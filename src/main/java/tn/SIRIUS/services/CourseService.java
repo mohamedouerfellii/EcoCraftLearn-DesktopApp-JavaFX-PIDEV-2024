@@ -15,13 +15,13 @@ public class CourseService implements ICRUD<Course> {
     }
     @Override
     public int add(Course course){
-        String query = "INSERT INTO courses (image,title,description,tutor,duration,price,nbrSection) VALUES (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO COURSES (image,title,description,tutor,duration,price,nbrSection) VALUES (?,?,?,?,?,?,?)";
         try{
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, course.getImage());
             statement.setString(2,course.getTitle());
             statement.setString(3,course.getDescription());
-            statement.setInt(4,course.getTutor());
+            statement.setInt(4,1); // static , just for testing
             statement.setString(5, course.getDuration());
             statement.setFloat(6,course.getPrice());
             statement.setInt(7,0);
@@ -56,11 +56,40 @@ public class CourseService implements ICRUD<Course> {
         return courseList;
     }
     @Override
-    public int update(Course course){
-        return 1;
+    public boolean update(Course course){
+        String query = "UPDATE COURSES SET title = ? , description = ? , duration = ? , price = ? , image = ? WHERE idCourse = ?";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, course.getTitle());
+            statement.setString(2,course.getDescription());
+            statement.setString(3,course.getDuration());
+            statement.setFloat(4,course.getPrice());
+            statement.setString(5, course.getImage());
+            statement.setInt(6,course.getId());
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return true;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
     @Override
-    public int delete(Course course){
-        return 1;
+    public boolean delete(int courseId){
+        String qry = "DELETE FROM COURSES WHERE idCourse = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,courseId);
+            if(stm.executeUpdate() == 1){
+                stm.close();
+                return true;
+            }
+            stm.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

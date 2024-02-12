@@ -98,11 +98,7 @@
     -fx-border-color: #BDA91A;
     -fx-border-width: 2px;
 }
-.edit-course-btn:hover {
-    -fx-background-color: #BDA91A;
-    -fx-text-fill: #fff;
-}
-.delete-course-btn{
+.delete-course-btn,.confirm-delete-course-btn{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 20;
     -fx-background-color: #fff;
@@ -111,10 +107,6 @@
     -fx-border-radius: 8px;
     -fx-border-color: red;
     -fx-border-width: 2px;
-}
-.delete-course-btn:hover{
-    -fx-background-color: red;
-    -fx-text-fill: #fff;
 }
 .add-section-btn{
     -fx-font-family: "Jost Medium";
@@ -125,10 +117,6 @@
     -fx-border-radius: 8px;
     -fx-border-color: #1D6611;
     -fx-border-width: 2px;
-}
-.add-section-btn:hover{
-    -fx-background-color: #1D6611;
-    -fx-text-fill: #fff;
 }
 .label-details{
     -fx-font-family: "Jost Medium";
@@ -160,4 +148,50 @@
 }
 .one-course-details-container{
     -fx-background-color: #D5FFDC;
+}
+.delete-warning-container{
+    -fx-background-color: #fff;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: red;
+}
+.warning-delete-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-text-fill: red;
+}
+.warning-delete-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.password-confirm-delete-course {
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+}
+.confirm-delete-course-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: red;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+}
+.success-operation-container{
+    -fx-background-color: #fff;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #1D6611;
+}
+.success-msg{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #1D6611;
 }

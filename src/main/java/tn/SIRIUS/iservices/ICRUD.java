@@ -6,7 +6,7 @@ import java.util.List;
 public interface ICRUD<T> {
     public int add(T entity);
     public List<T> getAll();
-    public int update(T entity);
-    public int delete(T entity);
+    public boolean update(T entity);
+    public boolean delete(int id);
 
 }
