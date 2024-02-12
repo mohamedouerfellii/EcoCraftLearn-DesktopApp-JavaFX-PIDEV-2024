@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="Container" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ProduitPageController">
+   <children>
+      <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="136.0">
+         <children>
+            <ImageView fitHeight="85.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageLogo">
+               <image>
+                  <Image url="@../../images/logo.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="BtnDashboard" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Dashboard">
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fx:id="iconsdash" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconsdash">
+                     <image>
+                        <Image url="@../../icons/dashboard-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+
+            <Button fx:id="BtnCourses" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text=" Courses     ">
+               <graphic>
+                  <ImageView fx:id="iconCourses" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconCourses">
+                     <image>
+                        <Image url="@../../icons/graduation-cap-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Button>
+            <Button fx:id="BtnEvents" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Events     ">
+               <graphic>
+                  <ImageView fx:id="iconevent" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconevent">
+                     <image>
+                        <Image url="@../../icons/calendar-event-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="BtnForum" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Forum       ">
+               <graphic>
+                  <ImageView fx:id="iconforum" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconforum">
+                     <image>
+                        <Image url="@../../icons/team-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="BtnProducts" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Products    ">
+               <graphic>
+                  <ImageView fx:id="iconProduct" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconProduct">
+                     <image>
+                        <Image url="@../../icons/shopping-bag-2-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="BtnCollects" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Collects     ">
+               <graphic>
+                  <ImageView fx:id="iconcollect" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconcollect">
+                     <image>
+                        <Image url="@../../icons/recycle-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="BtnLogout" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" text="Logout       ">
+               <graphic>
+                  <ImageView fx:id="iconlogout" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconlogout">
+                     <image>
+                        <Image url="@../../icons/logout-box-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Button>
+         </children></VBox>
+      <AnchorPane layoutX="-9.0" layoutY="-15.0" prefHeight="665.0" prefWidth="1209.0" styleClass="BackAnchorPane" stylesheets="@../../styles/Style1.css">
+         <children>
+            <AnchorPane layoutX="16.0" layoutY="10.0" prefHeight="645.0" prefWidth="1178.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/Style1.css">
+               <children>
+                  <ScrollPane layoutX="29.0" layoutY="130.0" prefHeight="501.0" prefWidth="1121.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/Style1.css">
+                     <content>
+                        <VBox fx:id="VboxTableProduct" prefHeight="585.0" prefWidth="1092.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleItemTable.css" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

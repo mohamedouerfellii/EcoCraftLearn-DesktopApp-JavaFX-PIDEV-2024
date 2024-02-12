@@ -1,0 +1,359 @@
+.Container{
+    -fx-background-color: #1D6611;
+}
+.BackAnchorPane
+{
+    -fx-background-color: #D5FFDC;
+    -fx-translate-x: 150px;
+    -fx-translate-y: 70px;
+    -fx-background-radius: 18px 0px 0px 18;
+}
+.AnchorPaneProductBack
+{
+    -fx-border-color: #1D6611 ;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15 15 15 15;
+}
+.ScrolPaneProductBack{
+    -fx-background-color: #D5FFDC ;
+}
+.ScrolPaneProductBack .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneProductBack .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneProductBack .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneProductBack .scroll-bar:vertical .increment-button,
+.ScrolPaneProductBack .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.AnchorPaneGroupProduct
+{
+    -fx-background-color: transparent;
+}
+
+.ImageLogo{
+    -fx-translate-x: 20px;
+    -fx-translate-y: 17px;
+}
+.BtnMenu {
+  -fx-font-family: jost;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D5FFDC; /* Text color when not clicked */
+    -fx-background-radius: 15 0 0 15; /* Individual radius values for each corner */
+}
+
+
+.BtnMenu:pressed,
+.BtnMenu:hover
+
+{
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+.BtnMenu:hover {
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color on hover */
+}
+
+.iconsdash
+{
+
+    -fx-image: url('/icons/dashboard-fill.png');
+}
+
+
+.BtnMenu:pressed .iconsdash,
+.BtnMenu:hover .iconsdash {
+    -fx-image: url('/icons/dashboard-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+
+.iconCourses
+{
+    -fx-image: url('/icons/graduation-cap-fill.png');
+}
+
+
+.BtnMenu:pressed .iconCourses,
+.BtnMenu:hover .iconCourses {
+    -fx-image: url('/icons/graduation-cap-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+
+.iconevent
+{
+
+    -fx-image: url('/icons/calendar-event-fill.png');
+}
+
+
+.BtnMenu:pressed .iconevent,
+.BtnMenu:hover .iconevent {
+    -fx-image: url('/icons/dashboard-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+
+.iconforum
+{
+
+    -fx-image: url('/icons/team-fill.png');
+}
+
+
+.BtnMenu:pressed .iconforum,
+.BtnMenu:hover .iconforum {
+    -fx-image: url('/icons/team-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+
+
+.iconProduct
+{
+
+    -fx-image: url('/icons/shopping-bag-2-fill.png');
+}
+
+
+.BtnMenu:pressed .iconProduct,
+.BtnMenu:hover .iconProduct {
+    -fx-image: url('/icons/shopping-bag-2-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+
+
+.iconcollect
+{
+
+    -fx-image: url('/icons/team-fill.png');
+}
+
+
+.BtnMenu:pressed .iconcollect,
+.BtnMenu:hover .iconcollect {
+    -fx-image: url('/icons/team-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+.iconlogout
+{
+    -fx-image: url('/icons/logout-box-fill.png');
+}
+.BtnMenu:pressed .iconlogout,
+.BtnMenu:hover .iconlogout {
+    -fx-image: url('/icons/logout-box-filll.png');
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #1D6611; /* Text color when clicked */
+}
+/*partie Homepage et Product Page*/
+
+.HomeAnchorPane
+{
+    -fx-background-color: #D5FFDC;
+}
+
+.MenuVbox {
+    -fx-background-color: #1D6611; /* Background color */
+    -fx-min-width: 120px; /* Width */
+    -fx-pref-height: 680px; /* Height */
+    -fx-top: 20px; /* Top margin */
+    -fx-left: 20px; /* Left margin */
+    -fx-background-radius: 56px; /* Background radius for rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); /* Drop shadow effect */
+}
+.Logo
+{
+    -fx-translate-x: 30px;
+    -fx-translate-y: 20px;
+}
+.MenuBtn
+{
+    -fx-font-family: jost;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D5FFDC; /* Text color when not clicked */
+
+}
+
+.RectangleSearch {
+    -fx-fill: #D9D9D9;
+    -fx-border-radius: 56px;
+    -fx-arc-width: 30;
+    -fx-arc-height: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.search-input{
+    -fx-background-color: transparent;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+}
+
+/* Pane Product style*/
+
+.PaneGroupProduct {
+    -fx-background-color: transparent; /* Couleur de fond */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #1D6611; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+
+
+}
+.AddProductBtn
+{
+
+    -fx-font-family: jost;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: D5FFDC;
+    -fx-background-radius: 15;
+
+}
+
+
+
+.TextShop
+{
+    -fx-font-family: "Jost Medium";
+    -fx-text-fill: #000000;
+    -fx-font-size: 20;
+}
+
+.ScrolPaneProduct{
+    -fx-background-color: #ffffff  ;
+}
+.ScrolPaneProduct .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneProduct .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneProduct .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneProduct .scroll-bar:vertical .increment-button,
+.ScrolPaneProduct .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+
+.productContainer
+{
+    -fx-background-color: #D5FFDC ;
+    -fx-spacing: 25px;
+    -fx-padding: 30px;
+}
+
+
+/*ItemProduct***************************************************************************/
+
+
+
+.ItemProductPane {
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-background-radius: 15; /* Rayon de bordure */
+    -fx-border-color: #7DC145; /* Couleur du contour */
+    -fx-border-width: 2px; /* Largeur du contour */
+   -fx-border-radius: 15; /* Rayon du contour */
+ /*-fx-min-width: 300px;
+    -fx-max-width: 300px;
+    -fx-min-height: 454px;
+    -fx-max-height: 454px;*/
+
+}
+
+.TriangleImageProduct {
+
+    -fx-fill: #D5FFDC;
+    -fx-border-radius: 15 15 15 15;
+    -fx-arc-width: 15;
+    -fx-arc-height: 15;
+    -fx-stroke-width: 1;
+}
+
+.ImgProduct {
+    -fx-fit-width: 200px; /* Largeur de l'image */
+    -fx-fit-height: 200px; /* Hauteur de l'image */
+    -fx-background-color: lightgray; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-background-radius: 10px; /* Rayon de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0); /* Ombre */
+}
+
+.rectangleimage {
+    -fx-background-radius: 10 10 10 10; /* ou tout autre rayon que vous préférez */
+}
+
+
+.NameProduct {
+    -fx-font-family: "Jost";
+    -fx-font-size: 2em;
+    -fx-text-fill: #7DC145;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+.Priceproduct
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 2em;
+    -fx-text-fill: #ff0000;
+    -fx-alignment: center;
+}
+.DescProduct
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+.BtnAcheter {
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 15;
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+}
+
+    /* Styles pour le GridPane */
+.GridContainerProduct {
+    -fx-hgap: 5px; /* Espacement horizontal entre les cellules */
+    -fx-vgap: 5px; /* Espacement vertical entre les cellules */
+}
+
+/* Styles pour les cellules individuelles */
+.grid-cell {
+    -fx-background-color: white; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 1px; /* Largeur de la bordure */
+}
+
+/* Définition des dimensions des cellules */
+.grid-cell {
+    -fx-min-width: 50px; /* Largeur minimale */
+    -fx-min-height: 50px; /* Hauteur minimale */
+    -fx-max-width: 100px; /* Largeur maximale */
+    -fx-max-height: 100px; /* Hauteur maximale */
+}
+
+
+

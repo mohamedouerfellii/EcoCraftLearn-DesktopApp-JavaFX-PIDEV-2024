@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="HomeAnchorPane" prefHeight="720.0" prefWidth="1350.0" styleClass="HomeAnchorPane" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ProductPage">
+   <children>
+      <VBox fx:id="MenuVbox" layoutX="24.0" layoutY="20.0" prefHeight="664.0" prefWidth="123.0" styleClass="MenuVbox" stylesheets="@../../styles/Style1.css">
+         <children>
+            <ImageView fitHeight="58.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="Logo">
+               <image>
+                  <Image url="@../../images/logo.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="HomeBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Home">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/home-4-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="80.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn1" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Courses">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/graduation-cap-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn2" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Events">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/calendar-event-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn3" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Forum">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/team-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn4" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Products">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/shopping-bag-2-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn5" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Collects">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/recycle-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="HomeBtn6" contentDisplay="TOP" mnemonicParsing="false" prefHeight="58.0" prefWidth="97.0" styleClass="MenuBtn" stylesheets="@../../styles/Style1.css" text="Logout">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/logout-box-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="15.0" top="40.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="196.0" layoutY="67.0" prefHeight="615.0" prefWidth="1117.0">
+         <children>
+            <AnchorPane fx:id="ContainerAnchorpaneProduct" layoutX="14.0" layoutY="14.0" onDragDetected="#handleAddProductBtn">
+               <children>
+                  <Pane fx:id="PaneGroupProduct" prefHeight="600.0" prefWidth="1100.0" styleClass="PaneGroupProduct" stylesheets="@../../styles/Style1.css">
+                     <children>
+                        <ScrollPane fx:id="ScrolPaneProduct" layoutX="28.0" layoutY="83.0" prefHeight="504.0" prefWidth="1059.0" styleClass="ScrolPaneProduct" stylesheets="@../../styles/Style1.css">
+                           <content>
+                              <GridPane fx:id="GridContainerProduct" alignment="CENTER" prefHeight="495.0" prefWidth="1044.0" styleClass="GridContainerProduct" stylesheets="@../../styles/Style1.css" VBox.vgrow="ALWAYS">
+                                 <rowConstraints>
+                                    <RowConstraints fillHeight="false" minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                        <Line endX="731.0" layoutX="122.0" layoutY="47.0" startX="-100.0" strokeWidth="2.0" />
+                        <Text layoutX="22.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="TextShop" text="Shop" wrappingWidth="58.0" />
+                        <Button fx:id="AddProductBtn" layoutX="903.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddProductBtn" prefHeight="52.0" prefWidth="186.0" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css" text="       Add Product" />
+                        <ImageView fitHeight="34.0" fitWidth="41.0" layoutX="916.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/add-fill.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="10.0" maxHeight="600.0" maxWidth="1106.0" minHeight="694.0" minWidth="701.0" prefHeight="600.0" prefWidth="1100.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css" visible="false">
+               <children>
+                  <Label layoutX="38.0" layoutY="101.0" prefHeight="25.0" prefWidth="45.0" styleClass="TextTitle" stylesheets="@../../styles/StyleForm.css" text="Name" />
+                  <TextField fx:id="InputName" layoutX="37.0" layoutY="133.0" prefHeight="54.0" prefWidth="480.0" styleClass="InputName" stylesheets="@../../styles/StyleForm.css" />
+                  <Label layoutX="146.0" layoutY="14.0" prefHeight="51.0" prefWidth="262.0" styleClass="TextForm" stylesheets="@../../styles/StyleForm.css" text="Products details " />
+                  <Label layoutX="35.0" layoutY="218.0" prefHeight="25.0" prefWidth="85.0" styleClass="TextTitle" stylesheets="@../../styles/StyleForm.css" text="Description " />
+                  <TextField fx:id="InputDescription" layoutX="34.0" layoutY="253.0" prefHeight="171.0" prefWidth="480.0" styleClass="InputDescription" stylesheets="@../../styles/StyleForm.css" />
+                  <Label layoutX="34.0" layoutY="451.0" prefHeight="25.0" prefWidth="45.0" styleClass="TextTitle" stylesheets="@../../styles/StyleForm.css" text="Price" />
+                  <TextField fx:id="InputPrice" layoutX="34.0" layoutY="483.0" prefHeight="54.0" prefWidth="480.0" styleClass="InputPrice" stylesheets="@../../styles/StyleForm.css" />
+                  <Button fx:id="AddNewProduct" layoutX="962.0" layoutY="523.0" mnemonicParsing="false" onAction="#AddNewProduct" prefHeight="54.0" prefWidth="107.0" styleClass="AddBtn" stylesheets="@../../styles/StyleForm.css" text="Add" />
+                  <Button fx:id="GoBackBtn" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleGoBackBtn" prefHeight="54.0" prefWidth="55.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css">
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/arrow-left-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="PictureBtn" layoutX="658.0" layoutY="205.0" mnemonicParsing="false" onAction="#handlePictureBtn" prefHeight="224.0" prefWidth="384.0" styleClass="PictureBtn" stylesheets="@../../styles/StyleForm.css" />
+                  <ImageView fitHeight="45.0" fitWidth="55.0" layoutX="947.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" styleClass="IconImg">
+                     <image>
+                        <Image url="@../../icons/image-add-fill.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="PictureChooser" fitHeight="194.0" fitWidth="216.0" layoutX="685.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true" styleClass="PictureChooser" />
+                  <Line endX="134.0" layoutX="221.0" layoutY="65.0" startX="-100.0" strokeWidth="2.0" />
+                  <Label layoutX="78.0" layoutY="96.0" prefHeight="11.0" prefWidth="11.0" text="*" textFill="RED">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="116.0" layoutY="208.0" prefHeight="11.0" prefWidth="11.0" text="*" textFill="RED">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="70.0" layoutY="442.0" prefHeight="11.0" prefWidth="11.0" text="*" textFill="RED">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

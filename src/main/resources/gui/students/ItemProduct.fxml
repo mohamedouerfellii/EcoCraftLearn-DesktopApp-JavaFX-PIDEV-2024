@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="BoxProduct" styleClass="BoxProduct" stylesheets="@../../styles/StyleForm.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ItemProduct">
+   <children>
+      <AnchorPane fx:id="ItemProductPane" maxHeight="454.0" maxWidth="309.0" minHeight="452.0" prefHeight="454.0" prefWidth="309.0" styleClass="ItemProductPane" stylesheets="@../../styles/Style1.css">
+         <children>
+            <Label fx:id="NameProduct" layoutX="32.0" layoutY="219.0" minHeight="0.0" prefHeight="62.0" prefWidth="246.0" styleClass="NameProduct" stylesheets="@../../styles/Style1.css" text="Product Number ">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="BtnAcheter" layoutX="216.0" layoutY="387.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="62.0" styleClass="BtnAcheter" stylesheets="@../../styles/Style1.css">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/shopping-cart-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="Priceproduct" layoutX="110.0" layoutY="394.0" styleClass="Priceproduct" stylesheets="@../../styles/Style1.css" text="350" textFill="RED" />
+            <Label fx:id="DescProduct" layoutX="52.0" layoutY="281.0" prefHeight="62.0" prefWidth="209.0" styleClass="DescProduct" stylesheets="@../../styles/Style1.css" text="zafzqegfrezbgvserbqezrzgregqerhcugikcugcvugvlgvjvjvjh" />
+            <ImageView fx:id="ImgProduct" fitHeight="185.0" fitWidth="266.0" layoutX="68.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="ImgProduct">
+               <image>
+                  <Image url="@../../images/Img1.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

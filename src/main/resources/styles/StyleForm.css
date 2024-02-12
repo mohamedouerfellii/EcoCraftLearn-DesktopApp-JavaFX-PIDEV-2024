@@ -1,0 +1,106 @@
+.AnchorForm {
+    -fx-min-width: 1100px;
+    -fx-max-width: 1100px;
+    -fx-min-height: 600px;
+    -fx-max-height: 600px;
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #1D6611; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+}
+.TextForm
+{
+    -fx-font-family: "Jost Medium";
+    -fx-text-fill: #000000;
+    -fx-font-size: 25;
+}
+.TextTitle
+{
+    -fx-font-family: "Jost";
+    -fx-text-fill: #1D6611;
+    -fx-font-size: 15;
+
+}
+
+.InputName {
+
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+
+
+.InputName.text-field {
+
+    -fx-font-family: "Jost";
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+}
+
+.InputDescription {
+
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+
+
+.InputDescription.text-field {
+
+    -fx-font-family: "Jost";
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+}
+
+
+
+.InputPrice {
+
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+.InputPrice.text-field {
+
+    -fx-font-family: "Jost";
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+}
+
+
+.InputCategory{
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+
+.InputCategory .list-cell {
+    -fx-font-family: "Jost";
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+}
+.GoBackBtn
+{
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 15;
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+}
+.AddBtn
+{
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 15;
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+}
+.PictureBtn {
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-font-family: "Jost";
+    -fx-text-fill: #000000;
+    -fx-font-size: 15;
+}
+

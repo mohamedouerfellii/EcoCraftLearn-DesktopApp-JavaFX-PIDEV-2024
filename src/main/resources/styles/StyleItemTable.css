@@ -1,0 +1,81 @@
+.AnchorPaneItem
+{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #7DC145; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+}
+
+.ImageProduct
+{
+    -fx-fit-width: 200px; /* Largeur de l'image */
+    -fx-fit-height: 200px; /* Hauteur de l'image */
+    -fx-background-color: lightgray; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-background-radius: 10px; /* Rayon de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0); /* Ombre */
+}
+
+.NameProduct {
+    -fx-font-family: "Jost";
+    -fx-font-size: 2em;
+    -fx-text-fill: #D5FFDC;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+.PriceProduct
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 2em;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+
+}
+.DescProduct
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+}
+.CatProduct {
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+    -fx-wrap-text: true;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.CatProduct:hover {
+    -fx-background-color: #CCCCCC;
+}
+.UpdateBtn
+{
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 15;
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+}
+.DeleteBtn
+{
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 15;
+    -fx-font-family: "Jost";
+    -fx-font-size: 15;
+}
+
+.VboxTableProduct
+{
+    -fx-background-color: #D5FFDC ;
+    -fx-spacing: 25px;
+    -fx-padding: 30px;
+}
