@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="631.0" prefWidth="1194.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.UpdatePostController">
+   <children>
+      <BorderPane fx:id="createPostContaner" layoutX="342.0" layoutY="87.0" maxWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/style.css">
+         <top>
+            <VBox alignment="CENTER" prefHeight="42.0" prefWidth="614.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="771.0" text="update Post ? ">
+                     <font>
+                        <Font name="Jost Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <VBox prefHeight="345.0" prefWidth="673.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="52.0" prefWidth="370.0" spacing="15.0">
+                     <children>
+                        <Circle fx:id="updtePostuserimg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="updatePostUsername" prefHeight="36.0" prefWidth="353.0" text="abdelmoanm">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="251.0" prefWidth="594.0" spacing="5.0">
+                     <children>
+                        <TextArea fx:id="updatePostText" maxHeight="-Infinity" prefHeight="185.0" prefWidth="568.0" promptText="What's in your Mind ? ..." styleClass="PostContent" stylesheets="@../../css/style.css" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="22.0" left="15.0" right="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Jost Regular" size="12.0" />
+                           </font>
+                        </TextArea>
+                        <Rectangle fx:id="updatePostImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="594.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="558.0" style="-fx-border-color: lightgrey;" styleClass="PostContent" stylesheets="@../../css/style.css">
+                           <children>
+                              <Label contentDisplay="TOP" prefHeight="19.0" prefWidth="423.0" text="Add to your Post " textFill="#696868">
+                                 <font>
+                                    <Font name="Jost Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="updatePostattachment" mnemonicParsing="false" onAction="#openAttachmentWindow" prefHeight="33.0" prefWidth="102.0" style="-fx-background-color: transparent;" stylesheets="@../../css/style.css">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/dark/image-add-fill.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets bottom="3.0" top="3.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <bottom>
+            <Button fx:id="updatePostBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="598.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css" text="update" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Jost Bold" size="20.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

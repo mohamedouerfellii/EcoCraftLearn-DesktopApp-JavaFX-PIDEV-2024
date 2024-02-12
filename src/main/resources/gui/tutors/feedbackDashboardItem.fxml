@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="feedbackItemContainer" alignment="TOP_CENTER" prefHeight="300.0" prefWidth="530.0" styleClass="feedback-item-container" stylesheets="@../../style/dashboardAdminStyle.css"  xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.feedbackDashboardItemController">
+   <children>
+      <HBox prefHeight="75.0" prefWidth="200.0">
+         <children>
+            <Circle fx:id="feedbackAuthorImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="feedback-author-img-container">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Circle>
+            <Label fx:id="feedbackAuthorName" styleClass="feedback-author-name" stylesheets="@../../style/dashboardAdminStyle.css" text="Ouerfelli Mohamed">
+               <HBox.margin>
+                  <Insets left="20.0" top="27.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="feedbackDate" styleClass="feedback-date" stylesheets="@../../style/dashboardAdminStyle.css" text="18-12-2024">
+               <HBox.margin>
+                  <Insets left="180.0" top="32.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="205.0" prefWidth="530.0">
+         <children>
+            <Text fx:id="feedbackContentText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="feedback-content-text" text="“Your knowledge and clear communication made learning Reversible tote enjoyable and effective. Sessions were well-prepared, and you provided constructive feedback, fostering both understanding and confidence. Highly recommend!&quot;" textAlignment="CENTER" wrappingWidth="431.7367309331894" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

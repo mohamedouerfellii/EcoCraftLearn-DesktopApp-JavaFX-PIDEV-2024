@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="postItem" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.PostItem">
+   <bottom>
+      <VBox maxWidth="-Infinity" prefHeight="50.0" prefWidth="594.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator fx:id="separator" prefHeight="27.0" prefWidth="623.0">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Separator>
+            <HBox maxWidth="-Infinity" prefHeight="42.0" prefWidth="600.0" translateX="3.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ToggleButton fx:id="likePostBtn" mnemonicParsing="false" onAction="#LikePressed" prefHeight="37.0" prefWidth="33.0" styleClass="likeBtn" stylesheets="@../../css/style.css">
+                           <graphic>
+                              <ImageView fx:id="LikeIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/dark/icons8-aime-rempli-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="261.0" text="3,5K">
+                           <font>
+                              <Font name="System Bold" size="10.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <ToggleButton fx:id="likePostBtn1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#LikePressed" prefHeight="37.0" prefWidth="32.0" styleClass="likeBtn" stylesheets="@../../css/style.css">
+                           <graphic>
+                              <ImageView fx:id="LikeIcon1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/dark/icons8-aime-rempli-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </HBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="commentPostBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="304.0" styleClass="commentBtn" stylesheets="@../../css/style.css" text="comment">
+                     <graphic>
+                        <ImageView fx:id="CommentIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/dark/icons8-paroles-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="sharePostBtn" layoutX="127.0" layoutY="10.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="238.0" styleClass="BtnShare" stylesheets="@../../css/style.css" text="share">
+                     <graphic>
+                        <ImageView fx:id="shareIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/dark/icons8-transférer-50%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <VBox fx:id="container" maxHeight="-Infinity" maxWidth="618.0" minWidth="-Infinity" prefHeight="24.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="Post_Text" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="565.0">
+               <VBox.margin>
+                  <Insets left="25.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+         </children>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <HBox prefHeight="78.0" prefWidth="564.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fx:id="Profil_img" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <VBox prefHeight="63.0" prefWidth="446.0" spacing="5.0">
+               <children>
+                  <Label fx:id="UserName" prefHeight="28.0" prefWidth="438.0" text="Jarray abdelmonam">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Posted_Date" prefHeight="22.0" prefWidth="379.0" text="12/2/2023">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <MenuButton fx:id="AboutPostBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" styleClass="choice-box" stylesheets="@../../css/style.css">
+              <items>
+                <MenuItem fx:id="updatePostBtn" mnemonicParsing="false" text="Update" />
+                <MenuItem fx:id="deletePostBtn" mnemonicParsing="false" text="Delete" />
+              </items>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" translateX="9.0">
+                     <image>
+                        <Image url="@../../img/dark/icons8-points-de-suspension-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuButton>
+         </children>
+         <padding>
+            <Insets left="15.0" top="15.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </top>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="15.0" />
+   </padding>
+</BorderPane>

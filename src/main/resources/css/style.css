@@ -1,0 +1,124 @@
+.PostContent{
+    -fx-control-inner-background: white;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+    -fx-border-color: grey ;
+    -fx-border-radius: 10 ;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 4, 4);
+
+
+}
+
+.Borderepane{
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0,0, 0);
+}
+/* styles.css */
+
+.custom-text-area {
+    -fx-control-inner-background: transparent; /* Set the background color */
+    -fx-text-fill: black; /* Set the font color */
+    -fx-font-family: "Arial"; /* Set the font family */
+    -fx-font-size: 14px; /* Set the font size */
+}
+
+
+.forum{
+    -fx-background-color: Transparent ;
+}
+.forum .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.forum .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+
+
+/* Styles for the normal state of the button */
+.button {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: transparent;
+    -fx-text-fill: #939393;
+    -fx-background-radius: 8px;
+}
+
+/* Styles for the hovered state of the button */
+.button:hover {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #7dc145;
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 8px;
+}
+
+/* Styles for the pressed state of the button */
+.button:pressed {
+    -fx-background-color: #7dc145;
+    -fx-text-fill: white;/* Even darker blue on press */}
+.button:selected {-fx-background-color: #7dc145;
+    -fx-text-fill: white;/* Even darker blue on press */
+}
+
+.top-bar.button,
+.top-bar.button:pressed,
+.top-bar-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+
+}
+
+.top-bar.button:hover {
+    -fx-background-color: #b2b2b2;
+    -fx-background-radius: 10;
+}
+
+.top-bar.button:selected,
+.top-bar-button-selected {
+    -fx-background-color: #b2b2b2;
+    -fx-border-color: #b2b2b2;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-radius: 0;
+     /* 2px border at the bottom */
+}
+
+
+.choice-box {
+    -fx-background-color: transparent; /* Set background color */
+
+}
+
+.choice-box .arrow {
+    -fx-background-color: transparent; /* Set arrow color */
+}
+
+.choice-box .box {
+    -fx-background-color: transparent; /* Set button background color */
+    -fx-background-insets: 0, 0 0 0 0, 1 1 1 1; /* Set insets */
+}
+
+
+.transparent-vbox {
+    -fx-background-color: white;
+}
+
+.PopularUser{
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+.PopularUser:hover{
+    -fx-background-color: grey;
+    -fx-border-color: grey;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+
