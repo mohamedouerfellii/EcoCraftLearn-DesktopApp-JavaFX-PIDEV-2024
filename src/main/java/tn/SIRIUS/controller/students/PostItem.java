@@ -20,6 +20,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import tn.SIRIUS.entities.User;
+import tn.SIRIUS.services.PostService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,6 +71,10 @@ public class PostItem  {
     @FXML
     private ImageView shareIcon;
     private  ForumController forumController = new ForumController();
+
+    public MenuButton getAboutPostBtn() {return AboutPostBtn;}
+
+
     @FXML
     private MenuButton AboutPostBtn;
 
@@ -90,7 +95,7 @@ public class PostItem  {
         double textHeight = text.getBoundsInLocal().getHeight();
         Post_Text.setWrappingWidth(565);
         container.setPrefHeight(textHeight+150);
-            String imageUrl = p.getAttachment();
+        String imageUrl = p.getAttachment();
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Image image = new Image(imageUrl);
             StackPane stackPane = new StackPane();
@@ -112,11 +117,11 @@ public class PostItem  {
             container.getChildren().add(stackPane);
             container.setPrefHeight(textHeight+image.getHeight()+125+50);// Show the ImageView
         }
-likePostBtn.setStyle("    -fx-font-family: \"Jost Medium\";\n" +
-        "    -fx-font-size: 16;\n" +
-        "    -fx-background-color: transparent;\n" +
-        "    -fx-text-fill: #939393;\n" +
-        "    -fx-background-radius: 8px;");
+        likePostBtn.setStyle("    -fx-font-family: \"Jost Medium\";\n" +
+                "    -fx-font-size: 16;\n" +
+                "    -fx-background-color: transparent;\n" +
+                "    -fx-text-fill: #939393;\n" +
+                "    -fx-background-radius: 8px;");
         Image image1 = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-24.png"));
         LikeIcon.setImage(image1);
 
@@ -159,16 +164,20 @@ likePostBtn.setStyle("    -fx-font-family: \"Jost Medium\";\n" +
         likePostBtn.setOnAction(event -> {
             LikePressed();
         });
-updatePostBtn.setOnAction(e->{
-    try {
-        forumController.updatePressed(p);
-    } catch (IOException ex) {
-        throw new RuntimeException(ex);
-    }
-});
+        updatePostBtn.setOnAction(e->{
+            try {
+                forumController.recover(p);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
+        deletePostBtn.setOnAction(e->{
+            forumController.getDeletePostContainer().setVisible(true);
+            forumController.setIdposttodelete(p.getIdPost());
+            System.out.println(p.getIdPost());
 
-
+        });
 
 
     }
@@ -179,26 +188,26 @@ updatePostBtn.setOnAction(e->{
 
 
         System.out.println(likePostBtn.isSelected());
-    if (likePostBtn.isSelected()) {
+        if (likePostBtn.isSelected()) {
 
-        likePostBtn.setStyle("-fx-background-color: white;\n" +
-                        " -fx-text-fill: #939393 ;\n" +
-                "        -fx-border-radius: 5;\n " +
-                "       -fx-padding: 8 ;");
-                Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-26.png"));
-                LikeIcon.setImage(icon);
+            likePostBtn.setStyle("-fx-background-color: white;\n" +
+                    " -fx-text-fill: #939393 ;\n" +
+                    "        -fx-border-radius: 5;\n " +
+                    "       -fx-padding: 8 ;");
+            Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-26.png"));
+            LikeIcon.setImage(icon);
 
-            } else {
+        } else {
 
-        likePostBtn.setStyle("  -fx-background-color: #ffffff; /* Facebook blue */\n" +
-                        "    -fx-text-fill: #939393;\n" +
-                        "    -fx-border-radius: 5;\n" +
-                        "    -fx-padding: 8 ;");
+            likePostBtn.setStyle("  -fx-background-color: #ffffff; /* Facebook blue */\n" +
+                    "    -fx-text-fill: #939393;\n" +
+                    "    -fx-border-radius: 5;\n" +
+                    "    -fx-padding: 8 ;");
 
-        Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-24.png"));
+            Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-24.png"));
 
-        LikeIcon.setImage(icon);
-            }
+            LikeIcon.setImage(icon);
+        }
 
 
 

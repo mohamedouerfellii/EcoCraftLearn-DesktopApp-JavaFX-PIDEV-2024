@@ -64,12 +64,42 @@ public class PostService implements ICRUD<Post,User> {
 
 
     @Override
-    public int update(Post entity) {
+    public int update(Post post) {
+
+        String query = "UPDATE posts SET content = ?, attachment = ? WHERE idPost = ? ";
+        try{
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, post.getContent());
+            statement.setString(2,post.getAttachment());
+            statement.setInt(3,post.getIdPost());
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return 1;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
         return 0;
     }
 
     @Override
-    public int delete(Post entity) {
+    public int delete(Post post) {
+
+        String query = "delete from posts  WHERE idPost = ? ";
+        try{
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, post.getIdPost());
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return 1;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
         return 0;
     }
 }

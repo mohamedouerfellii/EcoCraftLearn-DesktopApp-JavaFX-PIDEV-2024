@@ -39,8 +39,6 @@ import java.util.stream.Collectors;
 
 public class ForumController implements Initializable {
     @FXML
-    private VBox forum;
-    @FXML
     private Button NewAttachment;
 
     @FXML
@@ -50,37 +48,83 @@ public class ForumController implements Initializable {
     private Button New_PostBnt;
 
     @FXML
+    private VBox PopularpeopleConatainer;
+
+    @FXML
     private Circle User_image;
 
     @FXML
     private Label User_name;
-    @FXML
-    private Rectangle newImage;
 
     @FXML
-    private BorderPane createPostContaner;
-    @FXML
-    private TextField SearchPost;
-    @FXML
     private Button allPosts;
+
+    @FXML
+    private VBox forum;
+
+    @FXML
+    private Rectangle newImage;
 
     @FXML
     private Button personalPosts;
 
     @FXML
-    private VBox PopularpeopleConatainer;
+    private AnchorPane postsMainContent;
 
     @FXML
-    private AnchorPane postsMainContent;
+    private Button updatePostBtn;
+
+    @FXML
+    private AnchorPane updatePostContainer;
+
+    @FXML
+    private Rectangle updatePostImg;
+
+    @FXML
+    private TextArea updatePostText;
+
+    @FXML
+    private Label updatePostUsername;
+
+    @FXML
+    private Button updatePostattachment;
+
+    @FXML
+    private Circle updtePostuserimg;
+
+    @FXML
+    private Button cancelUpadteBtn;
+    @FXML
+    private BorderPane updatePostBorderPane;
+    @FXML
+    private Button cancelDeletePostBtn;
+
+
+    @FXML
+    private AnchorPane deletePostContainer;
+
+    public Button getConfirmDeletePostBtn() {return confirmDeletePostBtn;}
+
+    @FXML
+    private Button confirmDeletePostBtn;
+
+
+
 
     Map<Post, User> acuill = new HashMap<>();
     String attachmentPath;
-
+    String newattachmentPath;
+    int idposttodelete;
     private boolean showAllPosts = true;
+
+
     public AnchorPane getPostsMainContent() {
         return postsMainContent;
     }
+    public AnchorPane getDeletePostContainer() {return deletePostContainer;}
+    public int getIdposttodelete() {return idposttodelete;}
 
+    public void setIdposttodelete(int idposttodelete) {this.idposttodelete = idposttodelete;}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,45 +134,66 @@ public class ForumController implements Initializable {
         User_name.setText("Jarray abdelmonam");
         PostService postService = new PostService();
         acuill = postService.getAll();
-       showPosts();
-      //  ShowPopularPeople();
+        showPosts();
+        //  ShowPopularPeople();
         NewAttachment.setOnAction(event -> {
             newImage.setVisible(true);
-             attachmentPath = openAttachmentWindow();
+            attachmentPath = openAttachmentWindow();
 
         });
-        PostItem postItem = new PostItem();
+        updatePostattachment.setOnAction(e->{
+            newattachmentPath = UpdateopenAttachmentWindow();
+        });
+        cancelUpadteBtn.setOnAction(e->{
+            updatePostContainer.setVisible(false);
+            newattachmentPath=null;
+        });
 
+        confirmDeletePostBtn.setOnAction(e->{
+            LocalDateTime d = null;
+          Post deletepost= new Post(idposttodelete,"","",1,d);
+            if (postService.delete(deletepost)==1) {
+                acuill = postService.getAll();
+                showPosts();
+                deletePostContainer.setVisible(false);
+                System.out.println(" delete done");
+                idposttodelete= Integer.parseInt(null);
+            }else
+                System.out.println("delete failed");
+        });
+        cancelDeletePostBtn.setOnAction(e->{
+            deletePostContainer.setVisible(false);
+            idposttodelete= Integer.parseInt(null);
+        });
+
+        updatePostContainer.setVisible(false);
+        deletePostContainer.setVisible(false);
 
     }
 
 
-
-    public void  addNewPost(){
+    public void addNewPost() {
         String username = "Jarray abdelmonam";
         String img = "img/img.png";
-        int idUser=2;
+        int idUser = 2;
         LocalDateTime currentDateTime = LocalDateTime.now();
         String newPostText = NewPostText.getText();
-        Post post = new Post(1,newPostText,attachmentPath,idUser,currentDateTime);
+        Post post = new Post(1, newPostText, attachmentPath, idUser, currentDateTime);
         PostService postService = new PostService();
-        if(postService.add(post) == 1){
+        if (postService.add(post) == 1) {
             acuill = postService.getAll();
             showPosts();
 
-        }
-        else
+        } else
             System.out.println("FAILED");
 
-    //ShowPopularPeople();
-    attachmentPath=null;
-    NewPostText.clear();
-    newImage.setHeight(0);
-    newImage.setVisible(false);
+        //ShowPopularPeople();
+        attachmentPath = null;
+        NewPostText.clear();
+        newImage.setHeight(0);
+        newImage.setVisible(false);
 
     }
-
-
 
 
     public void showPosts() {
@@ -136,8 +201,10 @@ public class ForumController implements Initializable {
             forum.getChildren().remove(3, forum.getChildren().size()); // Remove all children except the first one
         }
 
+        TreeMap<Post, User> sortedPosts = new TreeMap<>(Comparator.comparing(Post::getPostedDate).reversed());
+        sortedPosts.putAll(acuill);
         try {
-            for (Map.Entry<Post, User> entry : acuill.entrySet()) {
+            for (Map.Entry<Post, User> entry : sortedPosts.entrySet()) {
                 Post a = entry.getKey();
                 User user = entry.getValue();
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -150,10 +217,11 @@ public class ForumController implements Initializable {
 
                 if (showAllPosts) {
                     postItem.LikePressed();
-
                     forum.getChildren().add(p);
+                    postItem.getAboutPostBtn().setVisible(false);
                 } else if (user.getIdUser() == 1) { // Assuming getId() returns the user ID
                     forum.getChildren().add(p);
+                    postItem.getAboutPostBtn().setVisible(true);
 
                 }
             }
@@ -170,18 +238,35 @@ public class ForumController implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
-            Image  img = new Image("file:/"+selectedFile.getAbsolutePath());
+            Image img = new Image("file:/" + selectedFile.getAbsolutePath());
             newImage.setFill(new ImagePattern((img)));
             newImage.setVisible(true);
-            newImage.setHeight(img.getHeight()*50/100);
-            newImage.setWidth(img.getWidth()*50/100);
+            newImage.setHeight(img.getHeight() * 50 / 100);
+            newImage.setWidth(img.getWidth() * 50 / 100);
             Text text = new Text(NewPostText.getText());
             double textHeight = text.getBoundsInLocal().getHeight();
             NewPostText.setPrefWidth(600);
-           NewPostText.setPrefHeight(textHeight);
-           return attachmentPath = "file:/"+selectedFile.getAbsolutePath();
+            NewPostText.setPrefHeight(textHeight);
+            return attachmentPath = "file:/" + selectedFile.getAbsolutePath();
         }
         newImage.setVisible(false);
+        return null;
+
+    }
+
+
+    private String UpdateopenAttachmentWindow() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            Image img = new Image("file:/" + selectedFile.getAbsolutePath());
+            updatePostImg.setFill(new ImagePattern((img)));
+            updatePostImg.setVisible(true);
+            updatePostImg.setHeight(img.getHeight() * 50 / 100);
+            updatePostImg.setWidth(img.getWidth() * 50 / 100);
+            return newattachmentPath = "file:/" + selectedFile.getAbsolutePath();
+        }
         return null;
 
     }
@@ -203,29 +288,54 @@ public class ForumController implements Initializable {
         }
 
 
+    }
 
 
-
-        }
-
-
-    void updatePressed(Post post) throws IOException {
-
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/updatePost.fxml"));
-                Parent root = fxmlLoader.load();
-               postsMainContent.getChildren().clear();
-                postsMainContent.getChildren().add(root);
+    void recover(Post post) throws IOException {
 
 
-            System.out.println(post.getIdPost());
-        }
-
+        Image img = new Image(getClass().getResourceAsStream("/img/img.png"));
+       updtePostuserimg.setFill(new ImagePattern(img));
+        updatePostText.setWrapText(true);
+       updatePostText.setText(post.getContent());
+       if (post.getAttachment()!=null && !post.getAttachment().isEmpty()){
+       Image img1 = new Image(post.getAttachment());
+       updatePostImg.setWidth(img1.getWidth()*30/100);
+       updatePostImg.setHeight(img1.getHeight()*30/100);
+       updatePostImg.setFill(new ImagePattern(img1));
+       updatePostImg.setVisible(true);
+       }
+       updatePostContainer.setVisible(true);
+       updatePostBtn.setOnAction(e->{UpdatePost(post);});
 
     }
 
 
+    public void UpdatePost(Post post) {
+        if(newattachmentPath==null){
+            newattachmentPath= post.getAttachment();
+        }
+        String username = "Jarray abdelmonam";
+        String img = "img/img.png";
+        int idUser = 2;
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        Post updatedpost = new Post(post.getIdPost(), updatePostText.getText(), newattachmentPath, idUser, post.getPostedDate());
+        PostService postService = new PostService();
+        if (postService.update(updatedpost) == 1) {
+            System.out.println("done");
+            updatePostContainer.setVisible(false);
+            acuill = postService.getAll();
+            showPosts();
+        } else System.out.println("error");
+        newattachmentPath=null;
+    }
 
+
+
+
+
+
+}
 //***************************************************************
    /* public void ShowPopularPeople() {
 
