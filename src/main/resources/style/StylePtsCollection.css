@@ -1,0 +1,72 @@
+.ptscollect-main-page{
+    -fx-background-color: white;
+}
+
+
+.ptsCollect-scroll-pane{
+    -fx-background-color: white;
+}
+.ptsCollect-scroll-pane .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ptsCollect-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.ptsCollect-scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ptsCollect-scroll-pane .scroll-bar:vertical .increment-button,
+.ptsCollect-scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+.ptscollect-add-page{
+    -fx-background-color: rgba(154,154,154,0.5);
+}
+
+
+
+.ptscollect-add-formulaire{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #999999;
+}
+
+
+.add-ptscollect-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-background-color: #fff;
+    -fx-text-fill: #1D6611;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #1D6611;
+    -fx-border-width: 2px;
+}
+.add-ptscollect-btn:hover{
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #fff;
+}
+.delete-ptscollect-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-background-color: #fff;
+    -fx-text-fill: red;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+}
+.delete-ptscollect-btn:hover{
+    -fx-background-color: red;
+    -fx-text-fill: #fff;
+}
+
+
+.collection-pts-container {
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 4, 4);
+}
