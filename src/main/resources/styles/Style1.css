@@ -22,6 +22,7 @@
     -fx-background-color: transparent;
     -fx-border-radius: 15 15 15 15;
 }
+
 .ImageProductDetails
 {
     -fx-fit-width: 200px; /* Largeur de l'image */
@@ -33,6 +34,18 @@
     -fx-border-radius: 10px; /* Rayon de la bordure */
     -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0); /* Ombre */
 }
+.LabelText{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.Title
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+
 .ScrolPaneProductBack{
     -fx-background-color: #D5FFDC ;
 }

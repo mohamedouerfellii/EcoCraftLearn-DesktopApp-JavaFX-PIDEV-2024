@@ -12,15 +12,15 @@
    <children>
       <AnchorPane prefHeight="250.0" prefWidth="632.0" styleClass="AnchorPaneItem" stylesheets="@../../styles/StyleItemTable.css">
          <children>
-            <ImageView fx:id="ImageProduct" fitHeight="172.0" fitWidth="231.0" layoutX="50.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProduct">
+            <ImageView fx:id="ImageProduct" fitHeight="172.0" fitWidth="231.0" layoutX="44.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProduct">
                <image>
                   <Image url="@../../images/Img1.jpg" />
                </image>
             </ImageView>
             <Label fx:id="NameProduct" layoutX="256.0" layoutY="25.0" prefHeight="45.0" prefWidth="161.0" styleClass="NameProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
             <Label fx:id="DescProduct" layoutX="267.0" layoutY="99.0" prefHeight="50.0" prefWidth="139.0" styleClass="DescProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
-            <Label fx:id="PriceProduct" layoutX="313.0" layoutY="202.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
-            <Separator layoutX="247.0" layoutY="25.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Label fx:id="PriceProduct" layoutX="303.0" layoutY="187.0" prefHeight="35.0" prefWidth="61.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
+            <Separator layoutX="236.0" layoutY="22.0" orientation="VERTICAL" prefHeight="200.0" />
             <Label fx:id="DateProduct" layoutX="61.0" layoutY="214.0" prefHeight="23.0" prefWidth="120.0" styleClass="DescProduct" stylesheets="@../../styles/StyleItemTable.css" text="2024-2-24" />
             <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="48.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
                <image>
