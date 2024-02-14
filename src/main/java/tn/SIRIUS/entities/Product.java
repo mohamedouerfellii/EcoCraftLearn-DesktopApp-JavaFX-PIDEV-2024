@@ -13,6 +13,14 @@ public class Product {
     public Product() {
     }
 
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
+
     public String getName() {
         return name;
     }

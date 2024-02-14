@@ -102,6 +102,7 @@ public class ProductPage implements Initializable{
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         recentlyAdded = new ArrayList<>(recentlyAdded());
         int column = 0;
         int row = 1;
@@ -128,6 +129,33 @@ public class ProductPage implements Initializable{
     }
 
 
+    public void ShowProductList()
+    {
+        recentlyAdded = new ArrayList<>(recentlyAdded());
+        int column = 0;
+        int row = 1;
+        for (Product product : recentlyAdded) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                VBox boxProduct = fxmlLoader.load();
+
+                ItemProduct itemProduct = fxmlLoader.getController();
+                itemProduct.setData(product);
+
+                if (column == 3) {
+                    column = 0;
+                    ++row;
+                }
+                GridContainerProduct.add(boxProduct, column++, row);
+                GridContainerProduct.setMargin(boxProduct, new Insets(10));
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     @FXML
     private void handlePictureBtn(ActionEvent event) {
 
@@ -137,12 +165,12 @@ public class ProductPage implements Initializable{
                 new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
+        if (selectedFile != null)
+        {
             Image image = new Image(selectedFile.toURI().toString());
             PictureChooser.setImage(image);
         }
     }
-
     private List<Product> recentlyAdded()
     {
         List<Product> productList = new ArrayList<>();
@@ -157,25 +185,20 @@ public class ProductPage implements Initializable{
             String name = InputName.getText();
             String description = InputDescription.getText();
             float price = Float.parseFloat(InputPrice.getText());
-
             String image = PictureChooser.getImage().getUrl().toString();
-
             ProductService productService = new ProductService();
             Product product = new Product(0, name, description, image, price, 1, "");
-
             int result = productService.add(product);
 
             if (result == 1) {
                 System.out.println("Product added successfully.");
+                ShowProductList();
             } else {
-
                 System.out.println("Failed to add the product.");
             }
         } catch (NumberFormatException ex) {
-
             System.out.println("Invalid price format. Please enter a valid number.");
         } catch (Exception ex) {
-
             System.out.println("An error occurred while adding the product: " + ex.getMessage());
             ex.printStackTrace();
         }

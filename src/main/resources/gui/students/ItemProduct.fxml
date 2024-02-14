@@ -10,14 +10,14 @@
 
 <VBox fx:id="BoxProduct" styleClass="BoxProduct" stylesheets="@../../styles/StyleForm.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ItemProduct">
    <children>
-      <AnchorPane fx:id="ItemProductPane" maxHeight="454.0" maxWidth="309.0" minHeight="452.0" prefHeight="454.0" prefWidth="309.0" styleClass="ItemProductPane" stylesheets="@../../styles/Style1.css">
+      <AnchorPane fx:id="ItemProductPane" maxHeight="454.0" maxWidth="309.0" minHeight="406.0" prefHeight="413.0" prefWidth="309.0" styleClass="ItemProductPane" stylesheets="@../../styles/Style1.css">
          <children>
             <Label fx:id="NameProduct" layoutX="32.0" layoutY="219.0" minHeight="0.0" prefHeight="62.0" prefWidth="246.0" styleClass="NameProduct" stylesheets="@../../styles/Style1.css" text="Product Number ">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Button fx:id="BtnAcheter" layoutX="216.0" layoutY="387.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="62.0" styleClass="BtnAcheter" stylesheets="@../../styles/Style1.css">
+            <Button fx:id="BtnAcheter" layoutX="207.0" layoutY="350.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="62.0" styleClass="BtnAcheter" stylesheets="@../../styles/Style1.css">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -26,11 +26,16 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label fx:id="Priceproduct" layoutX="110.0" layoutY="394.0" styleClass="Priceproduct" stylesheets="@../../styles/Style1.css" text="350" textFill="RED" />
+            <Label fx:id="Priceproduct" layoutX="68.0" layoutY="358.0" styleClass="Priceproduct" stylesheets="@../../styles/Style1.css" text="350" textFill="RED" />
             <Label fx:id="DescProduct" layoutX="52.0" layoutY="281.0" prefHeight="62.0" prefWidth="209.0" styleClass="DescProduct" stylesheets="@../../styles/Style1.css" text="zafzqegfrezbgvserbqezrzgregqerhcugikcugcvugvlgvjvjvjh" />
             <ImageView fx:id="ImgProduct" fitHeight="185.0" fitWidth="266.0" layoutX="68.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="ImgProduct">
                <image>
                   <Image url="@../../images/Img1.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="23.0" layoutX="32.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/price-tag-3-fill.png" />
                </image>
             </ImageView>
          </children>

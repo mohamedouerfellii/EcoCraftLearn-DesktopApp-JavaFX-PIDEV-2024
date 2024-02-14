@@ -1,8 +1,9 @@
 .AnchorPaneItem
 {
-    -fx-background-color: #7DC145;
+    -fx-background-color: #D5FFDC;
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #7DC145; /* Couleur de la bordure par défaut */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #1D6611; /* Couleur de la bordure par défaut */
     -fx-border-width: 2px; /* Largeur de la bordure */
 }
 
@@ -21,7 +22,7 @@
 .NameProduct {
     -fx-font-family: "Jost";
     -fx-font-size: 2em;
-    -fx-text-fill: #D5FFDC;
+    -fx-text-fill: #000000;
     -fx-alignment: center;
     -fx-wrap-text: true;
 }

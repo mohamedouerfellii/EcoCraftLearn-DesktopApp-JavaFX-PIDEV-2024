@@ -8,11 +8,30 @@
     -fx-translate-y: 70px;
     -fx-background-radius: 18px 0px 0px 18;
 }
+
+
 .AnchorPaneProductBack
 {
     -fx-border-color: #1D6611 ;
     -fx-background-color: transparent;
     -fx-border-radius: 15 15 15 15;
+}
+.AnchorPanedetailsProduct
+{
+    -fx-border-color: #1D6611 ;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15 15 15 15;
+}
+.ImageProductDetails
+{
+    -fx-fit-width: 200px; /* Largeur de l'image */
+    -fx-fit-height: 200px; /* Hauteur de l'image */
+    -fx-background-color: lightgray; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-background-radius: 10px; /* Rayon de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0); /* Ombre */
 }
 .ScrolPaneProductBack{
     -fx-background-color: #D5FFDC ;
@@ -315,7 +334,7 @@
 {
     -fx-font-family: "Jost";
     -fx-font-size: 2em;
-    -fx-text-fill: #ff0000;
+    -fx-text-fill: #000000;
     -fx-alignment: center;
 }
 .DescProduct
@@ -326,15 +345,20 @@
     -fx-alignment: center;
     -fx-wrap-text: true;
 }
+/* Style de base pour le bouton */
 .BtnAcheter {
-    -fx-background-color: #000000;
-    -fx-text-fill: #D5FFDC;
-    -fx-background-radius: 15;
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-border-color: #7DC145; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Épaisseur de la bordure */
+
+    -fx-border-radius: 15 15 15 15;
     -fx-font-family: "Jost";
     -fx-font-size: 15;
 }
 
-    /* Styles pour le GridPane */
+
+
+/* Styles pour le GridPane */
 .GridContainerProduct {
     -fx-hgap: 5px; /* Espacement horizontal entre les cellules */
     -fx-vgap: 5px; /* Espacement vertical entre les cellules */

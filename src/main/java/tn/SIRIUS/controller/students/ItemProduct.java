@@ -44,6 +44,7 @@ public class ItemProduct {
     private Rectangle TriangleImageProduct;
 
     public void setData(Product product) {
+
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));

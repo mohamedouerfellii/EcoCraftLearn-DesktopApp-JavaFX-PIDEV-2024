@@ -1,9 +1,9 @@
 package tn.SIRIUS.services;
 
+import tn.SIRIUS.controller.admins.ProduitPageController;
 import tn.SIRIUS.entities.Product;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
-import java.util.Date;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -65,12 +65,42 @@ public class ProductService implements ICRUD<Product> {
 
 
     @Override
-    public int update(Product product) {
-        return 0;
+    public boolean update(Product product) {
+        String query = "UPDATE PRODUCTS SET name = ? , description = ? , image = ? , price = ? WHERE idProduct = ?";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, product.getName());
+            statement.setString(2,product.getDescription());
+            statement.setString(3,product.getImage());
+            statement.setFloat(4,product.getPrice());
+            statement.setInt(5,product.getIdProduct());
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return true;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @Override
-    public int delete(Product product) {
-        return 0;
+    public boolean delete(int idProduct) {
+        String qry = "DELETE FROM PRODUCTS WHERE idProduct = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idProduct);
+            if(stm.executeUpdate() == 1){
+                stm.close();
+
+                return true;
+            }
+            stm.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
+
 }

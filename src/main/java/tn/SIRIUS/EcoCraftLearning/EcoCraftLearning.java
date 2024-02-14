@@ -10,7 +10,7 @@ import java.util.Objects;
 public class EcoCraftLearning extends Application {
 
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/students/ProductPage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/admins/ProduitPageController.fxml")));
         stage.setScene(new Scene(root,1350,720));
         stage.setTitle("ECO CRAFT");
         stage.show();

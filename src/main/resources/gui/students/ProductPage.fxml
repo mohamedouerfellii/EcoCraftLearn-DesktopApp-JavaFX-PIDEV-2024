@@ -115,7 +115,7 @@
          <children>
             <AnchorPane fx:id="ContainerAnchorpaneProduct" layoutX="14.0" layoutY="14.0" onDragDetected="#handleAddProductBtn">
                <children>
-                  <Pane fx:id="PaneGroupProduct" prefHeight="600.0" prefWidth="1100.0" styleClass="PaneGroupProduct" stylesheets="@../../styles/Style1.css">
+                  <Pane fx:id="PaneGroupProduct" prefHeight="600.0" prefWidth="1100.0" styleClass="PaneGroupProduct" stylesheets="@../../styles/Style1.css" visible="false">
                      <children>
                         <ScrollPane fx:id="ScrolPaneProduct" layoutX="28.0" layoutY="83.0" prefHeight="504.0" prefWidth="1059.0" styleClass="ScrolPaneProduct" stylesheets="@../../styles/Style1.css">
                            <content>
@@ -138,7 +138,7 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="10.0" maxHeight="600.0" maxWidth="1106.0" minHeight="694.0" minWidth="701.0" prefHeight="600.0" prefWidth="1100.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css" visible="false">
+            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="10.0" maxHeight="600.0" maxWidth="1106.0" minHeight="694.0" minWidth="701.0" prefHeight="600.0" prefWidth="1100.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css">
                <children>
                   <Label layoutX="38.0" layoutY="101.0" prefHeight="25.0" prefWidth="45.0" styleClass="TextTitle" stylesheets="@../../styles/StyleForm.css" text="Name" />
                   <TextField fx:id="InputName" layoutX="37.0" layoutY="133.0" prefHeight="54.0" prefWidth="480.0" styleClass="InputName" stylesheets="@../../styles/StyleForm.css" />

@@ -10,35 +10,24 @@
 
 <HBox fx:id="BoxTableProduct" styleClass="BoxTableProduct" stylesheets="@../../styles/StyleItemTable.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.TableItemProduct">
    <children>
-      <AnchorPane prefHeight="250.0" prefWidth="1000.0" styleClass="AnchorPaneItem" stylesheets="@../../styles/StyleItemTable.css">
+      <AnchorPane prefHeight="250.0" prefWidth="632.0" styleClass="AnchorPaneItem" stylesheets="@../../styles/StyleItemTable.css">
          <children>
-            <ImageView fx:id="ImageProduct" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProduct">
+            <ImageView fx:id="ImageProduct" fitHeight="172.0" fitWidth="231.0" layoutX="50.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProduct">
                <image>
                   <Image url="@../../images/Img1.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="NameProduct" layoutX="225.0" layoutY="28.0" prefHeight="45.0" prefWidth="161.0" styleClass="NameProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
-            <Label fx:id="DescProduct" layoutX="276.0" layoutY="97.0" prefHeight="23.0" prefWidth="60.0" styleClass="DescProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
-            <Label fx:id="PriceProduct" layoutX="289.0" layoutY="176.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
-            <Button layoutX="780.0" layoutY="176.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="47.0" styleClass="DeleteBtn" stylesheets="@../../styles/StyleItemTable.css">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/delete-bin-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="682.0" layoutY="178.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="67.0" styleClass="UpdateBtn" stylesheets="@../../styles/StyleItemTable.css">
-               <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/edit-2-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Separator layoutX="208.0" layoutY="25.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Label fx:id="NameProduct" layoutX="256.0" layoutY="25.0" prefHeight="45.0" prefWidth="161.0" styleClass="NameProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
+            <Label fx:id="DescProduct" layoutX="267.0" layoutY="99.0" prefHeight="50.0" prefWidth="139.0" styleClass="DescProduct" stylesheets="@../../styles/StyleItemTable.css" text="Label" />
+            <Label fx:id="PriceProduct" layoutX="313.0" layoutY="202.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
+            <Separator layoutX="247.0" layoutY="25.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Label fx:id="DateProduct" layoutX="61.0" layoutY="214.0" prefHeight="23.0" prefWidth="120.0" styleClass="DescProduct" stylesheets="@../../styles/StyleItemTable.css" text="2024-2-24" />
+            <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="48.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/calendar-date-Product.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="DetailsBtnProduct" layoutX="504.0" layoutY="177.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" styleClass="DeleteBtn" stylesheets="@../../styles/StyleItemTable.css" text="Edit" />
          </children>
       </AnchorPane>
    </children>
