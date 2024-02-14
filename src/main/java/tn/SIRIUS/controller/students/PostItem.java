@@ -171,6 +171,10 @@ public class PostItem  {
                 throw new RuntimeException(ex);
             }
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Gestion_des_Forums
 
         deletePostBtn.setOnAction(e->{
             forumController.getDeletePostContainer().setVisible(true);

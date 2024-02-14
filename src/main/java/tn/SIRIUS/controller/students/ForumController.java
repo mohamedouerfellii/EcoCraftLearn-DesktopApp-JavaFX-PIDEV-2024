@@ -92,6 +92,7 @@ public class ForumController implements Initializable {
     @FXML
     private Circle updtePostuserimg;
 
+<<<<<<< HEAD
     @FXML
     private Button cancelUpadteBtn;
     @FXML
@@ -110,14 +111,22 @@ public class ForumController implements Initializable {
 
 
 
+=======
+>>>>>>> origin/Gestion_des_Forums
 
     Map<Post, User> acuill = new HashMap<>();
     String attachmentPath;
     String newattachmentPath;
+<<<<<<< HEAD
     int idposttodelete;
     private boolean showAllPosts = true;
 
 
+=======
+
+    private boolean showAllPosts = true;
+
+>>>>>>> origin/Gestion_des_Forums
     public AnchorPane getPostsMainContent() {
         return postsMainContent;
     }
@@ -144,10 +153,15 @@ public class ForumController implements Initializable {
         updatePostattachment.setOnAction(e->{
             newattachmentPath = UpdateopenAttachmentWindow();
         });
+<<<<<<< HEAD
         cancelUpadteBtn.setOnAction(e->{
             updatePostContainer.setVisible(false);
             newattachmentPath=null;
         });
+=======
+        updatePostContainer.setVisible(false);
+
+>>>>>>> origin/Gestion_des_Forums
 
         confirmDeletePostBtn.setOnAction(e->{
             LocalDateTime d = null;
@@ -300,12 +314,21 @@ public class ForumController implements Initializable {
        updatePostText.setText(post.getContent());
        if (post.getAttachment()!=null && !post.getAttachment().isEmpty()){
        Image img1 = new Image(post.getAttachment());
+<<<<<<< HEAD
        updatePostImg.setWidth(img1.getWidth()*30/100);
        updatePostImg.setHeight(img1.getHeight()*30/100);
        updatePostImg.setFill(new ImagePattern(img1));
        updatePostImg.setVisible(true);
        }
        updatePostContainer.setVisible(true);
+=======
+
+       updatePostImg.setWidth(img1.getWidth()*30/100);
+       updatePostImg.setHeight(img1.getHeight()*30/100);
+       updatePostImg.setFill(new ImagePattern(img));
+           updatePostImg.setVisible(true);}
+        updatePostContainer.setVisible(true);
+>>>>>>> origin/Gestion_des_Forums
        updatePostBtn.setOnAction(e->{UpdatePost(post);});
 
     }
@@ -323,12 +346,20 @@ public class ForumController implements Initializable {
         PostService postService = new PostService();
         if (postService.update(updatedpost) == 1) {
             System.out.println("done");
+<<<<<<< HEAD
             updatePostContainer.setVisible(false);
             acuill = postService.getAll();
             showPosts();
         } else System.out.println("error");
         newattachmentPath=null;
     }
+=======
+        } else System.out.println("error");
+        attachmentPath=null;
+    }
+
+}
+>>>>>>> origin/Gestion_des_Forums
 
 
 
