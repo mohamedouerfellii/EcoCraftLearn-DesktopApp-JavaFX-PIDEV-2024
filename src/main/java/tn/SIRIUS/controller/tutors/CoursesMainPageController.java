@@ -2,8 +2,15 @@ package tn.SIRIUS.controller.tutors;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import tn.SIRIUS.controller.shared.SectionDetailsItemDescriptionController;
+import tn.SIRIUS.controller.shared.SectionsDetailsTitleItemController;
 import tn.SIRIUS.entities.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,15 +25,18 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.scene.media.MediaView;
+import tn.SIRIUS.entities.Section;
 import tn.SIRIUS.services.CourseService;
+import tn.SIRIUS.services.SectionService;
 import tn.SIRIUS.services.UserService;
-import tn.SIRIUS.utils.MyDB;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CoursesMainPageController implements Initializable {
@@ -111,19 +121,71 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     private ImageView courseImgEditPreview;
     @FXML
-    private AnchorPane doneEditCourse;
+    private AnchorPane failedOperationEditContainer;
+    @FXML
+    private AnchorPane failedOperationContainer;
+    @FXML
+    private Button showCourseSectionsBtn;
+    @FXML
+    private MediaView mediaAddSectionViewer;
+    @FXML
+    private AnchorPane coursesAddSectionContainer;
+    @FXML
+    private TextField titleInputAddSection;
+    @FXML
+    private TextArea sectionDescInput;
+    @FXML
+    private Label errorAttAddSection;
+    @FXML
+    private Label errorDescAddSection;
+    @FXML
+    private Label errorTitleAddSection;
+    @FXML
+    private AnchorPane coursesViewSectionContainer;
+    @FXML
+    private VBox sectionsViewListContainer;
+    @FXML
+    private MediaView mediaViewerSectionsCourse;
+    @FXML
+    private VBox sectionsViewDetailsContainer;
+    @FXML
+    private Label courseTitleSectionDisplay;
+    @FXML
+    private Slider volumeBarSectionVid;
+    @FXML
+    private Slider slideBarTimeVidSectioin;
+    @FXML
+    private Button playSectionVidBtn;
+    @FXML
+    private ImageView playVidSecBtnImg;
+    @FXML
+    private Label speedVidSec;
+    private List<Section> sections;
     private String addCourseImgPath;
     private Image detailImg;
     List<Course> courses;
-    private int idC;
+    private MediaPlayer mediaPlayer;
+    private File fileVidSection;
+    private Media mediaSecVid;
+    private String vidSectionPath;
+    private int playVidCounter;
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        // Init visibilities and variables
         addCoursePane.setVisible(false);
         coursesDetailsContainer.setVisible(false);
         warningDeleteCourseContainer.setVisible(false);
         successOperationContainer.setVisible(false);
         coursesEditContainer.setVisible(false);
-        doneEditCourse.setVisible(false);
+        failedOperationContainer.setVisible(false);
+        failedOperationEditContainer.setVisible(false);
+        coursesAddSectionContainer.setVisible(false);
+        coursesViewSectionContainer.setVisible(false);
+        volumeBarSectionVid.setValue(100);
+        slideBarTimeVidSectioin.setValue(0);
+        vidSectionPath = "";
+        addCourseImgPath = "";
+        // End
         showCoursesList();
         addNewCourseBtn.setOnMouseClicked(e -> addCoursePane.setVisible(true));
         goBackCourseBtn.setOnMouseClicked(e -> addCoursePane.setVisible(false));
@@ -140,6 +202,12 @@ public class CoursesMainPageController implements Initializable {
             }
         });
         goBackCourseDetBtn.setOnMouseClicked(e -> coursesDetailsContainer.setVisible(false));
+        // video for section part
+        volumeBarSectionVid.valueProperty().addListener(observable -> {
+            if(volumeBarSectionVid.isPressed())
+                mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
+        });
+
     }
     public void showCoursesList(){
         CourseService courseService = new CourseService();
@@ -167,18 +235,21 @@ public class CoursesMainPageController implements Initializable {
         String duration = addCourseDuration.getText();
         CourseService courseService = new CourseService();
         Course course = new Course(0,addCourseImgPath,title,description,1,duration,price,0,"",0);
-        if(courseService.add(course) == 1){
+        if(courseService.add(course)){
             showCoursesList();
             addCoursePane.setVisible(false);
             successOperationContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> {
-                successOperationContainer.setVisible(false);
-            }));
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
             timeline.setCycleCount(1);
             timeline.play();
         }
-        else
-            System.out.println("FAILED");
+        else {
+            addCoursePane.setVisible(false);
+            failedOperationContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
     }
     public void showCourseDetails(Course course) {
         addCourseImgPath = course.getImage();
@@ -186,7 +257,7 @@ public class CoursesMainPageController implements Initializable {
         coursesDetailsContainer.setVisible(true);
         courseDetailsImgContainer.setFill(new ImagePattern(detailImg));
         titleLabelDetail.setText(course.getTitle());
-        idLabelDetail.setText(String.valueOf("#"+course.getId()));
+        idLabelDetail.setText("#" + course.getId());
         tutorLabelDetail.setText(String.valueOf(course.getTutor()));
         priceLabelDetail.setText(String.valueOf(course.getPrice()));
         nbrSecLabelDetail.setText(String.valueOf(course.getNbrSection()));
@@ -194,6 +265,10 @@ public class CoursesMainPageController implements Initializable {
         descriptionLabelDetail.setText(course.getDescription());
         durationLabelDetail.setText(course.getDuration());
         postedDateLabelDetail.setText(course.getPostedDate());
+        showCourseSectionsBtn.setVisible(course.getNbrSection() >= 1);
+        // for sections part
+        courseTitleSectionDisplay.setText(course.getTitle());
+
     }
     @FXML
     public void addSectionCourseBtnHover(MouseEvent event){
@@ -205,7 +280,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-border-radius: 8px;"+
                 "    -fx-border-width: 2px;");
         addSectionCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/light/add-circle-lineee.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/light/add-circle-lineee.png"))
         ));
     }
     @FXML
@@ -219,7 +294,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-border-color: #1D6611;" +
                 "    -fx-border-width: 2px;");
         addSectionCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/dark/add-circle-linee.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/add-circle-linee.png"))
         ));
     }
     @FXML
@@ -231,7 +306,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-background-radius: 8px;" +
                 "    -fx-border-radius: 8px;");
         editCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/light/edit-box-line.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/light/edit-box-line.png"))
         ));
     }
     @FXML
@@ -245,7 +320,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-border-color: #BDA91A;" +
                 "    -fx-border-width: 2px;");
         editCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/dark/edit-box-line.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/edit-box-line.png"))
         ));
     }
     @FXML
@@ -257,7 +332,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-background-radius: 8px;" +
                 "    -fx-border-radius: 8px;");
         deleteCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/light/close-circle-filll.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/light/close-circle-filll.png"))
         ));
     }
     @FXML
@@ -271,7 +346,7 @@ public class CoursesMainPageController implements Initializable {
                 "    -fx-border-color: red;" +
                 "    -fx-border-width: 2px;");
         deleteCourseBtnImg.setImage(new Image(
-                getClass().getResourceAsStream("/icons/dark/close-circle-filll.png")
+                Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/close-circle-filll.png"))
         ));
     }
    @FXML
@@ -288,18 +363,23 @@ public class CoursesMainPageController implements Initializable {
         UserService userService = new UserService();
         if(userService.isPasswordMatch(1,password)){
             CourseService courseService = new CourseService();
-            if (courseService.delete(Integer.valueOf(idLabelDetail.getText().replace("#","")))){
+            if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
                 passwordConfirmDelete.clear();
                 warningDeleteCourseContainer.setVisible(false);
                 coursesDetailsContainer.setVisible(false);
                 successOperationContainer.setVisible(true);
                 showCoursesList();
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> {
-                    successOperationContainer.setVisible(false);
-                }));
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
                 timeline.setCycleCount(1);
                 timeline.play();
             }
+        } else {
+            passwordConfirmDelete.clear();
+            warningDeleteCourseContainer.setVisible(false);
+            failedOperationEditContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
         }
     }
     @FXML
@@ -313,11 +393,22 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     public void addSectionCourseBtnClicked(MouseEvent event){
-
+            coursesAddSectionContainer.setVisible(true);
     }
     @FXML
     public void goBackCoursesDetails(MouseEvent event){
+        // set visibilty and clear input for edit course
         coursesEditContainer.setVisible(false);
+        // set visibilty and clear input for section
+        coursesAddSectionContainer.setVisible(false);
+        errorTitleAddSection.setVisible(false);
+        errorDescAddSection.setVisible(false);
+        errorAttAddSection.setVisible(false);
+        titleInputAddSection.clear();
+        sectionDescInput.clear();
+        mediaAddSectionViewer.setMediaPlayer(null);
+        coursesViewSectionContainer.setVisible(false);
+        mediaPlayer.pause();
     }
     @FXML
     public void chooseImageEditCourse(MouseEvent event){
@@ -334,7 +425,7 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     public void editCourse(MouseEvent event){
-        int id = Integer.valueOf(idLabelDetail.getText().replace("#",""));
+        int id = Integer.parseInt(idLabelDetail.getText().replace("#",""));
         String title = editTitleInputAddCourse.getText();
         String description = editCourseDesc.getText();
         float price = Float.parseFloat(editCoursePrice.getText());
@@ -344,16 +435,173 @@ public class CoursesMainPageController implements Initializable {
         if(courseService.update(course)){
             showCoursesList();
             coursesEditContainer.setVisible(false);
-            addCoursePane.setVisible(false);
             showCourseDetails(course);
-            doneEditCourse.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> {
-                doneEditCourse.setVisible(false);
-            }));
+            successOperationContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
             timeline.setCycleCount(1);
             timeline.play();
         }
-        else
-            System.out.println("FAILED");
+        else {
+            coursesEditContainer.setVisible(false);
+            addCoursePane.setVisible(false);
+            showCourseDetails(course);
+            failedOperationEditContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
     }
+    @FXML
+    public void playAddSectionVid(MouseEvent event){
+        mediaPlayer.play();
+    }
+    @FXML
+    public void pauseAddSectionVid(MouseEvent event){ mediaPlayer.pause(); }
+    @FXML
+    public void chooseSectionAttBtnClicked(MouseEvent event){
+        FileChooser videoChooser = new FileChooser();
+        videoChooser.setTitle("Choose your course Video");
+        FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter(
+                "Videos Files", "*.mp4", "*.avi", "*.mov", "*.mkv", "*.wmv", "*.flv");
+        videoChooser.getExtensionFilters().add(videoFilter);
+        fileVidSection = videoChooser.showOpenDialog(null);
+        if(fileVidSection != null){
+            vidSectionPath = fileVidSection.toURI().toString();
+            mediaSecVid = new Media(vidSectionPath);
+            mediaPlayer = new MediaPlayer(mediaSecVid);
+            mediaAddSectionViewer.setMediaPlayer(mediaPlayer);
+        }
+    }
+    @FXML
+    public void addSectionFormBtnClicked(){
+        if( !titleInputAddSection.getText().isEmpty() &&
+            ( !sectionDescInput.getText().isEmpty() && sectionDescInput.getText().length() >= 20 ) &&
+            !vidSectionPath.isEmpty() ){
+            int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
+            Section section = new Section(
+                    0,courseID,
+                    titleInputAddSection.getText(),
+                    sectionDescInput.getText(),
+                    vidSectionPath, ""
+            );
+            SectionService sectionService = new SectionService();
+            if(sectionService.add(section)){
+                CourseService courseService = new CourseService();
+                int nbrSection = Integer.parseInt(nbrSecLabelDetail.getText()) + 1;
+                if(courseService.updateNbrSection(courseID,nbrSection)){
+                    showCoursesList();
+                    showCourseDetails(courseService.getOne(courseID));
+                    goBackCoursesDetails(null);
+                    notifySuccess();
+                } else {
+                    coursesAddSectionContainer.setVisible(false);
+                    notifyFailed();
+                }
+            } else {
+                coursesAddSectionContainer.setVisible(false);
+                notifyFailed();
+            }
+        } else {
+            if( titleInputAddSection.getText().isEmpty() )
+                errorTitleAddSection.setVisible(true);
+            if( sectionDescInput.getText().isEmpty() || sectionDescInput.getText().length() < 20 )
+                errorDescAddSection.setVisible(true);
+            if( vidSectionPath.isEmpty() )
+                errorAttAddSection.setVisible(true);
+        }
+    }
+    public void notifySuccess(){
+        successOperationContainer.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+    public void notifyFailed(){
+        failedOperationContainer.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationContainer.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+    @FXML
+    public void showCourseSectionsBtnClicked(MouseEvent event){
+        int count = 0;
+        coursesViewSectionContainer.setVisible(true);
+        // get and display all sections
+        sectionsViewListContainer.getChildren().clear();
+        SectionService sectionService = new SectionService();
+        sections = sectionService.getAll();
+        try {
+            for(Section section : sections) {
+                if(count < 1){
+                    setSectionPlay(section);
+                    count++;
+                }
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/shared/sectionsDetailsTitleItem.fxml"));
+                Parent root = fxmlLoader.load();
+                SectionsDetailsTitleItemController itemController = fxmlLoader.getController();
+                itemController.setCoursesMainPageController(this);
+                itemController.setData(section);
+                sectionsViewListContainer.getChildren().add(root);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setSectionPlay(Section section){
+        mediaSecVid = new Media(section.getAttachment());
+        mediaPlayer = new MediaPlayer(mediaSecVid);
+        mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/shared/SectionDetailsItemDescription.fxml"));
+            Parent root = fxmlLoader.load();
+            SectionDetailsItemDescriptionController itemController = fxmlLoader.getController();
+            itemController.setCoursesMainPageController(this);
+            itemController.setData(section);
+            sectionsViewDetailsContainer.getChildren().clear();
+            sectionsViewDetailsContainer.getChildren().add(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        initPlayVidCounter();
+    }
+    @FXML
+    public void playSectionVid(MouseEvent event){
+        if(playVidCounter == 0 || ( playVidCounter%2 == 0 )){
+            mediaPlayer.play();
+            mediaPlayer.currentTimeProperty().addListener(observable -> updateProgressBarSecVideo());
+            slideBarTimeVidSectioin.valueProperty().addListener(observable -> {
+                if(slideBarTimeVidSectioin.isPressed())
+                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(slideBarTimeVidSectioin.getValue()/100));
+            });
+            playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/pause-line.png")));
+            playVidCounter++;
+        } else{
+            playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/play-fill.png")));
+            mediaPlayer.pause();
+            playVidCounter++;
+        }
+    }
+    public void updateProgressBarSecVideo(){
+        Platform.runLater(() -> {
+            slideBarTimeVidSectioin.setValue(mediaPlayer.getCurrentTime().toMillis()/mediaPlayer.getTotalDuration().toMillis()*100);
+        });
+    }
+    public void initPlayVidCounter(){
+        playVidCounter = 0;
+        playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/play-fill.png")));
+        slideBarTimeVidSectioin.setValue(0);
+    }
+    @FXML
+    public void updateSecVidSpeed(){
+        if (speedVidSec.getText().equals("x1")){
+            speedVidSec.setText("x1.5");
+            mediaPlayer.setRate(1.5);
+        } else {
+            speedVidSec.setText("x1");
+            mediaPlayer.setRate(1.0);
+        }
+    }
+
 }

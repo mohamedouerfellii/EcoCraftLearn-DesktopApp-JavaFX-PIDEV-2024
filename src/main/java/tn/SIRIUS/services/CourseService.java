@@ -14,7 +14,7 @@ public class CourseService implements ICRUD<Course> {
         con = MyDB.getInstance().getCon();
     }
     @Override
-    public int add(Course course){
+    public boolean add(Course course){
         String query = "INSERT INTO COURSES (image,title,description,tutor,duration,price,nbrSection) VALUES (?,?,?,?,?,?,?)";
         try{
             PreparedStatement statement = con.prepareStatement(query);
@@ -27,13 +27,13 @@ public class CourseService implements ICRUD<Course> {
             statement.setInt(7,0);
             if(statement.executeUpdate() == 1){
                 statement.close();
-                return 1;
+                return true;
             }
             statement.close();
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
-        return 0;
+        return false;
     }
     @Override
     public List<Course> getAll(){
@@ -47,7 +47,7 @@ public class CourseService implements ICRUD<Course> {
                         rs.getString("title"),rs.getString("description"),
                         rs.getInt("tutor"),rs.getString("duration"),
                         rs.getFloat("price"),rs.getInt("nbrSection"),
-                        rs.getDate("postedDate").toString(),0
+                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred")
                 ));
             }
         }catch (SQLException ex){
@@ -89,6 +89,47 @@ public class CourseService implements ICRUD<Course> {
             stm.close();
         }catch (SQLException e){
             System.out.println(e.getMessage());
+        }
+        return false;
+    }
+    public Course getOne(int idCourse){
+        String query = "SELECT * FROM COURSES WHERE idCourse = ?";
+        Course course = new Course();
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idCourse);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                course.setId(rs.getInt("idCourse"));
+                course.setImage(rs.getString("image"));
+                course.setTitle(rs.getString("title"));
+                course.setDescription(rs.getString("description"));
+                course.setTutor(rs.getInt("tutor"));
+                course.setDuration(rs.getString("duration"));
+                course.setPrice(rs.getFloat("price"));
+                course.setNbrSection(rs.getInt("nbrSection"));
+                course.setPostedDate(rs.getDate("postedDate").toString());
+                course.setNbrRegistred(rs.getInt("nbrRegistred"));
+            }
+            stm.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return course;
+    }
+    public boolean updateNbrSection(int idCourse,int nbrSection){
+        String query = "UPDATE COURSES SET nbrSection = ? WHERE idCourse = ?";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, nbrSection);
+            statement.setInt(2, idCourse);
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return true;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
         }
         return false;
     }

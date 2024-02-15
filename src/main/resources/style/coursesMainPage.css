@@ -60,7 +60,7 @@
     -fx-background-color: #fff;
 }
 .course-item-container{
-    -fx-background-color: #C1F2B0;
+    -fx-background-color: #fff;
     -fx-background-radius: 18px;
 }
 .course-item-title{
@@ -97,8 +97,9 @@
     -fx-border-radius: 8px;
     -fx-border-color: #BDA91A;
     -fx-border-width: 2px;
+    -fx-cursor: hand;
 }
-.delete-course-btn,.confirm-delete-course-btn{
+.delete-course-btn{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 20;
     -fx-background-color: #fff;
@@ -107,6 +108,7 @@
     -fx-border-radius: 8px;
     -fx-border-color: red;
     -fx-border-width: 2px;
+    -fx-cursor: hand;
 }
 .add-section-btn{
     -fx-font-family: "Jost Medium";
@@ -117,6 +119,7 @@
     -fx-border-radius: 8px;
     -fx-border-color: #1D6611;
     -fx-border-width: 2px;
+    -fx-cursor: hand;
 }
 .label-details{
     -fx-font-family: "Jost Medium";
@@ -150,15 +153,15 @@
     -fx-background-color: #D5FFDC;
 }
 .delete-warning-container{
-    -fx-background-color: #fff;
+    -fx-background-color: #f8d7da ;
     -fx-border-radius: 24px;
     -fx-background-radius: 24px;
-    -fx-border-color: red;
+    -fx-border-color: #d64242;
 }
 .warning-delete-label{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 24;
-    -fx-text-fill: red;
+    -fx-text-fill: #d64242;
 }
 .warning-delete-text{
     -fx-font-family: "Jost Medium";
@@ -166,32 +169,136 @@
     -fx-fill: #000000;
 }
 .password-confirm-delete-course {
-    -fx-background-color: #fff;
+    -fx-background-color: #f8d7da ;
     -fx-border-radius: 6px;
-    -fx-border-color: #999;
+    -fx-border-color: #d64242;
     -fx-background-radius: 6px;
     -fx-prompt-text-fill: #999;
     -fx-font-family: "Jost Medium";
     -fx-font-weight: 600;
     -fx-font-size: 16px;
 }
+.confirm-delete-course-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #f8d7da;
+    -fx-text-fill: #d64242;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #d64242;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
 .confirm-delete-course-btn:hover{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 20;
     -fx-background-color: red;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #f8d7da;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
+    -fx-border-color: red;
     -fx-border-width: 2px;
 }
 .success-operation-container{
-    -fx-background-color: #fff;
-    -fx-border-radius: 24px;
-    -fx-background-radius: 24px;
-    -fx-border-color: #1D6611;
+    -fx-background-color: #d4edda;
+    -fx-border-color: #19BB1C;
 }
 .success-msg{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-text-fill: #1D6611;
+    -fx-text-fill: #19BB1C;
+}
+.failed-operation-container{
+    -fx-background-color: #f8d7da;
+    -fx-border-color: #d64242;
+}
+.failed-msg{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #d64242;
+}
+.video-section-add-display{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 0 0 20 20;
+}
+.play-video-btn{
+    -fx-background-color: #1D6611;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+.play-video-btn:hover{
+    -fx-opacity: 0.6;
+}
+.error-input{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #d64242;
+}
+.one-section-view-container{
+    -fx-background-color: red;
+}
+.section-content-view-container{
+    -fx-background-color: white;
+}
+.scroll-pane-sections-container{
+    -fx-background-color: #fff;
+}
+.scroll-pane-sections-container .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .increment-button,
+.scroll-pane-sections-container .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.scroll-pane-sections-view-list{
+    -fx-background-color: #fff;
+}
+.scroll-pane-sections-view-list .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.scroll-pane-sections-view-list .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.scroll-pane-sections-view-list .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.scroll-pane-sections-view-list .scroll-bar:vertical .increment-button,
+.scroll-pane-sections-view-list .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.sections-view-list-container{
+    -fx-background-color: #e9fdec;
+    -fx-border-color: #fff;
+    -fx-border-width: 0 0 0 1;
+}
+.video-section-display-container{
+    -fx-background-color: #000000;
+}
+.volume-bar-section-vid {
+    -fx-background-color: #e9fdec;
+}
+.volume-bar-section-vid .track {
+    -fx-background-color: #e9fdec;
+    -fx-cursor: hand;
+}
+.volume-bar-section-vid .thumb {
+    -fx-background-color: #1D6611;
+    -fx-cursor: hand;
+}
+.speed-vid{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
 }

@@ -12,6 +12,7 @@ public class Course {
     private String postedDate;
     private int nbrRegistred;
     public Course(){
+        id = 0;
     }
     public Course(int id,String image,String title,String description,int tutor,String duration,float price,int nbrSection,String postedDate,int nbrRegistred){
         this.id = id;
