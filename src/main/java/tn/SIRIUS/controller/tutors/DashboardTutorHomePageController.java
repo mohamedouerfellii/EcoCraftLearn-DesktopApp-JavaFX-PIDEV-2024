@@ -60,6 +60,7 @@ public class DashboardTutorHomePageController implements Initializable {
     private ImageView logoutBtnImg;
     @FXML
     private Pane mainContentContainer;
+    private CoursesMainPageController coursesMainPageController;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Profile Image
@@ -78,7 +79,7 @@ public class DashboardTutorHomePageController implements Initializable {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/dashboardTutorHomePageContent.fxml"));
-            mainContentContainer.getChildren().removeAll();
+            mainContentContainer.getChildren().clear();
             Parent page = fxmlLoader.load();
             mainContentContainer.getChildren().setAll(page);
         }catch (IOException ex){
@@ -125,7 +126,9 @@ public class DashboardTutorHomePageController implements Initializable {
                 collectsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/recycle-fill.png")));
             }
             try{
-                Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/tutors/CoursesMainPage.fxml")));
+                FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/gui/tutors/CoursesMainPage.fxml")));
+                Parent page = fxmlLoader.load();
+                coursesMainPageController = fxmlLoader.getController();
                 mainContentContainer.getChildren().clear();
                 mainContentContainer.getChildren().setAll(page);
             }catch (IOException ex){
@@ -157,6 +160,8 @@ public class DashboardTutorHomePageController implements Initializable {
             }
             try{
                 Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/tutors/dashboardTutorHomePageContent.fxml")));
+                coursesMainPageController.cleanup();
+                coursesMainPageController = null;
                 mainContentContainer.getChildren().clear();
                 mainContentContainer.getChildren().setAll(page);
             }catch (IOException ex){

@@ -3,9 +3,9 @@ package tn.SIRIUS.controller.tutors;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -34,7 +34,6 @@ import tn.SIRIUS.services.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -160,6 +159,16 @@ public class CoursesMainPageController implements Initializable {
     private ImageView playVidSecBtnImg;
     @FXML
     private Label speedVidSec;
+    @FXML
+    private ImageView muteVolumeSectVid;
+    @FXML
+    private HBox volumeSecPartContainer;
+    @FXML
+    private ImageView fullScreenSecVid;
+    @FXML
+    private Text timeVideoSectioPlay;
+    @FXML
+    private Text totalTimeVidSection;
     private List<Section> sections;
     private String addCourseImgPath;
     private Image detailImg;
@@ -169,6 +178,8 @@ public class CoursesMainPageController implements Initializable {
     private Media mediaSecVid;
     private String vidSectionPath;
     private int playVidCounter;
+    private int muteVidSecCounter;
+    private double currentVolume;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         // Init visibilities and variables
@@ -185,6 +196,7 @@ public class CoursesMainPageController implements Initializable {
         slideBarTimeVidSectioin.setValue(0);
         vidSectionPath = "";
         addCourseImgPath = "";
+        //timeVideoSectioPlay.setText("0");
         // End
         showCoursesList();
         addNewCourseBtn.setOnMouseClicked(e -> addCoursePane.setVisible(true));
@@ -207,7 +219,6 @@ public class CoursesMainPageController implements Initializable {
             if(volumeBarSectionVid.isPressed())
                 mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
         });
-
     }
     public void showCoursesList(){
         CourseService courseService = new CourseService();
@@ -406,9 +417,9 @@ public class CoursesMainPageController implements Initializable {
         errorAttAddSection.setVisible(false);
         titleInputAddSection.clear();
         sectionDescInput.clear();
+        mediaPlayer.pause();
         mediaAddSectionViewer.setMediaPlayer(null);
         coursesViewSectionContainer.setVisible(false);
-        mediaPlayer.pause();
     }
     @FXML
     public void chooseImageEditCourse(MouseEvent event){
@@ -451,6 +462,7 @@ public class CoursesMainPageController implements Initializable {
             timeline.play();
         }
     }
+    // Section part
     @FXML
     public void playAddSectionVid(MouseEvent event){
         mediaPlayer.play();
@@ -549,9 +561,7 @@ public class CoursesMainPageController implements Initializable {
         }
     }
     public void setSectionPlay(Section section){
-        mediaSecVid = new Media(section.getAttachment());
-        mediaPlayer = new MediaPlayer(mediaSecVid);
-        mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
+        if(mediaPlayer != null) mediaPlayer.pause();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/shared/SectionDetailsItemDescription.fxml"));
@@ -559,12 +569,16 @@ public class CoursesMainPageController implements Initializable {
             SectionDetailsItemDescriptionController itemController = fxmlLoader.getController();
             itemController.setCoursesMainPageController(this);
             itemController.setData(section);
+            mediaSecVid = new Media(section.getAttachment());
+            mediaPlayer = new MediaPlayer(mediaSecVid);
+            mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
             sectionsViewDetailsContainer.getChildren().clear();
             sectionsViewDetailsContainer.getChildren().add(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         initPlayVidCounter();
+        updateTimeLabelVideoSection();
     }
     @FXML
     public void playSectionVid(MouseEvent event){
@@ -584,14 +598,21 @@ public class CoursesMainPageController implements Initializable {
         }
     }
     public void updateProgressBarSecVideo(){
-        Platform.runLater(() -> {
-            slideBarTimeVidSectioin.setValue(mediaPlayer.getCurrentTime().toMillis()/mediaPlayer.getTotalDuration().toMillis()*100);
-        });
+        Platform.runLater(() -> slideBarTimeVidSectioin.setValue(mediaPlayer.getCurrentTime().toMillis()/mediaPlayer.getTotalDuration().toMillis()*100) );
     }
     public void initPlayVidCounter(){
         playVidCounter = 0;
+        muteVidSecCounter = 0;
         playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/play-fill.png")));
+        muteVolumeSectVid.setImage(new Image(getClass().getResourceAsStream("/icons/dark/volume-up-line.png")));
+        volumeBarSectionVid.setValue(100);
         slideBarTimeVidSectioin.setValue(0);
+        speedVidSec.setText("x1");
+        mediaPlayer.setRate(1.0);
+        mediaPlayer.totalDurationProperty().addListener((obs,oldDuration,newDuration) -> {
+            totalTimeVidSection.setText(getVidTime(newDuration));
+        });
+
     }
     @FXML
     public void updateSecVidSpeed(){
@@ -603,5 +624,69 @@ public class CoursesMainPageController implements Initializable {
             mediaPlayer.setRate(1.0);
         }
     }
-
+    @FXML
+    public void muteUnmuteVidSecPart(MouseEvent event){
+        if((muteVidSecCounter%2 == 0)){
+            muteVolumeSectVid.setImage(new Image(getClass().getResourceAsStream("/icons/dark/volume-mute-line.png")));
+            currentVolume = (volumeBarSectionVid.getValue()/100);
+            mediaPlayer.setVolume(0.0);
+            volumeBarSectionVid.setValue(0.0);
+        } else{
+            muteVolumeSectVid.setImage(new Image(getClass().getResourceAsStream("/icons/dark/volume-up-line.png")));
+            mediaPlayer.setVolume(currentVolume);
+            volumeBarSectionVid.setValue(currentVolume*100);
+        }
+        muteVidSecCounter++;
+    }
+    @FXML
+    public void showVolumeSlideBar(MouseEvent event){
+        volumeBarSectionVid.setVisible(true);
+    }
+    @FXML
+    public void hideVolumeSlideBar(MouseEvent event){
+        volumeBarSectionVid.setVisible(false);
+    }
+    // update time video section details part
+    public void restartEndVideo(){
+        playVidCounter = 0;
+        playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/play-fill.png")));
+        mediaPlayer.seek(new Duration(0));
+        mediaPlayer.pause();
+        slideBarTimeVidSectioin.setValue(0);
+    }
+    public void updateTimeLabelVideoSection(){
+        timeVideoSectioPlay.textProperty().bind(Bindings.createStringBinding(() -> { /* Callable<String> ( call() )*/
+            try{
+                return getVidTime(mediaPlayer.getCurrentTime()) + " / ";
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+                return "";
+            }
+        },mediaPlayer.currentTimeProperty()));
+    }
+    public String getVidTime(Duration time){
+        int secondes = (int) time.toSeconds();
+        int minutes = (int) time.toMinutes();
+        int hours = (int) time.toHours();
+        if(secondes > 59 ) secondes = secondes % 60;
+        if(minutes > 59 ) minutes = minutes % 60;
+        if(hours > 59 ) hours = hours % 60;
+        if(hours > 0) {
+            String duration =  String.format("%d:%02d:%02d",hours,minutes,secondes);
+            if(totalTimeVidSection.getText().equals(duration))
+                restartEndVideo();
+            return duration;
+        }
+        else {
+            String duration =  String.format("%02d:%02d",minutes,secondes);
+            if(totalTimeVidSection.getText().equals(duration))
+                restartEndVideo();
+            return duration;
+        }
+    }
+    public void cleanup(){
+        mediaSecVid = null;
+        sections.clear();
+        courses.clear();
+    }
 }

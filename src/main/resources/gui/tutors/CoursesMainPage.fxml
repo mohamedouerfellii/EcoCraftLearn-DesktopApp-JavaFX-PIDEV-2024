@@ -599,10 +599,10 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Slider fx:id="slideBarTimeVidSectioin" prefHeight="14.0" prefWidth="784.0" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesMainPage.css" />
+                                          <Slider fx:id="slideBarTimeVidSectioin" prefHeight="14.0" prefWidth="724.0" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesMainPage.css" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="933.0" spacing="5.0">
                                        <children>
                                           <Button fx:id="playSectionVidBtn" mnemonicParsing="false" onMouseClicked="#playSectionVid" styleClass="play-video-btn" stylesheets="@../../style/coursesMainPage.css">
                                              <graphic>
@@ -616,16 +616,41 @@
                                                 <Insets left="20.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Slider fx:id="volumeBarSectionVid" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesMainPage.css">
+                                          <HBox fx:id="volumeSecPartContainer" alignment="CENTER" onMouseExited="#hideVolumeSlideBar" prefHeight="26.0" prefWidth="305.0">
                                              <HBox.margin>
-                                                <Insets left="30.0" />
+                                                <Insets left="15.0" top="2.0" />
                                              </HBox.margin>
-                                          </Slider>
-                                          <Label fx:id="speedVidSec" onMouseClicked="#updateSecVidSpeed" styleClass="speed-vid" stylesheets="@../../style/coursesMainPage.css" text="x1">
+                                             <children>
+                                                <Text fx:id="timeVideoSectioPlay" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time-vid-play-section" text="24:59:59 / " />
+                                                <Text fx:id="totalTimeVidSection" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time-vid-play-section" text="24:59:59" wrappingWidth="72.19736862182617" />
+                                                <ImageView fx:id="muteVolumeSectVid" fitHeight="28.0" fitWidth="36.0" onMouseClicked="#muteUnmuteVidSecPart" onMouseEntered="#showVolumeSlideBar" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../icons/dark/volume-up-line.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                                <Slider fx:id="volumeBarSectionVid" prefHeight="14.0" prefWidth="105.0" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesMainPage.css" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Slider>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="speedVidSec" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#updateSecVidSpeed" prefHeight="23.0" prefWidth="35.0" styleClass="speed-vid" stylesheets="@../../style/coursesMainPage.css" text="x1">
                                              <HBox.margin>
-                                                <Insets left="580.0" />
+                                                <Insets left="380.0" />
                                              </HBox.margin>
                                           </Label>
+                                          <ImageView fx:id="fullScreenSecVid" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="full-screen-sec-vid">
+                                             <image>
+                                                <Image url="@../../icons/dark/fullscreen-line.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </ImageView>
                                        </children>
                                        <opaqueInsets>
                                           <Insets />

@@ -302,3 +302,14 @@
     -fx-text-fill: #000000;
     -fx-cursor: hand;
 }
+.full-screen-sec-vid{
+    -fx-cursor: hand;
+}
+.full-screen-sec-vid:hover{
+    -fx-opacity: 0.8;
+}
+.time-vid-play-section{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
