@@ -29,6 +29,7 @@ public class SectionDetailsItemDescriptionController implements Initializable {
     @FXML
     private Text sectionDescContent;
     private CoursesMainPageController mainPageController;
+    private Section section;
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
@@ -85,20 +86,21 @@ public class SectionDetailsItemDescriptionController implements Initializable {
                 Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/edit-box-line.png"))
         ));
     }
-    public void setData(Section section){
-        sectionTitle.setText(section.getTitle());
-        sectionDescContent.setText(section.getDescription());
+    public void setData(Section sec){
+        sectionTitle.setText(sec.getTitle());
+        sectionDescContent.setText(sec.getDescription());
+        this.section = sec;
     }
     public void setCoursesMainPageController(CoursesMainPageController controller){
         mainPageController = controller;
     }
     @FXML
     public void editSectionBtnClicked(MouseEvent event){
-
+        mainPageController.setUpEditSectionPage(section);
     }
     @FXML
     public void deleteSectionBtnClicked(MouseEvent event){
-
+        mainPageController.deleteSection(section);
     }
 
 }

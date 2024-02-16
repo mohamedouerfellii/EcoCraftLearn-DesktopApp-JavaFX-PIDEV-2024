@@ -169,6 +169,22 @@ public class CoursesMainPageController implements Initializable {
     private Text timeVideoSectioPlay;
     @FXML
     private Text totalTimeVidSection;
+    @FXML
+    private MediaView mediaEditSectionViewer;
+    @FXML
+    private TextField titleInputEditSection;
+    @FXML
+    private TextArea sectionEditDescInput;
+    @FXML
+    private AnchorPane coursesEditSectionContainer;
+    @FXML
+    private Label errorTitleEditSection;
+    @FXML
+    private Label errorDescEditSection;
+    @FXML
+    private Label errorAttEditSection;
+    @FXML
+    private TextField idInputEditSection;
     private List<Section> sections;
     private String addCourseImgPath;
     private Image detailImg;
@@ -192,6 +208,7 @@ public class CoursesMainPageController implements Initializable {
         failedOperationEditContainer.setVisible(false);
         coursesAddSectionContainer.setVisible(false);
         coursesViewSectionContainer.setVisible(false);
+        coursesEditSectionContainer.setVisible(false);
         volumeBarSectionVid.setValue(100);
         slideBarTimeVidSectioin.setValue(0);
         vidSectionPath = "";
@@ -534,8 +551,7 @@ public class CoursesMainPageController implements Initializable {
         timeline.setCycleCount(1);
         timeline.play();
     }
-    @FXML
-    public void showCourseSectionsBtnClicked(MouseEvent event){
+    public void showCourseSection(){
         int count = 0;
         coursesViewSectionContainer.setVisible(true);
         // get and display all sections
@@ -559,6 +575,10 @@ public class CoursesMainPageController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    public void showCourseSectionsBtnClicked(MouseEvent event){
+        showCourseSection();
     }
     public void setSectionPlay(Section section){
         if(mediaPlayer != null) mediaPlayer.pause();
@@ -684,9 +704,89 @@ public class CoursesMainPageController implements Initializable {
             return duration;
         }
     }
+    // Edit Section
+    public void setUpEditSectionPage(Section section){
+        titleInputEditSection.setText(section.getTitle());
+        sectionEditDescInput.setText(section.getDescription());
+        titleInputAddSection.setText(String.valueOf(section.getIdSection()));
+        vidSectionPath = section.getAttachment();
+        mediaSecVid = new Media(vidSectionPath);
+        mediaPlayer = new MediaPlayer(mediaSecVid);
+        mediaEditSectionViewer.setMediaPlayer(mediaPlayer);
+        idInputEditSection.setText(String.valueOf(section.getIdSection()));
+        coursesEditSectionContainer.setVisible(true);
+    }
+    @FXML
+    public void chooseSectionEditAttBtnClicked(MouseEvent event){
+        FileChooser videoChooser = new FileChooser();
+        videoChooser.setTitle("Choose your course Video");
+        FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter(
+                "Videos Files", "*.mp4", "*.avi", "*.mov", "*.mkv", "*.wmv", "*.flv");
+        videoChooser.getExtensionFilters().add(videoFilter);
+        fileVidSection = videoChooser.showOpenDialog(null);
+        if(fileVidSection != null){
+            vidSectionPath = fileVidSection.toURI().toString();
+            mediaSecVid = new Media(vidSectionPath);
+            mediaPlayer = new MediaPlayer(mediaSecVid);
+            mediaEditSectionViewer.setMediaPlayer(mediaPlayer);
+        }
+    }
+    @FXML
+    public void playEditSectionVid(MouseEvent event){
+        mediaPlayer.play();
+    }
+    @FXML
+    public void pauseEditSectionVid(MouseEvent event){
+        mediaPlayer.pause();
+    }
+    @FXML
+    public void sectionEditFormBtnClicked(MouseEvent event){
+        if( !titleInputEditSection.getText().isEmpty() &&
+                ( !sectionEditDescInput.getText().isEmpty() && sectionEditDescInput.getText().length() >= 20 ) &&
+                !vidSectionPath.isEmpty() ){
+            int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
+            int idSection = Integer.parseInt(idInputEditSection.getText());
+            System.out.println(idSection);
+            Section section = new Section(
+                    idSection,courseID,
+                    titleInputEditSection.getText(),
+                    sectionEditDescInput.getText(),
+                    vidSectionPath, ""
+            );
+            SectionService sectionService = new SectionService();
+            if(sectionService.update(section)){
+                    showCourseSection();
+                    setSectionPlay(section);
+                    coursesEditSectionContainer.setVisible(false);
+                    notifySuccess();
+            } else {
+                    coursesEditSectionContainer.setVisible(false);
+                    notifyFailed();
+            }
+        } else {
+            if( titleInputEditSection.getText().isEmpty() )
+                errorAttEditSection.setVisible(true);
+            if( sectionEditDescInput.getText().isEmpty() || sectionEditDescInput.getText().length() < 20 )
+                errorDescEditSection.setVisible(true);
+            if( vidSectionPath.isEmpty() )
+                errorAttEditSection.setVisible(true);
+        }
+    }
+    public void deleteSection(Section section){
+        SectionService sectionService = new SectionService();
+        if(sectionService.delete(section.getIdSection())){
+            showCourseSection();
+            notifySuccess();
+        } else {
+            notifyFailed();
+        }
+    }
+    // resources clean
     public void cleanup(){
         mediaSecVid = null;
-        sections.clear();
-        courses.clear();
+        if (sections != null)
+            sections.clear();
+        if (courses != null)
+            courses.clear();
     }
 }
