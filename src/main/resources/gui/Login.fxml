@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane prefHeight="720.0" prefWidth="1350.0" stylesheets="@../style/button.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.LoginController">
+    <ImageView fitHeight="720.0" fitWidth="1350.0">
+            <image>
+                <Image url="@../icons/BG.png" />
+            </image>
+        </ImageView>
+        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="610.0" stroke="BLACK" strokeType="INSIDE" styleClass="custom-rectangle" width="640.0">
+            <effect>
+                <DropShadow blurType="GAUSSIAN">
+                    <color>
+                        <Color red="0.5684210658073425" green="0.5684210658073425" blue="0.5684210658073425" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <StackPane.margin>
+                <Insets />
+            </StackPane.margin></Rectangle>
+        <AnchorPane fx:id="LoginAnchorPane" layoutX="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="640.0">
+            <children>
+                <Label layoutX="136.0" layoutY="74.0" prefHeight="35.0" prefWidth="383.0" styleClass="welcome-text" stylesheets="@../style/text.css" text="Welcome ! let the journey begin." />
+                <Text fill="#d5ffdc" layoutX="98.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);;" text="Username" wrappingWidth="138.93670654296875">
+                    <font>
+                        <Font size="24.0" />
+                    </font></Text>
+                <Text fill="#d5ffdc" layoutX="97.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);;" text="Password" wrappingWidth="130.13671875">
+                    <font>
+                        <Font size="24.0" />
+                    </font></Text>
+                <TextField fx:id="userNameLabel" layoutX="99.0" layoutY="178.0" prefHeight="50.5" prefWidth="420.0" promptText="Enter your username" styleClass="label-prompt" stylesheets="@../style/text.css">
+                    <effect>
+                        <DropShadow offsetY="2.0">
+                            <color>
+                                <Color red="0.23137255012989044" green="0.23137255012989044" blue="0.23137255012989044" />
+                            </color>
+                        </DropShadow>
+                    </effect></TextField>
+                <Button fx:id="LoginButton" layoutX="308.0" layoutY="354.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="50.5" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Login" />
+                <Button layoutX="127.0" layoutY="429.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="340.0" styleClass="google" stylesheets="@../style/button.css" text="Connect with google" textFill="#666666" />
+                <Button layoutX="60.0" layoutY="359.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="268.0" styleClass="forget-password" stylesheets="@../style/button.css" text="Forget Password ?" textFill="WHITE">
+                    <font>
+                        <Font name="Jost Regular" size="24.0" />
+                    </font></Button>
+                <Label layoutX="127.0" layoutY="502.0" prefHeight="35.0" prefWidth="253.0" styleClass="signup-text" stylesheets="@../style/text.css" text="You don't have an account ?">
+                    <font>
+                        <Font name="Jost Regular" size="12.0" />
+                    </font></Label>
+                <Button fx:id="SignInButton" layoutX="362.0" layoutY="494.0" mnemonicParsing="false" onAction="#signUpForum" prefHeight="50.0" prefWidth="93.0" styleClass="sign-up-button" stylesheets="@../style/button.css" text="Sign up" />
+                <ImageView fitHeight="41.02" fitWidth="44.0" layoutX="135.0" layoutY="434.0">
+                    <image>
+                            <Image url="@../icons/Google.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="Show" layoutX="99.0" layoutY="279.0" prefHeight="50.5" prefWidth="420.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css" visible="false">
+                    <effect>
+                        <DropShadow offsetY="2.0" />
+                    </effect>
+                </TextField>
+                <PasswordField fx:id="passwordLabel" layoutX="99.0" layoutY="279.0" prefHeight="50.5" prefWidth="420.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css">
+
+
+                    <effect>
+                        <DropShadow offsetY="2.0">
+                            <color>
+                                <Color red="0.23137255012989044" green="0.23137255012989044" blue="0.23137255012989044" />
+                            </color>
+                        </DropShadow>
+                    </effect></PasswordField>
+                <CheckBox fx:id="CheckPassword" layoutX="491.0" layoutY="290.0" mnemonicParsing="false" onAction="#handelVisibility" prefHeight="30.0" prefWidth="17.0" stylesheets="@../style/button.css" />
+                <Label fx:id="CheckDetail" layoutX="146.0" layoutY="116.0" prefHeight="30.0" prefWidth="366.0" styleClass="signup-text" stylesheets="@../style/text.css" textFill="RED">
+            <font>
+               <Font size="25.0" />
+            </font></Label>
+
+            </children>
+        </AnchorPane>
+    </StackPane>

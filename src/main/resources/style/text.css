@@ -1,0 +1,62 @@
+/*
+.container {
+   -fx-border-radius: 10;
+}
+.anchor-pane {
+   -fx-background-color: transparent;
+}
+.text-area{
+   -fx-prompt-text-opacity: 0;
+   -fx-background-color: #94c995;
+   -fx-prompt-text-fill: #D5FFDC;
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0.1, 0, 3);
+}
+.anchor-pane.rounded-background {
+   -fx-background-radius: 10;
+   -fx-background-color: #D5FFDC;
+}
+
+.prompt-text{
+   -fx-prompt-text-fill: #D5FFDC;
+
+   -fx-font-weight: light;
+   -fx-font-size: 20;
+}
+.your-text-class{
+   -fx-font-size: 24;
+   -fx-text-fill: #D5FFDC;
+   -fx-font: jost;
+   -fx-font-weight: bold;
+}
+.login-style{
+   -fx-font-size: 50;
+   -fx-font-weight: bold;
+   -fx-text-fill: #D5FFDC;
+}
+*/
+.sign-in-text{
+   -fx-font-size: 50;
+   -fx-font-weight: bold;
+   -fx-text-fill: #D5FFDC;
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);
+}
+.welcome-text{
+   -fx-font-size: 24;
+   -fx-font-family: "Jost Medium";
+
+   -fx-text-fill: #D5FFDC;
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);
+}
+.label-prompt{
+   -fx-font-size: 20;
+   -fx-font-family: "Jost Light";
+   -fx-text-fill: #666666;
+   -fx-cursor: 2;
+   -fx-background-color: #D5FFDC;
+
+}
+.signup-text{
+   -fx-font-family: "Jost light";
+   -fx-font-size: 20;
+   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);
+}

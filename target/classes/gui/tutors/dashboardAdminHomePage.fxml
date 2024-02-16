@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="pagesContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="pages-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.DashboardAdminHomePageController">
+   <children>
+      <Pane fx:id="mainContentContainer" layoutX="150.0" layoutY="70.0" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" />
+      <VBox alignment="TOP_CENTER" prefHeight="721.0" prefWidth="150.0" styleClass="left-menu-container" stylesheets="@../../style/dashboardAdminStyle.css">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="logoContainer">
+                     <image>
+                        <Image url="@../../images/logoLight.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Dashboard">
+               <graphic>
+                  <ImageView fx:id="dashboardBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/dashboard-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="100.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="coursesBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Courses    ">
+               <graphic>
+                  <ImageView fx:id="coursesBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/graduation-cap-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="eventsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Events      ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/calendar-event-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="forumBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Forum      ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/group-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="productsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Products  ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/shopping-bag-3-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="collectsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Collects   ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/recycle-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Logout   ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/logout-box-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="120.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="538.0" layoutY="2.0" prefHeight="60.0" prefWidth="797.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
+         <children>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="60.0" translateY="-5.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fx:id="msgBtn" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-message-501.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="70.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-notification-501.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox fx:id="notifCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+               </children>
+            </HBox>
+            <Circle fx:id="profileImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="profil-img-container">
+               <HBox.margin>
+                  <Insets right="-260.0" />
+               </HBox.margin>
+            </Circle>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/arrow-down-s-fill.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="260.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
