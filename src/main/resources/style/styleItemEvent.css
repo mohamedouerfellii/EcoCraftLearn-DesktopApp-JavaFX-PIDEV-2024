@@ -1,0 +1,28 @@
+.AnchorPaneItemEvent {
+    -fx-background-color: #7DC145; /* Couleur de fond */
+    -fx-background-radius: 40 40 40 40;
+
+}
+.HboxItemEvent
+{     -fx-background-color: transparent;
+    -fx-background-radius:40 40 40 40;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 4, 0);
+}
+.Morebtn {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+
+.Morebtn:hover {
+    -fx-opacity: 0.6;
+}
+.TiteleEventItem
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 30;
+    -fx-fill: #D5FFDC;
+}

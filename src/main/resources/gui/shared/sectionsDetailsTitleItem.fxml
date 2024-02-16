@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="sectionTitleContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#changeSection" prefHeight="60.0" prefWidth="314.0" styleClass="container" stylesheets="@../../style/sectionsDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.shared.SectionsDetailsTitleItemController">
+   <children>
+      <VBox prefHeight="40.0" prefWidth="316.0">
+         <children>
+            <Text fx:id="sectionTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-title-content" text="This is a test" wrappingWidth="305.33669662475586">
+               <VBox.margin>
+                  <Insets left="10.0" top="12.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

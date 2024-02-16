@@ -1,0 +1,59 @@
+.FormContainerEvent
+{
+    -fx-background-color: #fff;
+    -fx-border-color: #000000;
+    -fx-border-radius: 15 15 15 15;
+}
+.GoBackBtnEvent
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.GoBackBtnEvent:hover
+{
+    -fx-opacity: 0.6;
+}
+
+.InputTitleEvent
+{
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.InputDescrEvent
+{
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+
+.chooseImgBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+
+.TitleEvent
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}

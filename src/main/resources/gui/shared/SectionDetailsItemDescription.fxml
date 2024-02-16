@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="858.0" styleClass="main-description-container" stylesheets="@../../style/sectionsDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.shared.SectionDetailsItemDescriptionController">
+   <children>
+      <Label fx:id="sectionTitle" layoutX="28.0" layoutY="4.0" prefHeight="52.0" prefWidth="286.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Section Number One" />
+      <Button fx:id="editSectionBtn" layoutX="655.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#editSectionBtnClicked" onMouseEntered="#editSectionBtnHover" onMouseExited="#editSectionBtnNormal" prefHeight="40.0" prefWidth="90.0" styleClass="edit-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
+         <graphic>
+            <ImageView fx:id="editSectionBtnImg" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/edit-box-line.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="deleteSectionBtn" layoutX="753.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#deleteSectionBtnClicked" onMouseEntered="#deleteSectionBtnHover" onMouseExited="#deleteSectionBtnNormal" prefHeight="40.0" prefWidth="90.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete">
+         <graphic>
+            <ImageView fx:id="deleteSectionBtnImg" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <VBox fx:id="descriptionSectionDetailsContainer" layoutX="19.0" layoutY="62.0" prefHeight="126.0" prefWidth="818.0" styleClass="description-section-details-container" stylesheets="@../../style/sectionsDetails.css">
+         <children>
+            <Label styleClass="section-desc-label" stylesheets="@../../style/sectionsDetails.css" text="Description :">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
+            <Text fx:id="sectionDescContent" fill="#495057" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-desc-content" text="Text" wrappingWidth="793.3367614746094">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

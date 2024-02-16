@@ -1,0 +1,95 @@
+.AnchorHomePageEvent
+{
+    -fx-background-color: #fff;
+
+    -fx-border-radius: 15 15 15 15;
+}
+
+.MenuVbox
+{
+    -fx-background-color: #1D6611; /* Background color */
+    -fx-min-width: 120px; /* Width */
+    -fx-pref-height: 680px; /* Height */
+    -fx-top: 20px; /* Top margin */
+    -fx-left: 20px; /* Left margin */
+    -fx-background-radius: 56px; /* Background radius for rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); /* Drop shadow effect */
+}
+
+.Logo
+{
+    -fx-translate-x: 30px;
+    -fx-translate-y: 20px;
+}
+.MenuBtn
+{
+    -fx-font-family: jost;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D5FFDC; /* Text color when not clicked */
+
+}
+
+.VBoxContainerEvent
+{
+    -fx-background-color: #fff ;
+    -fx-spacing: 15px;
+    -fx-padding: 10px;
+}
+
+.ScrolPaneProduct{
+    -fx-background-color: #ffffff  ;
+}
+.ScrolPaneEvent .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneEvent .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneEvent .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneEvent .scroll-bar:vertical .increment-button,
+.ScrolPaneEvent .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+
+
+.feedback-scroll-pane{
+    -fx-background-color: #7DC145;
+}
+.feedback-content-container{
+    -fx-background-color: #7DC145;
+}
+.feedback-scroll-pane .scroll-bar:vertical, .scroll-bar:horizontal{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.feedback-scroll-pane .scroll-bar:vertical .thumb, .scroll-bar:horizontal .thumb {
+    -fx-background-color: #000000;
+}
+.feedback-scroll-pane .scroll-bar:vertical .thumb:hover, .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.feedback-scroll-pane .scroll-bar:vertical .increment-button,
+.feedback-scroll-pane .scroll-bar:vertical .decrement-button ,
+.feedback-scroll-pane .scroll-bar:horizontal .increment-button ,
+.feedback-scroll-pane .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+}
+.HomeAddEvent
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.HomeAddEvent:hover
+{
+    -fx-opacity: 0.6;
+}

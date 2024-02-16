@@ -1,0 +1,147 @@
+package tn.SIRIUS.controller.students;
+
+import tn.SIRIUS.entities.Course;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.Circle;
+import javafx.scene.control.Label;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HomePageController implements Initializable {
+    @FXML
+    private Circle profilImgContainer;
+    @FXML
+    private HBox notifCount;
+    @FXML
+    private HBox msgCount;
+    @FXML
+    private Label welcomeMsg;
+    @FXML
+    private Circle mostProgressedCourseImgContainer;
+    @FXML
+    private Arc mostProgressedCoursePrc;
+    @FXML
+    private Label mostProgressedCoursePrcVal;
+    @FXML
+    private Button homeBtn;
+    @FXML
+    private ImageView homeBtnImg;
+    @FXML
+    private Button coursesBtn;
+    @FXML
+    private ImageView coursesBtnImg;
+    @FXML
+    private Button eventsBtn;
+    @FXML
+    private ImageView eventsBtnImg;
+    @FXML
+    private Button forumBtn;
+    @FXML
+    private ImageView forumBtnImg;
+    @FXML
+    private Button productsBtn;
+    @FXML
+    private ImageView productsBtnImg;
+    @FXML
+    private Button collectsBtn;
+    @FXML
+    private ImageView collectsBtnImg;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private ImageView logoutBtnImg;
+    @FXML
+    private ScrollPane coursesScrollPane;
+    @FXML
+    private VBox coursesVboxHomePage;
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        //Profile Image
+        Image profileImg = new Image("/resources/images/profilePictures/12.jpg");
+        profilImgContainer.setFill(new ImagePattern(profileImg));
+        //Msg and Notifications
+        Label nbrNotif = new Label();
+        Label nbrMsg = new Label();
+        nbrNotif.setText("5");
+        nbrMsg.setText("2");
+        nbrNotif.setStyle("-fx-font-family: \"Jost\";-fx-font-weight: bold;-fx-font-size: 16;-fx-text-fill: white;");
+        nbrMsg.setStyle("-fx-font-family: \"Jost\";-fx-font-weight: bold;-fx-font-size: 16;-fx-text-fill: white;");
+        notifCount.getChildren().add(nbrNotif);
+        msgCount.getChildren().add(nbrMsg);
+        //Welcome Msg
+        String welcomeText = "Welcome Abdallah!";
+        welcomeMsg.setText(welcomeText);
+        //Most progressed courses
+        Image mostProgressedCourseImg = new Image("/resources/images/coursesImg/Finished-Basket-3-cropped.jpg");
+        mostProgressedCourseImgContainer.setFill(new ImagePattern(mostProgressedCourseImg));
+        double prcProg = 99.0;
+        double progressCourseValue = (prcProg / 100.0) * 360;
+        mostProgressedCoursePrc.setLength(progressCourseValue);
+        mostProgressedCoursePrcVal.setText(String.valueOf(prcProg)+"%");
+        //Menu
+        String styleMenuBtnClicked =
+                """
+                -fx-font-family: "Jost Medium";
+                -fx-font-size: 16;
+                -fx-background-color: #D5FFDC;
+                -fx-background-radius: 24px;
+                -fx-text-fill: #1D6611;""";
+        String styleMenuBtnHover =
+                """
+                -fx-font-family: "Jost Medium";
+                -fx-font-size: 16;
+                -fx-background-color: #1D6611;
+                -fx-background-radius: 24px;
+                -fx-opacity: 0.6;
+                -fx-text-fill: #D5FFDC;""";
+        String styleMenuBtnNormal =
+                """
+                -fx-font-family: "Jost Medium";
+                -fx-font-size: 16;
+                -fx-background-color: transparent;
+                -fx-text-fill: #D5FFDC;""";
+        homeBtn.setStyle(styleMenuBtnClicked);
+        homeBtnImg.setImage(new Image("/resources/icons/dark/home-4-fill.png"));
+        coursesBtn.setOnMouseEntered(e -> coursesBtn.setStyle(styleMenuBtnHover) );
+        coursesBtn.setOnMouseExited(e -> coursesBtn.setStyle(styleMenuBtnNormal) );
+        eventsBtn.setOnMouseEntered(e -> eventsBtn.setStyle(styleMenuBtnHover) );
+        eventsBtn.setOnMouseExited(e -> eventsBtn.setStyle(styleMenuBtnNormal) );
+        forumBtn.setOnMouseEntered(e -> forumBtn.setStyle(styleMenuBtnHover) );
+        forumBtn.setOnMouseExited(e -> forumBtn.setStyle(styleMenuBtnNormal) );
+        productsBtn.setOnMouseEntered(e -> productsBtn.setStyle(styleMenuBtnHover) );
+        productsBtn.setOnMouseExited(e -> productsBtn.setStyle(styleMenuBtnNormal) );
+        collectsBtn.setOnMouseEntered(e -> collectsBtn.setStyle(styleMenuBtnHover) );
+        collectsBtn.setOnMouseExited(e -> collectsBtn.setStyle(styleMenuBtnNormal));
+        logoutBtn.setOnMouseEntered(e -> logoutBtn.setStyle(styleMenuBtnHover) );
+        logoutBtn.setOnMouseExited(e -> logoutBtn.setStyle(styleMenuBtnNormal) );
+        //Courses part
+        coursesScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        Course course = new Course(1,"/resources/images/coursesImg/tote_428_597_s_c1_428_597_int_c1.png","test course display","Description",1,"08h 30m",250.0f,5,"20-01-2024",0);
+        try {
+            for (int i = 0; i < 6; i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesHomePageItem.fxml"));
+                Parent root = fxmlLoader.load();
+                CoursesHomePageItemController itemController = fxmlLoader.getController();
+                itemController.setCourseData(course);
+                coursesVboxHomePage.getChildren().add(root);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+}

@@ -1,0 +1,66 @@
+.main-description-container{
+    -fx-background-color: #fff;
+}
+.container{
+    -fx-background-color: #e9fdec;
+    -fx-border-color: #fff;
+    -fx-border-width: 0 0 1 0;
+    -fx-cursor: hand;
+}
+.section-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-text-fill: #000000;
+}
+.section-title-content{
+    -fx-font-family: "Jost";
+    -fx-font-size: 24;
+    -fx-text-fill: #212832;
+}
+.sections-view-list-container{
+    -fx-background-color: #fff;
+}
+.section-desc-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-text-fill: #212832;
+}
+.delete-section-btn{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 12;
+    -fx-background-color: #fff;
+    -fx-text-fill: red;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+.edit-section-btn{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 12;
+    -fx-background-color: #fff;
+    -fx-text-fill: #BDA91A;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #BDA91A;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+.description-section-details-container{
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #D5FFDC;
+    -fx-border-width: 2px;
+}
+.section-desc-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 22;
+    -fx-text-fill: #212832;
+}
+.section-desc-content{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 18;
+    -fx-text-fill: #495057;
+}
