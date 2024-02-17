@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="quizItemContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="840.0" styleClass="quiz-item-container" stylesheets="@../../style/sectionsDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.QuizItemTutorController">
+   <children>
+      <Text fx:id="question" layoutX="78.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-quiz" text="Find the sum of numbers between 1 and 20 (1 and 20 included):" />
+      <VBox layoutX="120.0" layoutY="65.0" prefHeight="318.0" prefWidth="600.0" spacing="25.0">
+         <children>
+            <CheckBox fx:id="checkChoice1" mnemonicParsing="false" prefHeight="18.0" prefWidth="206.0" styleClass="checkbox-quizz" stylesheets="@../../style/sectionsDetails.css" text="CheckBox" />
+            <CheckBox fx:id="checkChoice2" mnemonicParsing="false" prefHeight="18.0" prefWidth="206.0" styleClass="checkbox-quizz" stylesheets="@../../style/sectionsDetails.css" text="CheckBox" />
+            <CheckBox fx:id="checkChoice3" mnemonicParsing="false" prefHeight="18.0" prefWidth="206.0" styleClass="checkbox-quizz" stylesheets="@../../style/sectionsDetails.css" text="CheckBox" />
+            <CheckBox fx:id="checkChoice4" mnemonicParsing="false" prefHeight="18.0" prefWidth="206.0" styleClass="checkbox-quizz" stylesheets="@../../style/sectionsDetails.css" text="CheckBox" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="194.0" styleClass="correct-answer-label" stylesheets="@../../style/sectionsDetails.css" text="Correct Answer :" />
+                  <Text fx:id="correctAnswer" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="correct-answer-container" text="Text" wrappingWidth="598.1367492675781" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

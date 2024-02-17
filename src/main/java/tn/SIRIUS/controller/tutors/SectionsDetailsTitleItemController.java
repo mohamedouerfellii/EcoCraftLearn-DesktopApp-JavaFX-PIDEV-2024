@@ -1,4 +1,4 @@
-package tn.SIRIUS.controller.shared;
+package tn.SIRIUS.controller.tutors;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

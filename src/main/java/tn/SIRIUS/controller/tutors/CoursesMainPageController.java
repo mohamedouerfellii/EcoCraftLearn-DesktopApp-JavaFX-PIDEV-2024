@@ -4,13 +4,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import tn.SIRIUS.controller.shared.SectionDetailsItemDescriptionController;
-import tn.SIRIUS.controller.shared.SectionsDetailsTitleItemController;
 import tn.SIRIUS.entities.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -185,6 +185,24 @@ public class CoursesMainPageController implements Initializable {
     private Label errorAttEditSection;
     @FXML
     private TextField idInputEditSection;
+    @FXML
+    private AnchorPane quizAddFormPageContainer;
+    @FXML
+    private Label idSectionAddQuiz;
+    @FXML
+    private Label nbrQuestionQuizAdd;
+    @FXML
+    private TextField questionQuizAddInput;
+    @FXML
+    private TextField choice1QuizAddInput;
+    @FXML
+    private TextField choice2QuizAddInput;
+    @FXML
+    private TextField choice3QuizAddInput;
+    @FXML
+    private TextField choice4QuizAddInput;
+    @FXML
+    private ComboBox<String> comboBoxQuizAdd;
     private List<Section> sections;
     private String addCourseImgPath;
     private Image detailImg;
@@ -209,6 +227,7 @@ public class CoursesMainPageController implements Initializable {
         coursesAddSectionContainer.setVisible(false);
         coursesViewSectionContainer.setVisible(false);
         coursesEditSectionContainer.setVisible(false);
+        quizAddFormPageContainer.setVisible(false);
         volumeBarSectionVid.setValue(100);
         slideBarTimeVidSectioin.setValue(0);
         vidSectionPath = "";
@@ -565,7 +584,7 @@ public class CoursesMainPageController implements Initializable {
                     count++;
                 }
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/shared/sectionsDetailsTitleItem.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/sectionsDetailsTitleItem.fxml"));
                 Parent root = fxmlLoader.load();
                 SectionsDetailsTitleItemController itemController = fxmlLoader.getController();
                 itemController.setCoursesMainPageController(this);
@@ -584,7 +603,7 @@ public class CoursesMainPageController implements Initializable {
         if(mediaPlayer != null) mediaPlayer.pause();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/gui/shared/SectionDetailsItemDescription.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/gui/tutors/SectionDetailsItemDescription.fxml"));
             Parent root = fxmlLoader.load();
             SectionDetailsItemDescriptionController itemController = fxmlLoader.getController();
             itemController.setCoursesMainPageController(this);
@@ -775,11 +794,32 @@ public class CoursesMainPageController implements Initializable {
     public void deleteSection(Section section){
         SectionService sectionService = new SectionService();
         if(sectionService.delete(section.getIdSection())){
+            CourseService courseService = new CourseService();
+            int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
+            int newNbrSection = Integer.parseInt(nbrSecLabelDetail.getText()) - 1;
+            courseService.updateNbrSection(courseID,newNbrSection );
             showCourseSection();
             notifySuccess();
         } else {
             notifyFailed();
         }
+    }
+    // Quiz Start
+    public void setAddQuizPage(int idSection){
+        idSectionAddQuiz.setText(String.valueOf(idSection));
+        quizAddFormPageContainer.setVisible(true);
+        nbrQuestionQuizAdd.setText("Question Number : 0");
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "Choice 1",
+                "Choice 2",
+                "Choice 3",
+                "Choice 4"
+        );
+        comboBoxQuizAdd.setItems(items);
+    }
+    @FXML
+    public void goBackSectionFromQuizAdd(MouseEvent event){
+        quizAddFormPageContainer.setVisible(false);
     }
     // resources clean
     public void cleanup(){

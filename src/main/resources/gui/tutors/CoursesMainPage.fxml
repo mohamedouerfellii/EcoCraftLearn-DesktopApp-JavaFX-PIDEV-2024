@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
@@ -475,7 +476,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesAddSectionContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+      <AnchorPane fx:id="coursesAddSectionContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
          <children>
             <Label fx:id="labelAddSectionPageTitle" alignment="CENTER" layoutX="419.0" layoutY="10.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Add Section To Your Course !" />
             <Button fx:id="goBackSectionBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetails" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
@@ -568,7 +569,7 @@
             <Label fx:id="errorAttAddSection" layoutX="885.0" layoutY="485.0" prefHeight="23.0" prefWidth="214.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Your section needs a video !" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesViewSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+      <AnchorPane fx:id="coursesViewSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
          <children>
             <Button fx:id="goBackSectionViewBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetails" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
@@ -679,7 +680,7 @@
             <Label fx:id="courseTitleSectionDisplay" alignment="CENTER" layoutX="539.0" layoutY="7.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Courses Lab !" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesEditSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+      <AnchorPane fx:id="coursesEditSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
          <children>
             <Label fx:id="labelAddSectionPageTitle1" alignment="CENTER" layoutX="514.0" layoutY="11.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Edit Your Section !" />
             <Button fx:id="goBackSectionDetailsBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
@@ -771,6 +772,175 @@
             </AnchorPane>
             <Label fx:id="errorAttEditSection" layoutX="885.0" layoutY="485.0" prefHeight="23.0" prefWidth="214.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Your section needs a video !" visible="false" />
             <TextField fx:id="idInputEditSection" layoutX="68.0" layoutY="457.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="43.0" promptText="Add a title" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="quizAddFormPageContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label fx:id="labelAddSectionPageTitle11" alignment="CENTER" layoutX="416.0" layoutY="11.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Add Quiz To Your Section !" />
+            <Button fx:id="goBackAddQuizSectionDetailsBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackSectionFromQuizAdd" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/arrow-left-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ScrollPane hbarPolicy="NEVER" layoutX="22.0" layoutY="66.0" prefHeight="552.0" prefWidth="1179.0" styleClass="scroll-pane-question-list" stylesheets="@../../style/coursesMainPage.css">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="1179.0" spacing="10.0" styleClass="vbox-quiz" stylesheets="@../../style/coursesMainPage.css">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                           <children>
+                              <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Question" />
+                              <Label text="*" textFill="RED">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets right="270.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField fx:id="questionQuizAddInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a question" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                        <Label fx:id="errorTitleEditSection1" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Question is required !">
+                           <VBox.margin>
+                              <Insets right="320.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                           <children>
+                              <VBox prefHeight="161.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                                       <children>
+                                          <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Choice 1" />
+                                          <Label text="*" textFill="RED">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField fx:id="choice1QuizAddInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a choice" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                                    <Label fx:id="errorAttEditSection11" prefHeight="23.0" prefWidth="317.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Choice is required and must be unique !">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="161.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                                       <children>
+                                          <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Choice 2" />
+                                          <Label text="*" textFill="RED">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField fx:id="choice2QuizAddInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a choice" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                                    <Label fx:id="errorAttEditSection111" prefHeight="23.0" prefWidth="350.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Choice is required and must be unique !">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                           <children>
+                              <VBox prefHeight="161.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                                       <children>
+                                          <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Choice 3" />
+                                          <Label text="*" textFill="RED">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField fx:id="choice3QuizAddInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a choice" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                                    <Label fx:id="errorAttEditSection111" prefHeight="23.0" prefWidth="327.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Choice is required and must be unique !">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="161.0" prefWidth="500.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                                       <children>
+                                          <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Choice 4" />
+                                          <Label text="*" textFill="RED">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <TextField fx:id="choice4QuizAddInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a choice" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                                    <Label fx:id="errorAttEditSection1111" prefHeight="23.0" prefWidth="325.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Choice is required and must be unique !">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="355.0" spacing="20.0">
+                           <children>
+                              <Label fx:id="nbrQuestionQuizAdd" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Question Number : 20">
+                                 <HBox.margin>
+                                    <Insets left="60.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="comboBoxQuizAdd" prefHeight="50.0" prefWidth="160.0" styleClass="combo-box" stylesheets="@../../style/coursesMainPage.css">
+                                 <HBox.margin>
+                                    <Insets left="250.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                              <Button fx:id="editSectionCourseFormBtn1" mnemonicParsing="false" onMouseClicked="#sectionEditFormBtnClicked" prefHeight="50.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Add Question">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="editSectionCourseFormBtn11" mnemonicParsing="false" onMouseClicked="#sectionEditFormBtnClicked" prefHeight="50.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Done">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Label fx:id="idSectionAddQuiz" layoutX="1033.0" layoutY="39.0" text="Label" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="successOperationContainer" layoutX="568.0" layoutY="4.0" prefHeight="35.0" prefWidth="146.0" styleClass="success-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
