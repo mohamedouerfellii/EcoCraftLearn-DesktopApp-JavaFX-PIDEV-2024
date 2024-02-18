@@ -30,7 +30,7 @@ public class EventService implements ICRUD<Event> {
             statement.setString(7,event.getEventType());
             statement.setString(8,event.getPlace());
             statement.setInt(9, event.getPlaceNbr());
-            statement.setInt(10, event.getPrice());
+            statement.setFloat(10, event.getPrice());
 
 
             if(statement.executeUpdate() == 1){

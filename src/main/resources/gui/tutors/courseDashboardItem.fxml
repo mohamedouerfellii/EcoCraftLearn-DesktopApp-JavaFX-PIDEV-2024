@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" styleClass="course-item-container" stylesheets="@../../style/coursesMainPage.css" xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CourseDashboardItemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" styleClass="course-item-container" stylesheets="@../../style/coursesMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CourseDashboardItemController">
    <children>
       <Circle fx:id="courseItemImgContainer" fill="DODGERBLUE" layoutX="53.0" layoutY="50.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Label fx:id="courseItemTitle" layoutX="113.0" layoutY="20.0" prefHeight="35.0" prefWidth="369.0" styleClass="course-item-title" stylesheets="@../../style/coursesMainPage.css" text="Newspaper weave baskets" />

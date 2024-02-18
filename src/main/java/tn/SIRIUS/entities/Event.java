@@ -14,12 +14,12 @@ public class Event {
     private String eventType;
     private  String place;
      private int placeNbr;
-      private  int price;
+      private  float price;
 
     public Event() {
     }
 
-    public Event(int idEvent, String title, String description, String startDate, String endDate, String attachment, int owner, String eventType, String place, int placeNbr, int price) {
+    public Event(int idEvent, String title, String description, String startDate, String endDate, String attachment, int owner, String eventType, String place, int placeNbr, float price) {
         this.idEvent = idEvent;
         this.title = title;
         this.description = description;
@@ -113,7 +113,7 @@ public class Event {
         this.placeNbr = placeNbr;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

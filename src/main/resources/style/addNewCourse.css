@@ -8,6 +8,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .go-back-course-btn:hover, .choose-img_btn:hover{
     -fx-opacity: 0.6;

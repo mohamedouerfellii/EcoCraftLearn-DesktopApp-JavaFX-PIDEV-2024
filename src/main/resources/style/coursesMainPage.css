@@ -8,6 +8,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .add-new-course-btn:hover, .show-details-btn:hover{
     -fx-opacity: 0.6;
@@ -302,3 +303,50 @@
     -fx-text-fill: #000000;
     -fx-cursor: hand;
 }
+/* ------ */
+.delete-event-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: red;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+}
+.delete-event-btn:hover{
+    -fx-opacity: 0.8;
+}
+.edit-event-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #BDA91A;
+    -fx-background-radius: 12px;
+    -fx-cursor: hand;
+}
+.edit-event-btn:hover{
+    -fx-opacity: 0.8;
+}
+.date-picker .date-cell {
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #fff;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #fff;
+}
+
+.date-picker-popup > .month-year-pane > .label {
+    -fx-text-fill: #fff;
+}
+
+.date-picker-popup > .calendar-grid > .day-name-cell {
+    -fx-text-fill: #fff;
+}
+
+.date-picker-popup > .calendar-grid > .date-cell {
+    -fx-text-fill: #fff;
+}
+
+.date-picker-popup > .calendar-grid > .today > .date-cell {
+    -fx-text-fill: #fff;
+}
+

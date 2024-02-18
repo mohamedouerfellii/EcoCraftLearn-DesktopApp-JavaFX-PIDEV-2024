@@ -64,7 +64,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addCoursePane" layoutX="7.0" layoutY="6.0" prefHeight="650.0" prefWidth="1200.0" styleClass="add-new-course-main-container" stylesheets="@../../style/addNewCourse.css" visible="false">
+      <AnchorPane fx:id="addCoursePane" layoutX="7.0" layoutY="6.0" prefHeight="650.0" prefWidth="1200.0" styleClass="add-new-course-main-container" stylesheets="@../../style/addNewCourse.css">
          <children>
             <Button fx:id="goBackCourseBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
@@ -475,7 +475,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesAddSectionContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+      <AnchorPane fx:id="coursesAddSectionContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="419.0" layoutY="10.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Add Section To Your Course !" />
             <Button fx:id="goBackSectionBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetails" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
@@ -568,7 +568,7 @@
             <Label fx:id="errorAttAddSection" layoutX="885.0" layoutY="485.0" prefHeight="23.0" prefWidth="214.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Your section needs a video !" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesViewSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+      <AnchorPane fx:id="coursesViewSectionContainer" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
          <children>
             <Button fx:id="goBackSectionViewBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetails" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
