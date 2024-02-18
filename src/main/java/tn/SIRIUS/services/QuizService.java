@@ -1,6 +1,7 @@
 package tn.SIRIUS.services;
 
 import tn.SIRIUS.entities.Quiz;
+import tn.SIRIUS.entities.QuizQuestion;
 import tn.SIRIUS.entities.Section;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
@@ -28,6 +29,7 @@ public class QuizService{
         return false;
     }
     public Quiz getQuizBySection(int section){
+        System.out.println(section);
         String query = "SELECT * FROM QUIZZES WHERE section = ?";
         Quiz quiz = new Quiz();
         try{
@@ -40,6 +42,11 @@ public class QuizService{
             }
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
+        }
+        if(quiz.getIdQuiz() != 0){
+            QuizQuestionService quizQuestionService = new QuizQuestionService();
+            List<QuizQuestion> quizQuestions = quizQuestionService.getAllByQuiz(quiz.getIdQuiz());
+            quiz.setQuestions(quizQuestions);
         }
         return quiz;
     }

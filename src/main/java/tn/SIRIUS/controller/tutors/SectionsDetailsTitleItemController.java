@@ -1,12 +1,15 @@
 package tn.SIRIUS.controller.tutors;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import tn.SIRIUS.controller.tutors.CoursesMainPageController;
+import tn.SIRIUS.entities.Quiz;
 import tn.SIRIUS.entities.Section;
+import tn.SIRIUS.services.QuizService;
 
 import java.net.URL;
 import java.util.ResourceBundle;

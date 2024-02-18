@@ -26,14 +26,6 @@ import java.util.ResourceBundle;
 
 public class SectionDetailsItemDescriptionController implements Initializable {
     @FXML
-    private Button deleteSectionBtn;
-    @FXML
-    private Button editSectionBtn;
-    @FXML
-    private ImageView deleteSectionBtnImg;
-    @FXML
-    private ImageView editSectionBtnImg;
-    @FXML
     private Label sectionTitle;
     @FXML
     private Text sectionDescContent;
@@ -41,6 +33,10 @@ public class SectionDetailsItemDescriptionController implements Initializable {
     private VBox questionListContainer;
     @FXML
     private Button addQuizFormGoBtn;
+    @FXML
+    private Button deleteQuizBtn;
+    @FXML
+    private Button editQuizBtn;
     private CoursesMainPageController mainPageController;
     private Section section;
     private Quiz quiz;
@@ -48,78 +44,30 @@ public class SectionDetailsItemDescriptionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
     }
-    @FXML
-    public void deleteSectionBtnHover(MouseEvent event){
-        deleteSectionBtn.setStyle("-fx-font-family: \"Jost Medium\";" +
-                "    -fx-font-size: 12;" +
-                "    -fx-background-color: red;" +
-                "    -fx-text-fill: #fff;" +
-                "    -fx-background-radius: 8px;" +
-                "    -fx-border-radius: 8px;");
-        deleteSectionBtnImg.setImage(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("/icons/light/close-circle-filll.png"))
-        ));
-    }
-    @FXML
-    public void deleteSectionBtnNormal(MouseEvent event){
-        deleteSectionBtn.setStyle("-fx-font-family: \"Jost Medium\";" +
-                "    -fx-font-size: 12;" +
-                "    -fx-background-color: #fff;" +
-                "    -fx-text-fill: red;" +
-                "    -fx-background-radius: 8px;" +
-                "    -fx-border-radius: 8px;" +
-                "    -fx-border-color: red;" +
-                "    -fx-border-width: 2px;");
-        deleteSectionBtnImg.setImage(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/close-circle-filll.png"))
-        ));
-    }
-    @FXML
-    public void editSectionBtnHover(MouseEvent event){
-        editSectionBtn.setStyle("-fx-font-family: \"Jost Medium\";" +
-                "    -fx-font-size: 12;" +
-                "    -fx-background-color: #BDA91A;" +
-                "    -fx-text-fill: #fff;" +
-                "    -fx-background-radius: 8px;" +
-                "    -fx-border-radius: 8px;");
-        editSectionBtnImg.setImage(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("/icons/light/edit-box-line.png"))
-        ));
-    }
-    @FXML
-    public void editSectionBtnNormal(MouseEvent event){
-        editSectionBtn.setStyle("-fx-font-family: \"Jost Medium\";" +
-                "    -fx-font-size: 12;" +
-                "    -fx-background-color: #fff;" +
-                "    -fx-text-fill: #BDA91A;" +
-                "    -fx-background-radius: 8px;" +
-                "    -fx-border-radius: 8px;" +
-                "    -fx-border-color: #BDA91A;" +
-                "    -fx-border-width: 2px;");
-        editSectionBtnImg.setImage(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/edit-box-line.png"))
-        ));
-    }
-    public void setData(Section sec) throws IOException {
+    public void setData(Section sec,boolean isUpdated,CoursesMainPageController con) throws IOException {
+        this.mainPageController = con;
+        this.section = sec;
         sectionTitle.setText(sec.getTitle());
         sectionDescContent.setText(sec.getDescription());
         QuizService quizService = new QuizService();
         quiz = quizService.getQuizBySection(sec.getIdSection());
+        System.out.println("test");
+        System.out.println(quiz.getIdQuiz());
         if(quiz.getIdQuiz() == 0){
             questionListContainer.setVisible(false);
             addQuizFormGoBtn.setVisible(true);
         } else {
-            QuizQuestionService quizQuestionService = new QuizQuestionService();
-            List<QuizQuestion> quizQuestions = quizQuestionService.getAllBySection(sec.getIdSection());
-            for (QuizQuestion qq : quizQuestions){
+            editQuizBtn.setVisible(true);
+            deleteQuizBtn.setVisible(true);
+            for (QuizQuestion qq : quiz.getQuestions()){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getResourceAsStream("/gui/tutors/QuizItemTutor.fxml"));
-                QuizItemTutorController controller = fxmlLoader.getController();
-                controller.setData(qq);
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/QuizItemTutor.fxml"));
+                Parent root = fxmlLoader.load();
+                QuizItemTutorController cntrll = fxmlLoader.getController();
+                cntrll.setData(qq,isUpdated,con);
                 questionListContainer.getChildren().add(root);
             }
         }
-        this.section = sec;
     }
     public void setCoursesMainPageController(CoursesMainPageController controller){
         mainPageController = controller;
@@ -134,6 +82,10 @@ public class SectionDetailsItemDescriptionController implements Initializable {
     }
     @FXML
     public void addQuizBtnClicked(MouseEvent event){
-        mainPageController.setAddQuizPage(section.getIdSection());
+        mainPageController.setAddQuizPage(section);
+    }
+    @FXML
+    public void editQuizBtnClicked(MouseEvent event){
+        mainPageController.setEditQuizPage(quiz);
     }
 }

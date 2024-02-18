@@ -85,4 +85,12 @@ public class QuizQuestion {
     public void setCorrect_choice(String correct_choice) {
         this.correct_choice = correct_choice;
     }
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        if(obj == this) return true;
+        if(obj instanceof QuizQuestion qq)
+            return qq.getIdQuestion() == this.getIdQuestion();
+        return false;
+    }
 }

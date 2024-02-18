@@ -9,23 +9,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="858.0" styleClass="main-description-container" stylesheets="@../../style/sectionsDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.SectionDetailsItemDescriptionController">
+<AnchorPane fx:id="containerDEscriptionSection" prefHeight="300.0" prefWidth="858.0" styleClass="main-description-container" stylesheets="@../../style/sectionsDetails.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.SectionDetailsItemDescriptionController">
    <children>
       <Label fx:id="sectionTitle" layoutX="28.0" layoutY="4.0" prefHeight="52.0" prefWidth="286.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Section Number One" />
-      <Button fx:id="editSectionBtn" layoutX="655.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#editSectionBtnClicked" onMouseEntered="#editSectionBtnHover" onMouseExited="#editSectionBtnNormal" prefHeight="40.0" prefWidth="90.0" styleClass="edit-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
+      <Button fx:id="editSectionBtn" layoutX="706.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#editSectionBtnClicked" prefHeight="40.0" prefWidth="36.0" styleClass="edit-section-btn" stylesheets="@../../style/sectionsDetails.css">
          <graphic>
             <ImageView fx:id="editSectionBtnImg" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/dark/edit-box-line.png" />
+                  <Image url="@../../icons/light/edit-box-line.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deleteSectionBtn" layoutX="753.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#deleteSectionBtnClicked" onMouseEntered="#deleteSectionBtnHover" onMouseExited="#deleteSectionBtnNormal" prefHeight="40.0" prefWidth="90.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete">
+      <Button fx:id="deleteSectionBtn" layoutX="753.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#deleteSectionBtnClicked" prefHeight="40.0" prefWidth="23.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css">
          <graphic>
             <ImageView fx:id="deleteSectionBtnImg" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
                <image>
-                  <Image url="@../../icons/dark/close-circle-filll.png" />
+                  <Image url="@../../icons/light/delete-bin-line.png" />
                </image>
             </ImageView>
          </graphic>
@@ -47,6 +47,24 @@
       <Button fx:id="addQuizBtn" layoutX="27.0" layoutY="204.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" styleClass="add-quizz-btn" stylesheets="@../../style/sectionsDetails.css" text="Add Quizz" visible="false" />
       <Label fx:id="quizzLabelPresentation" layoutX="27.0" layoutY="193.0" prefHeight="52.0" prefWidth="93.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Quiz :" />
       <Button fx:id="addQuizFormGoBtn" layoutX="25.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#addQuizBtnClicked" prefHeight="40.0" prefWidth="90.0" styleClass="add-quiz-btn" stylesheets="@../../style/sectionsDetails.css" text="Add Quiz" visible="false" />
-      <VBox fx:id="questionListContainer" alignment="CENTER" layoutX="20.0" layoutY="245.0" prefHeight="52.0" prefWidth="818.0" />
+      <VBox fx:id="questionListContainer" alignment="CENTER" layoutX="20.0" layoutY="245.0" prefHeight="52.0" prefWidth="818.0" spacing="10.0" />
+      <Button fx:id="editQuizBtn" layoutX="710.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#editQuizBtnClicked" prefHeight="40.0" prefWidth="36.0" styleClass="edit-section-btn" stylesheets="@../../style/sectionsDetails.css">
+         <graphic>
+            <ImageView fx:id="editSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/light/edit-box-line.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="deleteQuizBtn" layoutX="757.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="23.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css">
+         <graphic>
+            <ImageView fx:id="deleteSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+               <image>
+                  <Image url="@../../icons/light/delete-bin-line.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

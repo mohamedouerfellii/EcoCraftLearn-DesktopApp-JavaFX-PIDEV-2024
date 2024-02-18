@@ -6,6 +6,7 @@ import tn.SIRIUS.utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class QuizQuestionService{
     private Connection con;
@@ -18,9 +19,9 @@ public class QuizQuestionService{
             statement.setString(2,qq.getQuestion());
             statement.setString(3,qq.getChoice_1());
             statement.setString(4, qq.getChoice_2());
-            statement.setString(4, qq.getChoice_3());
-            statement.setString(4, qq.getChoice_4());
-            statement.setString(4, qq.getCorrect_choice());
+            statement.setString(5, qq.getChoice_3());
+            statement.setString(6, qq.getChoice_4());
+            statement.setString(7, qq.getCorrect_choice());
             if(statement.executeUpdate() == 1){
                 statement.close();
                 return true;
@@ -31,11 +32,12 @@ public class QuizQuestionService{
         }
         return false;
     }
-    public List<QuizQuestion> getAllBySection(int idQuiz){
+    public List<QuizQuestion> getAllByQuiz(int idQuiz){
         String query = "SELECT * FROM QUIZQUESTIONS WHERE quiz = ?";
         List<QuizQuestion> quizQuestions = new ArrayList<>();
         try{
             PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idQuiz);
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
                 quizQuestions.add(new QuizQuestion(
@@ -89,6 +91,19 @@ public class QuizQuestionService{
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public int getNextIdAvailable(){
+        String query = "SELECT * FROM QUIZQUESTIONS ORDER BY idQuestion DESC LIMIT 1";
+        int idAvailable = 0;
+        try(Statement stm = con.createStatement()){
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()){
+                idAvailable = rs.getInt(1);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return idAvailable;
     }
 
 }

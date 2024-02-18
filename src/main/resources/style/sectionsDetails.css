@@ -28,24 +28,25 @@
 .delete-section-btn{
     -fx-font-family: "Jost SemiBold";
     -fx-font-size: 12;
-    -fx-background-color: #fff;
-    -fx-text-fill: red;
+    -fx-background-color: red;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
-    -fx-border-color: red;
-    -fx-border-width: 2px;
     -fx-cursor: hand;
+}
+.delete-section-btn:hover{
+    -fx-opacity: 0.8;
 }
 .edit-section-btn{
     -fx-font-family: "Jost SemiBold";
     -fx-font-size: 12;
-    -fx-background-color: #fff;
-    -fx-text-fill: #BDA91A;
+    -fx-background-color: #BDA91A;
+    -fx-text-fill: #fff;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
-    -fx-border-color: #BDA91A;
-    -fx-border-width: 2px;
     -fx-cursor: hand;
+}
+.edit-section-btn:hover{
+    -fx-opacity: 0.8;
 }
 .description-section-details-container{
     -fx-background-color: #fff;
@@ -74,56 +75,4 @@
 }
 .add-quiz-btn:hover{
     -fx-opacity: 0.8;
-}
-.quiz-item-container{
-    -fx-background-color: #D5FFDC;
-    -fx-background-radius: 28px;
-    -fx-border-radius: 28px;
-}
-.title-quiz{
-    -fx-font-family: "Jost Medium";
-    -fx-font-size: 24;
-    -fx-fill: #000000;
-}
-.checkbox-quizz {
-    -fx-font-family: "Jost Medium";
-    -fx-font-size: 20px;
-    -fx-text-fill: #202124;
-}
-
-.checkbox-quizz > .box {
-    -fx-background-color: #fff;
-    -fx-border-color: #1D6611;
-}
-
-.checkbox-quizz:selected > .box {
-    -fx-background-color: #1D6611;
-    -fx-border-color: #1D6611;
-    -fx-border-radius: 100px;
-}
-
-.checkbox-quizz:selected > .box > .mark {
-    -fx-background-color: #fff;
-}
-
-.checkbox-quizz > .box:hover {
-    -fx-background-color: #e9fdec;
-}
-
-.checkbox-quizz:selected > .box:hover {
-    -fx-background-color: #1D6611;
-}
-
-.checkbox-quizz > .box > .mark {
-    -fx-background-color: transparent;
-}
-.correct-answer-label{
-    -fx-font-family: "Jost Medium";
-    -fx-font-size: 20px;
-    -fx-text-fill: #000000;
-}
-.correct-answer-container{
-    -fx-font-family: "Jost Medium";
-    -fx-font-size: 20px;
-    -fx-fill: #19BB1C;
 }

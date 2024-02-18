@@ -236,7 +236,7 @@
     -fx-text-fill: #d64242;
 }
 .one-section-view-container{
-    -fx-background-color: red;
+    -fx-background-color: transparent;
 }
 .section-content-view-container{
     -fx-background-color: white;
@@ -245,7 +245,7 @@
     -fx-background-color: #fff;
 }
 .scroll-pane-sections-container .scroll-bar:vertical{
-    -fx-background-color: transparent;
+    -fx-background-color: #fff;
     -fx-background-insets: 0;
     -fx-padding: 2px;
 }
@@ -257,7 +257,7 @@
 }
 .scroll-pane-sections-container .scroll-bar:vertical .increment-button,
 .scroll-pane-sections-container .scroll-bar:vertical .decrement-button {
-    -fx-background-color: transparent;
+    -fx-background-color: #fff;
 }
 .scroll-pane-sections-view-list{
     -fx-background-color: #fff;
@@ -278,7 +278,7 @@
     -fx-background-color: transparent;
 }
 .sections-view-list-container{
-    -fx-background-color: #e9fdec;
+    -fx-background-color: #fff;
     -fx-border-color: #fff;
     -fx-border-width: 0 0 0 1;
 }
@@ -363,4 +363,79 @@
 }
 .vbox-quiz{
     -fx-background-color: #fff;
+}
+.quiz-item-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 28px;
+    -fx-border-radius: 28px;
+}
+.title-quiz{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.checkbox-quizz {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20px;
+    -fx-text-fill: #202124;
+}
+
+.checkbox-quizz > .box {
+    -fx-background-color: #fff;
+    -fx-border-color: #1D6611;
+}
+
+.checkbox-quizz:selected > .box {
+    -fx-background-color: #1D6611;
+    -fx-border-color: #1D6611;
+    -fx-border-radius: 100px;
+}
+
+.checkbox-quizz:selected > .box > .mark {
+    -fx-background-color: #fff;
+}
+
+.checkbox-quizz > .box:hover {
+    -fx-background-color: #e9fdec;
+}
+
+.checkbox-quizz:selected > .box:hover {
+    -fx-background-color: #1D6611;
+}
+
+.checkbox-quizz > .box > .mark {
+    -fx-background-color: transparent;
+}
+.correct-answer-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+.correct-answer-container{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20px;
+    -fx-fill: #19BB1C;
+}
+.delete-section-btn{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 12;
+    -fx-background-color: red;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+.delete-section-btn:hover{
+    -fx-opacity: 0.8;
+}
+.edit-section-btn{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 12;
+    -fx-background-color: #BDA91A;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+.edit-section-btn:hover{
+    -fx-opacity: 0.8;
 }

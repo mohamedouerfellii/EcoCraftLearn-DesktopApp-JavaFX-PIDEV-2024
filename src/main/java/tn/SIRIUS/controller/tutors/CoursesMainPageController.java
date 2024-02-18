@@ -26,17 +26,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.media.MediaView;
+import tn.SIRIUS.entities.Quiz;
+import tn.SIRIUS.entities.QuizQuestion;
 import tn.SIRIUS.entities.Section;
-import tn.SIRIUS.services.CourseService;
-import tn.SIRIUS.services.SectionService;
-import tn.SIRIUS.services.UserService;
+import tn.SIRIUS.services.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class CoursesMainPageController implements Initializable {
     @FXML
@@ -203,6 +201,53 @@ public class CoursesMainPageController implements Initializable {
     private TextField choice4QuizAddInput;
     @FXML
     private ComboBox<String> comboBoxQuizAdd;
+    @FXML
+    private VBox questionQuizFormContainer;
+    @FXML
+    private Label errorQuestionAdd;
+    @FXML
+    private Label choice1QuizError;
+    @FXML
+    private Label choice2QuizError;
+    @FXML
+    private Label choice3QuizError;
+    @FXML
+    private Label choice4QuizError;
+    @FXML
+    private AnchorPane failedOperationQuizAddContainer;
+    @FXML
+    private AnchorPane quizEditFormPageContainer;
+    @FXML
+    private VBox questionQuizEditFormContainer;
+    @FXML
+    private ComboBox<String> comboBoxQuizEdit;
+    @FXML
+    private TextField questionQuizEditInput;
+    @FXML
+    private TextField choice1QuizEditInput;
+    @FXML
+    private TextField choice2QuizEditInput;
+    @FXML
+    private TextField choice3QuizEditInput;
+    @FXML
+    private TextField choice4QuizEditInput;
+    @FXML
+    private Label idQuestionEdit;
+    @FXML
+    private Label errorQuestionEdit;
+    @FXML
+    private Label choice1QuizErrorEdit;
+    @FXML
+    private Label choice2QuizErrorEdit;
+    @FXML
+    private Button editQuestionQuizFormBtn;
+    @FXML
+    private Label choice4QuizErrorEdit;
+    @FXML
+    private Label choice3QuizErrorEdit;
+    @FXML
+    private AnchorPane failedOperationQuizEditContainer;
+    private Quiz quizToEdit;
     private List<Section> sections;
     private String addCourseImgPath;
     private Image detailImg;
@@ -214,6 +259,8 @@ public class CoursesMainPageController implements Initializable {
     private int playVidCounter;
     private int muteVidSecCounter;
     private double currentVolume;
+    private List<QuizQuestion> quizQuestions;
+    private Section sectionQqAdd;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         // Init visibilities and variables
@@ -228,6 +275,7 @@ public class CoursesMainPageController implements Initializable {
         coursesViewSectionContainer.setVisible(false);
         coursesEditSectionContainer.setVisible(false);
         quizAddFormPageContainer.setVisible(false);
+        quizEditFormPageContainer.setVisible(false);
         volumeBarSectionVid.setValue(100);
         slideBarTimeVidSectioin.setValue(0);
         vidSectionPath = "";
@@ -606,8 +654,7 @@ public class CoursesMainPageController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/SectionDetailsItemDescription.fxml"));
             Parent root = fxmlLoader.load();
             SectionDetailsItemDescriptionController itemController = fxmlLoader.getController();
-            itemController.setCoursesMainPageController(this);
-            itemController.setData(section);
+            itemController.setData(section,false,this);
             mediaSecVid = new Media(section.getAttachment());
             mediaPlayer = new MediaPlayer(mediaSecVid);
             mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
@@ -629,12 +676,11 @@ public class CoursesMainPageController implements Initializable {
                     mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(slideBarTimeVidSectioin.getValue()/100));
             });
             playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/pause-line.png")));
-            playVidCounter++;
         } else{
             playVidSecBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/play-fill.png")));
             mediaPlayer.pause();
-            playVidCounter++;
         }
+        playVidCounter++;
     }
     public void updateProgressBarSecVideo(){
         Platform.runLater(() -> slideBarTimeVidSectioin.setValue(mediaPlayer.getCurrentTime().toMillis()/mediaPlayer.getTotalDuration().toMillis()*100) );
@@ -759,6 +805,10 @@ public class CoursesMainPageController implements Initializable {
         mediaPlayer.pause();
     }
     @FXML
+    public void goBackSectionDetailsBtnClicked(MouseEvent event){
+        coursesEditSectionContainer.setVisible(false);
+    }
+    @FXML
     public void sectionEditFormBtnClicked(MouseEvent event){
         if( !titleInputEditSection.getText().isEmpty() &&
                 ( !sectionEditDescInput.getText().isEmpty() && sectionEditDescInput.getText().length() >= 20 ) &&
@@ -805,8 +855,8 @@ public class CoursesMainPageController implements Initializable {
         }
     }
     // Quiz Start
-    public void setAddQuizPage(int idSection){
-        idSectionAddQuiz.setText(String.valueOf(idSection));
+    public void setAddQuizPage(Section section){
+        idSectionAddQuiz.setText(String.valueOf(section.getIdSection()));
         quizAddFormPageContainer.setVisible(true);
         nbrQuestionQuizAdd.setText("Question Number : 0");
         ObservableList<String> items = FXCollections.observableArrayList(
@@ -816,10 +866,239 @@ public class CoursesMainPageController implements Initializable {
                 "Choice 4"
         );
         comboBoxQuizAdd.setItems(items);
+        comboBoxQuizAdd.setValue("Choice 1");
+        quizQuestions = new ArrayList<>();
+        sectionQqAdd = section;
     }
     @FXML
     public void goBackSectionFromQuizAdd(MouseEvent event){
         quizAddFormPageContainer.setVisible(false);
+        quizEditFormPageContainer.setVisible(false);
+        clearEditQuizInputs();
+        clearAddQuizInputs();
+    }
+    @FXML
+    public void addQuestionToQuiz(MouseEvent event) throws IOException {
+        String question = questionQuizAddInput.getText();
+        String choice1 = choice1QuizAddInput.getText();
+        String choice2 = choice2QuizAddInput.getText();
+        String choice3 = choice3QuizAddInput.getText();
+        String choice4 = choice4QuizAddInput.getText();
+        String correctChoice = comboBoxQuizAdd.getValue();
+        if(!choice1.isEmpty() && !choice2.isEmpty() && !choice3.isEmpty()
+                && !choice4.isEmpty() && !question.isEmpty()){
+            QuizQuestion qq = new QuizQuestion(
+                    0,0,question,choice1,choice2,choice3,choice4,correctChoice
+            );
+            quizQuestions.add(qq);
+            clearAddQuizInputs();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResourceAsStream("/gui/tutors/QuizItemTutor.fxml"));
+            QuizItemTutorController controller = fxmlLoader.getController();
+            controller.setData(qq,false,this);
+            questionQuizFormContainer.getChildren().add(root);
+            nbrQuestionQuizAdd.setText("Question Number : "+quizQuestions.size());
+            notifySuccess();
+        } else {
+            if(question.isEmpty())
+                errorQuestionAdd.setVisible(true);
+            if(choice1.isEmpty())
+                choice1QuizError.setVisible(true);
+            if(choice2.isEmpty())
+                choice2QuizError.setVisible(true);
+            if(choice3.isEmpty())
+                choice3QuizError.setVisible(true);
+            if(choice4.isEmpty())
+                choice4QuizError.setVisible(true);
+        }
+    }
+    @FXML
+    public void addQuiz(MouseEvent event){
+        if(quizQuestions.size() < 3){
+            failedOperationQuizAddContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationQuizAddContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+        } else {
+            QuizService quizService = new QuizService();
+            int idSection = Integer.parseInt(idSectionAddQuiz.getText());
+            if(quizService.add(new Quiz(0,idSection))){
+                Quiz quiz = quizService.getQuizBySection(idSection);
+                if(quiz.getIdQuiz() != 0){
+                    int count = 0;
+                    QuizQuestionService qqService = new QuizQuestionService();
+                    for(QuizQuestion qq : quizQuestions){
+                        qq.setQuiz(quiz.getIdQuiz());
+                        if(qqService.add(qq))
+                            count++;
+                    }
+                    if (count == quizQuestions.size()){
+                        setSectionPlay(sectionQqAdd);
+                        clearAddQuizInputs();
+                        quizAddFormPageContainer.setVisible(false);
+                        notifySuccess();
+                    } else
+                        notifyFailed();
+                }
+            }
+            else
+                notifyFailed();
+        }
+    }
+    public void setEditQuizPage(Quiz quiz){
+        quizToEdit = quiz;
+        quizEditFormPageContainer.setVisible(true);
+        for(QuizQuestion qq : quiz.getQuestions()){
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            try {
+                fxmlLoader.setLocation((getClass().getResource("/gui/tutors/QuizItemTutor.fxml")));
+                Parent root = fxmlLoader.load();
+                QuizItemTutorController controller = fxmlLoader.getController();
+                controller.setData(qq,true,this);
+                questionQuizEditFormContainer.getChildren().add(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "Choice 1",
+                "Choice 2",
+                "Choice 3",
+                "Choice 4"
+        );
+        comboBoxQuizEdit.setItems(items);
+        comboBoxQuizEdit.setValue("Choice 1");
+        nbrQuestionQuizAdd.setText("Question Number : "+quiz.getQuestions().size());
+    }
+    public void clearAddQuizInputs(){
+        questionQuizAddInput.clear();
+        choice1QuizAddInput.clear();
+        choice2QuizAddInput.clear();
+        choice3QuizAddInput.clear();
+        choice4QuizAddInput.clear();
+        errorQuestionAdd.setVisible(false);
+        choice1QuizError.setVisible(false);
+        choice2QuizError.setVisible(false);
+        choice3QuizError.setVisible(false);
+        choice4QuizError.setVisible(false);
+    }
+    public void clearEditQuizInputs(){
+        questionQuizEditInput.clear();
+        choice1QuizEditInput.clear();
+        choice2QuizEditInput.clear();
+        choice3QuizEditInput.clear();
+        choice4QuizEditInput.clear();
+        errorQuestionEdit.setVisible(false);
+        choice1QuizErrorEdit.setVisible(false);
+        choice2QuizErrorEdit.setVisible(false);
+        choice3QuizErrorEdit.setVisible(false);
+        choice4QuizErrorEdit.setVisible(false);
+    }
+    public void setQuestionEditForm(QuizQuestion qq){
+        questionQuizEditInput.setText(qq.getQuestion());
+        choice1QuizEditInput.setText(qq.getChoice_1());
+        choice2QuizEditInput.setText(qq.getChoice_2());
+        choice3QuizEditInput.setText(qq.getChoice_3());
+        choice4QuizEditInput.setText(qq.getChoice_4());
+        comboBoxQuizEdit.setValue(qq.getCorrect_choice());
+        idQuestionEdit.setText(String.valueOf(qq.getIdQuestion()));
+        editQuestionQuizFormBtn.setText("Edit Question");
+    }
+    public void loadQuestionsEditPage(QuizQuestion qq) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/gui/tutors/QuizItemTutor.fxml"));
+        Parent root = fxmlLoader.load();
+        QuizItemTutorController controller = fxmlLoader.getController();
+        controller.setData(qq,true,this);
+        questionQuizEditFormContainer.getChildren().add(root);
+    }
+    @FXML
+    public void editQuestionQuizFormBtnClicked(MouseEvent event) throws IOException {
+        String question = questionQuizEditInput.getText();
+        String choice1 = choice1QuizEditInput.getText();
+        String choice2 = choice2QuizEditInput.getText();
+        String choice3 = choice3QuizEditInput.getText();
+        String choice4 = choice4QuizEditInput.getText();
+        String correctChoice = comboBoxQuizEdit.getValue();
+        if(!choice1.isEmpty() && !choice2.isEmpty() && !choice3.isEmpty()
+                && !choice4.isEmpty() && !question.isEmpty()){
+            if(editQuestionQuizFormBtn.getText().equals("Edit Question")){
+                int idQuestion = Integer.parseInt(idQuestionEdit.getText());
+                QuizQuestion qq = new QuizQuestion(idQuestion,quizToEdit.getIdQuiz(),question,
+                        choice1,choice2,choice3,choice4,correctChoice);
+                QuizQuestionService qqService = new QuizQuestionService();
+                if(qqService.update(qq)){
+                    questionQuizEditFormContainer.getChildren().clear();
+                    for(QuizQuestion q : quizToEdit.getQuestions()){
+                        if(q.getIdQuestion() == qq.getIdQuestion())
+                            q = qq;
+                        try {
+                            loadQuestionsEditPage(q);
+                        }catch(IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    notifySuccess();
+                }
+                editQuestionQuizFormBtn.setText("Add Question");
+            } else{
+                QuizQuestionService qqService = new QuizQuestionService();
+                int idAvailable = qqService.getNextIdAvailable();
+                if(idAvailable != 0){
+                    QuizQuestion qq = new QuizQuestion(0,quizToEdit.getIdQuiz(),question,
+                            choice1,choice2,choice3,choice4,correctChoice);
+                    if(qqService.add(qq)){
+                        questionQuizEditFormContainer.getChildren().clear();
+                        quizToEdit.getQuestions().add(qq);
+                        for(QuizQuestion q : quizToEdit.getQuestions()){
+                            try {
+                                loadQuestionsEditPage(q);
+                            }catch(IOException e){
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        notifySuccess();
+                    }
+                }
+            }
+            clearEditQuizInputs();
+        } else {
+            if(question.isEmpty())
+                errorQuestionEdit.setVisible(true);
+            if(choice1.isEmpty())
+                choice1QuizErrorEdit.setVisible(true);
+            if(choice2.isEmpty())
+                choice2QuizErrorEdit.setVisible(true);
+            if(choice3.isEmpty())
+                choice3QuizErrorEdit.setVisible(true);
+            if(choice4.isEmpty())
+                choice4QuizErrorEdit.setVisible(true);
+        }
+    }
+    public void deleteQuestionQuiz(QuizQuestion qq){
+        QuizQuestionService qqService = new QuizQuestionService();
+        if(quizToEdit.getQuestions().size() > 3){
+            if(qqService.delete(qq.getIdQuestion())){
+                if(quizToEdit.getQuestions().remove(qq)){
+                    questionQuizEditFormContainer.getChildren().clear();
+                    for(QuizQuestion q : quizToEdit.getQuestions()){
+                        try {
+                            loadQuestionsEditPage(q);
+                        }catch(IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    notifySuccess();
+                } else
+                    notifyFailed();
+            } else
+                notifyFailed();
+        } else {
+            failedOperationQuizEditContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), e -> failedOperationQuizEditContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+        }
     }
     // resources clean
     public void cleanup(){
