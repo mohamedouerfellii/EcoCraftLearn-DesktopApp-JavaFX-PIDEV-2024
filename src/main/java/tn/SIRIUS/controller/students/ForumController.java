@@ -1,6 +1,12 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import tn.SIRIUS.controller.tutors.CourseDashboardItemController;
+import tn.SIRIUS.entities.Comment;
 import tn.SIRIUS.entities.Course;
 import tn.SIRIUS.entities.Post;
 import javafx.event.ActionEvent;
@@ -13,10 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +27,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.SIRIUS.entities.User;
+import tn.SIRIUS.services.CommentService;
 import tn.SIRIUS.services.PostService;
 
 import java.io.File;
@@ -56,10 +59,55 @@ public class ForumController implements Initializable {
     private Label User_name;
 
     @FXML
+    private Button addCommentBtn;
+
+    @FXML
+    private VBox allCommentsContainer;
+
+    @FXML
     private Button allPosts;
 
     @FXML
+    private Button cancelDeletePostBtn;
+
+    @FXML
+    private Button cancelUpadteBtn;
+
+    @FXML
+    private VBox commentPostContentContainer;
+
+    @FXML
+    private Text commentPostContentText;
+
+    @FXML
+    private Label commentPostPostedDate;
+
+    @FXML
+    private Circle commentPostUserImg;
+
+    @FXML
+    private Label commentPostUserName;
+
+    @FXML
+    private Button confirmDeletePostBtn;
+
+    @FXML
+    private BorderPane createPostContaner;
+
+    @FXML
+    private AnchorPane deletePostContainer;
+
+    @FXML
     private VBox forum;
+
+    @FXML
+    private Button newCommentAttachmentBtn;
+
+    @FXML
+    private VBox newCommentContainer;
+
+    @FXML
+    private TextArea newCommentIput;
 
     @FXML
     private Rectangle newImage;
@@ -69,6 +117,14 @@ public class ForumController implements Initializable {
 
     @FXML
     private AnchorPane postsMainContent;
+
+
+
+    @FXML
+    private AnchorPane showCommentsConatainer;
+
+    @FXML
+    private BorderPane updatePostBorderPane;
 
     @FXML
     private Button updatePostBtn;
@@ -90,33 +146,27 @@ public class ForumController implements Initializable {
 
     @FXML
     private Circle updtePostuserimg;
+    @FXML
+    private Button closeCommentsConatainerBtn;
 
     @FXML
-    private Button cancelUpadteBtn;
-    @FXML
-    private BorderPane updatePostBorderPane;
-    @FXML
-    private Button cancelDeletePostBtn;
-
-
-    @FXML
-    private AnchorPane deletePostContainer;
-
-    public Button getConfirmDeletePostBtn() {return confirmDeletePostBtn;}
-
-    @FXML
-    private Button confirmDeletePostBtn;
+    private Rectangle newCommentAttachment;
 
 
 
 
+    public AnchorPane getShowCommentsConatainer() {
+        return showCommentsConatainer;
+    }
+    private List<Comment> comments = new ArrayList<>();
     Map<Post, User> acuill = new HashMap<>();
     String attachmentPath;
     String newattachmentPath;
     int idposttodelete;
+    String newCommentAttachmentPath;
     private boolean showAllPosts = true;
 
-
+    public Button getConfirmDeletePostBtn() {return confirmDeletePostBtn;}
     public AnchorPane getPostsMainContent() {
         return postsMainContent;
     }
@@ -134,7 +184,7 @@ public class ForumController implements Initializable {
         PostService postService = new PostService();
         acuill = postService.getAll();
         showPosts();
-        //  ShowPopularPeople();
+        ShowPopularPeople();
         NewAttachment.setOnAction(event -> {
             newImage.setVisible(true);
             attachmentPath = openAttachmentWindow();
@@ -167,6 +217,9 @@ public class ForumController implements Initializable {
 
         updatePostContainer.setVisible(false);
         deletePostContainer.setVisible(false);
+        showCommentsConatainer.setVisible(false);
+
+
 
     }
 
@@ -174,7 +227,7 @@ public class ForumController implements Initializable {
     public void addNewPost() {
         String username = "Jarray abdelmonam";
         String img = "img/img.png";
-        int idUser = 2;
+        int idUser = 1;
         LocalDateTime currentDateTime = LocalDateTime.now();
         String newPostText = NewPostText.getText();
         Post post = new Post(1, newPostText, attachmentPath, idUser, currentDateTime);
@@ -215,10 +268,10 @@ public class ForumController implements Initializable {
 
 
                 if (showAllPosts) {
-                    postItem.LikePressed();
+//                    postItem.ReactionPressed();
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(false);
-                } else if (user.getIdUser() == 1) { // Assuming getId() returns the user ID
+                } else if (user.getIdUser() == 2) { // Assuming getId() returns the user ID
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(true);
 
@@ -334,15 +387,16 @@ public class ForumController implements Initializable {
 
 
 
-}
-//***************************************************************
-   /* public void ShowPopularPeople() {
 
-        for (int i = 0; i < acuill.size(); i++) {
-            User user = new User(acuill.get(i).getUsername(), acuill.get(i).getImage());
-            int nblike = acuill.get(i).getNbLikes();
+
+  public void ShowPopularPeople() {
+
+        for (Map.Entry<Post,User> entry : acuill.entrySet()) {
+            User user =entry.getValue();
+            System.out.println(user.getIdUser());
+            int nblike = 100;
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FirstTry/View/popularPeopleItem.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/students/popularPeopleItem.fxml"));
                 HBox hBox = fxmlLoader.load();
                 PopularPeopleItemController popularPeopleItemController = fxmlLoader.getController();
                 popularPeopleItemController.SetPopularData(nblike, user);
@@ -352,11 +406,113 @@ public class ForumController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-*/
-
-/*------------------------------------------------*/
 
 
+        }}
+
+
+
+
+
+
+public void setPostCommentData(Post post,User user) {
+        Image img =new Image(user.getImage());
+        commentPostUserImg.setFill(new ImagePattern(img));
+        commentPostUserName.setText(user.getFirstName()+ user.getLastName());
+        commentPostPostedDate.setText(post.getPostedDate().toString());
+        commentPostContentText.setText(post.getContent());
+    String imageUrl = post.getAttachment();
+    if (imageUrl != null && !imageUrl.isEmpty()) {
+        Image image = new Image(imageUrl);
+        StackPane stackPane = new StackPane();
+        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+        ImageView imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+        stackPane.setPrefHeight(image.getHeight() * 0.3);
+        stackPane.setPrefWidth(image.getWidth() * 0.3);
+        stackPane.setMaxWidth(600);
+        imageView.setFitWidth(image.getWidth() * 30 / 100);
+        imageView.setFitHeight(image.getHeight() * 30 / 100);
+        DoubleBinding scaledWidth = Bindings.createDoubleBinding(
+                () -> stackPane.widthProperty().get() * 0.5,
+                stackPane.widthProperty()
+        );
+        imageView.fitWidthProperty().bind(scaledWidth);
+        imageView.fitHeightProperty().bind(stackPane.heightProperty());
+        stackPane.getChildren().add(imageView);
+        commentPostContentContainer.getChildren().add(stackPane);
+        commentPostContentContainer.setPrefHeight(image.getHeight() + 125 + 50);
+    }
+    CommentService commentService = new CommentService();
+    comments = commentService.getAll();
+    for (Comment comment : comments){
+        if (comment.getPost().getIdPost()==post.getIdPost()) {
+            try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/students/commentItem.fxml"));
+            Parent root=fxmlLoader.load();
+            CommentItemController item = fxmlLoader.getController();
+            item.setCommentItemdata(comment);
+            allCommentsContainer.getChildren().add(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
+    closeCommentsConatainerBtn.setOnAction(e->
+    {
+        showCommentsConatainer.setVisible(false);
+        if (allCommentsContainer.getChildren().size() > 0) {
+            allCommentsContainer.getChildren().remove(1, allCommentsContainer.getChildren().size());
+            commentPostContentContainer.getChildren().remove(1, commentPostContentContainer.getChildren().size());
+            commentPostContentContainer.setPrefHeight(50);
+            newCommentIput.clear();
+        }
+    });
+
+}
+
+
+
+
+
+public  void addNewComment(Post p){
+
+        if (newCommentIput.getText() != null && !newCommentIput.getText().isEmpty()) {
+            String username = "Jarray abdelmonam";
+            String img = "img/img.png";
+            int idUser = 2;
+            User user = new User(2, "Jarray", "abdelmonam", "img/img.png", "123456", "564", "", "", 0, 0, "img/img.png");
+            Comment comment = new Comment(0, p, user, newCommentIput.getText(), newCommentAttachmentPath);
+            CommentService commentService = new CommentService();
+            if (commentService.add(comment) == 1)
+                System.out.println("true");
+            else System.out.println("error");
+        }
+        newCommentAttachmentPath = null;
+}
+
+
+    private String newCommentAttachmentWindow() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            Image img = new Image("file:/" + selectedFile.getAbsolutePath());
+            newCommentAttachment.setFill(new ImagePattern((img)));
+            newCommentAttachment.setVisible(true);
+            newCommentAttachment.setHeight(img.getHeight() * 0.3);
+            newCommentAttachment.setWidth(img.getWidth() * 0.3);
+            return newCommentAttachmentPath = "file:/" + selectedFile.getAbsolutePath();
+        }
+        return null;
+
+    }
+
+
+}
 
 
       /*  List<Post> sortedPosts = acuill.stream()
@@ -379,6 +535,8 @@ public class ForumController implements Initializable {
 
 
     //}
+
+
 
 
 

@@ -38,7 +38,9 @@ public class PostItem  {
     private ImageView CommentIcon;
 
     @FXML
-    private ToggleButton likePostBtn;
+    private Button likePostBtn;
+    @FXML
+    private Button disLikePostBtn;
 
     @FXML
     private ImageView LikeIcon;
@@ -70,6 +72,8 @@ public class PostItem  {
 
     @FXML
     private ImageView shareIcon;
+    @FXML
+    private ImageView disLikePostIcon;
     private  ForumController forumController = new ForumController();
 
     public MenuButton getAboutPostBtn() {return AboutPostBtn;}
@@ -82,6 +86,8 @@ public class PostItem  {
     private MenuItem updatePostBtn;
     @FXML
     private MenuItem deletePostBtn;
+
+    int nbvote=0;
 
     public void setData(Post p , User user )
     {
@@ -117,33 +123,6 @@ public class PostItem  {
             container.getChildren().add(stackPane);
             container.setPrefHeight(textHeight+image.getHeight()+125+50);// Show the ImageView
         }
-        likePostBtn.setStyle("    -fx-font-family: \"Jost Medium\";\n" +
-                "    -fx-font-size: 16;\n" +
-                "    -fx-background-color: transparent;\n" +
-                "    -fx-text-fill: #939393;\n" +
-                "    -fx-background-radius: 8px;");
-        Image image1 = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-24.png"));
-        LikeIcon.setImage(image1);
-
-//        likePostBtn.setOnMouseEntered(e->{
-//            Image image = new Image("/Resources/img/dark/icons8-aimer-50.png");
-//            LikeIcon.setImage(image);
-//            likePostBtn.setStyle(" -fx-font-family: \"Jost Medium\";\n" +
-//                    "    -fx-font-size: 16;\n" +
-//                    "    -fx-background-color: #7dc145;\n" +
-//                    "    -fx-text-fill: white;\n" +
-//                    "    -fx-opacity: 0.6;\n" +
-//                    "    -fx-background-radius: 8px;");
-//        });
-//        likePostBtn.setOnMouseExited(e->{
-//            Image image = new Image("/Resources/img/dark/icons8-aime-rempli-24.png");
-//            LikeIcon.setImage(image);
-//            likePostBtn.setStyle("  -fx-font-family: \"Jost Medium\";\n" +
-//                    "    -fx-font-size: 16;\n" +
-//                    "    -fx-background-color: transparent;\n" +
-//                    "    -fx-text-fill: #939393;\n" +
-//                    "    -fx-background-radius: 8px;");
-//        });
         sharePostBtn.setOnMouseEntered(e->{
             Image image = new Image(getClass().getResourceAsStream("/img/dark/icons8-transférer-50.png"));
             shareIcon.setImage(image);
@@ -159,11 +138,76 @@ public class PostItem  {
         commentPostBtn.setOnMouseExited(e->{
             Image image = new Image(getClass().getResourceAsStream("/img/dark/icons8-paroles-24.png"));
             CommentIcon.setImage(image);
+
+        });
+        commentPostBtn.setOnMouseClicked(e->{
+            forumController.getShowCommentsConatainer().setVisible(true);
+            forumController.setPostCommentData(p,user);
+
         });
 
+
+
+
+
+
+        String styleBtnClicked = "-fx-background-color: white;\n" +
+                " -fx-text-fill: #939393 ;\n" +
+                "        -fx-border-radius: 5;\n " +
+                "       -fx-padding: 8 ";
+
+        String styleBtnNormal = "    -fx-font-family: \"Jost Medium\";\n" +
+                "    -fx-font-size: 16;\n" +
+                "    -fx-background-color: transparent;\n" +
+                "    -fx-text-fill: #939393;\n" +
+                "    -fx-background-radius: 8px";
+
+        likePostBtn.setStyle(styleBtnNormal);
+        disLikePostBtn.setStyle(styleBtnNormal);
+
         likePostBtn.setOnAction(event -> {
-            LikePressed();
+            if (likePostBtn.getStyle().equals(styleBtnNormal)) {
+                likePostBtn.setStyle(styleBtnClicked);
+                LikeIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-48.png")));
+nbvote++;
+                System.out.println(nbvote);
+                // Deselect the other button
+                disLikePostBtn.setStyle(styleBtnNormal);
+                disLikePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32.png")));
+            } else {
+                likePostBtn.setStyle(styleBtnNormal);
+                LikeIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-32.png")));
+                nbvote--;
+                System.out.println(nbvote);
+            }
         });
+
+        disLikePostBtn.setOnAction(event -> {
+            if (disLikePostBtn.getStyle().equals(styleBtnNormal)) {
+                disLikePostBtn.setStyle(styleBtnClicked);
+                disLikePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32 (1).png")));
+                nbvote--;
+                System.out.println(nbvote);
+                // Deselect the other button
+                likePostBtn.setStyle(styleBtnNormal);
+                LikeIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-32.png")));
+            } else {
+                disLikePostBtn.setStyle(styleBtnNormal);
+                disLikePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32.png")));
+                nbvote++;
+                System.out.println(nbvote);
+            }
+        });
+
+
+
+
+
+//        disLikePostBtn.setOnAction(event -> {
+//            ReactionPressed(disLikePostBtn, disLikePostIcon, "/img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32.png", "/img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32 (1).png", likePostBtn, LikeIcon, "/img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-48.png", "/img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-32.png");
+//        });
+
+
         updatePostBtn.setOnAction(e->{
             try {
                 forumController.recover(p);
@@ -183,42 +227,39 @@ public class PostItem  {
     }
 
 
-    @FXML
-    void LikePressed() {
+//    private void ReactionPressed(ToggleButton selectedButton, ImageView selectedIcon, String selectedIconPath, String deselectedIconPath, ToggleButton otherButton, ImageView otherIcon, String otherIconPath, String otherDeselectedIconPath) {
+//        String styleBtnClicked = "-fx-background-color: white;\n" +
+//                " -fx-text-fill: #939393 ;\n" +
+//                "        -fx-border-radius: 5;\n " +
+//                "       -fx-padding: 8 ";
+//
+//        String styleBtnNormal = "    -fx-font-family: \"Jost Medium\";\n" +
+//                "    -fx-font-size: 16;\n" +
+//                "    -fx-background-color: transparent;\n" +
+//                "    -fx-text-fill: #939393;\n" +
+//                "    -fx-background-radius: 8px";
+//
+//        if (selectedButton.isSelected()) {
+//            selectedButton.setStyle(styleBtnClicked);
+//            selectedIcon.setImage(new Image(getClass().getResourceAsStream(selectedIconPath)));
+//
+//        } else {
+//            selectedButton.setStyle(styleBtnNormal);
+//            selectedIcon.setImage(new Image(getClass().getResourceAsStream(deselectedIconPath)));
+//
+//        }
+//
+//        if (otherButton.isSelected()) {
+//            otherButton.setSelected(false);  // Deselect the other button
+//            otherButton.setStyle(styleBtnNormal);
+//            otherIcon.setImage(new Image(getClass().getResourceAsStream(otherDeselectedIconPath)));
+//        }
+//        System.out.println("this"+selectedButton.isSelected());
+//        System.out.println("other"+otherButton.isSelected());
+//    }
 
 
-        System.out.println(likePostBtn.isSelected());
-        if (likePostBtn.isSelected()) {
 
-            likePostBtn.setStyle("-fx-background-color: white;\n" +
-                    " -fx-text-fill: #939393 ;\n" +
-                    "        -fx-border-radius: 5;\n " +
-                    "       -fx-padding: 8 ;");
-            Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-26.png"));
-            LikeIcon.setImage(icon);
-
-        } else {
-
-            likePostBtn.setStyle("  -fx-background-color: #ffffff; /* Facebook blue */\n" +
-                    "    -fx-text-fill: #939393;\n" +
-                    "    -fx-border-radius: 5;\n" +
-                    "    -fx-padding: 8 ;");
-
-            Image icon = new Image(getClass().getResourceAsStream("/img/dark/icons8-aime-rempli-24.png"));
-
-            LikeIcon.setImage(icon);
-        }
-
-
-
-    }
-    public ToggleButton getLike() {
-        return likePostBtn;
-    }
-
-    public void setLike(ToggleButton like) {
-        likePostBtn = like;
-    }
 
 
 

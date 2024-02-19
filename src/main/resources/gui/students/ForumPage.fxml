@@ -14,8 +14,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="postsMainContent" prefHeight="631.0" prefWidth="1194.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ForumController">
    <children>
@@ -286,7 +288,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deletePostContainer" prefHeight="634.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css">
+      <AnchorPane fx:id="deletePostContainer" prefHeight="634.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css" visible="false">
          <children>
             <Pane layoutX="381.0" layoutY="149.0" prefHeight="298.0" prefWidth="536.0" styleClass="Borderepane" stylesheets="@../../css/style.css">
                <children>
@@ -303,6 +305,124 @@
                   </HBox>
                </children>
             </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="showCommentsConatainer" prefHeight="635.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" layoutX="216.0" layoutY="33.0" prefHeight="579.0" prefWidth="882.0" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="allCommentsContainer" prefHeight="662.0" prefWidth="596.0">
+                     <children>
+                        <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="600.0" styleClass="about-post-borderpane" stylesheets="@../../css/style.css">
+                           <center>
+                              <VBox fx:id="commentPostContentContainer" maxHeight="-Infinity" maxWidth="618.0" minWidth="-Infinity" prefHeight="33.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Text fx:id="commentPostContentText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="565.0">
+                                       <VBox.margin>
+                                          <Insets left="25.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" />
+                                 </padding>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </VBox>
+                           </center>
+                           <top>
+                              <HBox prefHeight="33.0" prefWidth="593.0" spacing="15.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Circle fx:id="commentPostUserImg" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <VBox prefHeight="63.0" prefWidth="446.0" spacing="5.0">
+                                       <children>
+                                          <Label fx:id="commentPostUserName" prefHeight="28.0" prefWidth="438.0" text="Jarray abdelmonam">
+                                             <font>
+                                                <Font name="Microsoft Sans Serif" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="commentPostPostedDate" prefHeight="22.0" prefWidth="379.0" text="12/2/2023">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" top="15.0" />
+                                 </padding>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </HBox>
+                           </top>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" />
+                           </padding>
+                           <bottom>
+                              <VBox fx:id="newCommentContainer" prefHeight="64.0" prefWidth="646.0" spacing="5.0">
+                                 <children>
+                                    <Line endX="499.29290771484375" endY="0.8709419369697571" startX="-100.0" stroke="#cfcbcb" />
+                                    <HBox prefHeight="38.0" prefWidth="598.0">
+                                       <VBox.margin>
+                                          <Insets left="15.0" right="15.0" top="5.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <TextArea fx:id="newCommentIput" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="549.0" promptText="type" style="-fx-background-color: lightgrey;" translateX="20.0" wrapText="true" />
+                                          <Button fx:id="newCommentAttachmentBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" translateX="-60.0">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../img/dark/icons8-trombone-50.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button fx:id="addCommentBtn" minWidth="-Infinity" mnemonicParsing="false" prefHeight="34.0" prefWidth="34.0" translateX="-60.0">
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../img/dark/icons8-envoyé-24.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                       </children>
+                                    </HBox>
+                                    <Rectangle fx:id="newCommentAttachment" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" stroke="BLACK" strokeType="INSIDE" width="601.0" />
+                                    <Line endX="499.29290771484375" endY="0.8709419369697571" layoutX="111.0" layoutY="11.0" startX="-100.0" stroke="#cfcbcb" />
+                                 </children>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </VBox>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button fx:id="closeCommentsConatainerBtn" layoutX="1106.0" layoutY="12.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/light/icons8-multiplier-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
    </children>

@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -29,16 +28,16 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ToggleButton fx:id="likePostBtn" mnemonicParsing="false" onAction="#LikePressed" prefHeight="37.0" prefWidth="33.0" styleClass="likeBtn" stylesheets="@../../css/style.css">
+                        <Button fx:id="likePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/style.css">
                            <graphic>
-                              <ImageView fx:id="LikeIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="LikeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../img/dark/icons8-aime-rempli-24.png" />
+                                    <Image url="@../../img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-32.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                        </ToggleButton>
-                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="261.0" text="3,5K">
+                        </Button>
+                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="82.0" text="3,5K">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
@@ -46,15 +45,15 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <ToggleButton fx:id="likePostBtn1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#LikePressed" prefHeight="37.0" prefWidth="32.0" styleClass="likeBtn" stylesheets="@../../css/style.css">
+                        <Button fx:id="disLikePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/style.css">
                            <graphic>
-                              <ImageView fx:id="LikeIcon1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="disLikePostIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../img/dark/icons8-aime-rempli-24.png" />
+                                    <Image url="@../../img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                        </ToggleButton>
+                        </Button>
                      </children>
                   </HBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />

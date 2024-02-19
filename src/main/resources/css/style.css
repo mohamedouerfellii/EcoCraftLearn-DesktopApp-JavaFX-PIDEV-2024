@@ -60,12 +60,12 @@
 }
 
 /* Styles for the pressed state of the button */
-.button:pressed {
-    -fx-background-color: #7dc145;
-    -fx-text-fill: white;/* Even darker blue on press */}
-.button:selected {-fx-background-color: #7dc145;
-    -fx-text-fill: white;/* Even darker blue on press */
-}
+/*.button:pressed {*/
+/*    -fx-background-color: #7dc145;*/
+/*    -fx-text-fill: white;!* Even darker blue on press *!}*/
+/*.button:selected {-fx-background-color: #7dc145;*/
+/*    -fx-text-fill: white;!* Even darker blue on press *!*/
+/*}*/
 
 .top-bar.button,
 .top-bar.button:pressed,
@@ -125,7 +125,7 @@
 
 
 .transparent-pane {
-    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-color: rgba(61, 61, 61, 0.7);
   -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 0, 0, 0, 0);
 }
 
@@ -136,3 +136,10 @@
 /*.scroll-pane .label {*/
 /*    -fx-text-fill: black; !* Set the desired text color *!*/
 /*}*/
+.about-post-borderpane{
+
+        -fx-background-color: white;
+        -fx-border-color: none;
+        -fx-border-radius: 0 0 20  20; /* top-left, top-right, bottom-right, bottom-left */
+        -fx-background-radius: 20 20 0 0; /* top-left, top-right, bottom-right, bottom-left */
+    }
