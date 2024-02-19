@@ -30,41 +30,48 @@
             </ImageView>
          </graphic>
       </Button>
-      <VBox fx:id="descriptionSectionDetailsContainer" layoutX="19.0" layoutY="62.0" prefHeight="126.0" prefWidth="818.0" styleClass="description-section-details-container" stylesheets="@../../style/sectionsDetails.css">
+      <VBox alignment="CENTER" layoutX="1.0" layoutY="56.0" prefHeight="246.0" prefWidth="852.0" spacing="5.0">
          <children>
-            <Label styleClass="section-desc-label" stylesheets="@../../style/sectionsDetails.css" text="Description :">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Label>
-            <Text fx:id="sectionDescContent" fill="#495057" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-desc-content" text="Text" wrappingWidth="793.3367614746094">
-               <VBox.margin>
-                  <Insets left="10.0" />
-               </VBox.margin>
-            </Text>
+            <VBox fx:id="descriptionSectionDetailsContainer" prefHeight="126.0" prefWidth="818.0" styleClass="description-section-details-container" stylesheets="@../../style/sectionsDetails.css">
+               <children>
+                  <Label styleClass="section-desc-label" stylesheets="@../../style/sectionsDetails.css" text="Description :">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Text fx:id="sectionDescContent" fill="#495057" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section-desc-content" text="Text" wrappingWidth="793.3367614746094">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+            <AnchorPane>
+               <children>
+                  <VBox fx:id="questionListContainer" alignment="CENTER" layoutY="54.0" prefHeight="40.0" prefWidth="818.0" spacing="10.0" />
+                  <Label fx:id="quizzLabelPresentation" layoutX="17.0" prefHeight="52.0" prefWidth="93.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Quiz :" />
+                  <Button fx:id="addQuizFormGoBtn" layoutX="5.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#addQuizBtnClicked" prefHeight="40.0" prefWidth="90.0" styleClass="add-quiz-btn" stylesheets="@../../style/sectionsDetails.css" text="Add Quiz" visible="false" />
+                  <Button fx:id="editQuizBtn" layoutX="700.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#editQuizBtnClicked" prefHeight="40.0" prefWidth="36.0" styleClass="edit-section-btn" stylesheets="@../../style/sectionsDetails.css">
+                     <graphic>
+                        <ImageView fx:id="editSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/edit-box-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteQuizBtn" layoutX="747.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#deleteQuizBtnClicked" prefHeight="40.0" prefWidth="23.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css">
+                     <graphic>
+                        <ImageView fx:id="deleteSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+                           <image>
+                              <Image url="@../../icons/light/delete-bin-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
-      <Button fx:id="addQuizBtn" layoutX="27.0" layoutY="204.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="106.0" styleClass="add-quizz-btn" stylesheets="@../../style/sectionsDetails.css" text="Add Quizz" visible="false" />
-      <Label fx:id="quizzLabelPresentation" layoutX="27.0" layoutY="193.0" prefHeight="52.0" prefWidth="93.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Quiz :" />
-      <Button fx:id="addQuizFormGoBtn" layoutX="25.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#addQuizBtnClicked" prefHeight="40.0" prefWidth="90.0" styleClass="add-quiz-btn" stylesheets="@../../style/sectionsDetails.css" text="Add Quiz" visible="false" />
-      <VBox fx:id="questionListContainer" alignment="CENTER" layoutX="20.0" layoutY="245.0" prefHeight="52.0" prefWidth="818.0" spacing="10.0" />
-      <Button fx:id="editQuizBtn" layoutX="710.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#editQuizBtnClicked" prefHeight="40.0" prefWidth="36.0" styleClass="edit-section-btn" stylesheets="@../../style/sectionsDetails.css">
-         <graphic>
-            <ImageView fx:id="editSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../icons/light/edit-box-line.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="deleteQuizBtn" layoutX="757.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="23.0" styleClass="delete-section-btn" stylesheets="@../../style/coursesMainPage.css">
-         <graphic>
-            <ImageView fx:id="deleteSectionBtnImg1" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
-               <image>
-                  <Image url="@../../icons/light/delete-bin-line.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

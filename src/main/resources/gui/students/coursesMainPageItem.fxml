@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="250.0" styleClass="item-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesMainPageItemController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="250.0" spacing="5.0" styleClass="course-item-container" stylesheets="@../../style/coursesStudentMainPage.css">
+         <children>
+            <Rectangle fx:id="courseImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="115.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-img-item" width="235.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Rectangle>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="66.0" prefWidth="214.0">
+               <children>
+                  <Circle fx:id="tutorImgContainer" fill="DODGERBLUE" layoutX="26.0" layoutY="30.0" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Label fx:id="tutorNameLabel" layoutX="56.0" layoutY="17.0" styleClass="tutor-course-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Ouerfelli Mohamed" />
+               </children>
+            </AnchorPane>
+            <VBox prefHeight="65.0" prefWidth="298.0">
+               <children>
+                  <Text fx:id="titleCourseText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="course-title-item" text="Course One One One One one one one one" wrappingWidth="227.73671913146973">
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="298.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dark/group-fill.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="nbrRegistredLabel" prefHeight="36.0" prefWidth="202.0" styleClass="registred-nbr-course-label" stylesheets="@../../style/coursesStudentMainPage.css" text="195 Registred" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="298.0">
+               <children>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="130.0">
+                     <children>
+                        <Rectangle fx:id="starBar" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="20.0" stroke="TRANSPARENT" strokeType="INSIDE" width="111.5" />
+                        <ImageView fitHeight="20.0" fitWidth="130.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/star.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

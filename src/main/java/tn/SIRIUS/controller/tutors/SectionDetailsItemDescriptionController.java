@@ -51,9 +51,9 @@ public class SectionDetailsItemDescriptionController implements Initializable {
         sectionDescContent.setText(sec.getDescription());
         QuizService quizService = new QuizService();
         quiz = quizService.getQuizBySection(sec.getIdSection());
-        System.out.println("test");
-        System.out.println(quiz.getIdQuiz());
         if(quiz.getIdQuiz() == 0){
+            editQuizBtn.setVisible(false);
+            deleteQuizBtn.setVisible(false);
             questionListContainer.setVisible(false);
             addQuizFormGoBtn.setVisible(true);
         } else {
@@ -69,9 +69,6 @@ public class SectionDetailsItemDescriptionController implements Initializable {
             }
         }
     }
-    public void setCoursesMainPageController(CoursesMainPageController controller){
-        mainPageController = controller;
-    }
     @FXML
     public void editSectionBtnClicked(MouseEvent event){
         mainPageController.setUpEditSectionPage(section);
@@ -86,6 +83,10 @@ public class SectionDetailsItemDescriptionController implements Initializable {
     }
     @FXML
     public void editQuizBtnClicked(MouseEvent event){
-        mainPageController.setEditQuizPage(quiz);
+        mainPageController.setEditQuizPage(quiz,section);
+    }
+    @FXML
+    public void deleteQuizBtnClicked(MouseEvent event){
+        mainPageController.deleteQuiz(section,quiz.getIdQuiz());
     }
 }

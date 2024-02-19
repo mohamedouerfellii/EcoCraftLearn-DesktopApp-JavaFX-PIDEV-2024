@@ -99,6 +99,7 @@ public class QuizQuestionService{
             ResultSet rs = stm.executeQuery(query);
             while (rs.next()){
                 idAvailable = rs.getInt(1);
+                idAvailable++;
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());

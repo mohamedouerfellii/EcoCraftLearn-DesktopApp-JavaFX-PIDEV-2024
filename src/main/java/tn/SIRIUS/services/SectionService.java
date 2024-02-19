@@ -88,4 +88,26 @@ public class SectionService implements ICRUD<Section> {
         }
         return false;
     }
+    public List<Section> getAll(int idSection){
+        String query = "SELECT * FROM Sections WHERE course = ? ORDER BY postedDate ASC";
+        List<Section> sectionList = new ArrayList<>();
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idSection);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                sectionList.add(new Section(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6)
+                ));
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return sectionList;
+    }
 }

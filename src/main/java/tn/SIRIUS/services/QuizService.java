@@ -29,7 +29,6 @@ public class QuizService{
         return false;
     }
     public Quiz getQuizBySection(int section){
-        System.out.println(section);
         String query = "SELECT * FROM QUIZZES WHERE section = ?";
         Quiz quiz = new Quiz();
         try{

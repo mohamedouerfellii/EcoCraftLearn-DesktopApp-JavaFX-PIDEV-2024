@@ -65,7 +65,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addCoursePane" layoutX="7.0" layoutY="6.0" prefHeight="650.0" prefWidth="1200.0" styleClass="add-new-course-main-container" stylesheets="@../../style/addNewCourse.css" visible="false">
+      <AnchorPane fx:id="addCoursePane" layoutX="7.0" layoutY="6.0" prefHeight="650.0" prefWidth="1200.0" styleClass="add-new-course-main-container" stylesheets="@../../style/addNewCourse.css">
          <children>
             <Button fx:id="goBackCourseBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
@@ -105,7 +105,7 @@
                         <Insets right="270.0" />
                      </VBox.margin>
                   </HBox>
-                  <TextArea fx:id="addCourseDesc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="description-input" stylesheets="@../../style/addNewCourse.css" />
+                  <TextArea fx:id="addCourseDesc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="description-input" stylesheets="@../../style/addNewCourse.css" wrapText="true" />
                   <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
                      <children>
                         <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Price" />
@@ -154,7 +154,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="coursesDetailsContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+      <AnchorPane fx:id="coursesDetailsContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
          <children>
             <Button fx:id="goBackCourseDetBtn" layoutX="69.0" layoutY="27.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
@@ -217,7 +217,7 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Text fx:id="descriptionLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test" />
+                                    <Text fx:id="descriptionLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test" wrappingWidth="519.6693267822266" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
@@ -352,30 +352,6 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <AnchorPane fx:id="warningDeleteCourseContainer" layoutX="357.0" layoutY="156.0" prefHeight="359.0" prefWidth="492.0" styleClass="delete-warning-container" stylesheets="@../../style/coursesMainPage.css">
-               <children>
-                  <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="#d64242" />
-                  <Label layoutX="186.0" layoutY="4.0" styleClass="warning-delete-label" stylesheets="@../../style/coursesMainPage.css" text="Warning !" />
-                  <ImageView fx:id="closeWarningPassword" fitHeight="32.0" fitWidth="32.0" layoutX="435.0" layoutY="5.0" onMouseClicked="#closeWarningDeleteCourse" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
-                     <image>
-                        <Image url="@../../icons/dark/close-circle-filll.png" />
-                     </image>
-                  </ImageView>
-                  <Text layoutX="62.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="Are you sure you want to delete this course?" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
-                  <Button fx:id="confirmDeleteCourseBtn" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#confirmDeleteCourse" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Confirm" />
-                  <PasswordField fx:id="passwordConfirmDelete" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirm-delete-course" stylesheets="@../../style/coursesMainPage.css" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="failedOperationEditContainer" layoutX="490.0" layoutY="8.0" prefHeight="35.0" prefWidth="225.0" styleClass="failed-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
-               <children>
-                  <Label fx:id="passwordIncorrectContainer" layoutX="45.0" layoutY="5.0" prefHeight="23.0" prefWidth="207.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="Password Incorrect !" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="215.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/dark/close-line.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
             <Button fx:id="showCourseSectionsBtn" contentDisplay="RIGHT" layoutX="921.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#showCourseSectionsBtnClicked" prefHeight="52.0" prefWidth="191.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Show Section(s)">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -428,7 +404,7 @@
                         <Insets right="270.0" />
                      </VBox.margin>
                   </HBox>
-                  <TextArea fx:id="editCourseDesc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="description-input" stylesheets="@../../style/addNewCourse.css" />
+                  <TextArea fx:id="editCourseDesc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="description-input" stylesheets="@../../style/addNewCourse.css" wrapText="true" />
                   <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
                      <children>
                         <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Price" />
@@ -939,7 +915,7 @@
             <Label fx:id="idSectionAddQuiz" layoutX="1033.0" layoutY="39.0" text="Label" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="quizEditFormPageContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+      <AnchorPane fx:id="quizEditFormPageContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
          <children>
             <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="438.0" layoutY="12.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Edit Your Section Quiz !" />
             <Button fx:id="goBackAddQuizSectionDetailsBtn1" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackSectionFromQuizAdd" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
@@ -1138,6 +1114,30 @@
          <children>
             <Label layoutX="27.0" layoutY="5.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="Quiz Must Contain 3 question minimum !" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="347.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/close-line.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="warningDeleteCourseContainer" layoutX="367.0" layoutY="164.0" prefHeight="359.0" prefWidth="492.0" styleClass="delete-warning-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="#d64242" />
+            <Label layoutX="186.0" layoutY="4.0" styleClass="warning-delete-label" stylesheets="@../../style/coursesMainPage.css" text="Warning !" />
+            <ImageView fx:id="closeWarningPassword" fitHeight="32.0" fitWidth="32.0" layoutX="435.0" layoutY="5.0" onMouseClicked="#closeWarningDelete" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="msgConfirmDelete" layoutX="62.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="Are you sure you want to delete this course?" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
+            <Button fx:id="confirmDeleteBtn" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#confirmDelete" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Confirm" />
+            <PasswordField fx:id="passwordConfirmDelete" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirm-delete-course" stylesheets="@../../style/coursesMainPage.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="failedOperationEditContainer" layoutX="500.0" layoutY="18.0" prefHeight="35.0" prefWidth="225.0" styleClass="failed-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label fx:id="passwordIncorrectContainer" layoutX="45.0" layoutY="5.0" prefHeight="23.0" prefWidth="207.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="Password Incorrect !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="215.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../icons/dark/close-line.png" />
                </image>

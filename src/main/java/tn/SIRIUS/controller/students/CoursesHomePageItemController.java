@@ -19,10 +19,8 @@ public class CoursesHomePageItemController {
     private Label coursesHomePageHours;
     @FXML
     private Label coursesHomePageRate;
-    @FXML
-    private Button coursesHomePageBtn;
     public void setCourseData(Course course){
-        Image courseImg = new Image(course.getImage());
+        Image courseImg = new Image("file:/"+course.getImage().replace("\\","/"));
         coursesHomePageItemImg.setFill(new ImagePattern(courseImg));
         coursesHomePageTitle.setText(course.getTitle());
         coursesHomePageTutor.setText(String.valueOf(course.getTutor()));

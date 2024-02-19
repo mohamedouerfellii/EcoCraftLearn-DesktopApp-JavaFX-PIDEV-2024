@@ -1,5 +1,6 @@
 package tn.SIRIUS.services;
 
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.utils.MyDB;
 
 import java.sql.*;
@@ -25,5 +26,25 @@ public class UserService {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public User getCourseTutor(int idTutor){
+        String qry = "SELECT firstName,lastName,image FROM USERS WHERE idUser = ?";
+        User tutor = new User();
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idTutor);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()){
+                tutor.setId(idTutor);
+                tutor.setFirstName(rs.getString(1));
+                tutor.setLastName(rs.getString(2));
+                tutor.setImage(rs.getString(3));
+                return tutor;
+            }
+            stm.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return tutor;
     }
 }

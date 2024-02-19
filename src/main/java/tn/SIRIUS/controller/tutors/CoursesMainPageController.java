@@ -247,6 +247,10 @@ public class CoursesMainPageController implements Initializable {
     private Label choice3QuizErrorEdit;
     @FXML
     private AnchorPane failedOperationQuizEditContainer;
+    @FXML
+    private Text msgConfirmDelete;
+    @FXML
+    private Label nbrQuestionQuizEdit;
     private Quiz quizToEdit;
     private List<Section> sections;
     private String addCourseImgPath;
@@ -260,7 +264,8 @@ public class CoursesMainPageController implements Initializable {
     private int muteVidSecCounter;
     private double currentVolume;
     private List<QuizQuestion> quizQuestions;
-    private Section sectionQqAdd;
+    private Section sectionQuiz;
+    private int idQuizDelete;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         // Init visibilities and variables
@@ -444,37 +449,63 @@ public class CoursesMainPageController implements Initializable {
                 Objects.requireNonNull(getClass().getResourceAsStream("/icons/dark/close-circle-filll.png"))
         ));
     }
+    public void warningDeleteSetUp(String deleteCase){
+        switch (deleteCase){
+            case "Delete Course" -> msgConfirmDelete.setText("Are you sure you want to delete this course ?");
+            case "Delete Quiz" -> msgConfirmDelete.setText("Are you sure you want to delete this quiz ?");
+            case "Delete Section" -> msgConfirmDelete.setText("Are you sure you want to delete this section ?");
+            default -> System.out.println("Wrong case !");
+        }
+        warningDeleteCourseContainer.setVisible(true);
+    }
    @FXML
     public void deleteCourseBtnClicked(MouseEvent event){
-       warningDeleteCourseContainer.setVisible(true);
+       warningDeleteSetUp("Delete Course");
     }
     @FXML
-    public void closeWarningDeleteCourse(MouseEvent event){
+    public void closeWarningDelete(MouseEvent event){
+        passwordConfirmDelete.clear();
         warningDeleteCourseContainer.setVisible(false);
     }
     @FXML
-    public void confirmDeleteCourse(MouseEvent event){
+    public void confirmDelete(MouseEvent event){
        String password = passwordConfirmDelete.getText();
         UserService userService = new UserService();
         if(userService.isPasswordMatch(1,password)){
-            CourseService courseService = new CourseService();
-            if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
-                passwordConfirmDelete.clear();
-                warningDeleteCourseContainer.setVisible(false);
-                coursesDetailsContainer.setVisible(false);
-                successOperationContainer.setVisible(true);
-                showCoursesList();
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
-                timeline.setCycleCount(1);
-                timeline.play();
+            switch (msgConfirmDelete.getText()){
+                case "Are you sure you want to delete this course ?" -> {
+                    CourseService courseService = new CourseService();
+                    if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
+                        closeWarningDelete(null);
+                        coursesDetailsContainer.setVisible(false);
+                        successOperationContainer.setVisible(true);
+                        showCoursesList();
+                        notifySuccess();
+                    } else {
+                        closeWarningDelete(null);
+                        notifyFailed();
+                    }
+                }
+                case "Are you sure you want to delete this quiz ?" -> {
+                    QuizService quizService = new QuizService();
+                    if(quizService.delete(idQuizDelete)){
+                        closeWarningDelete(null);
+                        setSectionPlay(sectionQuiz);
+                        notifySuccess();
+                    } else {
+                        closeWarningDelete(null);
+                        notifyFailed();
+                    }
+                }
+                case "Are you sure you want to delete this section ?" -> {
+
+                }
+                default -> System.out.println("Wrong Case !");
             }
         } else {
             passwordConfirmDelete.clear();
             warningDeleteCourseContainer.setVisible(false);
-            failedOperationEditContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
+            notifyFailedPassword();
         }
     }
     @FXML
@@ -501,7 +532,7 @@ public class CoursesMainPageController implements Initializable {
         errorAttAddSection.setVisible(false);
         titleInputAddSection.clear();
         sectionDescInput.clear();
-        mediaPlayer.pause();
+        mediaPlayer.dispose();
         mediaAddSectionViewer.setMediaPlayer(null);
         coursesViewSectionContainer.setVisible(false);
     }
@@ -618,13 +649,19 @@ public class CoursesMainPageController implements Initializable {
         timeline.setCycleCount(1);
         timeline.play();
     }
-    public void showCourseSection(){
+    public void notifyFailedPassword(){
+        failedOperationEditContainer.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+    public void showCourseSection(int idCourse){
         int count = 0;
         coursesViewSectionContainer.setVisible(true);
         // get and display all sections
         sectionsViewListContainer.getChildren().clear();
         SectionService sectionService = new SectionService();
-        sections = sectionService.getAll();
+        sections = sectionService.getAll(idCourse);
         try {
             for(Section section : sections) {
                 if(count < 1){
@@ -645,19 +682,19 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     public void showCourseSectionsBtnClicked(MouseEvent event){
-        showCourseSection();
+        showCourseSection(Integer.parseInt(idLabelDetail.getText().replace("#","")));
     }
     public void setSectionPlay(Section section){
-        if(mediaPlayer != null) mediaPlayer.pause();
+        if(mediaPlayer != null) mediaPlayer.dispose();
+        mediaSecVid = new Media(section.getAttachment());
+        mediaPlayer = new MediaPlayer(mediaSecVid);
+        mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/SectionDetailsItemDescription.fxml"));
             Parent root = fxmlLoader.load();
             SectionDetailsItemDescriptionController itemController = fxmlLoader.getController();
             itemController.setData(section,false,this);
-            mediaSecVid = new Media(section.getAttachment());
-            mediaPlayer = new MediaPlayer(mediaSecVid);
-            mediaViewerSectionsCourse.setMediaPlayer(mediaPlayer);
             sectionsViewDetailsContainer.getChildren().clear();
             sectionsViewDetailsContainer.getChildren().add(root);
         } catch (IOException e) {
@@ -815,7 +852,6 @@ public class CoursesMainPageController implements Initializable {
                 !vidSectionPath.isEmpty() ){
             int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
             int idSection = Integer.parseInt(idInputEditSection.getText());
-            System.out.println(idSection);
             Section section = new Section(
                     idSection,courseID,
                     titleInputEditSection.getText(),
@@ -824,7 +860,7 @@ public class CoursesMainPageController implements Initializable {
             );
             SectionService sectionService = new SectionService();
             if(sectionService.update(section)){
-                    showCourseSection();
+                    showCourseSection(courseID);
                     setSectionPlay(section);
                     coursesEditSectionContainer.setVisible(false);
                     notifySuccess();
@@ -848,7 +884,7 @@ public class CoursesMainPageController implements Initializable {
             int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
             int newNbrSection = Integer.parseInt(nbrSecLabelDetail.getText()) - 1;
             courseService.updateNbrSection(courseID,newNbrSection );
-            showCourseSection();
+            showCourseSection(courseID);
             notifySuccess();
         } else {
             notifyFailed();
@@ -868,12 +904,14 @@ public class CoursesMainPageController implements Initializable {
         comboBoxQuizAdd.setItems(items);
         comboBoxQuizAdd.setValue("Choice 1");
         quizQuestions = new ArrayList<>();
-        sectionQqAdd = section;
+        sectionQuiz = section;
     }
     @FXML
     public void goBackSectionFromQuizAdd(MouseEvent event){
+        questionQuizEditFormContainer.getChildren().clear();
         quizAddFormPageContainer.setVisible(false);
         quizEditFormPageContainer.setVisible(false);
+        setSectionPlay(sectionQuiz);
         clearEditQuizInputs();
         clearAddQuizInputs();
     }
@@ -893,7 +931,8 @@ public class CoursesMainPageController implements Initializable {
             quizQuestions.add(qq);
             clearAddQuizInputs();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResourceAsStream("/gui/tutors/QuizItemTutor.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/gui/tutors/QuizItemTutor.fxml"));
+            Parent root = fxmlLoader.load();
             QuizItemTutorController controller = fxmlLoader.getController();
             controller.setData(qq,false,this);
             questionQuizFormContainer.getChildren().add(root);
@@ -933,7 +972,7 @@ public class CoursesMainPageController implements Initializable {
                             count++;
                     }
                     if (count == quizQuestions.size()){
-                        setSectionPlay(sectionQqAdd);
+                        setSectionPlay(sectionQuiz);
                         clearAddQuizInputs();
                         quizAddFormPageContainer.setVisible(false);
                         notifySuccess();
@@ -945,8 +984,14 @@ public class CoursesMainPageController implements Initializable {
                 notifyFailed();
         }
     }
-    public void setEditQuizPage(Quiz quiz){
+    public void deleteQuiz(Section section, int id){
+        idQuizDelete = id;
+        sectionQuiz = section;
+        warningDeleteSetUp("Delete Quiz");
+    }
+    public void setEditQuizPage(Quiz quiz,Section section){
         quizToEdit = quiz;
+        sectionQuiz = section;
         quizEditFormPageContainer.setVisible(true);
         for(QuizQuestion qq : quiz.getQuestions()){
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -968,7 +1013,7 @@ public class CoursesMainPageController implements Initializable {
         );
         comboBoxQuizEdit.setItems(items);
         comboBoxQuizEdit.setValue("Choice 1");
-        nbrQuestionQuizAdd.setText("Question Number : "+quiz.getQuestions().size());
+        nbrQuestionQuizEdit.setText("Question Number : "+quizToEdit.getQuestions().size());
     }
     public void clearAddQuizInputs(){
         questionQuizAddInput.clear();
@@ -993,6 +1038,7 @@ public class CoursesMainPageController implements Initializable {
         choice2QuizErrorEdit.setVisible(false);
         choice3QuizErrorEdit.setVisible(false);
         choice4QuizErrorEdit.setVisible(false);
+        editQuestionQuizFormBtn.setText("Add Question");
     }
     public void setQuestionEditForm(QuizQuestion qq){
         questionQuizEditInput.setText(qq.getQuestion());
@@ -1045,7 +1091,7 @@ public class CoursesMainPageController implements Initializable {
                 QuizQuestionService qqService = new QuizQuestionService();
                 int idAvailable = qqService.getNextIdAvailable();
                 if(idAvailable != 0){
-                    QuizQuestion qq = new QuizQuestion(0,quizToEdit.getIdQuiz(),question,
+                    QuizQuestion qq = new QuizQuestion(idAvailable,quizToEdit.getIdQuiz(),question,
                             choice1,choice2,choice3,choice4,correctChoice);
                     if(qqService.add(qq)){
                         questionQuizEditFormContainer.getChildren().clear();
@@ -1057,6 +1103,7 @@ public class CoursesMainPageController implements Initializable {
                                 System.out.println(e.getMessage());
                             }
                         }
+                        nbrQuestionQuizEdit.setText("Question Number : "+quizToEdit.getQuestions().size());
                         notifySuccess();
                     }
                 }
@@ -1088,6 +1135,7 @@ public class CoursesMainPageController implements Initializable {
                             System.out.println(e.getMessage());
                         }
                     }
+                    nbrQuestionQuizEdit.setText("Question Number : "+quizToEdit.getQuestions().size());
                     notifySuccess();
                 } else
                     notifyFailed();
@@ -1102,7 +1150,7 @@ public class CoursesMainPageController implements Initializable {
     }
     // resources clean
     public void cleanup(){
-        mediaSecVid = null;
+        mediaPlayer.dispose();
         if (sections != null)
             sections.clear();
         if (courses != null)
