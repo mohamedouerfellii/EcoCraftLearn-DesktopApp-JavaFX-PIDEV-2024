@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.SousCartItem">
+   <children>
+      <Rectangle fx:id="sousCartProductImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="101.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />
+      <VBox prefHeight="100.0" prefWidth="182.0" spacing="15.0">
+         <children>
+            <Label fx:id="sousCartProductName" prefHeight="17.0" prefWidth="182.0" text="Label" />
+            <Label fx:id="sousCartProductprice" prefHeight="17.0" prefWidth="182.0" text="Label" />
+            <Label fx:id="sousCartProductQuantite" prefHeight="17.0" prefWidth="186.0" text="Label" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

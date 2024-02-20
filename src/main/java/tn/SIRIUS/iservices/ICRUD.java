@@ -1,6 +1,5 @@
 package tn.SIRIUS.iservices;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ICRUD<T> {
@@ -8,5 +7,6 @@ public interface ICRUD<T> {
     public List<T> getAll();
     public boolean update(T entity);
     public boolean delete(int id);
+
 
 }

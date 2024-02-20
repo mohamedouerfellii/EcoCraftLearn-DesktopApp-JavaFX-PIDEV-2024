@@ -1,0 +1,6 @@
+.AnchorPaneReview
+{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 15 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2);
+}

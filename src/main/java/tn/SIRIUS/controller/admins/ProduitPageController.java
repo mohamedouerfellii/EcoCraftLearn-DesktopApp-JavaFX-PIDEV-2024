@@ -138,7 +138,6 @@ public class ProduitPageController implements Initializable {
         AnchorPaneProductBack.setVisible(false);
         AnchorPanedetailsProduct.setVisible(true);
 
-        
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
@@ -195,8 +194,6 @@ public class ProduitPageController implements Initializable {
     void handleOnBtnOpenUpdate(ActionEvent event) {
 
         FormUpdateAdmin.setVisible(true);
-
-
         InputNameUpdate.setText(NameProductdetails.getText());
         InputDescUpdate.setText(DescProductdetails.getText());
         InputPriceUpdate.setText(PriceProductDetails.getText());

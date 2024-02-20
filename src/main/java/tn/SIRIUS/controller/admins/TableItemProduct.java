@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import tn.SIRIUS.entities.Product;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class TableItemProduct {
 
     @FXML
-    private ImageView ImageProduct;
+    private Rectangle RectangleImage;
     @FXML
     private HBox BoxTableProduct;
 
@@ -42,9 +43,9 @@ public class TableItemProduct {
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
+        RectangleImage.setFill(new ImagePattern(img1));
 
 
-        ImageProduct.setImage(img1);
         NameProduct.setText(product.getName());
         DescProduct.setText(product.getDescription());
         DateProduct.setText(product.getAddDate());

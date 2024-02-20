@@ -1,11 +1,11 @@
 .AnchorForm {
-    -fx-min-width: 1100px;
-    -fx-max-width: 1100px;
-    -fx-min-height: 600px;
-    -fx-max-height: 600px;
-    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-min-width: 1120px;
+    -fx-max-width: 1120px;
+    -fx-min-height: 635px;
+    -fx-max-height: 635px;
+    -fx-background-color: #fff; /* Couleur de fond */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #1D6611; /* Couleur de la bordure par défaut */
+    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
     -fx-border-width: 2px; /* Largeur de la bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }

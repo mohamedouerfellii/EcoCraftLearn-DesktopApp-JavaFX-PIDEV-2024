@@ -79,6 +79,13 @@ public class Product {
         this.addDate = addDate;
     }
 
+    public Product(int idProduct, String name, String image, float price) {
+        this.idProduct = idProduct;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -90,6 +97,8 @@ public class Product {
                 ", owner=" + owner +
                 ", addDate='" + addDate + '\'' +
                 '}';
+
+
     }
 
 

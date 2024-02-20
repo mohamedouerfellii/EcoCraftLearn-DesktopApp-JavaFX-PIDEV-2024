@@ -1,6 +1,5 @@
 package tn.SIRIUS.services;
 
-import tn.SIRIUS.controller.admins.ProduitPageController;
 import tn.SIRIUS.entities.Product;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements ICRUD<Product> {
+
     private Connection con;
     public ProductService(){
         con = MyDB.getInstance().getCon();
@@ -39,7 +39,6 @@ public class ProductService implements ICRUD<Product> {
     public List<Product> getAll() {
         String query = "SELECT * FROM PRODUCTS";
         List<Product> productList = new ArrayList<>();
-
         try (Statement stm = con.createStatement();
              ResultSet rs = stm.executeQuery(query)) {
             while (rs.next()) {
@@ -102,5 +101,7 @@ public class ProductService implements ICRUD<Product> {
         }
         return false;
     }
+
+
 
 }
