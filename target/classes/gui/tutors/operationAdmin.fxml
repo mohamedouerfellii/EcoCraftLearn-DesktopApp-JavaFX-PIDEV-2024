@@ -20,7 +20,7 @@
    <children>
       <AnchorPane fx:id="coursesDetailsContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
          <children>
-            <Button layoutX="69.0" layoutY="27.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
+            <Button layoutX="69.0" layoutY="27.0" mnemonicParsing="false" onAction="#goBack" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -225,7 +225,7 @@
                   <PasswordField fx:id="passwordConfirmDelete" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirm-delete-course" stylesheets="@../../style/coursesMainPage.css" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="doneEditCourse" layoutX="563.0" layoutY="67.0" prefHeight="35.0" prefWidth="71.0" styleClass="success-operation-container" stylesheets="@../../style/coursesMainPage.css">
+            <AnchorPane fx:id="doneEditCourse" layoutX="563.0" layoutY="67.0" prefHeight="35.0" prefWidth="71.0" styleClass="success-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
                <children>
                   <Label fx:id="done" layoutX="13.0" layoutY="5.0" styleClass="success-msg" stylesheets="@../../style/coursesMainPage.css" text="Done !" />
                </children>
@@ -235,7 +235,7 @@
       </AnchorPane>
       <AnchorPane fx:id="editanchorpane" prefHeight="506.0" prefWidth="1230.0" visible="false">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="361.0" layoutY="160.0" prefHeight="359.0" prefWidth="412.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" layoutX="520.0" layoutY="155.0" prefHeight="242.0" prefWidth="466.0" spacing="10.0">
                <children>
                   <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Gender:">
                      <VBox.margin>
@@ -303,9 +303,9 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" layoutX="34.0" layoutY="121.0" prefHeight="387.0" prefWidth="395.0" spacing="10.0">
+            <VBox alignment="CENTER" layoutX="74.0" layoutY="116.0" prefHeight="386.0" prefWidth="321.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="136.0">
                      <children>
                         <Label alignment="TOP_CENTER" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="FirstName:" />
                         <Label alignment="TOP_CENTER" text="*" textFill="RED">
@@ -323,7 +323,7 @@
                         <Insets left="-200.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="36.0" prefWidth="139.0">
                      <children>
                         <Label alignment="TOP_CENTER" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="LastName:" />
                         <Label alignment="TOP_CENTER" text="*" textFill="RED">
@@ -341,7 +341,7 @@
                         <Insets left="-200.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="98.0">
                      <children>
                         <Label alignment="TOP_CENTER" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Email:" />
                         <Label alignment="TOP_CENTER" text="*" textFill="RED">
@@ -359,7 +359,7 @@
                         <Insets left="-200.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                  <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
                      <children>
                         <Label alignment="TOP_CENTER" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Password:" />
                         <Label text="*" textFill="RED">
@@ -378,8 +378,11 @@
                      </VBox.margin>
                   </TextField>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </VBox>
-            <Button fx:id="goBackCourseBtnEdit" layoutX="45.0" layoutY="41.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
+            <Button fx:id="goBackCourseBtnEdit" layoutX="45.0" layoutY="41.0" mnemonicParsing="false" onAction="#goBack" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -388,18 +391,18 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="editimgbutton" layoutX="782.0" layoutY="148.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Choose image">
+            <Button fx:id="editimgbutton" layoutX="987.0" layoutY="155.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Choose image">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
             <Label alignment="CENTER" layoutX="416.0" layoutY="41.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Edit User !" />
-            <Button fx:id="editbutton" layoutX="782.0" layoutY="408.0" mnemonicParsing="false" onAction="#editUserButton" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Edit User">
+            <Button fx:id="editbutton" layoutX="987.0" layoutY="407.0" mnemonicParsing="false" onAction="#editUserButton" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Edit User">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
-            <ImageView fx:id="editimguser" fitHeight="150.0" fitWidth="200.0" layoutX="787.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="editimguser" fitHeight="150.0" fitWidth="200.0" layoutX="992.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/logo%20version%201%20(2).png" />
                </image>

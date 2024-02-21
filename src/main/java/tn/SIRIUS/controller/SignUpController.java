@@ -32,6 +32,8 @@ public class SignUpController implements Initializable {
     private Label CheckDetails1;
     @FXML
     private Label done;
+    @FXML
+    private AnchorPane successOperationContainer;
 
     @FXML
     private CheckBox CheckPassword1;
@@ -53,14 +55,17 @@ public class SignUpController implements Initializable {
 
     @FXML
     private ChoiceBox<String> RoleChoise;
+    @FXML
+    private ChoiceBox<String> questionChoise;
+
+    @FXML
+    private TextField AnswerLabel;
 
     @FXML
     private TextField Show1;
 
     @FXML
     private AnchorPane SignUpAnchorPane;
-    @FXML
-    private AnchorPane successOperationContainer;
 
     @FXML
     private Button SignUpButton;
@@ -85,12 +90,16 @@ public class SignUpController implements Initializable {
             Show1.setText(passwordLabel1.getText());
             Show1.setVisible(true);
             passwordLabel1.setVisible(false);
+            Show1.requestFocus();
+            Show1.positionCaret(Show1.getLength());
             return;
         }
         else{
             passwordLabel1.setText(Show1.getText());
             passwordLabel1.setVisible(true);
             Show1.setVisible(false);
+            passwordLabel1.requestFocus();
+            passwordLabel1.positionCaret(passwordLabel1.getLength());
         }
     }
 
@@ -115,6 +124,16 @@ public class SignUpController implements Initializable {
         // Event handler for choice selection
         GenderChoise.setOnAction(event -> {
             String selectedOption =GenderChoise.getValue();
+
+        });
+        questionChoise.setItems(FXCollections.observableArrayList("What is your primary school name?", "What is your mother's name", "Who is your best teacher"));
+
+        // Set a default choice
+        questionChoise.setValue("");
+
+        // Event handler for choice selection
+        questionChoise.setOnAction(event -> {
+            String selectedOption =questionChoise.getValue();
 
         });
 
@@ -150,16 +169,17 @@ public class SignUpController implements Initializable {
         String firstname = FirtsName.getText();
         String lastname = LastName.getText();
         String email = Email.getText();
-        String roles = RoleChoise.getValue();
         String password = passwordLabel1.getText();
-
+        String question = questionChoise.getValue();
+        String answer = AnswerLabel.getText();
+        String roles = RoleChoise.getValue();
         String gender = GenderChoise.getValue();
         int number = Integer.parseInt(PhoneNumber.getText());
 
         GURDService u = new GURDService();
-        User user = new User(firstname,lastname,number,email,gender,password,roles,addUserImgPath);
+        User user = new User(firstname,lastname,number,email,gender,password,roles,addUserImgPath,answer,question);
         u.add(user);
-        FXMLLoader fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/gui/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

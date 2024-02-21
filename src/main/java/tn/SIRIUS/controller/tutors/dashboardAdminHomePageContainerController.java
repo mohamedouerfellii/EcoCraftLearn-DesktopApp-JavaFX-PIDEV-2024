@@ -1,17 +1,17 @@
 package tn.SIRIUS.controller.tutors;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class dashboardTutorHomePageContentController implements Initializable {
+public class dashboardAdminHomePageContainerController implements Initializable {
     @FXML
     private VBox feedbackContentContainer;
     @FXML
     private PieChart genderRatio;
+    @FXML
+    private Label nbrStudents;
     @FXML
     private Label genderRatioFDesc;
     @FXML
@@ -46,38 +48,45 @@ public class dashboardTutorHomePageContentController implements Initializable {
     private Label top3CourseTitle;
     @FXML
     private Label top3NbrRegistred;
+    @FXML
+            private TextField searchInput;
 
     List<User> users = new ArrayList<>();
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        //Feedback
-        showAllUsers();
-        //Gender Ratio
-       /* ObservableList<PieChart.Data> genderRatioDate = FXCollections.observableArrayList(new PieChart.Data("Male",25),new PieChart.Data("Female",15));
-        genderRatio.setData(genderRatioDate);
-        genderRatioMDesc.setText("( 25 Male Students )");
-        genderRatioFDesc.setText("( 15 Female Students )");
-        //Top 3 Courses
-
-        top1CourseTitle.setText("Japanese Furoshiki");
-        top1NbrRegistred.setText("107 Registered students");
-
-        top2CourseTitle.setText("Reversible Tote");
-        top2NbrRegistred.setText("88 Registered students");
-
-        top3CourseTitle.setText("Newspaper weave baskets");
-        top3NbrRegistred.setText("57 Registered students");*/
+        UserService srv=new UserService();
+        int nb=srv.getNbrStudent("student");
+        nbrStudents.setText(String.valueOf(nb));
+        //showUsers
+            showAllUsers();
+        //handleSearch();
     }
 
+    @FXML
+    private void handleSearch() {
+        String searchTerm = searchInput.getText().trim();
+        feedbackContentContainer.getChildren().clear();
+        showAllUsers(searchTerm);
+    }
 
+    public void showAllUsers(String searchTerm) {
+        UserService userService = new UserService();
+        users = userService.searchUsers(searchTerm);
+        displayUsers();
+    }
 
-    public void showAllUsers(){
-        GURDService use=new GURDService();
+    public void showAllUsers() {
+        GURDService use = new GURDService();
         users = use.getAll();
+        displayUsers();
+    }
+
+    private void displayUsers() {
         try {
-            for(User u : users) {
+            feedbackContentContainer.getChildren().clear();
+            for (User u : users) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/tutors/usersDashboardItem.fxml"));
                 Parent root = fxmlLoader.load();

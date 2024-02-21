@@ -8,6 +8,8 @@ public class User {
     private String Email;
     private String gender;
     private String Password;
+    private String question;
+    private String answer;
     private String roles;
     private String Image;
     private boolean isActive;
@@ -29,7 +31,7 @@ public class User {
         this.isActive=isActive;
         this.nbrPtsCollects=nbrPtsCollects;
     }
-    public User(String firstName, String lastName, int number, String Email, String gender, String Password, String roles,String image) {
+    public User(String firstName, String lastName, int number, String Email, String gender, String Password, String roles,String image,String answer,String question) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +41,8 @@ public class User {
         this.Password = Password;
         this.roles= roles;
         this.Image=image;
+        this.answer=answer;
+        this.question=question;
 
     }
     public User(int id,String firstName, String lastName, int number, String Email, String gender, String Password,String image) {
@@ -118,6 +122,21 @@ public class User {
         this.roles = roles;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
     public String getImage() {
         return Image;
@@ -157,4 +176,5 @@ public class User {
                 ", Image='" + Image + '\'' +
                 '}';
     }
+
 }

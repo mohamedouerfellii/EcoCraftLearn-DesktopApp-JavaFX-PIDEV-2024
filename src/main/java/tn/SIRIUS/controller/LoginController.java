@@ -1,5 +1,7 @@
 package tn.SIRIUS.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -8,7 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.w3c.dom.events.MouseEvent;
 import tn.SIRIUS.controller.tutors.OperationAdminController;
 import tn.SIRIUS.services.UserService;
 import tn.SIRIUS.utils.MyDB;
@@ -28,7 +33,12 @@ public class LoginController implements Initializable {
     private Stage stage;
     @FXML
     private Label CheckDetail;
-
+    @FXML
+    private AnchorPane successOperationContainer;
+    @FXML
+    private AnchorPane confirmationAnchor;
+    @FXML
+    private AnchorPane forgetPasswordAnchor;
     @FXML
     private CheckBox CheckPassword;
 
@@ -43,39 +53,45 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordLabel;
+    @FXML
+    private Label questionText;
 
     @FXML
     private TextField userNameLabel;
 
     @FXML
-    void handelVisibility(ActionEvent event) {
+   public void handelVisibility(ActionEvent event) {
         if(CheckPassword.isSelected())
         {
             Show.setText(passwordLabel.getText());
             Show.setVisible(true);
             passwordLabel.setVisible(false);
+            Show.requestFocus();
+            Show.positionCaret(Show.getLength());
             return;
         }
         else{
             passwordLabel.setText(Show.getText());
             passwordLabel.setVisible(true);
             Show.setVisible(false);
+            passwordLabel.requestFocus();
+            passwordLabel.positionCaret(passwordLabel.getLength());
         }
     }
-
     @FXML
     public void onLoginButtonClick(ActionEvent event) {
         UserService u = new UserService();
         String name = userNameLabel.getText();
         String password = passwordLabel.getText();
+        String passwordSeen = Show.getText();
         String role = u.getUserRole(name);
 
-        if (name.isBlank() || password.isBlank()) {
+        if ((name.isBlank() || password.isBlank()) && passwordSeen.isBlank()) {
             CheckDetail.setText("Username or Password fields are blank!");
         } else {
             System.out.println("Role retrieved from the database: " + role);
 
-            if (u.isPasswordMatch(name, password)) {
+            if (u.isPasswordMatch(name, password ,passwordSeen)) {
                 if (role != null) {
                     try {
                         FXMLLoader fxmlLoader;
@@ -87,13 +103,13 @@ public class LoginController implements Initializable {
                             stage.setScene(scene);
                             stage.show();
                         } else if ("admin".equals(role)) {
-                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
+                            fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
                             Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
                             stage.show();
                         } else if ("teacher".equals(role)) {
-                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/students/homePage.fxml"));
+                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/tutors/dashboardTeacherHomePageContent.fxml"));
                             Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
@@ -118,8 +134,24 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    public void forgetPassword(ActionEvent event){
+        UserService u = new UserService();
+        forgetPasswordAnchor.setVisible(false);
+        successOperationContainer.setVisible(false);
+        confirmationAnchor.setVisible(true);
+        if(u.getPassword(userNameLabel.getText()))
+        {
+            questionText.setText(userNameLabel.getText());
+        }
+        else
+            questionText.setText("you don't have account");
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+      forgetPasswordAnchor.setVisible(false);
+      confirmationAnchor.setVisible(false);
+        confirmationAnchor.setVisible(false);
     }
 }

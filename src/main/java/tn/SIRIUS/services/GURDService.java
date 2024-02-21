@@ -15,7 +15,7 @@ public class GURDService implements ICRUD<User> {
     }
     @Override
     public int add(User user){
-        String query = "INSERT INTO users (`firstName`, `lastName`, `email`, `password`, `numTel`, `role`, `gender`, `image`) VALUES (?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO users (`firstName`, `lastName`, `email`, `password`, `numTel`, `role`, `gender`, `image`,`question`,`answer`) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, user.getFirstName());
@@ -26,6 +26,10 @@ public class GURDService implements ICRUD<User> {
             statement.setString(6, user.getRoles());
             statement.setString(7, user.getGender());
             statement.setString(8, user.getImage());
+            statement.setString(9, user.getQuestion());
+            statement.setString(10, user.getAnswer());
+
+
 
 
             if(statement.executeUpdate() == 1){

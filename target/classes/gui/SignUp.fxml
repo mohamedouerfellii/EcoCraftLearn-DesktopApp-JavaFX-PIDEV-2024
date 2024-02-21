@@ -40,17 +40,12 @@
          <children>
             <Label layoutX="230.0" layoutY="-7.0" prefHeight="74.0" prefWidth="192.0" styleClass="sign-in-text" stylesheets="@../style/text.css" text="Sign up" />
             <Label layoutX="272.0" layoutY="59.0" prefHeight="35.0" prefWidth="103.0" styleClass="welcome-text" stylesheets="@../style/text.css" text="Join Us !" />
-            <Text fill="#d5ffdc" layoutX="57.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="last Name" wrappingWidth="123.73663330078125">
+            <Text fill="#d5ffdc" layoutX="36.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="First Name" wrappingWidth="123.73663330078125">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#d5ffdc" layoutX="57.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Password" wrappingWidth="130.13671875">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextField fx:id="LastName" layoutX="57.0" layoutY="219.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your last name" styleClass="label-prompt" stylesheets="@../style/text.css">
+            <TextField fx:id="FirtsName" layoutX="36.0" layoutY="117.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your first name" styleClass="label-prompt" stylesheets="@../style/text.css">
                <effect>
                   <DropShadow offsetY="2.0">
                      <color>
@@ -59,8 +54,12 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <Button fx:id="SignUpButton" layoutX="385.0" layoutY="495.0" mnemonicParsing="false" onAction="#addNewUser" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Sign Up" />
-            <PasswordField fx:id="confirmPassword" layoutX="57.0" layoutY="480.0" prefHeight="43.0" prefWidth="246.0" promptText="Confirm your password" styleClass="label-prompt" stylesheets="@../style/text.css">
+            <Text fill="#d5ffdc" layoutX="35.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="last Name" wrappingWidth="123.73663330078125">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="LastName" layoutX="35.0" layoutY="201.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your last name" styleClass="label-prompt" stylesheets="@../style/text.css">
                <effect>
                   <DropShadow offsetY="2.0">
                      <color>
@@ -68,13 +67,32 @@
                      </color>
                   </DropShadow>
                </effect>
-            </PasswordField>
-            <TextField fx:id="Show1" layoutX="57.0" layoutY="394.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css" visible="false">
+            </TextField>
+            <Text fill="#d5ffdc" layoutX="35.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Email" wrappingWidth="58.13671875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="Email" layoutX="34.0" layoutY="288.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your Email" styleClass="label-prompt" stylesheets="@../style/text.css">
+               <effect>
+                  <DropShadow offsetY="2.0">
+                     <color>
+                        <Color red="0.23137255012989044" green="0.23137255012989044" blue="0.23137255012989044" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Text fill="#d5ffdc" layoutX="35.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Password" wrappingWidth="130.13671875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="Show1" layoutX="36.0" layoutY="376.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css" visible="false">
                <effect>
                   <DropShadow offsetY="2.0" />
                </effect>
             </TextField>
-            <PasswordField fx:id="passwordLabel1" layoutX="57.0" layoutY="394.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css">
+            <PasswordField fx:id="passwordLabel1" layoutX="35.0" layoutY="376.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your password" styleClass="label-prompt" stylesheets="@../style/text.css">
                <effect>
                   <DropShadow offsetY="2.0">
                      <color>
@@ -83,23 +101,27 @@
                   </DropShadow>
                </effect>
             </PasswordField>
-            <CheckBox fx:id="CheckPassword1" layoutX="272.0" layoutY="400.0" mnemonicParsing="false" onAction="#handelVisibility1" prefHeight="30.0" prefWidth="17.0" />
-            <Label fx:id="CheckDetails1" layoutX="157.0" layoutY="99.0" prefHeight="26.0" prefWidth="281.0" textFill="#1200b7">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Text fill="#d5ffdc" layoutX="56.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Confirm Password" wrappingWidth="225.3367156982422">
+            <CheckBox fx:id="CheckPassword1" layoutX="253.0" layoutY="384.0" mnemonicParsing="false" onAction="#handelVisibility1" prefHeight="30.0" prefWidth="17.0" />
+            <Text fill="#d5ffdc" layoutX="34.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Confirm Password" wrappingWidth="225.3367156982422">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#d5ffdc" layoutX="57.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Email" wrappingWidth="58.13671875">
+            <PasswordField fx:id="confirmPassword" layoutX="35.0" layoutY="462.0" prefHeight="43.0" prefWidth="246.0" promptText="Confirm your password" styleClass="label-prompt" stylesheets="@../style/text.css">
+               <effect>
+                  <DropShadow offsetY="2.0">
+                     <color>
+                        <Color red="0.23137255012989044" green="0.23137255012989044" blue="0.23137255012989044" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </PasswordField>
+            <Text fill="#d5ffdc" layoutX="332.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Phone Number" wrappingWidth="150.39999999999986">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField fx:id="Email" layoutX="56.0" layoutY="306.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your Email" styleClass="label-prompt" stylesheets="@../style/text.css">
+            <TextField fx:id="PhoneNumber" layoutX="331.0" layoutY="117.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your phone number" styleClass="label-prompt" stylesheets="@../style/text.css">
                <effect>
                   <DropShadow offsetY="2.0">
                      <color>
@@ -108,24 +130,30 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <Button fx:id="Cancel" layoutX="385.0" layoutY="552.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Cancel" />
-            <ChoiceBox fx:id="RoleChoise" layoutX="338.0" layoutY="130.0" prefHeight="41.0" prefWidth="150.0" styleClass="box" stylesheets="@../style/button.css" />
-            <Text fill="#d5ffdc" layoutX="336.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="You are" wrappingWidth="93.336669921875">
+            <Text fill="#d5ffdc" layoutX="331.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="You are a" wrappingWidth="93.336669921875">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#d5ffdc" layoutX="336.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Photo" wrappingWidth="58.136718750000114">
+            <ChoiceBox fx:id="RoleChoise" layoutX="333.0" layoutY="198.0" prefHeight="41.0" prefWidth="100.0" styleClass="box" stylesheets="@../style/button.css" />
+            <Text fill="#d5ffdc" layoutX="476.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Gender" wrappingWidth="93.336669921875">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#d5ffdc" layoutX="337.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Phone Number" wrappingWidth="150.39999999999986">
+            <ChoiceBox fx:id="GenderChoise" layoutX="478.0" layoutY="198.0" prefHeight="41.0" prefWidth="100.0" styleClass="box" stylesheets="@../style/button.css" />
+            <Text fill="#d5ffdc" layoutX="329.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Question" wrappingWidth="93.336669921875">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField fx:id="PhoneNumber" layoutX="336.0" layoutY="306.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your phone number" styleClass="label-prompt" stylesheets="@../style/text.css">
+            <ChoiceBox fx:id="questionChoise" layoutX="331.0" layoutY="276.0" prefHeight="41.0" prefWidth="246.0" styleClass="box" stylesheets="@../style/button.css" />
+            <Text fill="#d5ffdc" layoutX="331.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Answer" wrappingWidth="123.73663330078125">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="AnswerLabel" layoutX="331.0" layoutY="361.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your Answer" styleClass="label-prompt" stylesheets="@../style/text.css">
                <effect>
                   <DropShadow offsetY="2.0">
                      <color>
@@ -134,33 +162,15 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <ChoiceBox fx:id="GenderChoise" layoutX="340.0" layoutY="392.0" prefHeight="41.0" prefWidth="150.0" styleClass="box" stylesheets="@../style/button.css" />
-            <Text fill="#d5ffdc" layoutX="338.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="You are" wrappingWidth="93.336669921875">
+            <Text fill="#d5ffdc" layoutX="331.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Photo" wrappingWidth="58.136718750000114">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#d5ffdc" layoutX="58.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="First Name" wrappingWidth="123.73663330078125">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextField fx:id="FirtsName" layoutX="58.0" layoutY="135.0" prefHeight="43.0" prefWidth="246.0" promptText="Enter your first name" styleClass="label-prompt" stylesheets="@../style/text.css">
-               <effect>
-                  <DropShadow offsetY="2.0">
-                     <color>
-                        <Color red="0.23137255012989044" green="0.23137255012989044" blue="0.23137255012989044" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </TextField>
-            <ImageView fx:id="userImageView" fitHeight="74.0" fitWidth="87.0" layoutX="401.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="chooseImage" layoutX="350.0" layoutY="218.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="29.0" prefWidth="30.0" styleClass="photo-user" stylesheets="@../style/button.css" />
-            <AnchorPane fx:id="successOperationContainer" layoutX="243.0" layoutY="70.0" prefHeight="35.0" prefWidth="130.0" visible="false">
-               <children>
-                  <Label fx:id="done" layoutX="41.0" layoutY="2.0" styleClass="success-msg" stylesheets="@../style/coursesMainPage.css" text="Done !" />
-               </children>
-            </AnchorPane>
+            <Button fx:id="chooseImage" layoutX="345.0" layoutY="444.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="29.0" prefWidth="30.0" styleClass="photo-user" stylesheets="@../style/button.css" />
+            <ImageView fx:id="userImageView" fitHeight="74.0" fitWidth="87.0" layoutX="396.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="SignUpButton" layoutX="385.0" layoutY="498.0" mnemonicParsing="false" onAction="#addNewUser" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Sign Up" />
+            <Button fx:id="Cancel" layoutX="385.0" layoutY="555.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Cancel" />
          </children>
       </AnchorPane>
    </children>

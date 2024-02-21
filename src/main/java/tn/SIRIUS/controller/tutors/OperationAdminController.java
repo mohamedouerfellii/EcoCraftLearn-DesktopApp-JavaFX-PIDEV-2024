@@ -185,15 +185,16 @@ public class OperationAdminController implements Initializable {
             GURDService courseService = new GURDService();
             if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
                 passwordConfirmDelete.clear();
+                doneEditCourse.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneEditCourse.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
                 FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminHomePageController.class.getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
                 stage.setScene(scene);
                 stage.show();
 
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneEditCourse.setVisible(false)));
-                timeline.setCycleCount(1);
-                timeline.play();
             }
 
         }
@@ -246,6 +247,14 @@ String Password=editpassworduser.getText();
             Image image = new Image(selectedFile.toURI().toString());
             editimguser.setImage(image);
         }
+    }
+    @FXML
+    private void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminHomePageController.class.getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

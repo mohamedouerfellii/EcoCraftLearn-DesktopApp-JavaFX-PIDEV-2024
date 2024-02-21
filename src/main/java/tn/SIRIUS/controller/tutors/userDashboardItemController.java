@@ -1,5 +1,7 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -14,6 +17,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.UserService;
@@ -30,7 +34,8 @@ public class userDashboardItemController implements Initializable {
 
     @FXML
     private VBox feedbackItemContainer;
-
+@FXML
+private AnchorPane doneAction;
     @FXML
     private Label fullNameLabel;
     @FXML
@@ -67,24 +72,38 @@ public class userDashboardItemController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
         stage.setScene(scene);
         stage.show();
+
     }
     @FXML
     public void banUser(int id,boolean b)
     {
 
-        UserService usr=new UserService();
-        if(usr.updateUserIsActive(id,b)==1)
-        {
-            System.out.println("done");
+        UserService usr = new UserService();
+        boolean currentUserState = usr.isUserActive(id);
+
+        if (currentUserState) {
+            // User is currently active, so ban the user
+            usr.updateUserIsActive(id, false);
+            doneAction.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneAction.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+            System.out.println("User banned");
+        } else {
+            // User is currently banned, so unban the user
+            usr.updateUserIsActive(id, true);
+            doneAction.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneAction.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+            System.out.println("User unbanned");
         }
-        else
-            System.out.println("error");
 
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        doneAction.setVisible(false);
     }
 }

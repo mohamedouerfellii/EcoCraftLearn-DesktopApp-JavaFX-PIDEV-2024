@@ -14,11 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +45,8 @@ public class DashboardAdminHomePageController implements Initializable {
     @FXML
     private Button eventsBtn;
     @FXML
+    private Label nbrStudents;
+    @FXML
     private ImageView eventsBtnImg;
     @FXML
     private Button forumBtn;
@@ -63,10 +67,9 @@ public class DashboardAdminHomePageController implements Initializable {
     @FXML
     private Pane mainContentContainer;
     private User user;
+
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        //Profile Image
-
 
         //Msg and Notifications
         Label nbrNotif = new Label();
@@ -175,5 +178,9 @@ public class DashboardAdminHomePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+
+
+
 
 }
