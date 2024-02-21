@@ -5,16 +5,27 @@ public class Course {
     private String image;
     private String title;
     private String description;
-    private int tutor;
+    private User tutor;
     private String duration;
     private float price;
     private int nbrSection;
     private String postedDate;
     private int nbrRegistred;
-    public Course(){
-        id = 0;
+    private float rate;
+
+    public int getNbrPersonRated() {
+        return nbrPersonRated;
     }
-    public Course(int id,String image,String title,String description,int tutor,String duration,float price,int nbrSection,String postedDate,int nbrRegistred){
+
+    public void setNbrPersonRated(int nbrPersonRated) {
+        this.nbrPersonRated = nbrPersonRated;
+    }
+
+    private int nbrPersonRated;
+    public Course(){
+        this.id = 0;
+    }
+    public Course(int id,String image,String title,String description,User tutor,String duration,float price,int nbrSection,String postedDate,int nbrRegistred,float rate,int nbrPersonRated){
         this.id = id;
         this.image = image;
         this.title = title;
@@ -25,6 +36,8 @@ public class Course {
         this.nbrSection = nbrSection;
         this.postedDate = postedDate;
         this.nbrRegistred = nbrRegistred;
+        this.rate = rate;
+        this.nbrPersonRated = nbrPersonRated;
     }
 
     public int getId() {
@@ -59,11 +72,11 @@ public class Course {
         this.description = description;
     }
 
-    public int getTutor() {
+    public User getTutor() {
         return tutor;
     }
 
-    public void setTutor(int tutor) {
+    public void setTutor(User tutor) {
         this.tutor = tutor;
     }
 
@@ -79,6 +92,12 @@ public class Course {
         return price;
     }
 
+    public float getRate() {
+        return rate;
+    }
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
     public void setPrice(float price) {
         this.price = price;
     }
@@ -115,5 +134,13 @@ public class Course {
                 ", postedDate='" + postedDate + '\'' +
                 ", nbrRegistred=" + nbrRegistred +
                 '}';
+    }
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        if(obj == this) return true;
+        if(obj instanceof Course c)
+            return c.getId() == this.getId();
+        return false;
     }
 }

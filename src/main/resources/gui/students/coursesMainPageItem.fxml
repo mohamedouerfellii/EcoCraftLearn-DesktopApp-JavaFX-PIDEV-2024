@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="250.0" styleClass="item-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesMainPageItemController">
+<AnchorPane fx:id="cardContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="500.0" styleClass="item-main-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesMainPageItemController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="250.0" spacing="5.0" styleClass="course-item-container" stylesheets="@../../style/coursesStudentMainPage.css">
+      <AnchorPane fx:id="cardContainer1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="500.0" styleClass="item-container" stylesheets="@../../style/coursesStudentMainPage.css">
          <children>
-            <Rectangle fx:id="courseImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="115.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-img-item" width="235.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </Rectangle>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="66.0" prefWidth="214.0">
+            <AnchorPane prefHeight="120.0" prefWidth="200.0" styleClass="right-container" stylesheets="@../../style/coursesStudentMainPage.css">
                <children>
-                  <Circle fx:id="tutorImgContainer" fill="DODGERBLUE" layoutX="26.0" layoutY="30.0" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Label fx:id="tutorNameLabel" layoutX="56.0" layoutY="17.0" styleClass="tutor-course-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Ouerfelli Mohamed" />
+                  <Text fx:id="titleCourseText" layoutX="19.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="course-title-item" text="JavaScript course" wrappingWidth="144.8" />
+                  <Label layoutX="18.0" layoutY="11.0" prefHeight="27.0" prefWidth="64.0" styleClass="second-welcome-msg" stylesheets="@../../style/style.css" text="Course">
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="17.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6;">
+                     <image>
+                        <Image url="@../../icons/dark/group-fill-black.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="nbrRegistredText" layoutX="42.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nbr-registred-text" text="128 Registred" wrappingWidth="109.59995727539064" />
                </children>
             </AnchorPane>
-            <VBox prefHeight="65.0" prefWidth="298.0">
+            <Label layoutX="214.0" layoutY="11.0" prefHeight="27.0" prefWidth="64.0" styleClass="second-welcome-msg" stylesheets="@../../style/style.css" text="Tutor">
+               <font>
+                  <Font name="Jost Regular" size="12.0" />
+               </font>
+            </Label>
+            <Circle fx:id="tutorImgContainer" fill="DODGERBLUE" layoutX="229.0" layoutY="53.0" radius="15.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Text fx:id="tutorNameText" layoutX="256.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="course-title-item" text="Ouerfelli Mohamed" wrappingWidth="144.8" />
+            <Button fx:id="mostProgressedCourseBtn" layoutX="410.0" layoutY="83.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Enroll Now" />
+            <AnchorPane layoutX="400.0" layoutY="1.0" prefHeight="27.0" prefWidth="100.0" styleClass="view-details" stylesheets="@../../style/coursesStudentMainPage.css">
                <children>
-                  <Text fx:id="titleCourseText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="course-title-item" text="Course One One One One one one one one" wrappingWidth="227.73671913146973">
-                     <VBox.margin>
-                        <Insets left="15.0" />
-                     </VBox.margin>
-                  </Text>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="298.0" spacing="10.0">
-               <children>
-                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <Label layoutX="11.0" prefHeight="27.0" prefWidth="74.0" styleClass="view-details-label" stylesheets="@../../style/coursesStudentMainPage.css" text="View Details">
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="76.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../icons/dark/group-fill.png" />
+                        <Image url="@../../icons/dark/arrow-right-s-line.png" />
                      </image>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
                   </ImageView>
-                  <Label fx:id="nbrRegistredLabel" prefHeight="36.0" prefWidth="202.0" styleClass="registred-nbr-course-label" stylesheets="@../../style/coursesStudentMainPage.css" text="195 Registred" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="298.0">
-               <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="130.0">
-                     <children>
-                        <Rectangle fx:id="starBar" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="20.0" stroke="TRANSPARENT" strokeType="INSIDE" width="111.5" />
-                        <ImageView fitHeight="20.0" fitWidth="130.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/star.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </AnchorPane>
-               </children>
-            </HBox>
+            </AnchorPane>
+            <Rectangle fx:id="starBarRate" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="18.0" layoutX="214.0" layoutY="93.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0" />
+            <ImageView fitHeight="40.0" fitWidth="100.0" layoutX="214.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/star.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nbrPersonRatedText" layoutX="318.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nbr-person-rated-text" text="( 2 )" wrappingWidth="82.39999999999986" />
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package tn.SIRIUS.services;
 
 import tn.SIRIUS.entities.Course;
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
 
@@ -42,12 +43,16 @@ public class CourseService implements ICRUD<Course> {
         try(Statement stm = con.createStatement()){
             ResultSet rs = stm.executeQuery(query);
             while (rs.next()){
+                UserService userService = new UserService();
+                User tutor = userService.getCourseTutor(rs.getInt("tutor"));
                 courseList.add(new Course(
                         rs.getInt("idCourse"),rs.getString("image"),
                         rs.getString("title"),rs.getString("description"),
-                        rs.getInt("tutor"),rs.getString("duration"),
+                        tutor,rs.getString("duration"),
                         rs.getFloat("price"),rs.getInt("nbrSection"),
-                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred")
+                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred"),
+                        rs.getFloat("rate"),
+                        rs.getInt("nbrPersonRated")
                 ));
             }
         }catch (SQLException ex){
@@ -100,16 +105,20 @@ public class CourseService implements ICRUD<Course> {
             stm.setInt(1,idCourse);
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
+                UserService userService = new UserService();
+                User tutor = userService.getCourseTutor(rs.getInt("tutor"));
                 course.setId(rs.getInt("idCourse"));
                 course.setImage(rs.getString("image"));
                 course.setTitle(rs.getString("title"));
                 course.setDescription(rs.getString("description"));
-                course.setTutor(rs.getInt("tutor"));
                 course.setDuration(rs.getString("duration"));
                 course.setPrice(rs.getFloat("price"));
                 course.setNbrSection(rs.getInt("nbrSection"));
                 course.setPostedDate(rs.getDate("postedDate").toString());
                 course.setNbrRegistred(rs.getInt("nbrRegistred"));
+                course.setRate(rs.getFloat("rate"));
+                course.setNbrPersonRated(rs.getInt("nbrPersonRated"));
+                course.setTutor(tutor);
             }
             stm.close();
         }catch (SQLException ex){
@@ -132,5 +141,56 @@ public class CourseService implements ICRUD<Course> {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+    public List<Course> getCoursesNotRegistered(int idUser){
+        List<Course> courseRegistered = getCourseRegistered(idUser);
+        String query = "SELECT * FROM COURSES";
+        List<Course> courseList = new ArrayList<>();
+        try(Statement stm = con.createStatement()){
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()){
+                UserService userService = new UserService();
+                User tutor = userService.getCourseTutor(rs.getInt("tutor"));
+                courseList.add(new Course(
+                        rs.getInt("idCourse"),rs.getString("image"),
+                        rs.getString("title"),rs.getString("description"),
+                        tutor,rs.getString("duration"),
+                        rs.getFloat("price"),rs.getInt("nbrSection"),
+                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred"),
+                        rs.getFloat("rate"),
+                        rs.getInt("nbrPersonRated")
+                ));
+            }
+            if (!courseList.isEmpty() || !courseRegistered.isEmpty())
+                courseList.removeAll(courseRegistered);
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return courseList;
+    }
+    public List<Course> getCourseRegistered(int idUser){
+        List<Course> courseRegistered = new ArrayList<>();
+        String query = "SELECT * FROM COURSES C JOIN COURSEPARTICIPATIONS CP ON C.idCourse = CP.course WHERE CP.participant = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idUser);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                UserService userService = new UserService();
+                User tutor = userService.getCourseTutor(rs.getInt("tutor"));
+                courseRegistered.add(new Course(
+                        rs.getInt("idCourse"),rs.getString("image"),
+                        rs.getString("title"),rs.getString("description"),
+                        tutor,rs.getString("duration"),
+                        rs.getFloat("price"),rs.getInt("nbrSection"),
+                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred"),
+                        rs.getFloat("rate"),
+                        rs.getInt("nbrPersonRated")
+                ));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return courseRegistered;
     }
 }

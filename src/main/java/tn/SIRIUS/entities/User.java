@@ -28,6 +28,13 @@ public class User {
         this.isActive=isActive;
         this.nbrPtsCollects=nbrPtsCollects;
     }
+    public User(int id,String firstName,String lastName,String email,String image){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.Email = email;
+        this.Image = image;
+    }
     public int getId() {
         return id;
     }

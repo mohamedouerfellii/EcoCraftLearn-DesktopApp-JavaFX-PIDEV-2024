@@ -1,44 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="mainPageContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-main-page-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesMainPageController">
    <children>
-      <HBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
-               <image>
-                  <Image url="@../../icons/dark/search-2-line.png" />
-               </image>
-            </ImageView>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
-               <HBox.margin>
-                  <Insets left="-390.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-         <padding>
-            <Insets left="-40.0" />
-         </padding>
-      </HBox>
-      <ScrollPane hbarPolicy="NEVER" layoutX="25.0" layoutY="72.0" prefHeight="546.0" prefWidth="1150.0" styleClass="course-scroll-pane-item" stylesheets="@../../style/coursesStudentMainPage.css">
+      <ScrollPane hbarPolicy="NEVER" layoutX="57.0" layoutY="72.0" prefHeight="545.0" prefWidth="1060.0" styleClass="course-scroll-pane-item" stylesheets="@../../style/coursesStudentMainPage.css">
          <content>
-            <GridPane fx:id="coursesGridPane" alignment="TOP_CENTER" hgap="10.0" prefHeight="544.0" prefWidth="1150.0" styleClass="course-grid-item" stylesheets="@../../style/coursesStudentMainPage.css" vgap="10.0">
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
+            <VBox prefHeight="544.0" prefWidth="1061.0" styleClass="grid-container" stylesheets="@../../style/coursesStudentMainPage.css">
+               <children>
+                  <GridPane fx:id="coursesGridPane" alignment="TOP_CENTER" hgap="15.0" maxWidth="-Infinity" prefHeight="78.0" prefWidth="1098.0" styleClass="course-grid-item" stylesheets="@../../style/coursesStudentMainPage.css" vgap="15.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </VBox>
          </content>
       </ScrollPane>
+      <HBox alignment="CENTER" layoutX="57.0" layoutY="19.0" prefHeight="46.0" prefWidth="460.0" spacing="5.0">
+         <children>
+            <Button fx:id="allCoursesBtn" mnemonicParsing="false" onMouseClicked="#allCoursesBtnClicked" prefHeight="34.0" prefWidth="122.0" styleClass="all-courses-btn" stylesheets="@../../style/style.css" text="All Courses" />
+            <Button fx:id="newestCoursesBtn" mnemonicParsing="false" onMouseClicked="#newestCoursesBtnClicked" prefHeight="34.0" prefWidth="86.0" styleClass="newest-courses-btn" stylesheets="@../../style/style.css" text="Newest" />
+            <Button fx:id="topRatedCoursesBtn" mnemonicParsing="false" onMouseClicked="#topRatedCoursesBtnClicked" prefHeight="34.0" prefWidth="110.0" styleClass="top-rated-courses-btn" stylesheets="@../../style/style.css" text="Top Rated" />
+            <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" onMouseClicked="#mostPopularCoursesBtnClicked" styleClass="most-popular-courses-btn" stylesheets="@../../style/style.css" text="Most Popular" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -28,17 +28,17 @@ public class UserService {
         return false;
     }
     public User getCourseTutor(int idTutor){
-        String qry = "SELECT firstName,lastName,image FROM USERS WHERE idUser = ?";
+        String qry = "SELECT firstName,lastName,image,email FROM USERS WHERE idUser = ?";
         User tutor = new User();
         try{
             PreparedStatement stm = con.prepareStatement(qry);
             stm.setInt(1,idTutor);
             ResultSet rs = stm.executeQuery();
             if (rs.next()){
-                tutor.setId(idTutor);
-                tutor.setFirstName(rs.getString(1));
-                tutor.setLastName(rs.getString(2));
-                tutor.setImage(rs.getString(3));
+                tutor = new User(
+                        idTutor,rs.getString(1),rs.getString(2),
+                        rs.getString(4),rs.getString(3)
+                );
                 return tutor;
             }
             stm.close();

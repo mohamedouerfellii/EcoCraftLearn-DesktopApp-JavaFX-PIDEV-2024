@@ -1,5 +1,5 @@
 .home-page-container{
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 .leftMenuContainer{
     -fx-background-color: #1D6611;
@@ -94,9 +94,10 @@
     -fx-opacity: 0.6;
     -fx-background-color: transparent;
     -fx-text-fill: #000000;
+    -fx-cursor: hand;
 }
 .courses-scroll-pane{
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 .courses-scroll-pane .scroll-bar:vertical{
     -fx-background-color: transparent;
@@ -114,7 +115,7 @@
     -fx-background-color: transparent;
 }
 .courses-vbox-home-page{
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 .courses-home-page-item-container{
     -fx-background-color: #D5FFDC;

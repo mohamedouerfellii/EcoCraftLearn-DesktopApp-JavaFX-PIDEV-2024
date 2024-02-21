@@ -1,6 +1,9 @@
 package tn.SIRIUS.controller.students;
 
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -9,8 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -18,13 +19,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
-import javafx.scene.control.Label;
 import tn.SIRIUS.services.CourseService;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomePageController implements Initializable {
     @FXML
@@ -69,10 +70,14 @@ public class HomePageController implements Initializable {
     private VBox coursesVboxHomePage;
     @FXML
     private Pane mainPageContainer;
+    @FXML
+    private TextField searchInput;
+    private CoursesMainPageController coursesMainPageController;
     private String styleMenuBtnClicked;
     private String styleMenuBtnNormal;
     private List<Course> courses;
     private CourseService courseService;
+    private String currentPage;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Profile Image
@@ -118,6 +123,7 @@ public class HomePageController implements Initializable {
         // Services
         courseService = new CourseService();
         // Init Page
+        currentPage = "home";
         showAllCourses();
     }
     // Menu
@@ -149,6 +155,8 @@ public class HomePageController implements Initializable {
             Stage stage = (Stage) mainPageContainer.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            currentPage = "home";
+            coursesMainPageController = null;
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
@@ -177,17 +185,18 @@ public class HomePageController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesMainPage.fxml"));
             Parent root = fxmlLoader.load();
-            CoursesMainPageController controller = fxmlLoader.getController();
-            controller.getCourses(courses);
+            coursesMainPageController = fxmlLoader.getController();
+            coursesMainPageController.getCourses(courses);
             mainPageContainer.getChildren().clear();
             mainPageContainer.getChildren().add(root);
+            currentPage = "courses";
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
     }
     // Home Page Start
     public void showAllCourses(){
-        courses = courseService.getAll();
+        courses = courseService.getCoursesNotRegistered(2);
         for (Course course : courses){
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -200,5 +209,18 @@ public class HomePageController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+    @FXML
+    public void searchForSomething(KeyEvent search){
+        TextInputControl textInputControl = (TextInputControl) search.getSource();
+        String searchInput = textInputControl.getText();
+        if (!searchInput.isEmpty()){
+            if(currentPage.equals("courses")){
+                coursesMainPageController.getCourses(courses.stream().filter(
+                        c -> ( c.getTitle().contains(searchInput) || c.getTutor().getFirstName().contains(searchInput) || c.getTutor().getLastName().contains(searchInput))
+                ).collect(Collectors.toList()));
+            }
+        } else
+            coursesMainPageController.getCourses(courses);
     }
 }

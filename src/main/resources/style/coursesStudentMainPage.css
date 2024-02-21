@@ -1,24 +1,35 @@
 .courses-main-page-container{
     -fx-background-color: transparent;
 }
+.item-main-container{
+    -fx-background-color: #D5FFDC;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 2, 2);
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+    -fx-cursor: hand;
+}
+.item-main-container:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 2, 2);
+}
 .item-container{
     -fx-background-color: transparent;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 2, 2);
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
 }
 .course-item-container{
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
     -fx-background-radius: 30px;
     -fx-border-radius: 30px;
     -fx-border-color: #7DC145;
     -fx-border-width: 1px;
-    -fx-cursor: hand;
 }
 .course-item-container:hover{
     -fx-border-color: #1D6611;
 }
-.course-img-item{
-    -fx-arc-width: 30px;
-    -fx-arc-height: 30px;
+.right-container{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 20 0 0 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 2, 2);
 }
 .tutor-course-label{
     -fx-font-family: "Jost Light";
@@ -26,8 +37,8 @@
     -fx-fill: #000000;
 }
 .course-title-item{
-    -fx-font-family: "Jost SemiBold";
-    -fx-font-size: 18;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
     -fx-text-fill: #000000;
 }
 .registred-nbr-course-label{
@@ -36,10 +47,10 @@
     -fx-fill: #000000;
 }
 .course-grid-item{
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 .course-scroll-pane-item{
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 .course-scroll-pane-item .scroll-bar:vertical{
     -fx-background-color: transparent;
@@ -47,7 +58,7 @@
     -fx-padding: 2px;
 }
 .course-scroll-pane-item .scroll-bar:vertical .thumb {
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
 }
 .course-scroll-pane-item .scroll-bar:vertical .thumb:hover {
     -fx-opacity: 0.6;
@@ -55,4 +66,46 @@
 .course-scroll-pane-item .scroll-bar:vertical .increment-button,
 .course-scroll-pane-item .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
+}
+.course-info-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 0 20 20 0;
+}
+.enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+.enroll-btn:hover{
+    -fx-opacity: 0.8;
+}
+.view-details-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #000000;
+}
+.view-details-label:hover{
+    -fx-opacity: 1;
+}
+.view-details-label{
+    -fx-cursor: hand;
+}
+.grid-container{
+    -fx-background-color: #D5FFDC;
+}
+.nbr-registred-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.nbr-person-rated-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 13;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
 }

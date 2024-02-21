@@ -1,8 +1,13 @@
 package tn.SIRIUS.controller.students;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -13,26 +18,22 @@ import tn.SIRIUS.services.UserService;
 
 public class CoursesMainPageItemController {
     @FXML
-    private Rectangle courseImgContainer;
+    private Text titleCourseText;
+    @FXML
+    private Text tutorNameText;
     @FXML
     private Circle tutorImgContainer;
     @FXML
-    private Label tutorNameLabel;
+    private Rectangle starBarRate;
     @FXML
-    private Text titleCourseText;
-    @FXML
-    private Label nbrRegistredLabel;
-    @FXML
-    private Rectangle starBar;
+    private Text nbrRegistredText;
     private CoursesMainPageController coursesMainPageController;
     public void setData(Course course,CoursesMainPageController controller){
-        UserService userService = new UserService();
-        User tutor = userService.getCourseTutor(course.getTutor());
-        courseImgContainer.setFill(new ImagePattern(new Image("file:/"+course.getImage().replace("\\","/"))));
-        tutorNameLabel.setText(tutor.getLastName()+" "+tutor.getFirstName());
-        tutorImgContainer.setFill(new ImagePattern(new Image("file:/"+tutor.getImage().replace("\\","/"))));
+        tutorNameText.setText(course.getTutor().getLastName()+" "+course.getTutor().getFirstName());
+        tutorImgContainer.setFill(new ImagePattern(new Image("file:/"+course.getTutor().getImage().replace("\\","/"))));
         titleCourseText.setText(course.getTitle());
-        nbrRegistredLabel.setText(course.getNbrRegistred()+" Registred");
+        starBarRate.setWidth((course.getRate() / 5)*100);
+        nbrRegistredText.setText(course.getNbrRegistred()+" Registered");
         coursesMainPageController = controller;
     }
 }

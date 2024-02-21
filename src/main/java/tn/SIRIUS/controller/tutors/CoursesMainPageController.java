@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import tn.SIRIUS.entities.Course;
+import tn.SIRIUS.entities.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,9 +26,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.scene.media.MediaView;
-import tn.SIRIUS.entities.Quiz;
-import tn.SIRIUS.entities.QuizQuestion;
-import tn.SIRIUS.entities.Section;
 import tn.SIRIUS.services.*;
 
 import java.io.File;
@@ -334,7 +331,7 @@ public class CoursesMainPageController implements Initializable {
         float price = Float.parseFloat(addCoursePrice.getText());
         String duration = addCourseDuration.getText();
         CourseService courseService = new CourseService();
-        Course course = new Course(0,addCourseImgPath,title,description,1,duration,price,0,"",0);
+        Course course = new Course(0,addCourseImgPath,title,description,new User(1,"","","",""),duration,price,0,"",0,0,0);
         if(courseService.add(course)){
             showCoursesList();
             addCoursePane.setVisible(false);
@@ -557,7 +554,7 @@ public class CoursesMainPageController implements Initializable {
         float price = Float.parseFloat(editCoursePrice.getText());
         String duration = editCourseDuration.getText();
         CourseService courseService = new CourseService();
-        Course course = new Course(id,addCourseImgPath,title,description,1,duration,price,0,"",0);
+        Course course = new Course(id,addCourseImgPath,title,description,new User(1,"","","","S"),duration,price,0,"",0,0.0f,0);
         if(courseService.update(course)){
             showCoursesList();
             coursesEditContainer.setVisible(false);
