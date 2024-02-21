@@ -81,4 +81,25 @@ public class SousCartService implements ICRUD<SousCart> {
     public boolean delete(int id) {
         return false;
     }
+
+
+    public boolean deleteSousCarts(int idSousCarts, int idCart) {
+        String qry = "DELETE FROM souscarts WHERE id_SousCarts = ? AND idCart = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1, idSousCarts);
+            stm.setInt(2, idCart);
+            if (stm.executeUpdate() == 1) {
+                stm.close();
+                return true;
+            }
+            stm.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+
+
 }

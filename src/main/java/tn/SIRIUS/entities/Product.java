@@ -10,6 +10,8 @@ public class Product {
  private int owner;
  private String addDate;
 
+
+
     public Product() {
     }
 

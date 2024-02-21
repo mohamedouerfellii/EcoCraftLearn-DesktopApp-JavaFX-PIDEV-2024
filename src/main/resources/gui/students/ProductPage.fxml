@@ -127,9 +127,8 @@
                               </GridPane>
                            </content>
                         </ScrollPane>
-                        <Line endX="731.0" layoutX="122.0" layoutY="47.0" startX="-100.0" strokeWidth="2.0" />
-                        <Text layoutX="22.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="TextShop" text="Shop" wrappingWidth="58.0" />
-                        <Button fx:id="AddProductBtn" layoutX="1039.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddProductBtn" prefHeight="52.0" prefWidth="58.0" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css">
+                        <Text layoutX="29.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="TextShop" text="Shop" wrappingWidth="132.0" />
+                        <Button fx:id="AddProductBtn" layoutX="1048.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddProductBtn" prefHeight="52.0" prefWidth="58.0" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css">
                            <graphic>
                               <ImageView fitHeight="34.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -137,31 +136,87 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="openCart" layoutX="1039.0" layoutY="106.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="55.0" text="cart" />
-                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="531.0" layoutY="106.0" prefHeight="409.0" prefWidth="287.0" style="-fx-background-color: grey;">
+                        <Button fx:id="openCart" layoutX="1050.0" layoutY="91.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="55.0" styleClass="openCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="cart" />
+                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="715.0" layoutY="84.0" prefHeight="544.0" prefWidth="407.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
                            <children>
-                              <ScrollPane hbarPolicy="NEVER" layoutX="68.0" layoutY="34.0" prefHeight="366.0" prefWidth="398.0">
+                              <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="40.0" prefHeight="408.0" prefWidth="404.0" styleClass="ScrolPaneContainerSousCarte" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                                  <content>
-                                    <VBox fx:id="cartItemsContainer" prefHeight="363.0" prefWidth="388.0" />
+                                    <VBox fx:id="cartItemsContainer" prefHeight="407.0" prefWidth="387.0" spacing="10.0" styleClass="cartItemsContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" />
                                  </content>
                               </ScrollPane>
-                              <Button fx:id="hideCartBtn" layoutX="542.0" layoutY="2.0" mnemonicParsing="false" text="hide" />
-                              <Button fx:id="passerCommandeBtn" layoutX="496.0" layoutY="367.0" mnemonicParsing="false" text="passer" />
-                              <Label fx:id="totalPriceCartLabel" layoutX="467.0" layoutY="224.0" prefHeight="52.0" prefWidth="107.0" />
+                              <Button fx:id="hideCartBtn" layoutX="365.0" layoutY="5.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" styleClass="hideCartBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="+" />
+                              <Button fx:id="passerCommandeBtn" layoutX="227.0" layoutY="499.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Order" />
+                              <Label fx:id="totalPriceCartLabel" layoutX="144.0" layoutY="454.0" prefHeight="35.0" prefWidth="132.0" styleClass="totalPriceCartLabel" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" />
+                              <Button fx:id="VideCartBtn" layoutX="91.0" layoutY="500.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Vide" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="178.0" layoutY="98.0" maxHeight="526.0" prefHeight="526.0" prefWidth="500.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css" visible="false">
+                           <children>
+                              <Button fx:id="PasserOrderBtn" layoutX="168.0" layoutY="385.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Passer Order" />
+                              <TextField fx:id="InputPhoneOrder" layoutX="204.0" layoutY="212.0" prefHeight="45.0" prefWidth="262.0" />
+                              <TextField fx:id="InputEmailOrder" layoutX="205.0" layoutY="127.0" prefHeight="45.0" prefWidth="262.0" />
+                              <TextField fx:id="InputCityOrder" layoutX="203.0" layoutY="294.0" prefHeight="45.0" prefWidth="262.0" />
+                              <Label layoutX="53.0" layoutY="127.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="Email :" />
+                              <Label layoutX="51.0" layoutY="212.0" prefHeight="45.0" prefWidth="107.0" styleClass="Title" text="Phone :" />
+                              <Label layoutX="49.0" layoutY="292.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="City :" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="AnchorQuantitéInsuffisante" layoutX="338.0" prefHeight="58.0" prefWidth="275.0" styleClass="CarteVide" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
+                           <children>
+                              <Text fill="RED" layoutX="43.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité Insuffisante !" textAlignment="CENTER" wrappingWidth="201.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="CarteVide" layoutX="401.0" layoutY="-1.0" prefHeight="58.0" prefWidth="275.0" styleClass="CarteVide" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
+                           <children>
+                              <Text fill="RED" layoutX="49.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Cart Is Vide !" textAlignment="CENTER" wrappingWidth="187.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </AnchorPane>
                      </children>
                   </Pane>
-                  <AnchorPane fx:id="CartAnchorPane" layoutX="273.0" layoutY="244.0" prefHeight="278.0" prefWidth="528.0" styleClass="CartAnchorPane" stylesheets="@../../styles/StyleCart.css" visible="false">
+                  <AnchorPane fx:id="CartAnchorPane" layoutX="314.0" layoutY="244.0" prefHeight="200.0" prefWidth="447.0" styleClass="CartAnchorPane" stylesheets="@../../styles/StyleCart.css" visible="false">
                      <children>
-                        <Button fx:id="CloseCart" layoutX="455.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleOnCloseCartAction" styleClass="CloseCart" text="Button" />
-                        <Button fx:id="ConfirmeCartBtn" layoutX="226.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleConfirmeCartClicked" prefHeight="25.0" prefWidth="97.0" styleClass="ConfirmeCartBtn" text="Confirme" />
-                        <Label fx:id="TotalPriceLabel" layoutX="198.0" layoutY="131.0" text="Label" />
-                        <Label fx:id="NomProductLabel" layoutX="83.0" layoutY="131.0" text="Label" />
-                        <Label fx:id="NumeroProductLabel" layoutX="23.0" layoutY="20.0" text="Label" />
-                        <Button fx:id="incrementValue" layoutX="438.0" layoutY="125.0" mnemonicParsing="false" onAction="#incrementValue" prefHeight="25.0" prefWidth="35.0" text="+" />
-                        <Label fx:id="Labelvalue" layoutX="399.0" layoutY="129.0" text="0" />
-                        <Button fx:id="decrementValue" layoutX="346.0" layoutY="125.0" mnemonicParsing="false" onAction="#decrementValue" prefHeight="25.0" prefWidth="28.0" text="-" />
+                        <Button fx:id="CloseCart" layoutX="388.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleOnCloseCartAction" prefHeight="34.0" prefWidth="28.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/close-circle-line.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="ConfirmeCartBtn" layoutX="164.0" layoutY="153.0" mnemonicParsing="false" onAction="#handleConfirmeCartClicked" prefHeight="25.0" prefWidth="97.0" styleClass="ConfirmeCartBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Confirme" />
+                        <Label fx:id="TotalPriceLabel" layoutX="94.0" layoutY="114.0" prefHeight="17.0" prefWidth="72.0" text="Label" />
+                        <Label fx:id="NomProductLabel" layoutX="90.0" layoutY="24.0" prefHeight="29.0" prefWidth="132.0" text="Label" />
+                        <Label fx:id="NumeroProductLabel" layoutX="92.0" layoutY="21.0" text="Label" visible="false" />
+                        <Button fx:id="incrementValue" layoutX="298.0" layoutY="68.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#incrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="incrementValue" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/add-line.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label fx:id="Labelvalue" layoutX="275.0" layoutY="75.0" text="0" />
+                        <Button fx:id="decrementValue" layoutX="228.0" layoutY="68.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#decrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="decrementValue" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icons/subtract-line.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="25.0" layoutY="21.0" prefHeight="35.0" prefWidth="97.0" styleClass="Title" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Name:" />
+                        <Label layoutX="24.0" layoutY="109.0" prefHeight="27.0" prefWidth="58.0" styleClass="Title" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Price:" />
                      </children>
                   </AnchorPane>
                </children>

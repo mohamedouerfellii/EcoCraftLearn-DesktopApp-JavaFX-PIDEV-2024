@@ -1,5 +1,7 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,11 +21,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
-import tn.SIRIUS.entities.Carts;
-import tn.SIRIUS.entities.Product;
-import tn.SIRIUS.entities.SousCart;
-import tn.SIRIUS.entities.User;
+import javafx.util.Duration;
+import tn.SIRIUS.entities.*;
 import tn.SIRIUS.services.CartsService;
+import tn.SIRIUS.services.CommandesService;
 import tn.SIRIUS.services.ProductService;
 import tn.SIRIUS.services.SousCartService;
 
@@ -36,11 +37,18 @@ import java.util.ResourceBundle;
 
 public class ProductPage implements Initializable{
 
+    @FXML
+    private AnchorPane AnchorQuantitéInsuffisante;
+
+    @FXML
+    private Button VideCartBtn;
     private int valueQuantite =1;
 
     @FXML
     private AnchorPane AnchorPaneQuantite;
 
+    @FXML
+    private AnchorPane AnchorPaneFormCommande;
 
     @FXML
     private Button AddNewProduct;
@@ -176,6 +184,20 @@ public class ProductPage implements Initializable{
     @FXML
     private AnchorPane cartAnchorepaneContainer;
 
+    @FXML
+    private AnchorPane CarteVide;
+
+    @FXML
+    private TextField InputPhoneOrder;
+
+    @FXML
+    private TextField InputEmailOrder;
+
+    @FXML
+    private TextField InputCityOrder;
+
+    @FXML
+    private Button PasserOrderBtn;
     private float initialPrice;
     @FXML
     private void handleAddProductBtn(ActionEvent event) {
@@ -220,15 +242,44 @@ public class ProductPage implements Initializable{
             throw new RuntimeException(e);
         }
         }
+        AnchorPaneFormCommande.setVisible(false);
+
         CartAnchorPane.setVisible(false);
         cartAnchorepaneContainer.setVisible(false);
         openCart.setOnAction(event -> showSousCarts());
         hideCartBtn.setOnAction(event -> cartAnchorepaneContainer.setVisible(false));
+
+
         passerCommandeBtn.setOnAction(event -> {
+            AnchorPaneFormCommande.setVisible(true);
+
+        });
+        PasserOrderBtn.setOnAction(event -> {
+
+                if (PasserCommande()) {
+                    CartsService cartsservice = new CartsService();
+                    Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+                    cartsservice.updateIsConfirmed(carts.getIdCarts());
+                    AnchorPaneFormCommande.setVisible(false);
+                }
+        });
+
+
+        VideCartBtn.setOnAction(event -> {
+
             CartsService cartsservice = new CartsService();
             Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
-            cartsservice.updateIsConfirmed(carts.getIdCarts());
+            cartsservice.delete(carts.getIdCarts());
+            cartAnchorepaneContainer.setVisible(false);
+
         });
+
+
+
+
+
+
+
     }
 
 
@@ -252,7 +303,7 @@ public class ProductPage implements Initializable{
                // itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
-                if (column == 2) {
+                if (column == 3) {
                     column = 0;
                     ++row;
                 }
@@ -341,17 +392,6 @@ public class ProductPage implements Initializable{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     public void remplireCartProduct(Product product) {
         CartAnchorPane.setVisible(true);
         NumeroProductLabel.setText(String.valueOf(product.getIdProduct()));
@@ -370,22 +410,22 @@ public class ProductPage implements Initializable{
     }
 
     public void updateTotalPriceLabel(boolean increase) {
-        float totalPrice = Float.parseFloat(TotalPriceLabel.getText()); // Obtenez le prix total actuel
+        float totalPrice = Float.parseFloat(TotalPriceLabel.getText());
 
-        // Mettez à jour le prix total en fonction de l'opération (augmentation ou diminution)
+
         if (increase) {
-            totalPrice += initialPrice; // Si l'opération est une augmentation, ajoutez le prix initial au prix total
+            totalPrice += initialPrice;
         } else {
-            totalPrice -= initialPrice; // Si l'opération est une diminution, soustrayez le prix initial au prix total
+            totalPrice -= initialPrice;
         }
-        TotalPriceLabel.setText(String.valueOf(totalPrice)); // Mettez à jour le label du prix total
+        TotalPriceLabel.setText(String.valueOf(totalPrice));
     }
 
     @FXML
     void incrementValue(ActionEvent event) {
-        valueQuantite++; // Incrémentez la quantité
-        updateValueLabel(); // Mettez à jour l'affichage de la quantité
-        updateTotalPriceLabel(true); // Mettez à jour le prix total
+        valueQuantite++;
+        updateValueLabel();
+        updateTotalPriceLabel(true);
     }
 
     private void updateValueLabel() {
@@ -395,42 +435,47 @@ public class ProductPage implements Initializable{
         }
     }
 
-
-
-
     @FXML
     void handleConfirmeCartClicked(ActionEvent event) {
         try {
             int id_produit = Integer.parseInt(NumeroProductLabel.getText());
             float totalPrice = Float.parseFloat(TotalPriceLabel.getText());
             int quantite = valueQuantite;
-            CartsService cartsservice = new CartsService();
-            Carts cart = new Carts();
-            SousCart sousCart = new SousCart();
-            SousCartService sousCartService = new SousCartService();
-            if( cartsservice.getByIdIfNotConfirmed(user.getIdUser()) != null){
-                cart = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
-                sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
-                sousCartService.add(sousCart);
-                cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
 
+            ProductService productService = new ProductService();
+            int availableQuantity = productService.getProductQuantityById(id_produit);
 
-            }else {
-                 cart = new Carts(1, 0, 0 , user.getIdUser());
-                if (cartsservice.add(cart)==1) {
-                cart = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
-                sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
-                sousCartService.add(sousCart);
-                cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
-
-            }}
+            if (availableQuantity != -1 && quantite <= availableQuantity) {
+                CartsService cartsservice = new CartsService();
+                Carts cart = new Carts();
+                SousCart sousCart = new SousCart();
+                SousCartService sousCartService = new SousCartService();
+                if (cartsservice.getByIdIfNotConfirmed(user.getIdUser()) != null) {
+                    cart = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+                    sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
+                    sousCartService.add(sousCart);
+                    cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
+                } else {
+                    cart = new Carts(1, 0, 0, user.getIdUser());
+                    if (cartsservice.add(cart) == 1) {
+                        cart = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+                        sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
+                        sousCartService.add(sousCart);
+                        cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
+                    }
+                }
+            } else {
+                AnchorQuantitéInsuffisante.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> AnchorQuantitéInsuffisante.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        valueQuantite=1;
+        valueQuantite = 1;
         updateValueLabel();
         CartAnchorPane.setVisible(false);
-
     }
 
 
@@ -438,6 +483,7 @@ public class ProductPage implements Initializable{
     void handleOnCloseCartAction(ActionEvent event) {
         CartAnchorPane.setVisible(false);
         PaneGroupProduct.setVisible(true);
+
     }
 
 
@@ -462,8 +508,65 @@ public class ProductPage implements Initializable{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }}
-        } else System.out.println("vide");
+        }else {
+           CarteVide.setVisible(true);
+           Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> CarteVide.setVisible(false)));
+           timeline.setCycleCount(1);
+           timeline.play();
+        }
     }
+
+    public boolean PasserCommande() {
+
+        try {
+            String email = InputEmailOrder.getText();
+            String city = InputCityOrder.getText();
+            String phoneInput = InputPhoneOrder.getText();
+            if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}")) {
+                System.out.println("Invalid phone number format. Please enter a 8-digit valid number.");
+                return false;
+            }
+            int phone = Integer.parseInt(phoneInput);
+            CartsService cartsservice = new CartsService();
+            Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+            int cartId = carts.getIdCarts();
+            CommandesService commandesService = new CommandesService();
+            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"");
+            int result = commandesService.add(commandes);
+            if (result == 1) {
+                System.out.println("SUCCESS");
+                CarteVide.setVisible(false);
+                return true;
+            } else {
+                System.out.println("FAILED");
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println("An error occurred while placing the order: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
+  public void deleteSouscarte(SousCart sousCart) {
+
+          SousCartService sousCartService = new SousCartService();
+          sousCartService.deleteSousCarts(sousCart.getId_SousCarts(), sousCart.getIdCart());
+
+          CartsService cartsservice = new CartsService();
+          Carts cart = new Carts();
+
+          cart = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+          float totalPrice = cart.getTotalPrice() - sousCart.getQuantiteProduct() * sousCart.getProduct().getPrice();
+          cartsservice.updateTotalPrice(cart.getIdCarts(), totalPrice);
+          showSousCarts();
+
+
+
+
+  }
+
 
 
 }

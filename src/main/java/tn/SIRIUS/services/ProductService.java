@@ -102,6 +102,18 @@ public class ProductService implements ICRUD<Product> {
         return false;
     }
 
-
-
+    public int getProductQuantityById(int idProduct) {
+        String query = "SELECT quantite FROM PRODUCTS WHERE idProduct = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setInt(1, idProduct);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("quantite");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error fetching product quantity: " + ex.getMessage());
+        }
+        return -1;
+    }
 }

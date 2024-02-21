@@ -104,3 +104,34 @@
     -fx-font-size: 15;
 }
 
+
+
+.AnchorPaneFormCommande
+{
+    -fx-min-width: 500px;
+    -fx-max-width: 500px;
+    -fx-min-height: 500px;
+    -fx-max-height: 500px;
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #39932C; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+}
+
+.PasserOrderBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+
+.PasserOrderBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+
+
+

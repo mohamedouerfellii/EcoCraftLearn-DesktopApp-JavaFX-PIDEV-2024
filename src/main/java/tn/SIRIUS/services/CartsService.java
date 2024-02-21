@@ -63,10 +63,21 @@ public class CartsService implements ICRUD<Carts> {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int idCarts) {
+        String qry = "DELETE FROM Carts WHERE idCarts = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1, idCarts);
+            if (stm.executeUpdate() == 1) {
+                stm.close();
+                return true;
+            }
+            stm.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
-
 
     public Carts getByIdIfNotConfirmed(int id) {
         String query = "SELECT * FROM carts WHERE owner = ? AND isConfirmed = 0";
@@ -98,8 +109,6 @@ public class CartsService implements ICRUD<Carts> {
         }
     }
 
-
-
     public int updateTotalPrice(int id, double newTotalPrice) {
         String query = "UPDATE carts SET totalPrice = ? WHERE idCarts = ?";
         try {
@@ -111,6 +120,10 @@ public class CartsService implements ICRUD<Carts> {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
 
 
 }

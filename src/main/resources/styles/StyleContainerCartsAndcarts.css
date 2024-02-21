@@ -1,0 +1,161 @@
+
+.sousCartItem
+{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: #7DC145;
+    -fx-border-radius: 15 15 15 15;
+
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+
+}
+.cartAnchorepaneContainer
+{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: #39932C;
+    -fx-border-radius: 15 15 15 15;
+}
+.hideCartBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.hideCartBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+.passerCommandeBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.passerCommandeBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+.cartItemsContainer
+{
+    -fx-background-color: #D5FFDC;
+}
+
+.ScrolPaneContainerSousCarte{
+    -fx-background-color: transparent;  ;
+}
+.ScrolPaneContainerSousCarte .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneContainerSousCarte .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneContainerSousCarte .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneContainerSousCarte .scroll-bar:vertical .increment-button,
+.ScrolPaneContainerSousCarte .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.totalPriceCartLabel
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-background-color: #fff;
+    -fx-border-radius: 15 15 15 15;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 8px;
+}
+.openCart
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.openCart:hover
+{
+    -fx-opacity: 0.6;
+}
+.CloseCart
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.CloseCart:hover
+{
+    -fx-opacity: 0.6;
+}
+
+.decrementValue
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.decrementValue:hover
+{
+    -fx-opacity: 0.6;
+}
+.incrementValue
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.incrementValue:hover
+{
+    -fx-opacity: 0.6;
+}
+.ConfirmeCartBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.ConfirmeCartBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+
+.Title
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 18;
+    -fx-fill: #000000;
+}
+
+
+.CarteVide
+{
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-color: Transparent;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: #FF0000;
+ -fx-border-width: 3px;
+
+}
+
+.DeleteBtnSousCart
+{    -fx-border-radius: 10 10 10 10;
+    -fx-border-width: 2px;
+    -fx-border-color: #FF0000;
+    -fx-background-color: transparent;
+
+}

@@ -6,17 +6,25 @@ public class Commandes {
     private String commandeDate;
    private int cart ;
 
-   private String address;
+   private String email;
+
+   private String city;
+   private int phone ;
+
+    private String status;
 
     public Commandes() {
     }
 
-    public Commandes(int idCommande, int owner, String commandeDate, int cart, String address) {
+    public Commandes(int idCommande, int owner, String commandeDate, int cart, String email, String city, int phone ,String status) {
         this.idCommande = idCommande;
         this.owner = owner;
         this.commandeDate = commandeDate;
         this.cart = cart;
-        this.address = address;
+        this.email = email;
+        this.city = city;
+        this.phone = phone;
+        this.status = status;
     }
 
     public int getIdCommande() {
@@ -51,12 +59,36 @@ public class Commandes {
         this.cart = cart;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -66,7 +98,10 @@ public class Commandes {
                 ", owner=" + owner +
                 ", commandeDate='" + commandeDate + '\'' +
                 ", cart=" + cart +
-                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                ", phone=" + phone +
+                ", status='" + status + '\'' +
                 '}';
     }
 
