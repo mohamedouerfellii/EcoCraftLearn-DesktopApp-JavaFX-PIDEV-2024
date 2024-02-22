@@ -64,7 +64,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="courseDetailsPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+      <AnchorPane fx:id="courseDetailsPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css">
          <children>
             <Button fx:id="goBackCoursesDetails" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetailsClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
             <Rectangle fx:id="courseDetailsImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="87.0" layoutY="83.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />
@@ -193,6 +193,7 @@
                <children>
                   <Button fx:id="miniDetailsBtn" mnemonicParsing="false" onMouseClicked="#miniDetailsBtnClicked" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Details" />
                   <Button fx:id="miniDescriptionBtn" mnemonicParsing="false" onMouseClicked="#miniDescBtnClicked" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Description" />
+                  <Button fx:id="miniReviewBtn" mnemonicParsing="false" onMouseClicked="#miniReviewBtnClicked" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Reviews" />
                </children>
             </HBox>
             <Button fx:id="enrollCourseBtn" layoutX="570.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#enrollCourseBtnClicked" prefHeight="50.0" prefWidth="140.0" styleClass="enroll-course-btn" text="Enroll Now">
@@ -201,8 +202,9 @@
                   <URL value="@../../style/coursesStudentMainPage.css" />
                </stylesheets>
             </Button>
-            <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="860.0" layoutY="603.0" stroke="#19bb1c" />
-            <Line fx:id="lineMiniDescBtn" endX="92.0" layoutX="972.0" layoutY="603.0" stroke="#19bb1c" visible="false" />
+            <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="804.0" layoutY="603.0" stroke="#19bb1c" />
+            <Line fx:id="lineMiniDescBtn" endX="92.0" layoutX="916.0" layoutY="603.0" stroke="#19bb1c" visible="false" />
+            <Line fx:id="lineMiniReviewBtn" endX="92.0" layoutX="1028.0" layoutY="602.0" stroke="#19bb1c" visible="false" />
             <AnchorPane fx:id="coursesDescriptionLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
                <children>
                   <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="9.0" prefHeight="456.0" prefWidth="407.0" styleClass="course-scroll-pane-item-desc" stylesheets="@../../style/coursesStudentMainPage.css">
@@ -212,6 +214,15 @@
                               <Text fx:id="miniDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="&quot;It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;" textAlignment="CENTER" wrappingWidth="348.5367431640625" />
                            </children>
                         </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="coursesReviewLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="9.0" prefHeight="456.0" prefWidth="407.0" styleClass="course-scroll-pane-item-desc" stylesheets="@../../style/coursesStudentMainPage.css">
+                     <content>
+                        <VBox fx:id="listReviewsLeftContainer" alignment="TOP_CENTER" prefHeight="454.0" prefWidth="411.0" spacing="10.0" styleClass="grid-container-desc" stylesheets="@../../style/coursesStudentMainPage.css" />
                      </content>
                   </ScrollPane>
                </children>
@@ -405,7 +416,7 @@
             <PasswordField fx:id="passwordConfirmUnroll" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirmation-input" stylesheets="@../../style/coursesStudentMainPage.css" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="ratingCourseContainer" layoutX="387.0" layoutY="140.0" prefHeight="359.0" prefWidth="492.0" styleClass="feedback-container" stylesheets="@../../style/coursesStudentMainPage.css">
+      <AnchorPane fx:id="ratingCourseContainer" layoutX="387.0" layoutY="140.0" prefHeight="359.0" prefWidth="492.0" styleClass="feedback-container" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
          <children>
             <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" />
             <Label layoutX="161.0" layoutY="3.0" styleClass="enroll-confirmation-text" stylesheets="@../../style/coursesStudentMainPage.css" text="Rate Your Course" />
@@ -446,7 +457,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Button fx:id="deleteFeedbackBtn" layoutX="185.0" layoutY="279.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="delete-btn" stylesheets="@../../style/coursesStudentMainPage.css">
+            <Button fx:id="deleteFeedbackBtn" layoutX="185.0" layoutY="279.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="delete-btn" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

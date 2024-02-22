@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FeedbackService {
     private Connection con;
@@ -73,5 +75,96 @@ public class FeedbackService {
             throw new RuntimeException(e);
         }
         return feedback;
+    }
+    public List<Feedback> getFeedbacksCourse(int idCourse){
+        String query = "SELECT * FROM COURSEFEEDBACKS WHERE course = ?";
+        List<Feedback> feedbacks = new ArrayList<>();
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idCourse);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+            UserService userService = new UserService();
+            User user = userService.getCourseTutor(rs.getInt(2));
+            feedbacks.add(
+                    new Feedback(rs.getInt(1),user,rs.getString(6),
+                            rs.getString(4),rs.getInt(5),rs.getInt(3)));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return feedbacks;
+    }
+    public boolean deleteFeedback(Feedback feedback){
+        String query = "DELETE FROM COURSEFEEDBACKS WHERE idFeedback = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,feedback.getId());
+            if(stm.executeUpdate() == 1){
+                String query2 = "SELECT rate, nbrPersonRated FROM COURSES WHERE idCourse = ?";
+                stm = con.prepareStatement(query2);
+                stm.setInt(1,feedback.getCourse());
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()){
+                    int OldNbrPersonRated = rs.getInt(2);
+                    int newNbrPersonRated = OldNbrPersonRated-1;
+                    float newRate = 0f;
+                    if(newNbrPersonRated!=0){
+                        double oldSommeRate = OldNbrPersonRated * rs.getFloat(1);
+                        newRate = (float) (( oldSommeRate - feedback.getRate() ) / newNbrPersonRated);
+                    }
+                    String query3 = "UPDATE COURSES SET rate = ?, nbrPersonRated = ? WHERE idCourse = ?";
+                    stm = con.prepareStatement(query3);
+                    stm.setFloat(1,newRate);
+                    stm.setInt(2,newNbrPersonRated);
+                    stm.setInt(3,feedback.getCourse());
+                    if(stm.executeUpdate() == 1){
+                        stm.close();
+                        return true;
+                    }
+                }
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+    public boolean updateFeedback(Feedback feedback){
+        Feedback oldFeedback = getFeedback(feedback.getOwner().getId(),feedback.getCourse());
+        if(oldFeedback.equals(feedback)){
+            return true;
+        } else {
+            String query = "SELECT rate, nbrPersonRated FROM COURSES WHERE idCourse = ?";
+            try {
+                PreparedStatement stm = con.prepareStatement(query);
+                stm.setInt(1,feedback.getCourse());
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()) {
+                    int nbrPersonRated = rs.getInt(2);
+                    double oldSommeRate = nbrPersonRated * rs.getFloat(1);
+                    double newSommeRate = oldSommeRate - oldFeedback.getRate();
+                    float newRate = (float) ((newSommeRate + feedback.getRate()) / nbrPersonRated);
+                    String query2 = "UPDATE COURSES SET rate = ? WHERE idCourse = ?";
+                    stm = con.prepareStatement(query2);
+                    stm.setFloat(1, newRate);
+                    stm.setInt(2, feedback.getCourse());
+                    if (stm.executeUpdate() == 1) {
+                        String query3 = "UPDATE COURSEFEEDBACKS SET rate = ?, content = ? WHERE idFeedback = ?";
+                        stm = con.prepareStatement(query3);
+                        stm.setInt(1,feedback.getRate());
+                        stm.setString(2,feedback.getContent());
+                        stm.setInt(3,oldFeedback.getId());
+                        if(stm.executeUpdate() == 1){
+                            stm.close();
+                            return true;
+                        }
+                         else return false;
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
     }
 }

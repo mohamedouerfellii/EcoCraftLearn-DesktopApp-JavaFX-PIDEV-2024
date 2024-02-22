@@ -451,3 +451,12 @@
 .delete-btn:hover{
     -fx-opacity: 0.6;
 }
+.feedback-item-container{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 24px;
+}
+.feedback-content-text{
+    -fx-font-family: "Jost";
+    -fx-font-size: 18;
+    -fx-text-fill: #000000;
+}

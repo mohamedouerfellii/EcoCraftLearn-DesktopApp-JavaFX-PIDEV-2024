@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="feedbackItemContainer" alignment="TOP_CENTER" prefHeight="225.0" prefWidth="420.0" styleClass="feedback-item-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ReviewItemCourseController">
+   <children>
+      <HBox prefHeight="75.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Circle fx:id="feedbackAuthorImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="feedback-author-img-container">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Circle>
+            <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="273.0">
+               <children>
+                  <Label fx:id="feedbackAuthorName" styleClass="feedback-author-name" stylesheets="@../../style/dashboardAdminStyle.css" text="Ouerfelli Mohamed" />
+                  <AnchorPane maxWidth="-Infinity" prefHeight="18.0" prefWidth="100.0">
+                     <children>
+                        <Rectangle fx:id="starBarRate" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="18.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0" />
+                        <ImageView fitHeight="40.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/star.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Label fx:id="feedbackDate" prefHeight="23.0" prefWidth="174.0" styleClass="feedback-date" stylesheets="@../../style/dashboardAdminStyle.css" text="18-12-2024">
+               <HBox.margin>
+                  <Insets right="20.0" top="32.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="TOP_CENTER" prefHeight="143.0" prefWidth="420.0">
+         <children>
+            <Text fx:id="feedbackContentText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="feedback-content-text" text="madjoyable and effective. Sessions were well-prepared, and you provided constructive feedback, fostering both understanding and confidence. Highly recommend!&quot;" textAlignment="CENTER" wrappingWidth="358.1367553472519">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
+         </children>
+      </VBox>
+   </children>
+</VBox>

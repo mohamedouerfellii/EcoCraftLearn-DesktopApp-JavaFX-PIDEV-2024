@@ -57,4 +57,12 @@ public class Feedback {
     public void setRate(int rate) {
         this.rate = rate;
     }
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) return false;
+        if(obj == this) return true;
+        if(obj instanceof Feedback fb)
+            return fb.getRate() == this.getRate() && fb.getContent().equals(this.getContent());
+        return false;
+    }
 }

@@ -81,6 +81,8 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     private Line lineMiniDetailsBtn;
     @FXML
+    private Line lineMiniReviewBtn;
+    @FXML
     private Text miniPrice;
     @FXML
     private AnchorPane coursesDescriptionLeft;
@@ -162,6 +164,12 @@ public class CoursesMainPageController implements Initializable {
     private ImageView star4;
     @FXML
     private ImageView star5;
+    @FXML
+    private Button deleteFeedbackBtn;
+    @FXML
+    private AnchorPane coursesReviewLeft;
+    @FXML
+    private VBox listReviewsLeftContainer;
     private CourseService courseService;
     private List<Course> registeredCourses;
     private String styleMiniBtnNormal;
@@ -335,6 +343,21 @@ public class CoursesMainPageController implements Initializable {
         //miniCertificate;
         miniDescription.setText("\" "+course.getDescription()+" \"");
         miniPrice.setText(course.getPrice()+" TND");
+        FeedbackService fbService = new FeedbackService();
+        List<Feedback> feedbacks = fbService.getFeedbacksCourse(course.getId());
+        listReviewsLeftContainer.getChildren().clear();
+        for (Feedback feedback : feedbacks){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/reviewItemCourse.fxml"));
+                Parent root = fxmlLoader.load();
+                ReviewItemCourseController controller = fxmlLoader.getController();
+                controller.setData(feedback);
+                listReviewsLeftContainer.getChildren().add(root);
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+            }
+        }
         currentCourse = course;
     }
     @FXML
@@ -345,13 +368,24 @@ public class CoursesMainPageController implements Initializable {
     public void miniDescBtnClicked(MouseEvent event){
         lineMiniDescBtn.setVisible(true);
         lineMiniDetailsBtn.setVisible(false);
+        lineMiniReviewBtn.setVisible(false);
         coursesDescriptionLeft.setVisible(true);
+        coursesReviewLeft.setVisible(false);
     }
     @FXML
     public  void miniDetailsBtnClicked(MouseEvent event){
         lineMiniDetailsBtn.setVisible(true);
         lineMiniDescBtn.setVisible(false);
+        lineMiniReviewBtn.setVisible(false);
         coursesDescriptionLeft.setVisible(false);
+        coursesReviewLeft.setVisible(false);
+    }
+    @FXML
+    public void miniReviewBtnClicked(MouseEvent event){
+        lineMiniDetailsBtn.setVisible(false);
+        lineMiniDescBtn.setVisible(false);
+        lineMiniReviewBtn.setVisible(true);
+        coursesReviewLeft.setVisible(true);
     }
     // Enroll Course
     @FXML
@@ -638,6 +672,13 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     public void closeRating(MouseEvent event){
         ratingCourseContainer.setVisible(false);
+        deleteFeedbackBtn.setVisible(false);
+        rateValue = 0;
+        star1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
+        star2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
+        star3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
+        star4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
+        star5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
         feedbackText.clear();
     }
     public void showRatingForm(Course course){
@@ -653,6 +694,13 @@ public class CoursesMainPageController implements Initializable {
                 default -> System.out.println("Error !");
             };
             feedbackText.setText(feedback.getContent());
+            deleteFeedbackBtn.setVisible(true);
+            deleteFeedbackBtn.setOnMouseClicked(e -> {
+                    if(fbService.deleteFeedback(feedback)){
+                        registeredCoursesBtnClicked(null);
+                        ratingCourseContainer.setVisible(false);
+                    }
+            });
         }
         currentCourse = course;
         ratingCourseContainer.setVisible(true);
@@ -663,17 +711,14 @@ public class CoursesMainPageController implements Initializable {
         User owner = new User(2,"","","","");
         String content = feedbackText.getText();
         Feedback feedback = new Feedback(0,owner,"",content,rateValue,currentCourse.getId());
-        if(fbService.addFeedback(feedback)){
-            notifySuccess();
-        } else
-            notifyFailed();
+        if(!deleteFeedbackBtn.isVisible()){
+            if(fbService.addFeedback(feedback)) notifySuccess();
+            else notifyFailed();
+        } else {
+            if(fbService.updateFeedback(feedback)) notifySuccess();
+            else notifyFailed();
+        }
         closeRating(null);
-        rateValue = 0;
-        star1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
-        star2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
-        star3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
-        star4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
-        star5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/oneStarEmpty.png"))));
     }
     @FXML
     public void starOneClicked(MouseEvent event){
