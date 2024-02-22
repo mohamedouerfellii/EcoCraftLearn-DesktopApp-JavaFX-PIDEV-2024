@@ -18,134 +18,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="home-page-container" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.HomePageController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="20.0" prefHeight="680.0" prefWidth="120.0" styleClass="leftMenuContainer" stylesheets="@../../style/style.css">
-         <children>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <ImageView fitHeight="80.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="logoContainer">
-                     <image>
-                        <Image url="@../../images/logoLight.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets top="4.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="homeBtn" alignment="CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#homeBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Home">
-                     <graphic>
-                        <ImageView fx:id="homeBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="home-btn-img">
-                           <image>
-                              <Image url="@../../icons/light/home-4-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="coursesBtn" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#coursesBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Courses">
-                     <graphic>
-                        <ImageView fx:id="coursesBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/graduation-cap-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="eventsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Events">
-                     <graphic>
-                        <ImageView fx:id="eventsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/calendar-event-line.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="forumBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Forum">
-                     <graphic>
-                        <ImageView fx:id="forumBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/group-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="productsBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Products">
-                     <graphic>
-                        <ImageView fx:id="productsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/shopping-bag-3-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
-               <children>
-                  <Button fx:id="collectsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Collects">
-                     <graphic>
-                        <ImageView fx:id="collectsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/recycle-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="85.0">
-               <children>
-                  <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Logout">
-                     <graphic>
-                        <ImageView fx:id="logoutBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/light/logout-box-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Jost Regular" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
       <HBox alignment="CENTER_RIGHT" layoutX="545.0" layoutY="20.0" prefHeight="60.0" prefWidth="797.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
@@ -291,5 +163,133 @@
             </HBox>
          </children>
       </Pane>
+      <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="20.0" prefHeight="680.0" prefWidth="120.0" styleClass="leftMenuContainer" stylesheets="@../../style/style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="logoContainer">
+                     <image>
+                        <Image url="@../../images/logoLight.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="homeBtn" alignment="CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#homeBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Home">
+                     <graphic>
+                        <ImageView fx:id="homeBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="home-btn-img">
+                           <image>
+                              <Image url="@../../icons/light/home-4-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="coursesBtn" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#coursesBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Courses">
+                     <graphic>
+                        <ImageView fx:id="coursesBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/graduation-cap-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="eventsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Events">
+                     <graphic>
+                        <ImageView fx:id="eventsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/calendar-event-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="forumBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Forum">
+                     <graphic>
+                        <ImageView fx:id="forumBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/group-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="productsBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Products">
+                     <graphic>
+                        <ImageView fx:id="productsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/shopping-bag-3-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="collectsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Collects">
+                     <graphic>
+                        <ImageView fx:id="collectsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/recycle-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="85.0">
+               <children>
+                  <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Logout">
+                     <graphic>
+                        <ImageView fx:id="logoutBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/logout-box-fill.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Jost Regular" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

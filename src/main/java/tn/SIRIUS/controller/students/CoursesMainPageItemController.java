@@ -27,6 +27,9 @@ public class CoursesMainPageItemController {
     private Rectangle starBarRate;
     @FXML
     private Text nbrRegistredText;
+    @FXML
+    private Text nbrPersonRatedText;
+    private Course course;
     private CoursesMainPageController coursesMainPageController;
     public void setData(Course course,CoursesMainPageController controller){
         tutorNameText.setText(course.getTutor().getLastName()+" "+course.getTutor().getFirstName());
@@ -34,6 +37,16 @@ public class CoursesMainPageItemController {
         titleCourseText.setText(course.getTitle());
         starBarRate.setWidth((course.getRate() / 5)*100);
         nbrRegistredText.setText(course.getNbrRegistred()+" Registered");
+        nbrPersonRatedText.setText("( "+course.getNbrPersonRated()+" )");
         coursesMainPageController = controller;
+        this.course = course;
+    }
+    @FXML
+    public void viewDetailsClicked(MouseEvent event){
+        coursesMainPageController.setUpCourseDetails(course);
+    }
+    @FXML
+    public void enrollBtnClicked(MouseEvent event){
+        coursesMainPageController.enrollFromItem(course);
     }
 }

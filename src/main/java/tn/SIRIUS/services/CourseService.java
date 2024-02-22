@@ -142,9 +142,25 @@ public class CourseService implements ICRUD<Course> {
         }
         return false;
     }
+    public boolean updateNbrRegistered(int idCourse,int nbrRegistered){
+        String query = "UPDATE COURSES SET nbrRegistred = ? WHERE idCourse = ?";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, nbrRegistered);
+            statement.setInt(2, idCourse);
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return true;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
     public List<Course> getCoursesNotRegistered(int idUser){
         List<Course> courseRegistered = getCourseRegistered(idUser);
-        String query = "SELECT * FROM COURSES";
+        String query = "SELECT * FROM COURSES WHERE nbrSection > 0";
         List<Course> courseList = new ArrayList<>();
         try(Statement stm = con.createStatement()){
             ResultSet rs = stm.executeQuery(query);

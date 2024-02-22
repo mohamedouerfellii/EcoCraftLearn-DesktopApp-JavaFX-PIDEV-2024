@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import tn.SIRIUS.entities.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +49,7 @@ public class dashboardTutorHomePageContentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Feedback
-        Feedback feedback = new Feedback(1,"Ouerfelli Mohamed","02-10-2024","“Your knowledge and clear communication made learning");
+        Feedback feedback = new Feedback(1,new User(2,"Ouerfelli","Mohemed","mohamedouerfelli3@gmail.com",""),"02-10-2024","“Your knowledge and clear communication made learning",4,1);
         try{
             for(int i=0; i<5; i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();

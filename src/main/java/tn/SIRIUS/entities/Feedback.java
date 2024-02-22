@@ -2,26 +2,41 @@ package tn.SIRIUS.entities;
 
 public class Feedback {
     private int id;
-    private String authorName;
+    private User owner;
     private String date;
     private String content;
-    public Feedback(int id,String authorName,String date,String content){
+    private int rate;
+    private int course;
+
+    public Feedback(){this.id = 0;}
+    public Feedback(int id, User owner, String date, String content, int rate,int course){
         this.id = id;
-        this.authorName = authorName;
+        this.owner = owner;
         this.date = date;
         this.content = content;
+        this.rate = rate;
+        this.course = course;
     }
     public int getId() {
         return id;
     }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
-    public String getAuthorName() {
-        return authorName;
+    public User getOwner() {
+        return owner;
     }
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
     public String getDate() {
         return date;
@@ -34,5 +49,12 @@ public class Feedback {
     }
     public void setContent(String content) {
         this.content = content;
+    }
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }

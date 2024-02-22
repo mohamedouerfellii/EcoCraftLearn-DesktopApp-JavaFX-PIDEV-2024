@@ -19,16 +19,17 @@ public class CoursesHomePageItemController {
     private Label coursesHomePageHours;
     @FXML
     private Label coursesHomePageRate;
+
     public void setCourseData(Course course){
         Image courseImg = new Image("file:/"+course.getImage().replace("\\","/"));
         coursesHomePageItemImg.setFill(new ImagePattern(courseImg));
         coursesHomePageTitle.setText(course.getTitle());
-        coursesHomePageTutor.setText(String.valueOf(course.getTutor()));
+        coursesHomePageTutor.setText(course.getTutor().getLastName()+" "+course.getTutor().getFirstName());
         coursesHomePageHours.setText(course.getDuration());
-        coursesHomePageRate.setText("4.9");
+        coursesHomePageRate.setText(String.valueOf(course.getRate()));
     }
     @FXML
     public void onViewCourseBtnClicked(){
-        System.out.println(coursesHomePageHours.getText());
+        //System.out.println(coursesHomePageHours.getText());
     }
 }

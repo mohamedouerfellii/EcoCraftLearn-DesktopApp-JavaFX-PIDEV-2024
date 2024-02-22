@@ -301,10 +301,10 @@ public class CoursesMainPageController implements Initializable {
         });
         goBackCourseDetBtn.setOnMouseClicked(e -> coursesDetailsContainer.setVisible(false));
         // video for section part
-        volumeBarSectionVid.valueProperty().addListener(observable -> {
-            if(volumeBarSectionVid.isPressed())
-                mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
-        });
+                volumeBarSectionVid.valueProperty().addListener(observable -> {
+                    if(volumeBarSectionVid.isPressed())
+                        mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
+                });
     }
     public void showCoursesList(){
         CourseService courseService = new CourseService();

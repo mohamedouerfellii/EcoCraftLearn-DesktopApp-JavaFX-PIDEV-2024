@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="mainPageContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-main-page-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesMainPageController">
    <children>
@@ -31,5 +46,416 @@
             <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" onMouseClicked="#mostPopularCoursesBtnClicked" styleClass="most-popular-courses-btn" stylesheets="@../../style/style.css" text="Most Popular" />
          </children>
       </HBox>
+      <Button fx:id="registeredCoursesBtn" layoutX="986.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#registeredCoursesBtnClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="My Learning" />
+      <AnchorPane fx:id="registeredCoursePage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css">
+         <children>
+            <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="459.0" layoutY="13.0" styleClass="title-form" stylesheets="@../../style/coursesStudentMainPage.css" text="My Learning" />
+            <Button fx:id="goBackRegisteredCourses" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackRegisteredCoursesClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
+            <HBox alignment="CENTER" layoutX="834.0" layoutY="17.0" prefHeight="46.0" prefWidth="240.0">
+               <children>
+                  <Button fx:id="inProgressBtn" mnemonicParsing="false" onMouseClicked="#inProgressBtnClicked" prefHeight="34.0" prefWidth="122.0" styleClass="all-courses-btn" stylesheets="@../../style/style.css" text="In Progress" />
+                  <Button fx:id="completedCoursesBtn" mnemonicParsing="false" onMouseClicked="#completedCoursesBtnClicked" prefHeight="34.0" prefWidth="106.0" styleClass="newest-courses-btn" stylesheets="@../../style/style.css" text="Completed" />
+               </children>
+            </HBox>
+            <ScrollPane hbarPolicy="NEVER" layoutX="74.0" layoutY="95.0" prefHeight="522.0" prefWidth="1000.0" styleClass="course-scroll-pane-item" stylesheets="@../../style/coursesStudentMainPage.css">
+               <content>
+                  <VBox fx:id="courseRegisteredVBox" alignment="TOP_CENTER" prefHeight="522.0" prefWidth="1000.0" spacing="10.0" styleClass="grid-container" stylesheets="@../../style/coursesStudentMainPage.css" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="courseDetailsPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+         <children>
+            <Button fx:id="goBackCoursesDetails" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetailsClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
+            <Rectangle fx:id="courseDetailsImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="87.0" layoutY="83.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />
+            <Circle fx:id="tutorCourseDetailsImg" fill="DODGERBLUE" layoutX="124.0" layoutY="525.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Text fx:id="tutorNameCourseDetailsText" layoutX="170.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tutor-course-details-name" text="Ouerfelli Mohamed" wrappingWidth="326.13331298828126" />
+            <Text fx:id="courseDetailsTitle" layoutX="99.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-course-details" text="Course One Two" wrappingWidth="610.9367523193359" />
+            <Rectangle fx:id="starBarRate" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="18.0" layoutX="96.0" layoutY="585.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0" />
+            <ImageView fitHeight="40.0" fitWidth="100.0" layoutX="96.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/star.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nbrPersonRatedText" layoutX="210.0" layoutY="598.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nbr-person-rated-text-details" text="( 2 )" wrappingWidth="33.33331909179674" />
+            <AnchorPane fx:id="coursesDetailsLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="57.0" layoutY="6.0" prefHeight="458.0" prefWidth="316.0" spacing="15.0">
+                     <children>
+                        <Text fx:id="miniPrice" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="price-course-text" text="216 TND">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/dark/user-2-fill.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="44.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Tutor :" wrappingWidth="69.40498352050781" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="miniTutor" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Ouerfelli Mohamed" wrappingWidth="183.4798903465271">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="225.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/dark/time-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="47.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Duration :" wrappingWidth="104.60499572753906" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="miniDurationText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="06h 30m" wrappingWidth="110.74008256196976">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="201.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/dark/calendar-check-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="48.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Posted in :" wrappingWidth="99.80494689941406" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="miniPostedDate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="24-02-2024" wrappingWidth="119.79998052120209">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="272.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/dark/list-ordered-2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="50.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="NBR Section :" wrappingWidth="133.40491485595703" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="miniNbrSection" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="6" wrappingWidth="88.00010967254639">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="256.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../icons/dark/article-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="53.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Certificate :" wrappingWidth="133.40491485595703" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="miniCertificate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Yes" wrappingWidth="93.84010791778564">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" layoutX="748.0" layoutY="564.0" prefHeight="39.0" prefWidth="428.0" spacing="20.0">
+               <children>
+                  <Button fx:id="miniDetailsBtn" mnemonicParsing="false" onMouseClicked="#miniDetailsBtnClicked" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Details" />
+                  <Button fx:id="miniDescriptionBtn" mnemonicParsing="false" onMouseClicked="#miniDescBtnClicked" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Description" />
+               </children>
+            </HBox>
+            <Button fx:id="enrollCourseBtn" layoutX="570.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#enrollCourseBtnClicked" prefHeight="50.0" prefWidth="140.0" styleClass="enroll-course-btn" text="Enroll Now">
+               <stylesheets>
+                  <URL value="@../../style/style.css" />
+                  <URL value="@../../style/coursesStudentMainPage.css" />
+               </stylesheets>
+            </Button>
+            <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="860.0" layoutY="603.0" stroke="#19bb1c" />
+            <Line fx:id="lineMiniDescBtn" endX="92.0" layoutX="972.0" layoutY="603.0" stroke="#19bb1c" visible="false" />
+            <AnchorPane fx:id="coursesDescriptionLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="9.0" prefHeight="456.0" prefWidth="407.0" styleClass="course-scroll-pane-item-desc" stylesheets="@../../style/coursesStudentMainPage.css">
+                     <content>
+                        <VBox alignment="CENTER" prefHeight="454.0" prefWidth="411.0" styleClass="grid-container-desc" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <Text fx:id="miniDescription" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="&quot;It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;" textAlignment="CENTER" wrappingWidth="348.5367431640625" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="courseStudyPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+         <children>
+            <Button fx:id="goBackCoursesStudy" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesStudyClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
+            <Label fx:id="errorAttAddSection1" prefHeight="23.0" prefWidth="214.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Your section needs a video !" visible="false" />
+            <ScrollPane fx:id="scrollPaneSectionsContainer" hbarPolicy="NEVER" layoutX="15.0" layoutY="81.0" prefHeight="550.0" prefWidth="1171.0" styleClass="scroll-pane-sections-container" stylesheets="@../../style/coursesStudentMainPage.css">
+               <content>
+                  <AnchorPane fx:id="oneSectionViewContainer" prefHeight="562.0" prefWidth="1180.0" styleClass="one-section-view-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                     <children>
+                        <HBox layoutY="-2.0" prefHeight="565.0" prefWidth="1172.0" styleClass="sections-view-list-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                           <children>
+                              <VBox prefHeight="566.0" prefWidth="859.0" styleClass="section-content-view-container" stylesheets="@../../style/coursesStudentMainPage.css">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="850.0" styleClass="video-section-display-container" stylesheets="@../../style/coursesMainPage.css">
+                                       <children>
+                                          <MediaView fx:id="mediaViewerSectionsCourse" fitHeight="480.0" fitWidth="720.0" styleClass="media-viewer-sections-course">
+                                             <viewport>
+                                                <Rectangle2D minX="850.0" minY="430.0" />
+                                             </viewport>
+                                          </MediaView>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Slider fx:id="slideBarTimeVidSectioin" prefHeight="14.0" prefWidth="724.0" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesStudentMainPage.css" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="933.0" spacing="5.0">
+                                       <children>
+                                          <Button fx:id="playSectionVidBtn" mnemonicParsing="false" onMouseClicked="#playSectionVid" styleClass="play-video-btn" stylesheets="@../../style/coursesStudentMainPage.css">
+                                             <graphic>
+                                                <ImageView fx:id="playVidSecBtnImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../icons/light/play-fill.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <HBox fx:id="volumeSecPartContainer" alignment="CENTER" onMouseExited="#hideVolumeSlideBar" prefHeight="26.0" prefWidth="305.0">
+                                             <HBox.margin>
+                                                <Insets left="15.0" top="2.0" />
+                                             </HBox.margin>
+                                             <children>
+                                                <Text fx:id="timeVideoSectionPlay" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time-vid-play-section" text="24:59:59 / " />
+                                                <Text fx:id="totalTimeVidSection" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="time-vid-play-section" text="24:59:59" wrappingWidth="72.19736862182617" />
+                                                <ImageView fx:id="muteVolumeSectVid" fitHeight="28.0" fitWidth="36.0" onMouseClicked="#muteUnmuteVidSecPart" onMouseEntered="#showVolumeSlideBar" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../icons/dark/volume-up-line.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                                <Slider fx:id="volumeBarSectionVid" prefHeight="14.0" prefWidth="105.0" styleClass="volume-bar-section-vid" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                   </HBox.margin>
+                                                </Slider>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="speedVidSec" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#updateSecVidSpeed" prefHeight="23.0" prefWidth="35.0" styleClass="speed-vid" stylesheets="@../../style/coursesStudentMainPage.css" text="x1">
+                                             <HBox.margin>
+                                                <Insets left="420.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <VBox fx:id="sectionsViewDetailsContainer" prefHeight="91.0" prefWidth="858.0">
+                                       <VBox.margin>
+                                          <Insets top="5.0" />
+                                       </VBox.margin>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="sectionsViewListContainer" prefHeight="373.0" prefWidth="314.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <Label fx:id="courseTitleSectionDisplay" alignment="CENTER" layoutX="496.0" layoutY="15.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Courses Lab !" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paymentContainer" layoutX="400.0" layoutY="75.0" prefHeight="468.0" prefWidth="411.0" styleClass="payment-method" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+         <children>
+            <Text fx:id="courseDetailsTitle1" layoutX="157.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="add-card-text" text="Settings" wrappingWidth="100.05368614196777" />
+            <Text fx:id="tutorNameCourseDetailsText1" layoutX="175.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="payment-text" text="Payment" wrappingWidth="92.13749313354492" />
+            <ImageView fx:id="closePayment" fitHeight="28.0" fitWidth="28.0" layoutX="375.0" layoutY="8.0" onMouseClicked="#closePaymentClicked" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutX="29.0" layoutY="118.0" prefHeight="267.0" prefWidth="359.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="cardHolderName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="338.0" promptText="Cardholder's Name" styleClass="payment-form-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+                  <Label fx:id="cardNameError" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Name is required !" visible="false" />
+                  <TextField fx:id="cardNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="338.0" promptText="Card Number" styleClass="payment-form-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+                  <Label fx:id="cardNumberError" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Card number is required ( 16 numbers ) !" visible="false" />
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="200.0" spacing="60.0">
+                     <children>
+                        <TextField fx:id="ccvCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="118.0" promptText="CCV" styleClass="payment-form-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+                        <TextField fx:id="expireDateCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="143.0" promptText="Expire ( mm-aa )" styleClass="payment-form-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="ccvExpireError" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="CCV And Expired Date are required !" visible="false" />
+               </children>
+            </VBox>
+            <Button fx:id="addCardEnrollCourse" layoutX="273.0" layoutY="395.0" mnemonicParsing="false" onMouseClicked="#addCardEnrollCourseClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Add Card" />
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="103.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/master-card.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="58.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/visaaaaa.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="failedOperationPasswordContainer" layoutX="510.0" layoutY="28.0" prefHeight="35.0" prefWidth="225.0" styleClass="failed-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label fx:id="passwordIncorrectContainer" layoutX="45.0" layoutY="5.0" prefHeight="23.0" prefWidth="207.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="Password Incorrect !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="215.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/close-line.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="failedOperationContainer" layoutX="578.0" layoutY="14.0" prefHeight="35.0" prefWidth="146.0" styleClass="failed-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label layoutX="39.0" layoutY="5.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="Failed !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/close-line.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="successOperationContainer" layoutX="578.0" layoutY="14.0" prefHeight="35.0" prefWidth="146.0" styleClass="success-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label layoutX="39.0" layoutY="5.0" styleClass="success-msg" stylesheets="@../../style/coursesMainPage.css" text="Done !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="115.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/checkbox-circle-fill.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="enrollCourseConfirmationContainer" layoutX="377.0" layoutY="130.0" prefHeight="359.0" prefWidth="492.0" styleClass="enroll-confirmation-container" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+         <children>
+            <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="#19bb1c" />
+            <Label layoutX="186.0" layoutY="4.0" styleClass="enroll-confirmation-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Confirmation" />
+            <ImageView fx:id="closeEnrollConfirmation" fitHeight="32.0" fitWidth="32.0" layoutX="435.0" layoutY="5.0" onMouseClicked="#closeEnrollConfirmation" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="msgConfirmDelete" layoutX="46.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="enroll-confirmation-text" text="Are you sure you want to Enroll this course?" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
+            <Button fx:id="confirmDeleteBtn" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#confirmEnrollClicked" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Confirm" />
+            <PasswordField fx:id="passwordConfirmEnroll" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirmation-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="unrollCourseConfirmationContainer" layoutX="377.0" layoutY="130.0" prefHeight="359.0" prefWidth="492.0" styleClass="enroll-confirmation-container" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+         <children>
+            <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="#19bb1c" />
+            <Label layoutX="186.0" layoutY="4.0" styleClass="enroll-confirmation-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Confirmation" />
+            <ImageView fx:id="closeEnrollConfirmation1" fitHeight="32.0" fitWidth="32.0" layoutX="435.0" layoutY="5.0" onMouseClicked="#closeUnrollConfirmation" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="msgConfirmDelete1" layoutX="46.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="enroll-confirmation-text" text="Are you sure you want to Unroll this course?" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
+            <Button fx:id="confirmUnrollBtn" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#confirmUnrollClicked" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-enroll-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Confirm" />
+            <PasswordField fx:id="passwordConfirmUnroll" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter Your Password" styleClass="password-confirmation-input" stylesheets="@../../style/coursesStudentMainPage.css" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ratingCourseContainer" layoutX="387.0" layoutY="140.0" prefHeight="359.0" prefWidth="492.0" styleClass="feedback-container" stylesheets="@../../style/coursesStudentMainPage.css">
+         <children>
+            <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" />
+            <Label layoutX="161.0" layoutY="3.0" styleClass="enroll-confirmation-text" stylesheets="@../../style/coursesStudentMainPage.css" text="Rate Your Course" />
+            <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="435.0" layoutY="5.0" onMouseClicked="#closeRating" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+               <image>
+                  <Image url="@../../icons/dark/close-circle-filll.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="msgConfirmDelete11" layoutX="57.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="enroll-confirmation-text" text="Your Feedback ?" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
+            <Button fx:id="confirmRatingBtn" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onMouseClicked="#submitFeedback" prefHeight="50.0" prefWidth="188.0" styleClass="enroll-course-btn" stylesheets="@../../style/coursesStudentMainPage.css" text="Submit" />
+            <TextArea fx:id="feedbackText" layoutX="88.0" layoutY="165.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="326.0" promptText="Write your feedback (optional)" styleClass="feedback-input" stylesheets="@../../style/coursesStudentMainPage.css" wrapText="true" />
+            <HBox layoutX="118.0" layoutY="101.0" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <ImageView fx:id="star1" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#starOneClicked" pickOnBounds="true" preserveRatio="true" styleClass="star-rate">
+                     <image>
+                        <Image url="@../../images/oneStarEmpty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star2" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#starTwoClicked" pickOnBounds="true" preserveRatio="true" styleClass="star-rate">
+                     <image>
+                        <Image url="@../../images/oneStarEmpty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star3" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#starThreeClicked" pickOnBounds="true" preserveRatio="true" styleClass="star-rate">
+                     <image>
+                        <Image url="@../../images/oneStarEmpty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star4" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#starFourClicked" pickOnBounds="true" preserveRatio="true" styleClass="star-rate">
+                     <image>
+                        <Image url="@../../images/oneStarEmpty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star5" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#starFiveClicked" pickOnBounds="true" preserveRatio="true" styleClass="star-rate">
+                     <image>
+                        <Image url="@../../images/oneStarEmpty.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Button fx:id="deleteFeedbackBtn" layoutX="185.0" layoutY="279.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="delete-btn" stylesheets="@../../style/coursesStudentMainPage.css">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/delete-bin-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

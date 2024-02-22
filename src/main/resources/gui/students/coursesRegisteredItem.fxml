@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="courseRegisteredContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="600.0" styleClass="course-registered-container" stylesheets="@../../style/coursesStudentMainPage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CoursesRegisteredItemController">
+   <children>
+      <Rectangle fx:id="courseImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="10.0" layoutY="10.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-registered-img-container" width="120.0" />
+      <AnchorPane layoutX="137.0" prefHeight="120.0" prefWidth="463.0">
+         <children>
+            <Label fx:id="tutorName" layoutX="2.6399993896484375" layoutY="11.0" prefHeight="27.0" prefWidth="210.0" styleClass="second-welcome-msg" stylesheets="@../../style/style.css" text="Course | Ouerfelli Mohamed">
+               <font>
+                  <Font name="Jost Regular" size="12.0" />
+               </font>
+            </Label>
+            <Text fx:id="titleCourseText" layoutX="2.6399993896484375" layoutY="66.5999984741211" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="course-registered-title-item" text="JavaScript course" wrappingWidth="302.3999755859375" />
+            <Text fx:id="nbrRegistredText" layoutX="24.639999389648438" layoutY="107.87999725341797" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nbr-registred-text" text="128 Registred" wrappingWidth="109.59995727539064" />
+            <ImageView fx:id="moreOptionsBtn" fitHeight="24.0" fitWidth="24.0" layoutX="431.63999938964844" layoutY="9.0" onMouseClicked="#moreOptionsBtnClicked" pickOnBounds="true" preserveRatio="true" styleClass="more-courses-registered">
+               <image>
+                  <Image url="@../../icons/dark/more-2-fill.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b4f7c4" height="10.0" layoutX="156.63999938964844" layoutY="99.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+            <Rectangle fx:id="prcProgressBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff3c" height="10.0" layoutX="156.63999938964844" layoutY="99.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+            <Text fx:id="progressPrcText" layoutX="367.63999938964844" layoutY="107.87999725341797" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="nbr-registred-text" text="25%" wrappingWidth="44.799908447265636" />
+            <Button fx:id="continueLearnBtn" layoutX="308.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#continueLearnBtnClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Continue" />
+            <AnchorPane fx:id="optionsContainer" layoutX="355.63999938964844" layoutY="8.0" prefHeight="75.0" prefWidth="78.0" styleClass="options-registered-courses-container" stylesheets="@../../style/coursesStudentMainPage.css">
+               <children>
+                  <Label layoutX="19.0" layoutY="9.0" onMouseClicked="#unrollOptionClicked" styleClass="options-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Unroll" />
+                  <Label layoutX="19.0" layoutY="40.0" onMouseClicked="#rateOptionClicked" styleClass="options-label" stylesheets="@../../style/coursesStudentMainPage.css" text="Rate" />
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6;">
+               <image>
+                  <Image url="@../../icons/dark/group-fill-black.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

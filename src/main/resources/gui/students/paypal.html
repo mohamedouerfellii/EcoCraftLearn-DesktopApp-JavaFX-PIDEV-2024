@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=AfiXIecQSgCRN25k0JtL3Pr1_fgQcmKSlUutzVxZ_3LRpXLK4YasoGk58ekNRnDCmDh6p2GxhjaLXf41&components=buttons"></script>
+   <!-- <script src="https://www.paypal.com/sdk/js?client-id=AfiXIecQSgCRN25k0JtL3Pr1_fgQcmKSlUutzVxZ_3LRpXLK4YasoGk58ekNRnDCmDh6p2GxhjaLXf41"></script> -->
+</head>
+<body>
+<section align="center">
+    <div style="margin-left: 8.5cm;">
+        <br>
+        <div id="paypal-button-container" ></div>
+    </div>
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions){
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '0.01'
+                        }
+                    }]
+                })
+            },
+
+        }).render("#paypal-button-container");
+    </script>
+</section>
+</body>
+</html>

@@ -20,7 +20,7 @@ public class feedbackDashboardItemController {
     public void setFeedBackData(Feedback feedback){
         Image profileImg = new Image(getClass().getResourceAsStream("/images/profilePictures/12.jpg"));
         feedbackAuthorImgContainer.setFill(new ImagePattern(profileImg));
-        feedbackAuthorName.setText(feedback.getAuthorName());
+        feedbackAuthorName.setText(feedback.getOwner().getLastName()+" "+feedback.getOwner().getFirstName());
         feedbackDate.setText(feedback.getDate());
         feedbackContentText.setText(feedback.getContent());
     }
