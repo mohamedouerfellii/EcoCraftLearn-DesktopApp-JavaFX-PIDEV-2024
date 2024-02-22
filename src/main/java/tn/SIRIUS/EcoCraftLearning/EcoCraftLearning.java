@@ -5,9 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class EcoCraftLearning extends Application {
     @Override
@@ -19,6 +19,8 @@ public class EcoCraftLearning extends Application {
         stage.setTitle("EcoCraft Learning");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logoDark.png")));
         stage.setResizable(false);
+        String ipAddress = InetAddress.getLocalHost().getHostAddress();
+        System.out.println(ipAddress);
         stage.show();
     }
 

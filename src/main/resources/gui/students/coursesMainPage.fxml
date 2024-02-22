@@ -64,7 +64,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="courseDetailsPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css">
+      <AnchorPane fx:id="courseDetailsPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
          <children>
             <Button fx:id="goBackCoursesDetails" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesDetailsClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
             <Rectangle fx:id="courseDetailsImg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="87.0" layoutY="83.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />

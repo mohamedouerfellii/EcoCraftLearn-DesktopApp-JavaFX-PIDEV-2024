@@ -19,11 +19,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane>
-               <children>
-                  <Label fx:id="quizzLabelPresentation" layoutX="17.0" prefHeight="52.0" prefWidth="93.0" styleClass="section-desc-title" stylesheets="@../../style/sectionsDetails.css" text="Quiz :" />
-               </children>
-            </AnchorPane>
+            <AnchorPane />
          </children>
       </VBox>
    </children>

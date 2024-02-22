@@ -23,10 +23,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import tn.SIRIUS.entities.*;
 import tn.SIRIUS.services.*;
+import tn.SIRIUS.utils.SMS;
 
 import java.io.File;
 import java.io.IOException;
@@ -170,6 +170,7 @@ public class CoursesMainPageController implements Initializable {
     private AnchorPane coursesReviewLeft;
     @FXML
     private VBox listReviewsLeftContainer;
+    private int incorrectPasswordCounter;
     private CourseService courseService;
     private List<Course> registeredCourses;
     private String styleMiniBtnNormal;
@@ -215,6 +216,7 @@ public class CoursesMainPageController implements Initializable {
                 mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
         });
         rateValue = 0;
+        incorrectPasswordCounter = 0;
     }
     public void notifySuccess(){
         successOperationContainer.setVisible(true);
@@ -488,6 +490,7 @@ public class CoursesMainPageController implements Initializable {
             }
         } else {
             closeEnrollConfirmation(null);
+            sendSecuritySms();
             notifyFailedPassword();
         }
     }
@@ -664,9 +667,18 @@ public class CoursesMainPageController implements Initializable {
                     notifyFailed();
             }else
                 notifyFailed();
-        } else
+        } else{
+            sendSecuritySms();
             notifyFailedPassword();
+        }
         closeUnrollConfirmation(null);
+    }
+    public void sendSecuritySms(){
+        incorrectPasswordCounter++;
+        if(incorrectPasswordCounter == 5){
+            SMS.sendSms();
+            incorrectPasswordCounter = 0;
+        }
     }
     // Rate
     @FXML
