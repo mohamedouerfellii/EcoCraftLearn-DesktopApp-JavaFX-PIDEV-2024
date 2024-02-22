@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import tn.SIRIUS.entities.CollectionPoint;
 import tn.SIRIUS.services.CollectionPtService;
 
+import java.io.IOException;
+
 public class CollectionPtsItemController {
 
     @FXML
@@ -27,7 +29,9 @@ public class CollectionPtsItemController {
     private Button viewCollectionsBtn;
 
 
-    private  PtsCollectMainPageController ptsCollectMainPageController = new PtsCollectMainPageController();
+
+    private PtsCollectMainPageController ptsCollectMainPageController;
+
     public void setPtsCollectMainPageController(PtsCollectMainPageController ptsCollectMainPageController) {this.ptsCollectMainPageController = ptsCollectMainPageController;}
 
     public void setCollectionItemData(CollectionPoint collectionPoint){
@@ -38,6 +42,14 @@ public class CollectionPtsItemController {
             ptsCollectMainPageController.getConfirmDeleteCollectionPtContainer().setVisible(true);
             ptsCollectMainPageController.setIdtodelete(collectionPoint.getIdcollectionPoint());
         });
+        showUpdateCollectionPtsBtn.setOnAction(event -> {
+            try {
+                ptsCollectMainPageController.recover(collectionPoint);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
      }
 
 }

@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +22,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PtsCollectMainPageController implements Initializable {
+
+    public AnchorPane getUpdateCollectionPtsContainer() {
+        return UpdateCollectionPtsContainer;
+    }
 
     @FXML
     private AnchorPane UpdateCollectionPtsContainer;
@@ -55,14 +60,30 @@ public class PtsCollectMainPageController implements Initializable {
     @FXML
     private AnchorPane ptsCollectPage;
 
+    public TextArea getUpdateCollectionPtsAdress() {
+        return updateCollectionPtsAdress;
+    }
+
     @FXML
     private TextArea updateCollectionPtsAdress;
+
+    public TextField getUpdateCollectionPtsCapacity() {
+        return updateCollectionPtsCapacity;
+    }
 
     @FXML
     private TextField updateCollectionPtsCapacity;
 
+    public Button getUpdateCollectionptsBtn() {
+        return updateCollectionptsBtn;
+    }
+
     @FXML
     private Button updateCollectionptsBtn;
+
+    public TextField getUpdateCollectionptsName() {
+        return updateCollectionptsName;
+    }
 
     @FXML
     private TextField updateCollectionptsName;
@@ -127,7 +148,13 @@ public class PtsCollectMainPageController implements Initializable {
         showAllCollectionPts();
         TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0);
         newCollectionPtsCapacity.setTextFormatter(textFormatter);
-
+        cancelUpdatingCollectionPts.setOnAction(event -> {
+                    UpdateCollectionPtsContainer.setVisible(false);
+                    updateCollectionptsName.clear();
+                    updateCollectionPtsAdress.clear();
+                    updateCollectionPtsCapacity.clear();
+                }
+                );
     }
     public void showAllCollectionPts(){
 
@@ -167,6 +194,37 @@ public class PtsCollectMainPageController implements Initializable {
       }
       else System.out.println("error");
     }
+
+
+    void recover(CollectionPoint collectionPoint ) throws IOException {
+        updateCollectionptsName.setText(collectionPoint.getNameCollectionPoint());
+        updateCollectionPtsAdress.setText(collectionPoint.getAdressCollectionPoint());
+        updateCollectionPtsCapacity.setText(collectionPoint.getCapacity().toString());
+        UpdateCollectionPtsContainer.setVisible(true);
+
+        updateCollectionptsBtn.setOnAction(e->{UpdateCollectionpt(collectionPoint);
+            System.out.println(collectionPoint.getIdcollectionPoint());
+        });
+
+    }
+
+    public void UpdateCollectionpt(CollectionPoint entity) {
+        int id = entity.getIdcollectionPoint();
+        String name =updateCollectionptsName.getText();
+        String adress = updateCollectionPtsAdress.getText();
+        float capacity = Float.parseFloat(updateCollectionPtsCapacity.getText());
+        CollectionPoint updatedentity = new CollectionPoint(id,name, adress, capacity);
+        CollectionPtService collectionPtService = new CollectionPtService();
+        if (collectionPtService.update(updatedentity) == 1) {
+            System.out.println("done");
+            UpdateCollectionPtsContainer.setVisible(false);
+            ptsCollectMainContainer.getChildren().clear();
+            points = collectionPtService.getAll();
+            showAllCollectionPts();
+        } else System.out.println("error");
+
+    }
+
 
 
 

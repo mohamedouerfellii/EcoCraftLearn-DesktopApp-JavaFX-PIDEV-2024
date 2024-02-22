@@ -20,7 +20,7 @@
             <Font name="Jost Regular" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="collectionPtsCapacity" alignment="CENTER" layoutX="302.0" layoutY="24.0" prefHeight="38.0" prefWidth="202.0" text=" 15,000 kg">
+      <Label fx:id="collectionPtsCapacity" alignment="CENTER" layoutX="325.0" layoutY="20.0" prefHeight="38.0" prefWidth="135.0" text=" 15,000 kg">
          <font>
             <Font name="Corbel" size="20.0" />
          </font>
@@ -53,5 +53,20 @@
                </graphic></Button>
          </children>
       </HBox>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="65.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/home-3-line.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="88.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/map-pin-line.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="333.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/icons8-weight-24.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
