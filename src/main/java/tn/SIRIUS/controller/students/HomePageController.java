@@ -69,7 +69,6 @@ public class HomePageController implements Initializable {
     private ScrollPane coursesScrollPane;
     @FXML
     private VBox coursesVboxHomePage;
-
     @FXML
     private Pane mainContentContainer;
     @Override

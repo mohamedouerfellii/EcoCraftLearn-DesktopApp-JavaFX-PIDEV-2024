@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface ICRUD<T,U> {
     public int add(T entity);
-   // public Map<T,U> getAll();
+   public List<T> getAll();
     public int update(T entity);
     public int delete(T entity);
 

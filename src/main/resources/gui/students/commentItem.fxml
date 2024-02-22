@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -9,7 +13,7 @@
 
 <VBox fx:id="commentContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CommentItemController">
    <children>
-      <HBox prefHeight="24.0" prefWidth="585.0" spacing="15.0">
+      <HBox prefHeight="55.0" prefWidth="601.0" spacing="15.0">
          <children>
             <Circle fx:id="commentUserImg" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <VBox spacing="10.0" style="-fx-background-color: lightgrey; -fx-background-radius: 10;">
@@ -22,6 +26,7 @@
                         <Insets left="7.0" top="5.0" />
                      </VBox.margin>
                   </Text>
+
                   <Text fx:id="commentContent" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="481.3367187976837">
                      <VBox.margin>
                         <Insets bottom="5.0" left="20.0" />
@@ -29,6 +34,19 @@
                   </Text>
                </children>
             </VBox>
+            <MenuButton fx:id="ABoutCommentBtn" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="16.0" prefWidth="30.0" styleClass="choice-box" stylesheets="@../../css/style.css" translateX="-15.0" translateY="17.0">
+               <items>
+                  <MenuItem fx:id="updateCommentmenuBtn" text="Update" />
+                  <MenuItem fx:id="deleteCommentmenuBtn" mnemonicParsing="false" text="Delete" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" translateX="9.0">
+                     <image>
+                        <Image url="@../../img/dark/icons8-points-de-suspension-30.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuButton>
          </children>
          <VBox.margin>
             <Insets left="15.0" top="7.0" />

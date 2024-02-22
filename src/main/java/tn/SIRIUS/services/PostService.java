@@ -41,25 +41,24 @@ public class PostService implements ICRUD<Post,User> {
     }
 
 
-    public Map<Post, User> getAll() {
-        Map<Post, User> postUserMap = new HashMap<>();
+    public List<Post> getAll() {
+        List<Post> list = new ArrayList<>();
         String query = "SELECT p.idPost AS postId, p.content, p.attachment, p.owner ,p.postedDate," +
                 "       u.idUser AS userId, u.firstName, u.lastName, u.email, u.password, u.numTel, u.role, u.gender, u.isActive, u.nbrPtsCollects, u.image " +
                 "FROM posts p " +
                 "JOIN users u ON p.owner = u.idUser;";
         try (Statement stm = con.createStatement()) {
             ResultSet rs = stm.executeQuery(query);
-
             while (rs.next()) {
                 User user = new User(rs.getInt("userId"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getString("password"), rs.getString("numTel"), rs.getString("role"), rs.getString("gender"), rs.getInt("isActive"), rs.getInt("nbrPtsCollects"), rs.getString("image"));
-                Post post = new Post(rs.getInt("postId"), rs.getString("content"), rs.getString("attachment"), rs.getInt("owner"), rs.getTimestamp("postedDate").toLocalDateTime());
-                postUserMap.put(post, user);
+                Post post = new Post(rs.getInt("postId"), rs.getString("content"), rs.getString("attachment"), rs.getInt("owner"), rs.getTimestamp("postedDate").toLocalDateTime(),user);
+                list.add(post);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
-        return postUserMap;
+        return list;
     }
 
 
@@ -101,5 +100,33 @@ public class PostService implements ICRUD<Post,User> {
             System.out.println(ex.getMessage());
         }
         return 0;
+    }
+    public Post getPostById(int id){
+        String query = "SELECT posts.*, users.* FROM posts JOIN users ON posts.owner = users.idUser WHERE idPost = ?";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()){
+                User owner = new User(
+                        rs.getInt("idUser"),
+                        rs.getString("FirstName"),
+                        rs.getString("lastName"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("numTel"),
+                        rs.getString("role"),
+                        rs.getString("gender"),
+                        rs.getInt("isActive"),
+                        rs.getInt("nbrPtsCollects"),
+                        rs.getString("image")
+                );
+                Post post = new Post(rs.getInt("idPost"), rs.getString("content"), rs.getString("attachment"), owner.getIdUser(), rs.getTimestamp("postedDate").toLocalDateTime(),owner);
+                return post;
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }

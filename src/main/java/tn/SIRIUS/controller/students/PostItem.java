@@ -89,11 +89,11 @@ public class PostItem  {
 
     int nbvote=0;
 
-    public void setData(Post p , User user )
+    public void setData(Post p)
     {
-        Image img = new Image(user.getImage());
+        Image img = new Image(p.getUser().getImage());
         Profil_img.setFill(new ImagePattern(img));
-        String usernamelastname = user.getFirstName()+ " " + user.getLastName();
+        String usernamelastname = p.getUser().getFirstName()+ " " + p.getUser().getLastName();
         UserName.setText(usernamelastname);
         Posted_Date.setText(p.getPostedDate().toString());
         Post_Text.setText(p.getContent());
@@ -142,7 +142,8 @@ public class PostItem  {
         });
         commentPostBtn.setOnMouseClicked(e->{
             forumController.getShowCommentsConatainer().setVisible(true);
-            forumController.setPostCommentData(p,user);
+            forumController.showPostComments(p);
+            forumController.getAddCommentBtn().setOnAction(event-> forumController.addNewComment(p));
 
         });
 
@@ -219,7 +220,6 @@ nbvote++;
         deletePostBtn.setOnAction(e->{
             forumController.getDeletePostContainer().setVisible(true);
             forumController.setIdposttodelete(p.getIdPost());
-            System.out.println(p.getIdPost());
 
         });
 

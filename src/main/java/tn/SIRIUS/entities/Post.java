@@ -10,6 +10,28 @@ public class Post {
    private  String attachment;
     private  int owner;
     private LocalDateTime postedDate;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
+    public Post(int idPost, String content, String attachment, int owner, LocalDateTime postedDate, User user) {
+        this.idPost = idPost;
+        this.content = content;
+        this.attachment = attachment;
+        this.owner = owner;
+        this.postedDate = postedDate;
+        this.user = user;
+    }
+
+
 
     public int getIdPost() {
         return idPost;

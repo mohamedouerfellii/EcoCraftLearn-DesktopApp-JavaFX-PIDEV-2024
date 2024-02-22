@@ -309,7 +309,7 @@
       </AnchorPane>
       <AnchorPane fx:id="showCommentsConatainer" prefHeight="635.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css">
          <children>
-            <ScrollPane hbarPolicy="NEVER" layoutX="216.0" layoutY="33.0" prefHeight="579.0" prefWidth="882.0" vbarPolicy="NEVER">
+            <ScrollPane fx:id="scrollPaneAllcomments" hbarPolicy="NEVER" layoutX="283.0" layoutY="33.0" prefHeight="579.0" prefWidth="882.0" vbarPolicy="NEVER">
                <content>
                   <VBox fx:id="allCommentsContainer" prefHeight="662.0" prefWidth="596.0">
                      <children>

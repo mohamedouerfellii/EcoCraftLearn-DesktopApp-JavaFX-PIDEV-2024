@@ -58,11 +58,35 @@ public class ForumController implements Initializable {
     @FXML
     private Label User_name;
 
+    public Button getAddCommentBtn() {
+        return addCommentBtn;
+    }
+
     @FXML
     private Button addCommentBtn;
 
+    public VBox getAllCommentsContainer() {
+        return allCommentsContainer;
+    }
+
+    public void setAllCommentsContainer(VBox allCommentsContainer) {
+        this.allCommentsContainer = allCommentsContainer;
+    }
+
     @FXML
     private VBox allCommentsContainer;
+
+    public ScrollPane getScrollPaneAllcomments() {
+        return scrollPaneAllcomments;
+    }
+
+    public void setScrollPaneAllcomments(ScrollPane scrollPaneAllcomments) {
+        this.scrollPaneAllcomments = scrollPaneAllcomments;
+    }
+
+    @FXML
+    private ScrollPane scrollPaneAllcomments;
+
 
     @FXML
     private Button allPosts;
@@ -146,6 +170,11 @@ public class ForumController implements Initializable {
 
     @FXML
     private Circle updtePostuserimg;
+
+    public Button getCloseCommentsConatainerBtn() {
+        return closeCommentsConatainerBtn;
+    }
+
     @FXML
     private Button closeCommentsConatainerBtn;
 
@@ -159,12 +188,13 @@ public class ForumController implements Initializable {
         return showCommentsConatainer;
     }
     private List<Comment> comments = new ArrayList<>();
-    Map<Post, User> acuill = new HashMap<>();
+   List<Post> acuill = new ArrayList<>();
     String attachmentPath;
     String newattachmentPath;
     int idposttodelete;
     String newCommentAttachmentPath;
     private boolean showAllPosts = true;
+
 
     public Button getConfirmDeletePostBtn() {return confirmDeletePostBtn;}
     public AnchorPane getPostsMainContent() {
@@ -174,13 +204,17 @@ public class ForumController implements Initializable {
     public int getIdposttodelete() {return idposttodelete;}
 
     public void setIdposttodelete(int idposttodelete) {this.idposttodelete = idposttodelete;}
+    User user= new User(1,"jarray","abdelmonam","jarray","jarray","jarray","jarray","jarray",1,1,"/img/img.png");
+
+    public User user1 = new User(2,"Mohamed","Mohamed","jarray","jarray","jarray","jarray","jarray",1,1,"/img/img.png");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Image userimg = new Image(getClass().getResourceAsStream("/img/img.png"));
+
+        Image userimg = new Image(user.getImage());
         User_image.setFill(new ImagePattern(userimg));
-        User_name.setText("Jarray abdelmonam");
+        User_name.setText(user.getFirstName()+ " "+user.getLastName());
         PostService postService = new PostService();
         acuill = postService.getAll();
         showPosts();
@@ -205,10 +239,10 @@ public class ForumController implements Initializable {
                 acuill = postService.getAll();
                 showPosts();
                 deletePostContainer.setVisible(false);
-                System.out.println(" delete done");
+
                 idposttodelete= Integer.parseInt(null);
-            }else
-                System.out.println("delete failed");
+            }
+
         });
         cancelDeletePostBtn.setOnAction(e->{
             deletePostContainer.setVisible(false);
@@ -221,23 +255,24 @@ public class ForumController implements Initializable {
 
 
 
+        newCommentAttachmentBtn.setOnAction(e-> newCommentAttachmentPath = newCommentAttachmentWindow());
+
+
+
     }
 
 
     public void addNewPost() {
-        String username = "Jarray abdelmonam";
-        String img = "img/img.png";
-        int idUser = 1;
         LocalDateTime currentDateTime = LocalDateTime.now();
         String newPostText = NewPostText.getText();
-        Post post = new Post(1, newPostText, attachmentPath, idUser, currentDateTime);
+        Post post = new Post(1, newPostText, attachmentPath, user1.getIdUser(), currentDateTime);
         PostService postService = new PostService();
         if (postService.add(post) == 1) {
             acuill = postService.getAll();
             showPosts();
 
-        } else
-            System.out.println("FAILED");
+        }
+
 
         //ShowPopularPeople();
         attachmentPath = null;
@@ -252,26 +287,23 @@ public class ForumController implements Initializable {
         if (forum.getChildren().size() > 1) {
             forum.getChildren().remove(3, forum.getChildren().size()); // Remove all children except the first one
         }
-
-        TreeMap<Post, User> sortedPosts = new TreeMap<>(Comparator.comparing(Post::getPostedDate).reversed());
-        sortedPosts.putAll(acuill);
+        Collections.sort(acuill, (c1, c2) -> c2.getPostedDate().compareTo(c1.getPostedDate()));
         try {
-            for (Map.Entry<Post, User> entry : sortedPosts.entrySet()) {
-                Post a = entry.getKey();
-                User user = entry.getValue();
+            for (Post post : acuill) {
+
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
                 Parent p = fxmlLoader.load();
                 PostItem postItem = fxmlLoader.getController();
                 postItem.setForumController(this);
-                postItem.setData(a, user);
+                postItem.setData(post);
 
 
                 if (showAllPosts) {
 //                    postItem.ReactionPressed();
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(false);
-                } else if (user.getIdUser() == 2) { // Assuming getId() returns the user ID
+                } else if (post.getUser().getIdUser() == user1.getIdUser()) { // Assuming getId() returns the user ID
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(true);
 
@@ -374,7 +406,7 @@ public class ForumController implements Initializable {
         Post updatedpost = new Post(post.getIdPost(), updatePostText.getText(), newattachmentPath, idUser, post.getPostedDate());
         PostService postService = new PostService();
         if (postService.update(updatedpost) == 1) {
-            System.out.println("done");
+
             updatePostContainer.setVisible(false);
             acuill = postService.getAll();
             showPosts();
@@ -391,15 +423,13 @@ public class ForumController implements Initializable {
 
   public void ShowPopularPeople() {
 
-        for (Map.Entry<Post,User> entry : acuill.entrySet()) {
-            User user =entry.getValue();
-            System.out.println(user.getIdUser());
+        for (Post post : acuill) {
             int nblike = 100;
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/students/popularPeopleItem.fxml"));
                 HBox hBox = fxmlLoader.load();
                 PopularPeopleItemController popularPeopleItemController = fxmlLoader.getController();
-                popularPeopleItemController.SetPopularData(nblike, user);
+                popularPeopleItemController.SetPopularData(nblike, post.getUser());
                 PopularpeopleConatainer.getChildren().add(hBox);
 
 
@@ -415,65 +445,83 @@ public class ForumController implements Initializable {
 
 
 
-public void setPostCommentData(Post post,User user) {
-        Image img =new Image(user.getImage());
+public void showPostComments(Post post) {
+    if (allCommentsContainer.getChildren().size() > 0) {
+        allCommentsContainer.getChildren().remove(1, allCommentsContainer.getChildren().size());
+        commentPostContentContainer.getChildren().remove(1, commentPostContentContainer.getChildren().size());
+        commentPostContentContainer.setPrefHeight(50);}
+        Image img = new Image(post.getUser().getImage());
         commentPostUserImg.setFill(new ImagePattern(img));
-        commentPostUserName.setText(user.getFirstName()+ user.getLastName());
+        commentPostUserName.setText(post.getUser().getFirstName() + post.getUser().getLastName());
         commentPostPostedDate.setText(post.getPostedDate().toString());
         commentPostContentText.setText(post.getContent());
-    String imageUrl = post.getAttachment();
-    if (imageUrl != null && !imageUrl.isEmpty()) {
-        Image image = new Image(imageUrl);
-        StackPane stackPane = new StackPane();
-        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        ImageView imageView = new ImageView(image);
-        imageView.setPreserveRatio(true);
-        stackPane.setPrefHeight(image.getHeight() * 0.3);
-        stackPane.setPrefWidth(image.getWidth() * 0.3);
-        stackPane.setMaxWidth(600);
-        imageView.setFitWidth(image.getWidth() * 30 / 100);
-        imageView.setFitHeight(image.getHeight() * 30 / 100);
-        DoubleBinding scaledWidth = Bindings.createDoubleBinding(
-                () -> stackPane.widthProperty().get() * 0.5,
-                stackPane.widthProperty()
-        );
-        imageView.fitWidthProperty().bind(scaledWidth);
-        imageView.fitHeightProperty().bind(stackPane.heightProperty());
-        stackPane.getChildren().add(imageView);
-        commentPostContentContainer.getChildren().add(stackPane);
-        commentPostContentContainer.setPrefHeight(image.getHeight() + 125 + 50);
-    }
-    CommentService commentService = new CommentService();
-    comments = commentService.getAll();
-    for (Comment comment : comments){
-        if (comment.getPost().getIdPost()==post.getIdPost()) {
-            try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/gui/students/commentItem.fxml"));
-            Parent root=fxmlLoader.load();
-            CommentItemController item = fxmlLoader.getController();
-            item.setCommentItemdata(comment);
-            allCommentsContainer.getChildren().add(root);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        String imageUrl = post.getAttachment();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Image image = new Image(imageUrl);
+            StackPane stackPane = new StackPane();
+            stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            stackPane.setPrefHeight(image.getHeight() * 0.3);
+            stackPane.setPrefWidth(image.getWidth() * 0.3);
+            stackPane.setMaxWidth(600);
+            imageView.setFitWidth(image.getWidth() * 30 / 100);
+            imageView.setFitHeight(image.getHeight() * 30 / 100);
+            DoubleBinding scaledWidth = Bindings.createDoubleBinding(
+                    () -> stackPane.widthProperty().get() * 0.5,
+                    stackPane.widthProperty()
+            );
+            imageView.fitWidthProperty().bind(scaledWidth);
+            imageView.fitHeightProperty().bind(stackPane.heightProperty());
+            stackPane.getChildren().add(imageView);
+            commentPostContentContainer.getChildren().add(stackPane);
+            commentPostContentContainer.setPrefHeight(image.getHeight() + 125 + 50);
+        }
+        CommentService commentService = new CommentService();
+        comments = commentService.getAll();
+        for (Comment comment : comments) {
+            if (comment.getPost().getIdPost() == post.getIdPost()) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/students/commentItem.fxml"));
+                    Parent root = fxmlLoader.load();
+                    CommentItemController item = fxmlLoader.getController();
+                    item.setForumController(this);
+                    item.setCommentItemdata(comment);
+                    if (comment.getOwner().getIdUser() == 1) {
+                       item.getABoutCommentBtn().setVisible(false);
+                    }else {
+                        item.getABoutCommentBtn().setVisible(true);
+                    }
+
+                    allCommentsContainer.getChildren().add(root);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
+
+        }
+        int lastIndex = allCommentsContainer.getChildren().size() - 1;
+        if (lastIndex >= 1) {
+            Parent lastRoot = (Parent) allCommentsContainer.getChildren().get(lastIndex);
+            lastRoot.setStyle("-fx-background-color: white;" +
+                    "        -fx-border-color: none;" +
+                    "        -fx-border-radius: 20 20 0  0;" +
+                    "        -fx-background-radius: 0 0 20 20;");
         }
 
-    }
+        closeCommentsConatainerBtn.setOnAction(e ->
+        {
+            showCommentsConatainer.setVisible(false);
 
-    closeCommentsConatainerBtn.setOnAction(e->
-    {
-        showCommentsConatainer.setVisible(false);
-        if (allCommentsContainer.getChildren().size() > 0) {
-            allCommentsContainer.getChildren().remove(1, allCommentsContainer.getChildren().size());
-            commentPostContentContainer.getChildren().remove(1, commentPostContentContainer.getChildren().size());
-            commentPostContentContainer.setPrefHeight(50);
-            newCommentIput.clear();
-        }
-    });
+
+        });
+
+
 
 }
-
 
 
 
@@ -481,17 +529,18 @@ public void setPostCommentData(Post post,User user) {
 public  void addNewComment(Post p){
 
         if (newCommentIput.getText() != null && !newCommentIput.getText().isEmpty()) {
-            String username = "Jarray abdelmonam";
-            String img = "img/img.png";
-            int idUser = 2;
-            User user = new User(2, "Jarray", "abdelmonam", "img/img.png", "123456", "564", "", "", 0, 0, "img/img.png");
-            Comment comment = new Comment(0, p, user, newCommentIput.getText(), newCommentAttachmentPath);
+            Comment comment = new Comment(0, p , user1, newCommentIput.getText(), newCommentAttachmentPath);
             CommentService commentService = new CommentService();
             if (commentService.add(comment) == 1)
                 System.out.println("true");
             else System.out.println("error");
         }
+        showPostComments(p);
+        newCommentContainer.setMaxHeight(67);
+        newCommentAttachment.setHeight(0);
+        newCommentAttachment.setVisible(false);
         newCommentAttachmentPath = null;
+        newCommentIput.clear();
 }
 
 
@@ -511,6 +560,21 @@ public  void addNewComment(Post p){
 
     }
 
+
+
+public void  deleteComment(Comment comment) {
+
+
+        PostService postService = new PostService();
+    Post post = postService.getPostById(comment.getPost().getIdPost());
+    CommentService commentService = new CommentService();
+    if (commentService.delete(comment) == 1) {
+        System.out.println("true");
+        showPostComments(post);
+    } else System.out.println("error");
+
+
+}
 
 }
 
