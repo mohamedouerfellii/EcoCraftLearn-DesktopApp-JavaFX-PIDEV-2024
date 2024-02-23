@@ -115,7 +115,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="14.0" layoutY="15.0" prefHeight="633.0" prefWidth="1178.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/Style1.css">
+            <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="14.0" layoutY="15.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/Style1.css">
                <children>
                   <ImageView fx:id="ImageProductDetails" fitHeight="366.0" fitWidth="482.0" layoutX="733.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProductDetails">
                      <image>

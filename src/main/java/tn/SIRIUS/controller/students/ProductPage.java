@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import tn.SIRIUS.entities.*;
@@ -81,7 +82,7 @@ public class ProductPage implements Initializable{
     private AnchorPane ContainerAnchorpaneProduct;
 
     @FXML
-    private Label DescProductdetailsClient;
+    private Text DescProductdetailsClient;
 
     @FXML
     private Button DetailGoBackBtn;
@@ -135,7 +136,7 @@ public class ProductPage implements Initializable{
     private VBox cartItemsContainer;
 
     @FXML
-    private Label NameProductdetailsClient;
+    private Text NameProductdetailsClient;
 
     @FXML
     private Label NomProductLabel;
@@ -153,7 +154,7 @@ public class ProductPage implements Initializable{
     private ImageView PictureChooser;
 
     @FXML
-    private Label PriceProductDetailsClient;
+    private Text PriceProductDetailsClient;
 
     @FXML
     private Rectangle RectangleDetailProduct;
@@ -171,7 +172,7 @@ public class ProductPage implements Initializable{
     private VBox VboxContainerReview;
 
     @FXML
-    private Label dateProductDetailsClient;
+    private Text dateProductDetailsClient;
 
     @FXML
     private Button decrementValue;
@@ -276,10 +277,6 @@ public class ProductPage implements Initializable{
 
 
 
-
-
-
-
     }
 
 
@@ -371,7 +368,7 @@ public class ProductPage implements Initializable{
         PaneGroupProduct.setVisible(true);
         AnchorPaneDetailsProctClient.setVisible(false);
     }
-    public void showProductDetailsClient(Product product) {
+   public void showProductDetailsClient(Product product) {
 
         AnchorPaneDetailsProctClient.setVisible(true);
         PaneGroupProduct.setVisible(false);
@@ -380,15 +377,12 @@ public class ProductPage implements Initializable{
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
 
       //IdProductdetailsClient.setText(String.valueOf(product.getIdProduct()));
-        RectangleDetailProduct.setFill(new ImagePattern(img1));
-        NameProductdetailsClient.setText(product.getName());
-        DescProductdetailsClient.setText(product.getDescription());
+       RectangleDetailProduct.setFill(new ImagePattern(img1));
+       NameProductdetailsClient.setText(product.getName());
+       DescProductdetailsClient.setText(product.getDescription());
        //dateProductDetailsClient.setText(product.getAddDate());
-        float price = product.getPrice();
-        PriceProductDetailsClient.setText(price + "  DT");
-
-
-
+       float price = product.getPrice();
+       PriceProductDetailsClient.setText(price + "  TND");
     }
 
 
@@ -563,10 +557,5 @@ public class ProductPage implements Initializable{
           showSousCarts();
 
 
-
-
   }
-
-
-
 }

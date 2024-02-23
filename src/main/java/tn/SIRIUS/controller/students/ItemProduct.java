@@ -39,15 +39,21 @@ public class ItemProduct {
     @FXML
     private Rectangle RectangleImageProduct;
     ProductPage productPage = new ProductPage();
+
     public void setData(Product product) {
+
+
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
+
         RectangleImageProduct.setFill(new ImagePattern(img1));
         NameProduct.setText(product.getName());
         DescProduct.setText(product.getDescription());
         float price = product.getPrice();
         Priceproduct.setText(price + "  DT");
+
+
         RectangleImageProduct.setOnMouseClicked( e -> productPage.showProductDetailsClient(product));
         AddToCartBtn.setOnMouseClicked(e -> {
             productPage.remplireCartProduct(product);
@@ -57,6 +63,8 @@ public class ItemProduct {
     public void setProductPage(ProductPage productpage) {
        this.productPage= productpage;
     }
+
+
 
 
 

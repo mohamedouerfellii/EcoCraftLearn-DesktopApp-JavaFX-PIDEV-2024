@@ -18,3 +18,38 @@
 {
    -fx-opacity: 0.6;
 }
+
+.price-course-text{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 30;
+    -fx-fill: #19BB1C;
+}
+.one-detail-container{
+    -fx-background-color: transparent;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0 0 0.5 0;
+}
+.text-mini-detail{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.text-mini-detail-content{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.price-course-text{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 30;
+    -fx-fill: #19BB1C;
+}
+
+.courses-details-left{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+}
+

@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -19,7 +20,7 @@
 
 <AnchorPane fx:id="HomeAnchorPane" prefHeight="720.0" prefWidth="1350.0" styleClass="GrandPageHomeProduct" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ProductPage">
    <children>
-      <VBox fx:id="MenuVbox" layoutX="24.0" layoutY="20.0" prefHeight="664.0" prefWidth="123.0" styleClass="MenuVbox" stylesheets="@../../styles/Style1.css">
+      <VBox fx:id="MenuVbox" layoutX="11.0" layoutY="20.0" prefHeight="664.0" prefWidth="123.0" styleClass="MenuVbox" stylesheets="@../../styles/Style1.css">
          <children>
             <ImageView fitHeight="58.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="Logo">
                <image>
@@ -112,11 +113,11 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane layoutX="155.0" layoutY="-2.0" prefHeight="720.0" prefWidth="1195.0" styleClass="HomeAnchorPaneProduct">
+      <AnchorPane layoutX="135.0" prefHeight="728.0" prefWidth="1218.0" styleClass="HomeAnchorPaneProduct">
          <children>
-            <AnchorPane fx:id="ContainerAnchorpaneProduct" layoutX="1.0" layoutY="3.0" onDragDetected="#handleAddProductBtn" prefHeight="720.0" prefWidth="1195.0">
+            <AnchorPane fx:id="ContainerAnchorpaneProduct" layoutX="9.0" layoutY="3.0" onDragDetected="#handleAddProductBtn" prefHeight="721.0" prefWidth="1209.0">
                <children>
-                  <Pane fx:id="PaneGroupProduct" layoutX="50.0" layoutY="50.0" prefHeight="635.0" prefWidth="1120.0" styleClass="PaneGroupProduct" stylesheets="@../../styles/Style1.css">
+                  <Pane fx:id="PaneGroupProduct" layoutX="10.0" layoutY="80.0" prefHeight="635.0" prefWidth="1200.0" styleClass="PaneGroupProduct" stylesheets="@../../styles/Style1.css">
                      <children>
                         <ScrollPane fx:id="ScrolPaneProduct" hbarPolicy="NEVER" layoutX="5.0" layoutY="83.0" prefHeight="544.0" prefWidth="984.0" styleClass="ScrolPaneProduct" stylesheets="@../../styles/Style1.css">
                            <content>
@@ -128,7 +129,7 @@
                            </content>
                         </ScrollPane>
                         <Text layoutX="29.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="TextShop" text="Shop" wrappingWidth="132.0" />
-                        <Button fx:id="AddProductBtn" layoutX="1048.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddProductBtn" prefHeight="52.0" prefWidth="58.0" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css">
+                        <Button fx:id="AddProductBtn" layoutX="1125.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleAddProductBtn" prefHeight="52.0" prefWidth="58.0" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css">
                            <graphic>
                               <ImageView fitHeight="34.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -136,7 +137,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="openCart" layoutX="1050.0" layoutY="91.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="55.0" styleClass="openCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="cart" />
+                        <Button fx:id="openCart" layoutX="1130.0" layoutY="89.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="55.0" styleClass="openCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="cart" />
                         <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="715.0" layoutY="84.0" prefHeight="544.0" prefWidth="407.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
                            <children>
                               <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="40.0" prefHeight="408.0" prefWidth="404.0" styleClass="ScrolPaneContainerSousCarte" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
@@ -221,7 +222,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorFormProduct" layoutX="50.0" layoutY="50.0" maxHeight="617.0" maxWidth="1119.0" minHeight="534.0" minWidth="984.0" prefHeight="534.0" prefWidth="1140.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css" visible="false">
+            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="80.0" prefHeight="635.0" prefWidth="1200.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css" visible="false">
                <children>
                   <Label layoutX="38.0" layoutY="101.0" prefHeight="25.0" prefWidth="45.0" styleClass="TextTitle" stylesheets="@../../styles/StyleForm.css" text="Name" />
                   <TextField fx:id="InputName" layoutX="37.0" layoutY="133.0" prefHeight="54.0" prefWidth="480.0" styleClass="InputName" stylesheets="@../../styles/StyleForm.css" />
@@ -268,20 +269,103 @@
                   <Insets top="-9.0" />
                </opaqueInsets>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorPaneDetailsProctClient" layoutX="50.0" layoutY="50.0" prefHeight="635.0" prefWidth="1120.0" styleClass="AnchorPaneDetailsProctClient" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" visible="false">
+            <AnchorPane fx:id="AnchorPaneDetailsProctClient" layoutX="10.0" layoutY="80.0" prefHeight="635.0" prefWidth="1200.0" styleClass="AnchorPaneDetailsProctClient" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" visible="false">
                <children>
-                  <Button fx:id="DetailGoBackBtn" layoutX="23.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleOnDetailGoBackBtnClicked" prefHeight="35.0" prefWidth="72.0" styleClass="DetailGoBackBtn" text="Go Back" />
-                  <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="262.0" layoutX="27.0" layoutY="99.0" stroke="BLACK" strokeType="INSIDE" styleClass="RectangleDetailClient" width="361.0" />
-                  <Label fx:id="NameProductdetailsClient" layoutX="399.0" layoutY="69.0" prefHeight="94.0" prefWidth="398.0" styleClass="LabelText" stylesheets="@../../styles/StyleItemTable.css" text="ZZZZZZ" />
-                  <Label fx:id="DescProductdetailsClient" layoutX="396.0" layoutY="141.0" prefHeight="106.0" prefWidth="404.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" text="ZZZZ" />
-                  <Label fx:id="PriceProductDetailsClient" layoutX="396.0" layoutY="239.0" prefHeight="69.0" prefWidth="367.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" text="12" />
-                  <Label fx:id="dateProductDetailsClient" layoutX="417.0" layoutY="466.0" prefHeight="54.0" prefWidth="361.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" />
-                  <Button fx:id="AddReview" layoutX="896.0" layoutY="326.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="164.0" styleClass="DetailGoBackBtn" text="Add Review" />
-                  <ScrollPane layoutX="29.0" layoutY="393.0" prefHeight="220.0" prefWidth="370.0">
-                     <content>
-                        <VBox fx:id="VboxContainerReview" prefHeight="212.0" prefWidth="357.0" styleClass="VboxContainerReview" />
-                     </content>
-                  </ScrollPane>
+                  <Button fx:id="DetailGoBackBtn" layoutX="70.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleOnDetailGoBackBtnClicked" prefHeight="35.0" prefWidth="72.0" styleClass="DetailGoBackBtn" text="Go Back" />
+                  <Button fx:id="AddReview" layoutX="537.0" layoutY="421.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="164.0" styleClass="DetailGoBackBtn" text="Add Review" />
+                  <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="68.0" layoutY="71.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />
+                  <AnchorPane layoutX="739.0" layoutY="66.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
+                     <children>
+                        <VBox alignment="TOP_CENTER" layoutX="57.0" layoutY="6.0" prefHeight="458.0" prefWidth="316.0" spacing="15.0">
+                           <children>
+                              <Text fx:id="PriceProductDetailsClient" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="price-course-text" text="216 TND">
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/user-2-fill.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="44.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Tutor :" wrappingWidth="69.40498352050781" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Text fx:id="NameProductdetailsClient" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Zied gachita" wrappingWidth="183.4798903465271">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
+                                 <children>
+                                    <AnchorPane prefHeight="46.0" prefWidth="201.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="48.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Quantite" wrappingWidth="99.80494689941406" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="12" wrappingWidth="119.79998052120209">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
+                                 <children>
+                                    <AnchorPane prefHeight="46.0" prefWidth="201.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="48.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="date" wrappingWidth="99.80494689941406" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="24-02-2024" wrappingWidth="119.79998052120209">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="162.0" prefWidth="316.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
+                                 <children>
+                                    <AnchorPane prefHeight="99.0" prefWidth="148.0">
+                                       <children>
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text layoutX="48.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Description " wrappingWidth="141.80494689941406" />
+                                       </children>
+                                    </AnchorPane>
+                                    <Text fx:id="DescProductdetailsClient" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="zzzzzz" wrappingWidth="107.79998052120209">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>
