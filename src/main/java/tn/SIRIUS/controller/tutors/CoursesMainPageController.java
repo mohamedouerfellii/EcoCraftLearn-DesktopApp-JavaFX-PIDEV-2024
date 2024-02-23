@@ -87,8 +87,6 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     private Text titleLabelDetail;
     @FXML
-    private Text tutorLabelDetail;
-    @FXML
     private ImageView deleteCourseBtnImg;
     @FXML
     private ImageView editCourseBtnImg;
@@ -355,7 +353,6 @@ public class CoursesMainPageController implements Initializable {
         courseDetailsImgContainer.setFill(new ImagePattern(detailImg));
         titleLabelDetail.setText(course.getTitle());
         idLabelDetail.setText("#" + course.getId());
-        tutorLabelDetail.setText(String.valueOf(course.getTutor()));
         priceLabelDetail.setText(String.valueOf(course.getPrice()));
         nbrSecLabelDetail.setText(String.valueOf(course.getNbrSection()));
         nbrRegistredLabelDetail.setText(String.valueOf(course.getNbrRegistred()));

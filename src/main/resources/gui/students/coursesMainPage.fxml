@@ -47,7 +47,7 @@
          </children>
       </HBox>
       <Button fx:id="registeredCoursesBtn" layoutX="986.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#registeredCoursesBtnClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="My Learning" />
-      <AnchorPane fx:id="registeredCoursePage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css">
+      <AnchorPane fx:id="registeredCoursePage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
          <children>
             <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="459.0" layoutY="13.0" styleClass="title-form" stylesheets="@../../style/coursesStudentMainPage.css" text="My Learning" />
             <Button fx:id="goBackRegisteredCourses" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackRegisteredCoursesClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
@@ -218,7 +218,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="coursesReviewLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css">
+            <AnchorPane fx:id="coursesReviewLeft" layoutX="747.0" layoutY="82.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
                <children>
                   <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="9.0" prefHeight="456.0" prefWidth="407.0" styleClass="course-scroll-pane-item-desc" stylesheets="@../../style/coursesStudentMainPage.css">
                      <content>

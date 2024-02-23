@@ -13,14 +13,12 @@ public class EcoCraftLearning extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EcoCraftLearning.class.getResource("/gui/students/homePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),1350,720);
+        Scene scene = new Scene(fxmlLoader.load(),1350,720); /* /gui/tutors/dashboardTutorHomePage.fxml /gui/students/homePage.fxml*/
         stage.setTitle("First Try");
         stage.setScene(scene);
         stage.setTitle("EcoCraft Learning");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logoDark.png")));
         stage.setResizable(false);
-        String ipAddress = InetAddress.getLocalHost().getHostAddress();
-        System.out.println(ipAddress);
         stage.show();
     }
 
