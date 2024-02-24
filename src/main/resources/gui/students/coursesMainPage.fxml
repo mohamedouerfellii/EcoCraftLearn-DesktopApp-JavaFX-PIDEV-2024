@@ -229,7 +229,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="courseStudyPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">
+      <AnchorPane fx:id="courseStudyPage" prefHeight="650.0" prefWidth="1200.0" styleClass="registered-course-page" stylesheets="@../../style/coursesStudentMainPage.css">
          <children>
             <Button fx:id="goBackCoursesStudy" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#goBackCoursesStudyClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="Go Back" />
             <Label fx:id="errorAttAddSection1" prefHeight="23.0" prefWidth="214.0" styleClass="error-input" stylesheets="@../../style/coursesMainPage.css" text="Your section needs a video !" visible="false" />
@@ -319,6 +319,7 @@
                </content>
             </ScrollPane>
             <Label fx:id="courseTitleSectionDisplay" alignment="CENTER" layoutX="496.0" layoutY="15.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Courses Lab !" />
+            <Button layoutX="1012.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#whiteboardBtnClicked" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../style/style.css" text="WhiteBoard" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paymentContainer" layoutX="400.0" layoutY="75.0" prefHeight="468.0" prefWidth="411.0" styleClass="payment-method" stylesheets="@../../style/coursesStudentMainPage.css" visible="false">

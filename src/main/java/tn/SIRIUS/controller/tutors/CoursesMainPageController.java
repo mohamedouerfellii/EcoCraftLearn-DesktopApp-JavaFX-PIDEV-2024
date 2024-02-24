@@ -246,6 +246,8 @@ public class CoursesMainPageController implements Initializable {
     private Text msgConfirmDelete;
     @FXML
     private Label nbrQuestionQuizEdit;
+    @FXML
+    private AnchorPane pageContainer;
     private Quiz quizToEdit;
     private List<Section> sections;
     private String addCourseImgPath;
@@ -1141,6 +1143,19 @@ public class CoursesMainPageController implements Initializable {
             timeline.setCycleCount(1);
             timeline.play();
         }
+    }
+    @FXML
+    public void whiteboardBtnClicked(MouseEvent event){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/tutors/whiteboard.fxml"));
+            Parent root = fxmlLoader.load();
+            pageContainer.getChildren().clear();
+            pageContainer.getChildren().add(root);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
     }
     // resources clean
     public void cleanup(){

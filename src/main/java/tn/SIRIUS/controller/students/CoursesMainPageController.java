@@ -170,6 +170,8 @@ public class CoursesMainPageController implements Initializable {
     private AnchorPane coursesReviewLeft;
     @FXML
     private VBox listReviewsLeftContainer;
+    @FXML
+    private AnchorPane mainPageContainer;
     private int incorrectPasswordCounter;
     private CourseService courseService;
     private List<Course> registeredCourses;
@@ -185,6 +187,7 @@ public class CoursesMainPageController implements Initializable {
     private int muteVidSecCounter;
     private double currentVolume;
     private int rateValue;
+    private int userTest;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         registeredCoursePage.setVisible(false);
@@ -217,6 +220,7 @@ public class CoursesMainPageController implements Initializable {
         });
         rateValue = 0;
         incorrectPasswordCounter = 0;
+        userTest = 4;
     }
     public void notifySuccess(){
         successOperationContainer.setVisible(true);
@@ -306,7 +310,7 @@ public class CoursesMainPageController implements Initializable {
     public void registeredCoursesBtnClicked(MouseEvent event){
         courseRegisteredVBox.getChildren().clear();
         inProgressBtn.setStyle("-fx-opacity: 1");
-        registeredCourses = courseService.getCourseRegistered(4);
+        registeredCourses = courseService.getCourseRegistered(userTest);
         for (Course course : registeredCourses){
             try {
                 loadRegisteredCoursesItem(course);
@@ -395,7 +399,7 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     public void enrollCourseBtnClicked(MouseEvent event){
         CreditCardService ccService = new CreditCardService();
-        if(ccService.isUserHadCreditCard(4)){
+        if(ccService.isUserHadCreditCard(userTest)){
             enrollCourseConfirmationContainer.setVisible(true);
         }
         else paymentContainer.setVisible(true);
@@ -403,7 +407,7 @@ public class CoursesMainPageController implements Initializable {
     public void enrollFromItem(Course course){
         currentCourse = course;
         CreditCardService ccService = new CreditCardService();
-        if(ccService.isUserHadCreditCard(4)){
+        if(ccService.isUserHadCreditCard(userTest)){
             enrollCourseConfirmationContainer.setVisible(true);
         }
         else paymentContainer.setVisible(true);
@@ -428,12 +432,12 @@ public class CoursesMainPageController implements Initializable {
         if( cardNumberText.matches("[0-9]+") && cardNumberText.length() == 16
             && !cardholderNameInputText.isEmpty() && ccvCardText.matches("[0-9]+") && ccvCardText.length() == 3 && !expireDateText.isEmpty()){
             CreditCardService creditCardService = new CreditCardService();
-            User user = new User(4,"","","","");
+            User user = new User(userTest,"","","","");
             if(creditCardService.addCard(new CreditCard(
                     0,user,cardNumberText,cardholderNameInputText,ccvCardText,expireDateText
             ))){
                 CourseParticipationService cpService = new CourseParticipationService();
-                if(cpService.enrollNewCourse(4,currentCourse.getId())){
+                if(cpService.enrollNewCourse(userTest,currentCourse.getId())){
                     if(courseService.updateNbrRegistered(currentCourse.getId(),currentCourse.getNbrRegistred()+1)){
                         closePaymentClicked(null);
                         registeredCoursesBtnClicked(null);
@@ -472,9 +476,9 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     public void confirmEnrollClicked(MouseEvent event){
         UserService userService = new UserService();
-        if(userService.isPasswordMatch(4,passwordConfirmEnroll.getText())){
+        if(userService.isPasswordMatch(userTest,passwordConfirmEnroll.getText())){
             CourseParticipationService cpService = new CourseParticipationService();
-            if(cpService.enrollNewCourse(4,currentCourse.getId())){
+            if(cpService.enrollNewCourse(userTest,currentCourse.getId())){
                 if(courseService.updateNbrRegistered(currentCourse.getId(),currentCourse.getNbrRegistred()+1)){
                     closeEnrollConfirmation(null);
                     registeredCoursesBtnClicked(null);
@@ -656,9 +660,9 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     public void confirmUnrollClicked(MouseEvent event){
         UserService userService = new UserService();
-        if(userService.isPasswordMatch(4,passwordConfirmUnroll.getText())){
+        if(userService.isPasswordMatch(userTest,passwordConfirmUnroll.getText())){
             CourseParticipationService cpService = new CourseParticipationService();
-            if(cpService.unrollCourse(currentCourse.getId(),2)){
+            if(cpService.unrollCourse(currentCourse.getId(),userTest)){
                 if(courseService.updateNbrRegistered(currentCourse.getId(),currentCourse.getNbrRegistred()-1)){
                     courses.add(currentCourse);
                     registeredCourses.remove(currentCourse);
@@ -697,7 +701,7 @@ public class CoursesMainPageController implements Initializable {
     }
     public void showRatingForm(Course course){
         FeedbackService fbService = new FeedbackService();
-        Feedback feedback = fbService.getFeedback(2,course.getId());
+        Feedback feedback = fbService.getFeedback(userTest,course.getId());
         if(feedback.getId() != 0){
             switch (feedback.getRate()){
                 case 1 -> starOneClicked(null);
@@ -722,7 +726,7 @@ public class CoursesMainPageController implements Initializable {
     @FXML
     public void submitFeedback(MouseEvent event){
         FeedbackService fbService = new FeedbackService();
-        User owner = new User(4,"","","","");
+        User owner = new User(userTest,"","","","");
         String content = feedbackText.getText();
         Feedback feedback = new Feedback(0,owner,"",content,rateValue,currentCourse.getId());
         if(!deleteFeedbackBtn.isVisible()){
@@ -784,5 +788,17 @@ public class CoursesMainPageController implements Initializable {
         if (mediaPlayer != null)
             mediaPlayer.dispose();
         courseStudyPage.setVisible(false);
+    }
+    @FXML
+    public void whiteboardBtnClicked(MouseEvent event){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/students/whiteboard.fxml"));
+            Parent root = fxmlLoader.load();
+            mainPageContainer.getChildren().clear();
+            mainPageContainer.getChildren().add(root);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

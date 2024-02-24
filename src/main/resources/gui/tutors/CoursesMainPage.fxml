@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" styleClass="courses-main-content-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CoursesMainPageController">
+<AnchorPane fx:id="pageContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-main-content-container" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CoursesMainPageController">
    <children>
       <AnchorPane layoutX="50.0" layoutY="13.0" prefHeight="613.0" prefWidth="1100.0" styleClass="courses-list-container" stylesheets="@../../style/coursesMainPage.css">
          <children>
@@ -165,7 +165,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Rectangle fx:id="courseDetailsImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="892.0" layoutY="162.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img-container" width="251.0" />
+            <Rectangle fx:id="courseDetailsImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="892.0" layoutY="202.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img-container" width="251.0" />
             <Label alignment="CENTER" layoutX="515.0" layoutY="24.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Courses Lab !" />
             <Pane layoutX="64.0" layoutY="93.0" prefHeight="526.0" prefWidth="800.0" styleClass="pane-data-details" stylesheets="@../../style/coursesMainPage.css">
                <children>
@@ -311,7 +311,7 @@
                   </ScrollPane>
                </children>
             </Pane>
-            <Button fx:id="editCourseBtn" layoutX="926.0" layoutY="453.0" mnemonicParsing="false" onMouseClicked="#editCourseBtnClicked" onMouseEntered="#editCourseBtnHover" onMouseExited="#editCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
+            <Button fx:id="editCourseBtn" layoutX="926.0" layoutY="493.0" mnemonicParsing="false" onMouseClicked="#editCourseBtnClicked" onMouseEntered="#editCourseBtnHover" onMouseExited="#editCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
                <graphic>
                   <ImageView fx:id="editCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -319,7 +319,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="deleteCourseBtn" layoutX="924.0" layoutY="392.0" mnemonicParsing="false" onMouseClicked="#deleteCourseBtnClicked" onMouseEntered="#deleteCourseBtnHover" onMouseExited="#deleteCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete">
+            <Button fx:id="deleteCourseBtn" layoutX="924.0" layoutY="432.0" mnemonicParsing="false" onMouseClicked="#deleteCourseBtnClicked" onMouseEntered="#deleteCourseBtnHover" onMouseExited="#deleteCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete">
                <graphic>
                   <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
                      <image>
@@ -327,7 +327,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="addSectionCourseBtn" layoutX="927.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#addSectionCourseBtnClicked" onMouseEntered="#addSectionCourseBtnHover" onMouseExited="#addSectionCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="add-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Add Section">
+            <Button fx:id="addSectionCourseBtn" layoutX="927.0" layoutY="555.0" mnemonicParsing="false" onMouseClicked="#addSectionCourseBtnClicked" onMouseEntered="#addSectionCourseBtnHover" onMouseExited="#addSectionCourseBtnNormal" prefHeight="50.0" prefWidth="188.0" styleClass="add-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Add Section">
                <graphic>
                   <ImageView fx:id="addSectionCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -335,7 +335,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="showCourseSectionsBtn" contentDisplay="RIGHT" layoutX="921.0" layoutY="93.0" mnemonicParsing="false" onMouseClicked="#showCourseSectionsBtnClicked" prefHeight="52.0" prefWidth="191.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Show Section(s)">
+            <Button fx:id="showCourseSectionsBtn" contentDisplay="RIGHT" layoutX="921.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#showCourseSectionsBtnClicked" prefHeight="52.0" prefWidth="191.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Show Section(s)">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -344,6 +344,7 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button layoutX="952.0" layoutY="27.0" mnemonicParsing="false" onMouseClicked="#whiteboardBtnClicked" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="WhitBoard" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="coursesEditContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css" visible="false">

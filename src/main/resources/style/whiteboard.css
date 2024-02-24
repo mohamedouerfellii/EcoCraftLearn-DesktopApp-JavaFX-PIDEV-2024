@@ -1,0 +1,46 @@
+.page-container{
+    -fx-background-radius: 18 0 0 18;
+}
+.chalksContainer{
+    -fx-background-color: #000000;
+}
+.chalks-white{
+    -fx-background-color: #ffffff;
+    -fx-cursor: hand;
+}
+.chalks-white:hover{
+    -fx-opacity: 0.6;
+}
+.chalks-yellow{
+    -fx-background-color: #ffff00;
+    -fx-cursor: hand;
+}
+.chalks-yellow:hover{
+    -fx-opacity: 0.6;
+}
+.chalks-red{
+    -fx-background-color: #ff0000;
+    -fx-cursor: hand;
+}
+.chalks-red:hover{
+    -fx-opacity: 0.6;
+}
+.chalks-green{
+    -fx-background-color: #047904;
+    -fx-cursor: hand;
+}
+.chalks-green:hover{
+    -fx-opacity: 0.6;
+}
+.eraser{
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+}
+.eraser:hover{
+    -fx-opacity: 0.6;
+}
+.tutor-name{
+    -fx-font-family: "Jost";
+    -fx-font-size: 18;
+    -fx-fill: #FFFFFF;
+}
