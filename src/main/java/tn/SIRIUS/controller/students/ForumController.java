@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CommentService;
 import tn.SIRIUS.services.PostService;
+import tn.SIRIUS.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class ForumController implements Initializable {
     private TextArea NewPostText;
 
     @FXML
-    private Button New_PostBnt;
+    private Button New_PostBtn;
 
     @FXML
     private VBox PopularpeopleConatainer;
@@ -57,7 +58,6 @@ public class ForumController implements Initializable {
 
     @FXML
     private Label User_name;
-
     public Button getAddCommentBtn() {
         return addCommentBtn;
     }
@@ -76,13 +76,6 @@ public class ForumController implements Initializable {
     @FXML
     private VBox allCommentsContainer;
 
-    public ScrollPane getScrollPaneAllcomments() {
-        return scrollPaneAllcomments;
-    }
-
-    public void setScrollPaneAllcomments(ScrollPane scrollPaneAllcomments) {
-        this.scrollPaneAllcomments = scrollPaneAllcomments;
-    }
 
     @FXML
     private ScrollPane scrollPaneAllcomments;
@@ -116,7 +109,7 @@ public class ForumController implements Initializable {
     private Button confirmDeletePostBtn;
 
     @FXML
-    private BorderPane createPostContaner;
+    private BorderPane createPostContainer;
 
     @FXML
     private AnchorPane deletePostContainer;
@@ -141,8 +134,6 @@ public class ForumController implements Initializable {
 
     @FXML
     private AnchorPane postsMainContent;
-
-
 
     @FXML
     private AnchorPane showCommentsConatainer;
@@ -204,14 +195,18 @@ public class ForumController implements Initializable {
     public int getIdposttodelete() {return idposttodelete;}
 
     public void setIdposttodelete(int idposttodelete) {this.idposttodelete = idposttodelete;}
-    User user= new User(1,"jarray","abdelmonam","jarray","jarray","jarray","jarray","jarray",1,1,"/img/img.png");
 
-    public User user1 = new User(2,"Mohamed","Mohamed","jarray","jarray","jarray","jarray","jarray",1,1,"/img/img.png");
+
+    UserService userService = new UserService();
+
+    public User getUser() {
+        return user;
+    }
+
+    public User user=userService.getPostById(1);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         Image userimg = new Image(user.getImage());
         User_image.setFill(new ImagePattern(userimg));
         User_name.setText(user.getFirstName()+ " "+user.getLastName());
@@ -240,7 +235,6 @@ public class ForumController implements Initializable {
                 showPosts();
                 deletePostContainer.setVisible(false);
 
-                idposttodelete= Integer.parseInt(null);
             }
 
         });
@@ -265,7 +259,7 @@ public class ForumController implements Initializable {
     public void addNewPost() {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String newPostText = NewPostText.getText();
-        Post post = new Post(1, newPostText, attachmentPath, user1.getIdUser(), currentDateTime);
+        Post post = new Post(1, newPostText, attachmentPath, user.getIdUser(), currentDateTime);
         PostService postService = new PostService();
         if (postService.add(post) == 1) {
             acuill = postService.getAll();
@@ -303,7 +297,7 @@ public class ForumController implements Initializable {
 //                    postItem.ReactionPressed();
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(false);
-                } else if (post.getUser().getIdUser() == user1.getIdUser()) { // Assuming getId() returns the user ID
+                } else if (post.getUser().getIdUser() == user.getIdUser()) { // Assuming getId() returns the user ID
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(true);
 
@@ -313,6 +307,7 @@ public class ForumController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 
@@ -421,25 +416,25 @@ public class ForumController implements Initializable {
 
 
 
-  public void ShowPopularPeople() {
-
-        for (Post post : acuill) {
-            int nblike = 100;
+    public void ShowPopularPeople() {
+        PopularpeopleConatainer.getChildren().clear();
+        PostService postService = new PostService();
+        Map<User, Integer> popularUsers = postService.PopularUser();
+        for (Map.Entry<User, Integer> entry : popularUsers.entrySet()) {
+            User usr = entry.getKey();
+            int nblike = entry.getValue();
+            System.out.println(1);
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/students/popularPeopleItem.fxml"));
                 HBox hBox = fxmlLoader.load();
                 PopularPeopleItemController popularPeopleItemController = fxmlLoader.getController();
-                popularPeopleItemController.SetPopularData(nblike, post.getUser());
+                popularPeopleItemController.SetPopularData(nblike, usr);
                 PopularpeopleConatainer.getChildren().add(hBox);
-
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
-        }}
-
+        }
+    }
 
 
 
@@ -488,10 +483,10 @@ public void showPostComments(Post post) {
                     CommentItemController item = fxmlLoader.getController();
                     item.setForumController(this);
                     item.setCommentItemdata(comment);
-                    if (comment.getOwner().getIdUser() == 1) {
-                       item.getABoutCommentBtn().setVisible(false);
+                    if (comment.getOwner().getIdUser() == user.getIdUser()) {
+                       item.getABoutCommentBtn().setVisible(true);
                     }else {
-                        item.getABoutCommentBtn().setVisible(true);
+                        item.getABoutCommentBtn().setVisible(false);
                     }
 
                     allCommentsContainer.getChildren().add(root);
@@ -529,7 +524,7 @@ public void showPostComments(Post post) {
 public  void addNewComment(Post p){
 
         if (newCommentIput.getText() != null && !newCommentIput.getText().isEmpty()) {
-            Comment comment = new Comment(0, p , user1, newCommentIput.getText(), newCommentAttachmentPath);
+            Comment comment = new Comment(0, p , user, newCommentIput.getText(), newCommentAttachmentPath);
             CommentService commentService = new CommentService();
             if (commentService.add(comment) == 1)
                 System.out.println("true");
@@ -575,6 +570,11 @@ public void  deleteComment(Comment comment) {
 
 
 }
+
+
+
+
+
 
 }
 

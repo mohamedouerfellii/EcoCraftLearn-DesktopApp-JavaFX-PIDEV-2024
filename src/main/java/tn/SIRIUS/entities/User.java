@@ -2,6 +2,14 @@ package tn.SIRIUS.entities;
 
 public class User {
     private int idUser;
+
+    public User(int id,String firstName, String lastName, String image) {
+        this.idUser = id;
+        this.FirstName = firstName;
+        this.lastName = lastName;
+        this.image = image;
+    }
+
     private String FirstName;
     private String lastName;
     private String email;

@@ -59,7 +59,7 @@
                      </padding>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <BorderPane fx:id="createPostContaner" maxWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/style.css">
+                  <BorderPane fx:id="createPostContainer" maxWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/style.css">
                      <top>
                         <VBox BorderPane.alignment="CENTER">
                            <children>
@@ -141,7 +141,7 @@
                         </VBox>
                      </center>
                      <bottom>
-                        <Button fx:id="New_PostBnt" mnemonicParsing="false" onAction="#addNewPost" prefHeight="37.0" prefWidth="598.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css" text="Post" BorderPane.alignment="CENTER">
+                        <Button fx:id="New_PostBtn" mnemonicParsing="false" onAction="#addNewPost" prefHeight="37.0" prefWidth="598.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css" text="Post" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="Jost Bold" size="20.0" />
                            </font>
@@ -307,7 +307,7 @@
             </Pane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="showCommentsConatainer" prefHeight="635.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css">
+      <AnchorPane fx:id="showCommentsConatainer" prefHeight="635.0" prefWidth="1194.0" styleClass="transparent-pane" stylesheets="@../../css/style.css" visible="false">
          <children>
             <ScrollPane fx:id="scrollPaneAllcomments" hbarPolicy="NEVER" layoutX="283.0" layoutY="33.0" prefHeight="579.0" prefWidth="882.0" vbarPolicy="NEVER">
                <content>

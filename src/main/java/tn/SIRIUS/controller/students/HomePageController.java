@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import tn.SIRIUS.entities.User;
+import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,11 +73,19 @@ public class HomePageController implements Initializable {
     private VBox coursesVboxHomePage;
     @FXML
     private Pane mainContentContainer;
+
+
+    UserService userService = new UserService();
+
+    User user = userService.getPostById(1);
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        //Profile Image
+
+
         try {
-            Image profileImg = new Image(getClass().getResourceAsStream("/images/profilePictures/12.jpg"));
+            Image profileImg = new Image(user.getImage());
             profilImgContainer.setFill(new ImagePattern(profileImg));
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception
@@ -151,10 +161,11 @@ public class HomePageController implements Initializable {
             }
             try{
                 FXMLLoader fxmlLoader = new FXMLLoader();
-               fxmlLoader.setLocation(getClass().getResource("/gui/students/ForumPage.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/ForumPage.fxml"));
                 Parent page = fxmlLoader.load();
                 mainContentContainer.getChildren().removeAll();
                 mainContentContainer.getChildren().setAll(page);
+
             }catch (IOException ex){
                 throw new RuntimeException();
             }
@@ -194,8 +205,6 @@ public class HomePageController implements Initializable {
             }
         });
     }
-
-
 
 
 

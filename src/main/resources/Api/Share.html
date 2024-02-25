@@ -1,0 +1,39 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<script>
+    // JavaScript function to update the post field without media
+    function updatePostField(newText) {
+        var payload = {
+            post: newText,
+            platforms: ["facebook"],
+        };
+
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer DBRJ2C7-2RBMHAJ-NF8Q49G-P3MR7VQ'
+        };
+
+        // Make the API request using jQuery
+        $.ajax({
+            type: 'POST',
+            url: 'https://app.ayrshare.com/api/post',
+            headers: headers,
+            data: JSON.stringify(payload),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import tn.SIRIUS.controller.students.PostItem;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class EcoCraftLearning extends Application {
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logoDark.png")));
         stage.setResizable(false);
         stage.show();
+
 
     }
 

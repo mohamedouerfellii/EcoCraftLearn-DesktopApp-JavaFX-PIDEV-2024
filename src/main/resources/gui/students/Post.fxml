@@ -26,18 +26,18 @@
             </Separator>
             <HBox maxWidth="-Infinity" prefHeight="42.0" prefWidth="594.0" translateX="3.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="37.0" prefWidth="106.0">
                      <children>
                         <Button fx:id="likePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/style.css">
                            <graphic>
                               <ImageView fx:id="LikeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../img/dark/icons8-flèche-épaisse-pointant-vers-le-haut-32.png" />
+                                    <Image url="@../../img/dark/upvote.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label alignment="CENTER" prefHeight="37.0" prefWidth="82.0" text="3,5K">
+                        <Label fx:id="nbLikesPost" alignment="CENTER" prefHeight="37.0" prefWidth="82.0" text="3,5K" textFill="#939393">
                            <font>
                               <Font name="System Bold" size="10.0" />
                            </font>
@@ -49,7 +49,7 @@
                            <graphic>
                               <ImageView fx:id="disLikePostIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../img/dark/icons8-flèche-épaisse-pointant-vers-le-bas-32.png" />
+                                    <Image url="@../../img/dark/icons8-flèche-haut-32%20(3).png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -57,7 +57,7 @@
                      </children>
                   </HBox>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button fx:id="commentPostBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="250.0" styleClass="commentBtn" stylesheets="@../../css/style.css" text="comment">
+                  <Button fx:id="commentPostBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="121.0" styleClass="commentBtn" stylesheets="@../../css/style.css" text="comment">
                      <graphic>
                         <ImageView fx:id="CommentIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -66,7 +66,7 @@
                         </ImageView>
                      </graphic></Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button fx:id="sharePostBtn" layoutX="127.0" layoutY="10.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="238.0" styleClass="BtnShare" stylesheets="@../../css/style.css" text="share">
+                  <Button fx:id="sharePostBtn" layoutX="127.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="99.0" styleClass="BtnShare" stylesheets="@../../css/style.css" text="share">
                      <graphic>
                         <ImageView fx:id="shareIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,6 +74,10 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
+                  <Separator layoutX="484.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="savePostBtn" mnemonicParsing="false" text="save" />
+                  <Separator layoutX="244.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="rapportPostBtn" layoutX="568.0" layoutY="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="rapot" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -90,7 +94,7 @@
                   <Insets left="25.0" />
                </VBox.margin>
                <font>
-                  <Font size="14.0" />
+                  <Font name="Jost Medium" size="14.0" />
                </font></Text>
          </children>
          <padding>

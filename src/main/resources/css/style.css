@@ -51,9 +51,10 @@
 
 /* Styles for the hovered state of the button */
 .button:hover {
+
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #7dc145;
+    -fx-background-color: #939393;
     -fx-text-fill: white;
     -fx-opacity: 0.6;
     -fx-background-radius: 8px;
