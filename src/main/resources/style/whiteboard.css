@@ -1,5 +1,5 @@
 .page-container{
-    -fx-background-radius: 18 0 0 18;
+    -fx-background-radius: 18;
 }
 .chalksContainer{
     -fx-background-color: #000000;
@@ -43,4 +43,34 @@
     -fx-font-family: "Jost";
     -fx-font-size: 18;
     -fx-fill: #FFFFFF;
+}
+.connected-name{
+    -fx-font-family: "Jost";
+    -fx-font-size: 18;
+    -fx-fill: #000000;
+}
+.studentConnected{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 18;
+}
+.vboxConnected{
+    -fx-background-color: #D5FFDC;
+}
+.scroll-pane-sections-container{
+    -fx-background-color: #D5FFDC;
+}
+.scroll-pane-sections-container .scroll-bar:vertical{
+    -fx-background-color: #D5FFDC;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .increment-button,
+.scroll-pane-sections-container .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #D5FFDC;
 }

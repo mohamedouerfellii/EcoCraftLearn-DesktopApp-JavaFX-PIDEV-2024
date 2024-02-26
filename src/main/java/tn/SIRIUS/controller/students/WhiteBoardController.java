@@ -27,24 +27,28 @@ public class WhiteBoardController implements Initializable {
     private String[] colors;
     private static DatagramSocket socket;
     private static InetAddress address;
-    private static final String IDENTIFIER = "Zied";
-    private static final int SERVER_PORT = 1235;
+    private static final String IDENTIFIER = "Jarray Abdo";
+    private static final int SERVER_PORT = 12345;
+    private int courseId;
     @Override
     public void initialize(URL url, ResourceBundle rs){
         colors = new String[]{"FFFFFF","ffff00","ff0000","047904","086c3a"};
+        gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.web("#086c3a"));
+        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+    }
+    public void setCourseId(int id){
+        courseId = id;
         try {
             socket = new DatagramSocket();
             address = InetAddress.getByName("localhost");
-
-            byte[] uuid = ("init;" + IDENTIFIER).getBytes();
+            System.out.println(courseId);
+            byte[] uuid = ("init;" + IDENTIFIER+";"+courseId+";").getBytes();
             DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
             socket.send(initialize);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.web("#086c3a"));
-        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
         new Thread(new ClientThread()).start();
     }
     private class ClientThread implements Runnable {

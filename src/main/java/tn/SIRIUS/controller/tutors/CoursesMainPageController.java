@@ -1146,10 +1146,14 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     public void whiteboardBtnClicked(MouseEvent event){
+        int courseID = Integer.parseInt(idLabelDetail.getText().replace("#",""));
+        System.out.println("test main"+courseID);
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/whiteboard.fxml"));
             Parent root = fxmlLoader.load();
+            WhiteBoardController controller = fxmlLoader.getController();
+            controller.setCourseId(courseID);
             pageContainer.getChildren().clear();
             pageContainer.getChildren().add(root);
         }catch (IOException e){

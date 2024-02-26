@@ -254,7 +254,6 @@ public class CoursesMainPageController implements Initializable {
         Parent root = fxmlLoader.load();
         CoursesRegisteredItemController controller = fxmlLoader.getController();
         controller.setData(course,this);
-        System.out.println("321");
         courseRegisteredVBox.getChildren().add(root);
     }
     public void getCourses(List<Course> courses){
@@ -795,6 +794,8 @@ public class CoursesMainPageController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/gui/students/whiteboard.fxml"));
             Parent root = fxmlLoader.load();
+            WhiteBoardController controller = fxmlLoader.getController();
+            controller.setCourseId(currentCourse.getId());
             mainPageContainer.getChildren().clear();
             mainPageContainer.getChildren().add(root);
         }catch (IOException e){
