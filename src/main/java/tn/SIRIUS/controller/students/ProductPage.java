@@ -34,6 +34,11 @@ import java.util.ResourceBundle;
 
 public class ProductPage implements Initializable{
 
+    @FXML
+    private TextField Langitudde;
+
+    @FXML
+    private TextField Latitude;
 
     @FXML
     private Line lineMiniDetailsBtn;
@@ -311,8 +316,8 @@ private VBox Containeritemreview;
         });
 
         PasserOrderBtn.setOnAction(event -> {
-
-                if (PasserCommande()) {
+            
+            if (PasserCommande(0, 0)) {
                     CartsService cartsservice = new CartsService();
                     Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
                     cartsservice.updateIsConfirmed(carts.getIdCarts());
@@ -335,38 +340,6 @@ private VBox Containeritemreview;
 
 
 
-
-        OrderMapBtn.setOnAction(event -> {
-
-          /*  WebEngine webEngine = webView.getEngine();
-
-            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.SUCCEEDED) {
-                    webEngine.executeScript("mapboxgl.accessToken = 'pk.eyJ1IjoiemllZGdhY2hpdGEiLCJhIjoiY2x0MG4yNWgwMTNrYTJqbzIxY2I1ZHZsNCJ9.V9zXjftAvkRjP5PZ9-a25g';" +
-                            "var map = new mapboxgl.Map({" +
-                            "container: 'map', " +
-                            "style: 'mapbox://styles/mapbox/streets-v11', " +
-                            "center: [-74.5, 40], " +
-                            "zoom: 9 " +
-                            "});");
-                }
-            });
-
-            webEngine.loadContent("<!DOCTYPE html>" +
-                    "<html>" +
-                    "<head>" +
-                    "<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>" +
-                    "<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />" +
-                    "</head>" +
-                    "<body>" +
-                    "<div id='map' style='width: 100%; height: 100%;'></div>" +
-                    "</body>" +
-                    "</html>");
-
-            mapContainer.getChildren().add(webView);*/
-
-
-        });
 
 
 
@@ -490,6 +463,7 @@ private VBox Containeritemreview;
                         .title("Product Added")
                         .text("Product :" + product.getName() + " has been added successfully.")
                         .showInformation();
+
                          ShowProductList();
             } else {
                 Notifications.create()
@@ -704,37 +678,7 @@ private VBox Containeritemreview;
         }
     }
 
-    public boolean PasserCommande() {
 
-        try {
-            String email = InputEmailOrder.getText();
-            String city = InputCityOrder.getText();
-            String phoneInput = InputPhoneOrder.getText();
-            if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}")) {
-                System.out.println("Invalid phone number ");
-                return false;
-            }
-            int phone = Integer.parseInt(phoneInput);
-            CartsService cartsservice = new CartsService();
-            Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
-            int cartId = carts.getIdCarts();
-            CommandesService commandesService = new CommandesService();
-            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"",0,0);
-            int result = commandesService.add(commandes);
-            if (result == 1) {
-                System.out.println("SUCCESS");
-                CarteVide.setVisible(false);
-                return true;
-            } else {
-                System.out.println("FAILED");
-                return false;
-            }
-        } catch (Exception ex) {
-            System.out.println("An error occurred while placing the order: " + ex.getMessage());
-            ex.printStackTrace();
-            return false;
-        }
-    }
 
 
   public void deleteSouscarte(SousCart sousCart) {
@@ -794,6 +738,95 @@ private VBox Containeritemreview;
         lineMiniDetailsBtn1.setVisible(true);
 
     }
+
+    @FXML
+    void handleOrderMap(ActionEvent event) {
+        mapContainer.setVisible(true);
+        WebView webView = new WebView();
+        webView.getEngine().loadContent("<html>"
+                + "<head>"
+                + "<link rel=\"stylesheet\" href=\"https://openlayers.org/en/v4.6.5/css/ol.css\" type=\"text/css\">"
+                + "<script src=\"https://openlayers.org/en/v4.6.5/build/ol.js\"></script>"
+                + "</head>"
+                + "<body>"
+                + "<div id=\"map\" class=\"map\" style=\"width: 650px; height: 500px;\"></div>"
+                + "<script>"
+                + "var map = new ol.Map({"
+                + "  target: 'map',"
+                + "  layers: ["
+                + "    new ol.layer.Tile({"
+                + "      source: new ol.source.OSM()"
+                + "    })"
+                + "  ],"
+                + "  view: new ol.View({"
+                + "    center: ol.proj.fromLonLat([9.5375, 33.8869])," // Centre sur la Tunisie
+                + "    zoom: 7" // Ajustez le zoom selon vos besoins
+                + "  })"
+                + "});"
+                + "map.on('click', function(event) {" // Ajoutez un gestionnaire d'événements de clic sur la carte OpenLayers
+                + "  var lonLat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');" // Transformez les coordonnées du clic en EPSG:4326
+                + "  var longitude = lonLat[0];" // Obtenez la longitude
+                + "  var latitude = lonLat[1];" // Obtenez la latitude
+                + "  alert(longitude + ',' + latitude);" // Affichez les coordonnées dans une alerte
+                + "  webView.getEngine().executeScript(\"handleClick(\" + longitude + \",\" + latitude + \");\");" // Appelez la fonction JavaFX avec les coordonnées
+                + "});"
+                + "</script>"
+                + "</body>"
+                + "</html>");
+
+        mapContainer.getChildren().add(webView);
+
+        // Fonction JavaFX pour traiter les clics sur la carte
+        webView.getEngine().setOnAlert(event1 -> {
+            String[] coordinates = event1.getData().split(",");
+            double longitude = Double.parseDouble(coordinates[0]);
+            double latitude = Double.parseDouble(coordinates[1]);
+            boolean commandeResult = PasserCommande(longitude, latitude);
+            System.out.println(longitude + " " + latitude);
+            if (commandeResult) {
+                System.out.println("succes");
+            } else {
+                System.out.println("failed");
+            }
+        });
+
+
+    }
+
+
+    public boolean PasserCommande(double longitude, double latitude) {
+
+        try {
+            String email = InputEmailOrder.getText();
+            String city = InputCityOrder.getText();
+            String phoneInput = InputPhoneOrder.getText();
+            if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}")) {
+                System.out.println("Invalid phone number ");
+                return false;
+            }
+            int phone = Integer.parseInt(phoneInput);
+            CartsService cartsservice = new CartsService();
+            Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
+            int cartId = carts.getIdCarts();
+            CommandesService commandesService = new CommandesService();
+            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"",latitude,longitude);
+            int result = commandesService.add(commandes);
+            if (result == 1) {
+                System.out.println("SUCCESS");
+                CarteVide.setVisible(false);
+                return true;
+            } else {
+                System.out.println("FAILED");
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println("An error occurred while placing the order: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 
 
 }

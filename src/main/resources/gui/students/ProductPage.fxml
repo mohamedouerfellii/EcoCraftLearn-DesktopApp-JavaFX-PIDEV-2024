@@ -168,7 +168,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="-1.0" prefHeight="635.0" prefWidth="1200.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
+                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="-1.0" prefHeight="635.0" prefWidth="1200.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                            <children>
                               <ScrollPane hbarPolicy="NEVER" layoutX="53.0" layoutY="211.0" prefHeight="407.0" prefWidth="774.0" styleClass="ScrolPaneContainerSousCarte" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" vbarPolicy="NEVER">
                                  <content>
@@ -208,15 +208,15 @@
                                     </VBox>
                                  </children>
                               </Pane>
-                              <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="404.0" layoutY="65.0" maxHeight="526.0" prefHeight="526.0" prefWidth="500.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css" visible="false">
+                              <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="683.0" layoutY="75.0" maxHeight="526.0" prefHeight="526.0" prefWidth="500.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css">
                                  <children>
-                                    <Button fx:id="PasserOrderBtn" layoutX="221.0" layoutY="433.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Order" />
+                                    <Button fx:id="PasserOrderBtn" layoutX="299.0" layoutY="433.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Order" />
                                     <TextField fx:id="InputPhoneOrder" layoutX="204.0" layoutY="212.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Phone Number" styleClass="InputsOrder" />
                                     <TextField fx:id="InputEmailOrder" layoutX="205.0" layoutY="127.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter your email" styleClass="InputsOrder" stylesheets="@../../styles/StyleForm.css" />
-                                    <TextField fx:id="InputCityOrder" layoutX="203.0" layoutY="294.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Your addresse" styleClass="InputsOrder" />
+                                    <TextField fx:id="InputCityOrder" layoutX="205.0" layoutY="270.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Your addresse" styleClass="InputsOrder" />
                                     <Label layoutX="53.0" layoutY="127.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="Email :" />
                                     <Label layoutX="51.0" layoutY="212.0" prefHeight="45.0" prefWidth="107.0" styleClass="Title" text="Phone :" />
-                                    <Label layoutX="49.0" layoutY="292.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="City :" />
+                                    <Label layoutX="53.0" layoutY="277.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="City :" />
                                     <Button fx:id="CloserOrder" layoutX="443.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCloserorder" prefHeight="34.0" prefWidth="43.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
@@ -228,12 +228,12 @@
                                     </Button>
                                     <Line endX="101.0" layoutX="327.0" layoutY="82.0" startX="-239.0" />
                                     <Label layoutX="110.0" layoutY="26.0" prefHeight="45.0" prefWidth="296.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Confirm Your Order " />
-                                    <Button fx:id="OrderMapBtn" layoutX="51.0" layoutY="433.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Map" />
+                                    <Button fx:id="OrderMapBtn" layoutX="51.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleOrderMap" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Map" />
                                  </children>
                               </AnchorPane>
-                              <Pane fx:id="mapContainer" layoutX="55.0" maxHeight="477.0" maxWidth="643.0" minHeight="381.0" minWidth="500.0" prefHeight="477.0" prefWidth="643.0" visible="false">
+                              <Pane fx:id="mapContainer" layoutX="55.0" maxHeight="500.0" maxWidth="643.0" minHeight="381.0" minWidth="500.0" prefHeight="500.0" prefWidth="509.0">
                                  <children>
-                                    <WebView layoutX="-4.0" layoutY="2.0" prefHeight="470.0" prefWidth="643.0" />
+                                    <WebView fx:id="mapWebView" layoutX="-4.0" layoutY="2.0" prefHeight="500.0" prefWidth="511.0" />
                                  </children>
                               </Pane>
                            </children>
@@ -326,7 +326,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="80.0" prefHeight="635.0" prefWidth="1200.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css">
+            <AnchorPane fx:id="AnchorFormProduct" layoutX="10.0" layoutY="80.0" prefHeight="635.0" prefWidth="1200.0" styleClass="AnchorForm" stylesheets="@../../styles/StyleForm.css" visible="false">
                <children>
                   <Label layoutX="434.0" layoutY="23.0" prefHeight="51.0" prefWidth="404.0" styleClass="title-form" stylesheets="@../../styles/StyleForm.css" text="Design Your Product" />
                   <Button fx:id="AddNewProduct" layoutX="785.0" layoutY="500.0" mnemonicParsing="false" onAction="#AddNewProduct" prefHeight="54.0" prefWidth="195.0" styleClass="AddBtn" stylesheets="@../../styles/StyleForm.css" text="Add Product" />
