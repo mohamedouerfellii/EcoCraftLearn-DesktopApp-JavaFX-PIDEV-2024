@@ -34,6 +34,9 @@ public class TableItemProduct {
     @FXML
     private Button DetailsBtnProduct;
 
+    @FXML
+    private Button qrcodeBtn;
+
     public List<Product> recentlyAdded;
 
     ProduitPageController produitPageController = new ProduitPageController();
@@ -47,12 +50,15 @@ public class TableItemProduct {
 
 
         NameProduct.setText(product.getName());
-        DescProduct.setText(product.getDescription());
+      //  DescProduct.setText(product.getDescription());
         DateProduct.setText(product.getAddDate());
         float price = product.getPrice();
         PriceProduct.setText(price + "  DT");
 
         DetailsBtnProduct.setOnMouseClicked(e ->  produitPageController.showProductDetails(product));
+
+        qrcodeBtn.setOnAction(e -> produitPageController.showQrCode(product));
+
 
     }
 

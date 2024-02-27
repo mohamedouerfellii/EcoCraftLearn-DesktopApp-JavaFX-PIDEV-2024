@@ -46,13 +46,13 @@ public class ItemProduct {
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
-
         RectangleImageProduct.setFill(new ImagePattern(img1));
+
         NameProduct.setText(product.getName());
         DescProduct.setText(product.getDescription());
+
         float price = product.getPrice();
         Priceproduct.setText(price + "  DT");
-
 
         RectangleImageProduct.setOnMouseClicked( e -> productPage.showProductDetailsClient(product));
         AddToCartBtn.setOnMouseClicked(e -> {

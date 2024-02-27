@@ -13,10 +13,14 @@ public class Commandes {
 
     private String status;
 
+    private double latitude;
+
+    private  double longitude;
+
     public Commandes() {
     }
 
-    public Commandes(int idCommande, int owner, String commandeDate, int cart, String email, String city, int phone ,String status) {
+    public Commandes(int idCommande, int owner, String commandeDate, int cart, String email, String city, int phone ,String status,double latitude,double longitude) {
         this.idCommande = idCommande;
         this.owner = owner;
         this.commandeDate = commandeDate;
@@ -25,6 +29,8 @@ public class Commandes {
         this.city = city;
         this.phone = phone;
         this.status = status;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getIdCommande() {
@@ -91,6 +97,22 @@ public class Commandes {
         this.status = status;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     @Override
     public String toString() {
         return "Commandes{" +
@@ -102,6 +124,8 @@ public class Commandes {
                 ", city='" + city + '\'' +
                 ", phone=" + phone +
                 ", status='" + status + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
                 '}';
     }
 

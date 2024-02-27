@@ -1,6 +1,57 @@
+
+.ScrolpaneReview{
+    -fx-background-color: #fff ;
+}
+.ScrolpaneReview .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolpaneReview .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolpaneReview .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolpaneReview .scroll-bar:vertical .increment-button,
+.ScrolpaneReview .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.Containeritemreview
+{
+    -fx-background-color: #fff ;
+    -fx-spacing: 25px;
+    -fx-padding: 30px;
+}
+
 .AnchorPaneReview
 {
-    -fx-background-color: #7DC145;
+    -fx-min-width: 350px;
+    -fx-max-width: 350px;
+    -fx-min-height: 90px;
+    -fx-max-height: 90px;
+
+    -fx-background-color: #70E000;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2);
+}
+.Title
+{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 32;
+    -fx-fill: #000000;
+}
+.comment
+{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.PaneReview
+{
+    -fx-background-color: #fff ;
+    -fx-background-radius: 10 10 10 10;
+
+    -fx-border-radius: 10 10 10 10;
+
 }

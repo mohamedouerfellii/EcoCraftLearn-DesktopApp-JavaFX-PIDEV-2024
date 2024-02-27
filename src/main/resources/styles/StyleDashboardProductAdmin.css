@@ -1,0 +1,144 @@
+.Container{
+    -fx-background-color: #fff;
+}
+.AnchorPaneProductBack
+{
+    -fx-border-color: #fff ;
+    -fx-background-color: transparent;
+
+}
+.AnchorPanedetailsProduct
+{
+    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+}
+
+.ImageProductDetails
+{
+    -fx-fit-width: 200px; /* Largeur de l'image */
+    -fx-fit-height: 200px; /* Hauteur de l'image */
+    -fx-background-color: lightgray; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-background-radius: 10px; /* Rayon de la bordure */
+    -fx-border-radius: 10px; /* Rayon de la bordure */
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0); /* Ombre */
+}
+.LabelText{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.Title
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+
+.ScrolPaneProductBack{
+    -fx-background-color: #fff  ;
+}
+.ScrolPaneProductBack .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneProductBack .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneProductBack .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneProductBack .scroll-bar:vertical .increment-button,
+.ScrolPaneProductBack .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.VboxTableProduct
+{
+    -fx-background-color: #fff;
+
+}
+
+.AnchorPaneGroupProduct
+{
+    -fx-background-color: transparent;
+}
+.course-details-img
+{
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+}
+
+.label-details{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.label-data{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+
+.pane-data-details{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 50px;
+}
+
+.one-course-scroll-pane{
+    -fx-background-color: #D5FFDC;
+}
+.one-course-scroll-pane .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.one-course-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.one-course-scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.one-course-scroll-pane .scroll-bar:vertical .increment-button,
+.one-course-scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.one-course-details-container{
+    -fx-background-color: #D5FFDC;
+}
+
+
+.delete-course-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #fff;
+    -fx-text-fill: red;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.edit-course-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #fff;
+    -fx-text-fill: #BDA91A;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #BDA91A;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.PaneQrcode
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+     -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}

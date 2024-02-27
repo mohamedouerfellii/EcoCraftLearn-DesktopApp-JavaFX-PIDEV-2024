@@ -36,19 +36,21 @@ public class SousCartItem {
 
 
     public void setSousCartProduct(SousCart sousCart) {
+
+
         if (sousCart.getProduct() != null) {
         Image img = new Image(sousCart.getProduct().getImage());
         sousCartProductImg.setFill(new ImagePattern(img));
         sousCartProductprice.setText(String.valueOf(sousCart.getProduct().getPrice()));
         sousCartProductName.setText(sousCart.getProduct().getName());
         sousCartProductQuantite.setText(String.valueOf(sousCart.getQuantiteProduct()));
-
-
             DeleteBtnSousCart.setOnMouseClicked(e -> {
                 productPage.deleteSouscarte(sousCart);
             });
 
     }
+
+
     }
 
 

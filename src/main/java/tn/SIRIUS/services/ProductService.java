@@ -17,14 +17,16 @@ public class ProductService implements ICRUD<Product> {
     @Override
     public int add(Product product) {
 
-        String query = "INSERT INTO products (name,description,image,price,owner) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO products (name,description,image,price,owner,quantite) VALUES (?,?,?,?,?,?)";
         try{
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, product.getName());
             statement.setString(2,product.getDescription());
             statement.setString(3,product.getImage());
             statement.setFloat(4,product.getPrice());
+
             statement.setInt(5, 1);
+            statement.setInt(6,product.getQuantite());
             if(statement.executeUpdate() == 1){
                 statement.close();
                 return 1;
@@ -49,7 +51,8 @@ public class ProductService implements ICRUD<Product> {
                         rs.getString("image"),
                         rs.getFloat("price"),
                         0,
-                        rs.getString("addDate")
+                        rs.getString("addDate"),
+                        rs.getInt("quantite")
                 );
                 productList.add(product);
             }
@@ -65,25 +68,26 @@ public class ProductService implements ICRUD<Product> {
 
     @Override
     public boolean update(Product product) {
-        String query = "UPDATE PRODUCTS SET name = ? , description = ? , image = ? , price = ? WHERE idProduct = ?";
-        try{
+        String query = "UPDATE PRODUCTS SET name = ? , description = ? , image = ? , price = ?, quantite = ? WHERE idProduct = ?";
+        try {
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, product.getName());
-            statement.setString(2,product.getDescription());
-            statement.setString(3,product.getImage());
-            statement.setFloat(4,product.getPrice());
-            statement.setInt(5,product.getIdProduct());
-            if(statement.executeUpdate() == 1){
+            statement.setString(2, product.getDescription());
+            statement.setString(3, product.getImage());
+            statement.setFloat(4, product.getPrice());
+            statement.setInt(5, product.getQuantite());
+            statement.setInt(6, product.getIdProduct());
+
+            if (statement.executeUpdate() == 1) {
                 statement.close();
                 return true;
             }
             statement.close();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return false;
     }
-
     @Override
     public boolean delete(int idProduct) {
         String qry = "DELETE FROM PRODUCTS WHERE idProduct = ?";
@@ -116,4 +120,40 @@ public class ProductService implements ICRUD<Product> {
         }
         return -1;
     }
+
+
+    public List<Product> searchProducts(String search) {
+        List<Product> productList = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM PRODUCTS WHERE (name LIKE ? OR description LIKE ?) AND image IS NOT NULL";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            String searchQuery = "%" + search + "%";
+            preparedStatement.setString(1, searchQuery);
+            preparedStatement.setString(2, searchQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setIdProduct(resultSet.getInt("idProduct"));
+                product.setName(resultSet.getString("name"));
+                product.setDescription(resultSet.getString("description"));
+                product.setImage(resultSet.getString("image"));
+
+
+                productList.add(product);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+
+
+
+
+
+
 }

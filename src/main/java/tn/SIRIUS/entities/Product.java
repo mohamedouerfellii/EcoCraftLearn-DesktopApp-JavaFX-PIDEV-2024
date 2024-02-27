@@ -10,7 +10,26 @@ public class Product {
  private int owner;
  private String addDate;
 
+ private int quantite;
 
+
+    private static String searchValue;
+
+    public static String getSearchValue() {
+        return searchValue;
+    }
+
+    public static void setSearchValue(String searchValue) {
+        Product.searchValue = searchValue;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
 
     public Product() {
     }
@@ -71,7 +90,7 @@ public class Product {
         this.addDate = addDate;
     }
 
-    public Product(int idProduct ,String name, String description, String image, float price, int owner, String addDate) {
+    public Product(int idProduct ,String name, String description, String image, float price, int owner, String addDate,int quantite) {
        this.idProduct = idProduct;
         this.name = name;
         this.description = description;
@@ -79,6 +98,8 @@ public class Product {
         this.price = price;
         this.owner = owner;
         this.addDate = addDate;
+        this.quantite=quantite;
+
     }
 
     public Product(int idProduct, String name, String image, float price) {
@@ -98,11 +119,7 @@ public class Product {
                 ", price=" + price +
                 ", owner=" + owner +
                 ", addDate='" + addDate + '\'' +
+                ", quantite=" + quantite +
                 '}';
-
-
     }
-
-
-
 }

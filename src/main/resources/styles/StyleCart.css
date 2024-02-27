@@ -1,7 +1,14 @@
 .CartAnchorPane
 {
-    -fx-background-color: #D5FFDC;
-    -fx-border-radius: 15 15 15 15 ;
-    -fx-border-color: #39932C;
-    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #D5FFDC ;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #000000;
+}
+
+.Title
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 30;
+    -fx-fill: #000000;
 }

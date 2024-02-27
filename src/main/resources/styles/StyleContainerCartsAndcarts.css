@@ -1,4 +1,17 @@
+.ContainerTotalPrice
+{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #7DC145;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+}
+.Panecart
+{
+    -fx-background-color: #D5FFDC;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
 
+}
 .sousCartItem
 {
     -fx-background-color: #7DC145;
@@ -6,21 +19,38 @@
     -fx-border-color: #7DC145;
     -fx-border-radius: 15 15 15 15;
 
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 
+}
+.souscartsInputs
+{
+    -fx-font-family: "Jost";
+    -fx-font-size: 20;
+    -fx-text-fill:#D5FFDC ;
+
+}
+.sousCartProductImg
+{
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
 }
 .cartAnchorepaneContainer
 {
-    -fx-background-color: #D5FFDC;
-    -fx-background-radius: 15 15 15 15;
-    -fx-border-color: #39932C;
-    -fx-border-radius: 15 15 15 15;
+    -fx-min-width: 1200px;
+    -fx-max-width: 1200px;
+    -fx-min-height: 635px;
+    -fx-max-height: 635px;
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }
 .hideCartBtn
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: transparent;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
@@ -41,8 +71,9 @@
     -fx-opacity: 0.6;
 }
 .cartItemsContainer
-{
-    -fx-background-color: #D5FFDC;
+{    -fx-spacing: 15px;
+    -fx-padding: 15px;
+    -fx-background-color: #fff;
 }
 
 .ScrolPaneContainerSousCarte{
@@ -67,7 +98,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 12;
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
     -fx-border-radius: 15 15 15 15;
     -fx-text-fill: #000000;
     -fx-background-radius: 8px;
@@ -76,7 +107,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color:Tranparent;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
@@ -88,8 +119,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
-    -fx-text-fill: #D5FFDC;
+    -fx-background-color: Transparent;
     -fx-background-radius: 8px;
 }
 .CloseCart:hover
@@ -101,7 +131,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
@@ -113,7 +143,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
@@ -125,7 +155,7 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }

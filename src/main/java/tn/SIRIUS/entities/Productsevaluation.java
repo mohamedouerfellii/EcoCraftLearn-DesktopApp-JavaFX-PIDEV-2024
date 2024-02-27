@@ -2,7 +2,7 @@ package tn.SIRIUS.entities;
 
 public class Productsevaluation {
    private int idEvaluation;
-   private int rate;
+   private double rate;
 
    private String review;
 
@@ -10,17 +10,20 @@ public class Productsevaluation {
 
    private int product;
    private int evaluator;
+   private int isConfirmed;
+
 
     public Productsevaluation() {
     }
 
-    public Productsevaluation(int idEvaluation, int rate, String review, String evaluationDate, int product, int evaluator) {
+    public Productsevaluation(int idEvaluation, double rate, String review, String evaluationDate, int product, int evaluator, int isConfirmed) {
         this.idEvaluation = idEvaluation;
         this.rate = rate;
         this.review = review;
         this.evaluationDate = evaluationDate;
         this.product = product;
         this.evaluator = evaluator;
+        this.isConfirmed = isConfirmed;
     }
 
     public int getIdEvaluation() {
@@ -31,11 +34,11 @@ public class Productsevaluation {
         this.idEvaluation = idEvaluation;
     }
 
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
@@ -71,6 +74,14 @@ public class Productsevaluation {
         this.evaluator = evaluator;
     }
 
+    public int getIsConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setIsConfirmed(int isConfirmed) {
+        this.isConfirmed = isConfirmed;
+    }
+
     @Override
     public String toString() {
         return "Productsevaluation{" +
@@ -80,7 +91,7 @@ public class Productsevaluation {
                 ", evaluationDate='" + evaluationDate + '\'' +
                 ", product=" + product +
                 ", evaluator=" + evaluator +
+                ", isConfirmed=" + isConfirmed +
                 '}';
     }
-
 }

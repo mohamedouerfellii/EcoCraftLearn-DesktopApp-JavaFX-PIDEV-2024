@@ -52,4 +52,32 @@
     -fx-border-color: #19BB1C;
     -fx-border-width: 0.5;
 }
+.course-details-img
+{
+    -fx-arc-height: 20;
+    -fx-arc-width: 20;
+}
 
+
+.courses-details-left{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+}
+
+.details-desc-enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.details-desc-enroll-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #19BB1C;
+    -fx-text-fill: #D5FFDC;
+    -fx-cursor: hand;
+}

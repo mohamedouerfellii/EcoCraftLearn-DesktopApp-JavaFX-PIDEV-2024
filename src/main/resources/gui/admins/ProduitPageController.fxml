@@ -4,167 +4,261 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="Container" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ProduitPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="Container" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ProduitPageController">
    <children>
-      <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="136.0">
+      <AnchorPane fx:id="AnchorPaneProductBack" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
          <children>
-            <ImageView fitHeight="85.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageLogo">
-               <image>
-                  <Image url="@../../images/logo.jpeg" />
-               </image>
-            </ImageView>
-            <Button fx:id="BtnDashboard" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Dashboard">
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fx:id="iconsdash" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconsdash">
-                     <image>
-                        <Image url="@../../icons/dashboard-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-
-            <Button fx:id="BtnCourses" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text=" Courses     ">
-               <graphic>
-                  <ImageView fx:id="iconCourses" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconCourses">
-                     <image>
-                        <Image url="@../../icons/graduation-cap-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Button>
-            <Button fx:id="BtnEvents" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Events     ">
-               <graphic>
-                  <ImageView fx:id="iconevent" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconevent">
-                     <image>
-                        <Image url="@../../icons/calendar-event-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="BtnForum" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Forum       ">
-               <graphic>
-                  <ImageView fx:id="iconforum" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconforum">
-                     <image>
-                        <Image url="@../../icons/team-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="BtnProducts" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Products    ">
-               <graphic>
-                  <ImageView fx:id="iconProduct" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconProduct">
-                     <image>
-                        <Image url="@../../icons/shopping-bag-2-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="BtnCollects" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" stylesheets="@../../styles/Style1.css" text="Collects     ">
-               <graphic>
-                  <ImageView fx:id="iconcollect" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconcollect">
-                     <image>
-                        <Image url="@../../icons/recycle-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="BtnLogout" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="BtnMenu" text="Logout       ">
-               <graphic>
-                  <ImageView fx:id="iconlogout" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" styleClass="iconlogout">
-                     <image>
-                        <Image url="@../../icons/logout-box-fill.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </Button>
-         </children></VBox>
-      <AnchorPane layoutX="-9.0" layoutY="-15.0" prefHeight="665.0" prefWidth="1209.0" styleClass="BackAnchorPane" stylesheets="@../../styles/Style1.css">
-         <children>
-            <AnchorPane fx:id="AnchorPaneProductBack" layoutX="16.0" layoutY="10.0" prefHeight="645.0" prefWidth="1178.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/Style1.css" visible="false">
+            <ScrollPane hbarPolicy="NEVER" layoutX="98.0" layoutY="82.0" prefHeight="561.0" prefWidth="1045.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/Style1.css" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="565.0" prefWidth="1043.0" spacing="15.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <HBox alignment="CENTER" layoutX="411.0" layoutY="17.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/style.css">
                <children>
-                  <ScrollPane layoutX="29.0" layoutY="130.0" prefHeight="501.0" prefWidth="731.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/Style1.css">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
+                     <image>
+                        <Image url="@../../icons/search-2-line.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="InputSearchProduct" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../styles/Style1.css">
+                     <HBox.margin>
+                        <Insets left="-390.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="-40.0" />
+               </padding>
+            </HBox>
+            <Label layoutX="36.0" layoutY="19.0" prefHeight="47.0" prefWidth="253.0" styleClass="TextShop" stylesheets="@../../styles/Style1.css" text="List of Product" />
+            <Pane fx:id="paneqrCode" layoutX="419.0" layoutY="158.0" prefHeight="343.0" prefWidth="358.0" styleClass="PaneQrcode" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+               <children>
+                  <ImageView fx:id="ImageQrcode" fitHeight="241.0" fitWidth="302.0" layoutX="31.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+                  <Line endX="-7.0" layoutX="305.0" layoutY="59.0" startX="-239.0" />
+                  <Label layoutX="117.0" layoutY="7.0" prefHeight="45.0" prefWidth="147.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Qr Code !" />
+                  <Button fx:id="CloseQrcode" layoutX="306.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCloseQrcode" prefHeight="34.0" prefWidth="43.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/close-circle-filll.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
+         <children>
+            <Button fx:id="GoBackBtn" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoBackBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
+            <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="762.0" layoutY="91.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="389.0" />
+            <Button fx:id="DeleteBtnProduct" layoutX="877.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Delete">
+               <graphic>
+                  <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+                     <image>
+                        <Image url="@../../icons/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="BtnOpenUpdate" layoutX="877.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Edit">
+               <graphic>
+                  <ImageView fx:id="editCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/edit-box-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane layoutX="89.0" layoutY="93.0" prefHeight="526.0" prefWidth="597.0" styleClass="pane-data-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="32.0" layoutY="12.0" prefHeight="507.0" prefWidth="532.0" styleClass="one-course-scroll-pane" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                      <content>
-                        <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="585.0" prefWidth="713.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleItemTable.css" />
+                        <VBox prefHeight="505.0" prefWidth="535.0" styleClass="one-course-details-container" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="788.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="ID Product :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="IdProductdetails" prefHeight="35.0" prefWidth="196.0" styleClass="label-data" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="#125487">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="634.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="99.0" styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Name :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="NameProductdetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="Product" wrappingWidth="257.36328125">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Quantity :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="QuantityProductdetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="12">
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Price :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="PriceProductDetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="125 TND" wrappingWidth="129.7421875">
+                                       <HBox.margin>
+                                          <Insets left="66.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="535.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Posted Date :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="dateProductDetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="24-10-2024" wrappingWidth="142.6953125">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="157.0" prefWidth="535.0">
+                                 <children>
+                                    <Label prefHeight="60.0" prefWidth="164.0" styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Description :">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="DescProductdetails" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="142.0" prefWidth="358.0" styleClass="label-data" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Label" wrapText="true">
+                                       <HBox.margin>
+                                          <Insets top="15.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </content>
                   </ScrollPane>
                </children>
-            </AnchorPane>
-            <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="14.0" layoutY="15.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/Style1.css">
+            </Pane>
+            <AnchorPane fx:id="FormUpdateAdmin" layoutX="149.0" layoutY="37.0" prefHeight="575.0" prefWidth="813.0" styleClass="FormUpdateAdmin" stylesheets="@../../styles/StyleFormUpdateAdmin.css" visible="false">
                <children>
-                  <ImageView fx:id="ImageProductDetails" fitHeight="366.0" fitWidth="482.0" layoutX="733.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true" styleClass="ImageProductDetails">
+                  <Button fx:id="UpdateBtn" layoutX="705.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleOnUpdateBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Update" />
+                  <Button fx:id="cancelBtn" layoutX="590.0" layoutY="502.0" mnemonicParsing="false" onAction="#handleOnCancelBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Cancel" />
+                  <Label layoutX="272.0" layoutY="2.0" prefHeight="51.0" prefWidth="284.0" styleClass="title-form" stylesheets="@../../styles/StyleForm.css" text="Update Product " />
+                  <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="62.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../styles/StyleForm.css" text="Name" />
+                        <Label stylesheets="@../../styles/StyleForm.css" text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="InputNameUpdate" layoutX="30.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a name" styleClass="InputName" stylesheets="@../../styles/StyleForm.css" />
+                  <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../styles/StyleForm.css" text="Description" />
+                        <Label text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="InputDescUpdate" layoutX="30.0" layoutY="202.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="InputDescription" stylesheets="@../../styles/StyleForm.css" wrapText="true" />
+                  <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="362.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../styles/StyleForm.css" text="Price" />
+                        <Label stylesheets="@../../styles/StyleForm.css" text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="InputPriceUpdate" layoutX="29.0" layoutY="398.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Set a price to your product" styleClass="InputPrice" stylesheets="@../../styles/StyleForm.css" />
+                  <HBox alignment="CENTER_LEFT" layoutX="31.0" layoutY="462.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../styles/StyleForm.css" text="Quantite" />
+                        <Label stylesheets="@../../styles/StyleForm.css" text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="InputQuantiteupdate" layoutX="30.0" layoutY="510.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add Your quantite" styleClass="InputQuantite" stylesheets="@../../styles/StyleForm.css" />
+                  <Button fx:id="PictureBtn" layoutX="617.0" layoutY="156.0" mnemonicParsing="false" onAction="#handleOnBtnChooserImage" prefHeight="56.0" prefWidth="160.0" styleClass="PictureBtn" stylesheets="@../../styles/StyleForm.css" text="Choose image">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="InputImageUpdate" fitHeight="194.0" fitWidth="201.0" layoutX="600.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true" styleClass="PictureChooser">
                      <image>
-                        <Image url="@../../images/Img1.jpg" />
+                        <Image url="@../../images/image%20preview.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="69.0" layoutY="121.0" prefHeight="50.0" prefWidth="54.0" styleClass="Title" stylesheets="@../../styles/Style1.css" text="N°:" />
-                  <Label layoutX="69.0" layoutY="227.0" prefHeight="50.0" prefWidth="92.0" styleClass="Title" stylesheets="@../../styles/Style1.css" text="Name :" />
-                  <Label layoutX="69.0" layoutY="331.0" prefHeight="50.0" prefWidth="151.0" styleClass="Title" stylesheets="@../../styles/Style1.css" text="Description:" />
-                  <Label layoutX="67.0" layoutY="423.0" prefHeight="50.0" prefWidth="92.0" styleClass="Title" stylesheets="@../../styles/Style1.css" text="Price :" />
-                  <Label layoutX="67.0" layoutY="505.0" prefHeight="50.0" prefWidth="92.0" styleClass="Title" stylesheets="@../../styles/Style1.css" text="Date :" />
-                  <Label fx:id="NameProductdetails" layoutX="281.0" layoutY="199.0" prefHeight="94.0" prefWidth="361.0" styleClass="LabelText" stylesheets="@../../styles/StyleItemTable.css" />
-                  <Label fx:id="DescProductdetails" layoutX="281.0" layoutY="293.0" prefHeight="106.0" prefWidth="383.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" />
-                  <Label fx:id="PriceProductDetails" layoutX="277.0" layoutY="404.0" prefHeight="69.0" prefWidth="225.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" />
-                  <Label fx:id="dateProductDetails" layoutX="277.0" layoutY="503.0" prefHeight="54.0" prefWidth="361.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" />
-                  <Button fx:id="GoBackBtn" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoBackBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
-                  <Button fx:id="DeleteBtnProduct" layoutX="961.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="67.0" styleClass="DeleteBtn" stylesheets="@../../styles/StyleItemTable.css">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/delete-bin-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Label fx:id="IdProductdetails" layoutX="281.0" layoutY="112.0" prefHeight="69.0" prefWidth="312.0" styleClass="LabelText" stylesheets="@../../styles/Style1.css" />
-                  <Button fx:id="BtnOpenUpdate" layoutX="822.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="67.0" styleClass="DeleteBtn" stylesheets="@../../styles/StyleItemTable.css">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/edit-2-fill.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <AnchorPane fx:id="FormUpdateAdmin" layoutX="164.0" layoutY="50.0" prefHeight="561.0" prefWidth="808.0" styleClass="FormUpdateAdmin" stylesheets="@../../styles/StyleFormUpdateAdmin.css" visible="false">
-                     <children>
-                        <Button fx:id="UpdateBtn" layoutX="719.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleOnUpdateBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Update" />
-                        <TextField fx:id="InputNameUpdate" layoutX="40.0" layoutY="86.0" prefHeight="54.0" prefWidth="437.0" promptText="Name" styleClass="InputTextField" stylesheets="@../../styles/StyleForm.css" />
-                        <TextField fx:id="InputDescUpdate" layoutX="40.0" layoutY="201.0" prefHeight="215.0" prefWidth="437.0" promptText="Description " styleClass="InputTextField" stylesheets="@../../styles/StyleForm.css" />
-                        <TextField fx:id="InputPriceUpdate" layoutX="40.0" layoutY="466.0" prefHeight="54.0" prefWidth="437.0" promptText="Price" styleClass="InputTextField" stylesheets="@../../styles/StyleForm.css" />
-                        <Button fx:id="BtnChooserImage" contentDisplay="TOP" layoutX="526.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleOnBtnChooserImage" prefHeight="267.0" prefWidth="253.0" text="Choose">
-                           <graphic>
-                              <ImageView fx:id="InputImageUpdate" fitHeight="224.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                        <Button fx:id="cancelBtn" layoutX="637.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleOnCancelBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Cancel" />
-                     </children>
-                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>

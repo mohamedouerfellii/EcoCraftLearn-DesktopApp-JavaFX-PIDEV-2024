@@ -16,7 +16,7 @@ public class CommandesService implements ICRUD<Commandes> {
 
     @Override
     public int add(Commandes entity) {
-        String query = "INSERT INTO commandes (owner,cart,email,city,phone,status) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO commandes (owner,cart,email,city,phone,status,latitude,longitude) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, entity.getOwner());
@@ -25,6 +25,8 @@ public class CommandesService implements ICRUD<Commandes> {
             ps.setString(4, entity.getCity());
             ps.setInt(5, entity.getPhone());
             ps.setString(6,"En cours");
+            ps.setDouble(7,entity.getLatitude());
+            ps.setDouble(8,entity.getLongitude());
             return ps.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException(e);

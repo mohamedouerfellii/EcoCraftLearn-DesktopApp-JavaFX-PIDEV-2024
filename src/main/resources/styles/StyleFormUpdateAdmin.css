@@ -1,8 +1,10 @@
 .FormUpdateAdmin
 {
-    -fx-background-color: #fff;
-    -fx-border-radius :15 15 15 15 ;
-    -fx-border-color: #1D6611;
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #000000; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 
 }
 .InputTextField

@@ -9,121 +9,162 @@
     -fx-border-width: 2px; /* Largeur de la bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }
+
+.title-form{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 32;
+    -fx-fill: #000000;
+}
+
+.label-form{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+
+
+
+
+
+
 .TextForm
 {
     -fx-font-family: "Jost Medium";
     -fx-text-fill: #000000;
     -fx-font-size: 25;
 }
-.TextTitle
-{
-    -fx-font-family: "Jost";
-    -fx-text-fill: #1D6611;
-    -fx-font-size: 15;
-
-}
 
 .InputName {
-
-    -fx-background-radius: 15px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
 }
 
 
 
-.InputName.text-field {
-
-    -fx-font-family: "Jost";
-    -fx-text-fill: #000000;
-    -fx-font-size: 15;
-}
 
 .InputDescription {
-
-    -fx-background-radius: 15px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
 }
 
-
-
-.InputDescription.text-field {
-
-    -fx-font-family: "Jost";
-    -fx-text-fill: #000000;
-    -fx-font-size: 15;
-}
 
 
 
 .InputPrice {
-
-    -fx-background-radius: 15px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
 }
 
-.InputPrice.text-field {
-
-    -fx-font-family: "Jost";
-    -fx-text-fill: #000000;
-    -fx-font-size: 15;
+.InputQuantite {
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
 }
 
 
-.InputCategory{
-    -fx-background-radius: 15px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
-}
 
-
-.InputCategory .list-cell {
-    -fx-font-family: "Jost";
-    -fx-text-fill: #000000;
-    -fx-font-size: 15;
-}
 .GoBackBtn
 {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
-    -fx-background-radius: 15;
-    -fx-font-family: "Jost";
-    -fx-font-size: 15;
+    -fx-background-radius: 8px;
+}
+.GoBackBtn:hover
+{
+    -fx-opacity: 0.6;
 }
 .AddBtn
 {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
-    -fx-background-radius: 15;
-    -fx-font-family: "Jost";
-    -fx-font-size: 15;
+    -fx-background-radius: 8px;
 }
-.PictureBtn {
-    -fx-background-radius: 15px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
-    -fx-font-family: "Jost";
-    -fx-text-fill: #000000;
-    -fx-font-size: 15;
+
+.AddBtn:hover
+{
+    -fx-opacity: 0.6;
 }
+.PictureBtn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+
+.PictureBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+.PictureBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 .AnchorPaneFormCommande
 {
-    -fx-min-width: 500px;
-    -fx-max-width: 500px;
-    -fx-min-height: 500px;
-    -fx-max-height: 500px;
-    -fx-background-color: #fff; /* Couleur de fond */
-    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #39932C; /* Couleur de la bordure par défaut */
-    -fx-border-width: 2px; /* Largeur de la bordure */
-    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+    -fx-background-color: #fff ;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #000000;
 }
 
 .PasserOrderBtn
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
@@ -133,5 +174,16 @@
     -fx-opacity: 0.6;
 }
 
-
+.InputsOrder
+{
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
 

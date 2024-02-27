@@ -8,26 +8,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+import org.controlsfx.control.Rating;
 import tn.SIRIUS.entities.*;
-import tn.SIRIUS.services.CartsService;
-import tn.SIRIUS.services.CommandesService;
-import tn.SIRIUS.services.ProductService;
-import tn.SIRIUS.services.SousCartService;
+import tn.SIRIUS.services.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +33,36 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductPage implements Initializable{
+
+
+    @FXML
+    private Line lineMiniDetailsBtn;
+
+    @FXML
+    private Line lineMiniDetailsBtn1;
+    @FXML
+    private Button miniDetailsBtn;
+
+    @FXML
+    private Button miniDescriptionBtn;
+
+    @FXML
+    private AnchorPane AnchorPanedetailProduct;
+
+
+    @FXML
+    private AnchorPane productDescriptionLeft;
+
+    @FXML
+    private Button OrderMapBtn;
+
+
+    @FXML
+    private WebView WebViewMapOrder;
+
+
+    @FXML
+    private Pane mapContainer;
 
     @FXML
     private AnchorPane AnchorQuantitéInsuffisante;
@@ -84,6 +110,7 @@ public class ProductPage implements Initializable{
     @FXML
     private Text DescProductdetailsClient;
 
+
     @FXML
     private Button DetailGoBackBtn;
 
@@ -118,13 +145,16 @@ public class ProductPage implements Initializable{
     private Button HomeBtn6;
 
     @FXML
-    private TextField InputDescription;
+    private TextArea InputDescription;
 
     @FXML
     private TextField InputName;
 
     @FXML
     private TextField InputPrice;
+
+    @FXML
+    private TextField InputQuantite;
 
     @FXML
     private Label Labelvalue;
@@ -137,7 +167,8 @@ public class ProductPage implements Initializable{
 
     @FXML
     private Text NameProductdetailsClient;
-
+    @FXML
+    private Text QuantiteProductDetailclient;
     @FXML
     private Label NomProductLabel;
 
@@ -200,6 +231,29 @@ public class ProductPage implements Initializable{
     @FXML
     private Button PasserOrderBtn;
     private float initialPrice;
+
+    private WebView webView;
+    private WebEngine webEngine;
+    @FXML
+    private TextField InputSearchProduct;
+
+
+    @FXML
+    private AnchorPane AnchorPanerating;
+
+    @FXML
+    private TextField InputReview;
+
+    @FXML
+    private Rating InputRatingStar;
+    @FXML
+    private Button Passerrating;
+
+
+@FXML
+private VBox Containeritemreview;
+    private List <Productsevaluation> Listreview;
+
     @FXML
     private void handleAddProductBtn(ActionEvent event) {
         AnchorFormProduct.setVisible(true);
@@ -255,6 +309,7 @@ public class ProductPage implements Initializable{
             AnchorPaneFormCommande.setVisible(true);
 
         });
+
         PasserOrderBtn.setOnAction(event -> {
 
                 if (PasserCommande()) {
@@ -277,13 +332,54 @@ public class ProductPage implements Initializable{
 
 
 
+
+
+
+
+        OrderMapBtn.setOnAction(event -> {
+
+          /*  WebEngine webEngine = webView.getEngine();
+
+            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.SUCCEEDED) {
+                    webEngine.executeScript("mapboxgl.accessToken = 'pk.eyJ1IjoiemllZGdhY2hpdGEiLCJhIjoiY2x0MG4yNWgwMTNrYTJqbzIxY2I1ZHZsNCJ9.V9zXjftAvkRjP5PZ9-a25g';" +
+                            "var map = new mapboxgl.Map({" +
+                            "container: 'map', " +
+                            "style: 'mapbox://styles/mapbox/streets-v11', " +
+                            "center: [-74.5, 40], " +
+                            "zoom: 9 " +
+                            "});");
+                }
+            });
+
+            webEngine.loadContent("<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>" +
+                    "<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />" +
+                    "</head>" +
+                    "<body>" +
+                    "<div id='map' style='width: 100%; height: 100%;'></div>" +
+                    "</body>" +
+                    "</html>");
+
+            mapContainer.getChildren().add(webView);*/
+
+
+        });
+
+
+
+
+
+
     }
 
 
     public void ShowProductList()
     {
         ProductService productService = new ProductService();
-        recentlyAdded = productService.getAll();
+            recentlyAdded = productService.getAll();
         GridContainerProduct.getChildren().clear();
 
         recentlyAdded = new ArrayList<>(recentlyAdded());
@@ -297,7 +393,7 @@ public class ProductPage implements Initializable{
                 VBox boxProduct = fxmlLoader.load();
 
                 ItemProduct itemProduct = fxmlLoader.getController();
-               // itemProduct.setProductPage(this);
+               //itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
                 if (column == 3) {
@@ -306,12 +402,42 @@ public class ProductPage implements Initializable{
                 }
                 GridContainerProduct.add(boxProduct, column++, row);
                 GridContainerProduct.setMargin(boxProduct, new Insets(10));
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
+
+    public void ShowProductListsearch(List<Product> products) {
+        GridContainerProduct.getChildren().clear();
+
+        int column = 0;
+        int row = 1;
+
+        for (Product product : products) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                VBox boxProduct = fxmlLoader.load();
+
+                ItemProduct itemProduct = fxmlLoader.getController();
+                //itemProduct.setProductPage(this);
+                itemProduct.setData(product);
+
+                if (column == 3) {
+                    column = 0;
+                    ++row;
+                }
+                GridContainerProduct.add(boxProduct, column++, row);
+                GridContainerProduct.setMargin(boxProduct, new Insets(10));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 
     @FXML
     private void handlePictureBtn(ActionEvent event) {
@@ -338,22 +464,37 @@ public class ProductPage implements Initializable{
         return productList;
     }
 
+
+
+
+
+
     @FXML
     private void AddNewProduct(ActionEvent event) {
         try {
+
             String name = InputName.getText();
             String description = InputDescription.getText();
             float price = Float.parseFloat(InputPrice.getText());
+            int quantite= Integer.parseInt(InputQuantite.getText());
+
             String image = PictureChooser.getImage().getUrl().toString();
+
             ProductService productService = new ProductService();
-            Product product = new Product(0, name, description, image, price, 1, "");
+
+            Product product = new Product(0, name, description, image, price, 1, "",quantite);
             int result = productService.add(product);
 
             if (result == 1) {
-                System.out.println("Product added successfully.");
-                ShowProductList();
+                Notifications.create()
+                        .title("Product Added")
+                        .text("Product :" + product.getName() + " has been added successfully.")
+                        .showInformation();
+                         ShowProductList();
             } else {
-                System.out.println("Failed to add the product.");
+                Notifications.create()
+                        .text("Product :" + product.getName() + "Failed to add the product.")
+                        .showInformation();;
             }
         } catch (NumberFormatException ex) {
             System.out.println("Invalid price format. Please enter a valid number.");
@@ -367,22 +508,69 @@ public class ProductPage implements Initializable{
     void handleOnDetailGoBackBtnClicked(ActionEvent event) {
         PaneGroupProduct.setVisible(true);
         AnchorPaneDetailsProctClient.setVisible(false);
+
     }
    public void showProductDetailsClient(Product product) {
 
+
+       AnchorPanedetailProduct.setVisible(true);
+       lineMiniDetailsBtn.setVisible(true);
         AnchorPaneDetailsProctClient.setVisible(true);
         PaneGroupProduct.setVisible(false);
         String imageUrl = product.getImage();
         String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
         Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
 
+
+
       //IdProductdetailsClient.setText(String.valueOf(product.getIdProduct()));
        RectangleDetailProduct.setFill(new ImagePattern(img1));
        NameProductdetailsClient.setText(product.getName());
        DescProductdetailsClient.setText(product.getDescription());
-       //dateProductDetailsClient.setText(product.getAddDate());
+       dateProductDetailsClient.setText(product.getAddDate());
+
+       QuantiteProductDetailclient.setText(String.valueOf(product.getQuantite()));
        float price = product.getPrice();
        PriceProductDetailsClient.setText(price + "  TND");
+
+
+
+       Passerrating.setOnAction(e -> {
+
+           int productid = product.getIdProduct();
+           String review = InputReview.getText();
+           double rating =InputRatingStar.getRating();
+           ProductevaluationService productevaluationService = new ProductevaluationService();
+           Productsevaluation productsevaluation = new Productsevaluation(0,rating, review, "", productid, user.getIdUser(),0);
+           productevaluationService.add(productsevaluation);
+
+       });
+
+
+
+       ProductevaluationService productevaluationService = new ProductevaluationService();
+       Listreview = productevaluationService.getAllByIdProductNotConfirmed(product.getIdProduct());
+       Containeritemreview.getChildren().clear();
+       try {
+           for (Productsevaluation productsevaluation : Listreview)
+           {
+               FXMLLoader fxmlLoader = new FXMLLoader();
+               fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemReviewProduct.fxml"));
+               HBox HboxContainerReview = fxmlLoader.load();
+               ItemReviewProduct itemReviewProduct = fxmlLoader.getController();
+
+               itemReviewProduct.setData(productsevaluation);
+               Containeritemreview.getChildren().add(HboxContainerReview);
+           }
+       }
+       catch (IOException e) {
+           throw new RuntimeException(e);
+       }
+
+
+
+
+
     }
 
 
@@ -390,16 +578,16 @@ public class ProductPage implements Initializable{
         CartAnchorPane.setVisible(true);
         NumeroProductLabel.setText(String.valueOf(product.getIdProduct()));
         NomProductLabel.setText(product.getName());
-        initialPrice = product.getPrice(); // Stockez le prix initial
-        TotalPriceLabel.setText(String.valueOf(initialPrice)); // Affichez le prix initial dans le label du prix total
+        initialPrice = product.getPrice();
+        TotalPriceLabel.setText(String.valueOf(initialPrice));
     }
 
     @FXML
     void decrementValue(ActionEvent event) {
         if (valueQuantite > 1) {
-            valueQuantite--; // Décrémentez la quantité
-            updateValueLabel(); // Mettez à jour l'affichage de la quantité
-            updateTotalPriceLabel(false); // Mettez à jour le prix total
+            valueQuantite--;
+            updateValueLabel();
+            updateTotalPriceLabel(false);
         }
     }
 
@@ -475,9 +663,15 @@ public class ProductPage implements Initializable{
 
     @FXML
     void handleOnCloseCartAction(ActionEvent event) {
+
         CartAnchorPane.setVisible(false);
         PaneGroupProduct.setVisible(true);
 
+    }
+    @FXML
+    void handleCloserorder(ActionEvent event) {
+
+        AnchorPaneFormCommande.setVisible(false);
     }
 
 
@@ -517,7 +711,7 @@ public class ProductPage implements Initializable{
             String city = InputCityOrder.getText();
             String phoneInput = InputPhoneOrder.getText();
             if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}")) {
-                System.out.println("Invalid phone number format. Please enter a 8-digit valid number.");
+                System.out.println("Invalid phone number ");
                 return false;
             }
             int phone = Integer.parseInt(phoneInput);
@@ -525,7 +719,7 @@ public class ProductPage implements Initializable{
             Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
             int cartId = carts.getIdCarts();
             CommandesService commandesService = new CommandesService();
-            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"");
+            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"",0,0);
             int result = commandesService.add(commandes);
             if (result == 1) {
                 System.out.println("SUCCESS");
@@ -558,4 +752,48 @@ public class ProductPage implements Initializable{
 
 
   }
+
+
+    public void showAllProducts(String searchText) {
+        ProductService productService = new ProductService();
+        recentlyAdded = productService.searchProducts(searchText);
+        ShowProductListsearch(recentlyAdded);
+    }
+
+    @FXML
+    private void handlesearch() {
+        String searchText = InputSearchProduct.getText().trim();
+        GridContainerProduct.getChildren().clear();
+        showAllProducts(searchText);
+    }
+   @FXML
+    private void handlecloserating(ActionEvent event) {
+       AnchorPanerating.setVisible(false);
+
+    }
+
+    @FXML
+    private void handleopenrating(ActionEvent event) {
+        AnchorPanerating.setVisible(true);
+
+    }
+
+    @FXML
+    private void handleDetailsBtnright(ActionEvent event) {
+        AnchorPanedetailProduct.setVisible(true);
+        lineMiniDetailsBtn.setVisible(true);
+         lineMiniDetailsBtn1.setVisible(false);
+        productDescriptionLeft.setVisible(false);
+    }
+
+    @FXML
+    private void handleDetailsBtnleft(ActionEvent event) {
+        productDescriptionLeft.setVisible(true);
+        AnchorPanedetailProduct.setVisible(false);
+        lineMiniDetailsBtn.setVisible(false);
+        lineMiniDetailsBtn1.setVisible(true);
+
+    }
+
+
 }
