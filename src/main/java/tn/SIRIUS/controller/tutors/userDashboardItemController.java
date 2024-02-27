@@ -18,7 +18,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.UserService;
 

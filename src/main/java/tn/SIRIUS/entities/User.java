@@ -1,5 +1,7 @@
 package tn.SIRIUS.entities;
 
+import java.util.Objects;
+
 public class User {
     private int id;
     private String firstName;
@@ -31,7 +33,15 @@ public class User {
         this.isActive=isActive;
         this.nbrPtsCollects=nbrPtsCollects;
     }
-    public User(String firstName, String lastName, int number, String Email, String gender, String Password, String roles,String image,String answer,String question) {
+
+    public User(int id, String firstName, String password, String roles) {
+        this.id = id;
+        this.firstName = firstName;
+        Password = password;
+        this.roles = roles;
+    }
+
+    public User(String firstName, String lastName, int number, String Email, String gender, String Password, String roles, String image, String answer, String question) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -109,6 +119,7 @@ public class User {
     public String getPassword() {
         return Password;
     }
+
 
     public void setPassword(String password) {
         Password = password;

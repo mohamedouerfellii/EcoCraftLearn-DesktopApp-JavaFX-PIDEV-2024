@@ -165,6 +165,7 @@ public class OperationAdminController implements Initializable {
         nbrPtCollectLabelDetail.setText(String.valueOf(user.getNbrPtsCollects()));
         isActiveLabelDetail.setText(String.valueOf(user.isActive()));
         numberLabelDetail.setText(String.valueOf(user.getNumber()));
+
     }
 
 

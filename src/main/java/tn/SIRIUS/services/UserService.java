@@ -1,34 +1,41 @@
 package tn.SIRIUS.services;
 
-import javafx.fxml.Initializable;
+import org.mindrot.jbcrypt.BCrypt;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.utils.MyDB;
 
-import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class UserService {
     private Connection con;
     public UserService(){
         con = MyDB.getInstance().getCon();
     }
-    public boolean isPasswordMatch(String username,String password,String passwordSeen){
-        String qry = "SELECT firstName,password FROM users WHERE  firstName = ? AND password = ?";
-        try{
+    public UserService(Connection con) {
+        this.con = con;
+    }
+    public int isPasswordMatch(User user) {
+        String qry = "SELECT * FROM users WHERE firstName = ? AND role = ?";
+        try {
             PreparedStatement stm = con.prepareStatement(qry);
-            stm.setString(1,username);
-            stm.setString(2,password);
-            stm.setString(2,passwordSeen);
+            stm.setString(1, user.getFirstName());
+            stm.setString(2, user.getRoles());
             ResultSet rs = stm.executeQuery();
-          if(rs.next())
-              return true;
-        }catch (SQLException e){
+            if (rs.next()) {
+                String storedHashedPassword = rs.getString("password");
+                String enteredPassword = user.getPassword();
+
+                // Check if the entered password matches the stored hashed password
+                if (BCrypt.checkpw(enteredPassword, storedHashedPassword)) {
+                    return rs.getInt("idUser");
+                }
+            }
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return 0;
     }
     public boolean isPasswordConfirmed(int idUser,String password){
         String qry = "SELECT password FROM users WHERE  idUser = ? AND password = ?";
@@ -137,25 +144,115 @@ public class UserService {
         return searchResults;
     }
 
-    public boolean getPassword(String username){
-        String sql = "SELECT question FROM users WHERE firstName LIKE ?";
+    public String getPassword(String username){
+        String sql = "SELECT * FROM users WHERE firstName LIKE ?";
         try{
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return true;
+                return resultSet.getString("password");
             }
 
         }catch (SQLException e)
         {
             e.printStackTrace();
         }
+        return null;
+    }
+    public String getquestion(String q) throws SQLException {
+        String sql = "SELECT question FROM users WHERE firstName = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, q);
+        ResultSet resultSet = stm.executeQuery();
+        while(resultSet.next())
+        {
+            return resultSet.getString("question");
+
+        }
+        return null;
+
+    }
+    public boolean confirmAnswer(String q,String a) throws SQLException {
+        String sql = "SELECT * FROM users WHERE question = ? AND answer = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, q);
+        stm.setString(2, a);
+        ResultSet resultSet = stm.executeQuery();
+        while(resultSet.next())
+        {
+            return true;
+
+        }
         return false;
     }
-    public String getquestion(String q){
+    public void userLoggedIn(int id,boolean b){
+        String sql ="UPDATE users set LogedIn = ? WHERE idUser = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setBoolean(1,b);
+            stm.setInt(2,id);
+            stm.executeUpdate();
 
-        return q;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
+    public int searchUserLoggedIn(){
+        String sql ="SELECT idUser FROM users WHERE LogedIn = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setBoolean(1,true);
+            ResultSet resultSet = stm.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getInt("idUser");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public User getUserById(int id){
+        String sql = "SELECT * FROM users WHERE idUser = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1,id);
+            ResultSet resultSet = stm.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getInt("idUser"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setRoles(resultSet.getString("role"));
+                user.setImage(resultSet.getString("image"));
+                return user;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public List<User> getAllFilterByName(){
+        String query = "SELECT * FROM users  ORDER BY firstname DESC";
+        List<User> userList = new ArrayList<>();
+        try(Statement stm = con.createStatement()){
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()){
+                userList.add(new User(
+                        rs.getInt("idUser"),rs.getString("firstname"),
+                        rs.getString("lastname"),rs.getInt("numTel"),
+                        rs.getString("Email"),rs.getString("gender"),
+                        rs.getString("password"),rs.getString("role"),
+                        rs.getString("image"),rs.getBoolean("isActive"),
+                        rs.getInt("nbrPtsCollects")));
+
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return userList;
+    }
+
 }
+

@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.mindrot.jbcrypt.BCrypt;
 import tn.SIRIUS.controller.tutors.OperationAdminController;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
@@ -29,7 +30,7 @@ public class SignUpController implements Initializable {
     private Button Cancel;
 
     @FXML
-    private Label CheckDetails1;
+    private AnchorPane fieldEmptyAnchor;
     @FXML
     private Label done;
     @FXML
@@ -81,6 +82,8 @@ public class SignUpController implements Initializable {
 
     @FXML
     private ImageView userImageView;
+    @FXML
+    private Label passwordNotConfirmed;
     private String addUserImgPath;
 
     @FXML
@@ -105,7 +108,8 @@ public class SignUpController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        fieldEmptyAnchor.setVisible(false);
+        passwordNotConfirmed.setVisible(false);
         RoleChoise.setItems(FXCollections.observableArrayList("teacher", "student"));
 
         // Set a default choice
@@ -169,21 +173,46 @@ public class SignUpController implements Initializable {
         String firstname = FirtsName.getText();
         String lastname = LastName.getText();
         String email = Email.getText();
-        String password = passwordLabel1.getText();
+        String password =  BCrypt.hashpw(passwordLabel1.getText(), BCrypt.gensalt());
         String question = questionChoise.getValue();
         String answer = AnswerLabel.getText();
         String roles = RoleChoise.getValue();
         String gender = GenderChoise.getValue();
-        int number = Integer.parseInt(PhoneNumber.getText());
 
-        GURDService u = new GURDService();
-        User user = new User(firstname,lastname,number,email,gender,password,roles,addUserImgPath,answer,question);
-        u.add(user);
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/gui/Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        int number;
 
+        if(PhoneNumber.getText().isEmpty())
+        {
+            number = 0;
+        }
+        else
+            number=Integer.parseInt(PhoneNumber.getText());
+        if(firstname.isEmpty()||lastname.isEmpty()||email.isEmpty()||password.isEmpty()||gender.isEmpty()||roles.isEmpty())
+        {
+            fieldEmptyAnchor.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> fieldEmptyAnchor.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+            if(confirmPassword.getText().isEmpty() || confirmPassword.getText()!=passwordLabel1.getText() || confirmPassword.getText()!=Show1.getText())
+            {
+
+                passwordNotConfirmed.setVisible(true);
+                passwordNotConfirmed.setText("Password Not Confirmed");
+                Timeline timeline1 = new Timeline(new KeyFrame(Duration.millis(2000), e -> passwordNotConfirmed.setVisible(false)));
+                timeline1.setCycleCount(1);
+                timeline1.play();
+            }
+            return;
+        }
+        else {
+            GURDService u = new GURDService();
+            User user = new User(firstname, lastname, number, email, gender, password, roles, addUserImgPath, answer, question);
+            u.add(user);
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/gui/Login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 }

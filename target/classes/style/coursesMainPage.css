@@ -195,3 +195,8 @@
     -fx-font-size: 20;
     -fx-text-fill: #1D6611;
 }
+.field-empty{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    fx-text-fill: red;
+}

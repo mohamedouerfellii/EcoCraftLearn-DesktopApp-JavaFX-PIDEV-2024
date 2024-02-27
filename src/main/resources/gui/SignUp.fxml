@@ -116,6 +116,11 @@
                   </DropShadow>
                </effect>
             </PasswordField>
+            <Label fx:id="passwordNotConfirmed" contentDisplay="CENTER" layoutX="35.0" layoutY="511.0" prefHeight="35.0" prefWidth="246.0" styleClass="field-empty" stylesheets="@../style/coursesMainPage.css" text="Password Not Confirmed!" textAlignment="CENTER" textFill="RED" visible="false">
+               <padding>
+                  <Insets bottom="-10.0" />
+               </padding>
+            </Label>
             <Text fill="#d5ffdc" layoutX="332.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: &quot;jost medium&quot;; -fx-font-size: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 1, 0);" text="Phone Number" wrappingWidth="150.39999999999986">
                <font>
                   <Font size="24.0" />
@@ -171,6 +176,15 @@
             <ImageView fx:id="userImageView" fitHeight="74.0" fitWidth="87.0" layoutX="396.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="SignUpButton" layoutX="385.0" layoutY="498.0" mnemonicParsing="false" onAction="#addNewUser" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Sign Up" />
             <Button fx:id="Cancel" layoutX="385.0" layoutY="555.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="30.0" prefWidth="210.0" styleClass="login-button" stylesheets="@../style/button.css" text="Cancel" />
+            <AnchorPane fx:id="fieldEmptyAnchor" layoutX="212.0" layoutY="65.0" prefHeight="35.0" prefWidth="186.0" styleClass="success-operation-container" stylesheets="@../style/coursesMainPage.css" visible="false">
+               <children>
+                  <Label fx:id="fieldsEmpty" layoutX="9.0" layoutY="2.0" prefHeight="35.0" prefWidth="178.0" styleClass="field-empty" stylesheets="@../style/coursesMainPage.css" text="Fields are empty!" textFill="RED">
+                     <padding>
+                        <Insets bottom="-10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

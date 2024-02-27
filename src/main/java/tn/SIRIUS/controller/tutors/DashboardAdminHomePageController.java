@@ -17,7 +17,9 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import tn.SIRIUS.controller.LoginController;
 import tn.SIRIUS.controller.SignUpController;
+import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
 import tn.SIRIUS.services.UserService;
@@ -29,7 +31,7 @@ import java.util.ResourceBundle;
 
 public class DashboardAdminHomePageController implements Initializable {
     @FXML
-    private Circle profileImgContainer;
+    private Circle profileImg;
     @FXML
     private HBox notifCount;
     @FXML
@@ -66,12 +68,12 @@ public class DashboardAdminHomePageController implements Initializable {
     private ImageView logoutBtnImg;
     @FXML
     private Pane mainContentContainer;
-    private User user;
 
-    @Override
+
+
     public void initialize(URL url, ResourceBundle rb){
-
-        //Msg and Notifications
+        User loggedInUser = Session.getUser();
+        profileImg.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
         Label nbrNotif = new Label();
         Label nbrMsg = new Label();
         nbrNotif.setText("5");
@@ -169,18 +171,15 @@ public class DashboardAdminHomePageController implements Initializable {
                 throw new RuntimeException();
             }
         });
+
     }
     @FXML
     public void logOut(ActionEvent event)  throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SignUpController.class.getResource("/gui/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-
-
-
-
 
 }

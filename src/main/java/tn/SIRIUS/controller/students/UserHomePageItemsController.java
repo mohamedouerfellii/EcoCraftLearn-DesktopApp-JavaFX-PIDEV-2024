@@ -1,4 +1,4 @@
-/*package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.students;
 
 
 import javafx.fxml.FXML;
@@ -11,27 +11,21 @@ import tn.SIRIUS.entities.User;
 
 public class UserHomePageItemsController {
     @FXML
-    private Circle coursesHomePageItemImg;
+    private Circle userImgCercle;
     @FXML
-    private Label coursesHomePageTitle;
+    private Label userNameLabel;
     @FXML
-    private Label coursesHomePageTutor;
+    private Label messageLabel;
     @FXML
-    private Label coursesHomePageHours;
-    @FXML
-    private Label coursesHomePageRate;
-    @FXML
-    private Button coursesHomePageBtn;
+    private Button replyButton;
+    private User user;
     public void setUserData(User user){
-        Image courseImg = new Image(user.getImage());
-        coursesHomePageItemImg.setFill(new ImagePattern(courseImg));
-        coursesHomePageTitle.setText(user.getTitle());
-        coursesHomePageTutor.setText(String.valueOf(user.getTutor()));
-        coursesHomePageHours.setText(user.getDuration());
-        coursesHomePageRate.setText("4.9");
+        userImgCercle.setFill(new ImagePattern(
+                new Image(user.getImage().replace("\\","/"))
+        ));
+        userNameLabel.setText(user.getFirstName());
+        this.user = user;
+
     }
-    @FXML
-    public void onViewCourseBtnClicked(){
-        System.out.println(coursesHomePageHours.getText());
-    }
-}*/
+
+}

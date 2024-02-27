@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import tn.SIRIUS.entities.User;
@@ -49,7 +51,7 @@ public class dashboardAdminHomePageContainerController implements Initializable 
     @FXML
     private Label top3NbrRegistred;
     @FXML
-            private TextField searchInput;
+    private TextField searchInput;
 
     List<User> users = new ArrayList<>();
 
@@ -64,6 +66,13 @@ public class dashboardAdminHomePageContainerController implements Initializable 
         //handleSearch();
     }
 
+    @FXML
+    public void showFilterUser(){
+        UserService userService = new UserService();
+
+        users= userService.getAllFilterByName();
+        displayUsers();
+    }
     @FXML
     private void handleSearch() {
         String searchTerm = searchInput.getText().trim();

@@ -110,7 +110,7 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Text fx:id="passwordLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="********">
+                                    <Text fx:id="passwordLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 14;" styleClass="label-data" text="********">
                                        <HBox.margin>
                                           <Insets left="35.0" />
                                        </HBox.margin>

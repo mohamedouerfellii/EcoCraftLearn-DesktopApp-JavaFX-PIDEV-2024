@@ -1,6 +1,8 @@
 package tn.SIRIUS.controller;
 
+import com.twilio.twiml.voice.Sms;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,19 +10,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.w3c.dom.events.MouseEvent;
+import tn.SIRIUS.api.SMS;
+import tn.SIRIUS.controller.tutors.DashboardAdminHomePageController;
 import tn.SIRIUS.controller.tutors.OperationAdminController;
+import tn.SIRIUS.entities.Session;
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.UserService;
 import tn.SIRIUS.utils.MyDB;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -29,6 +42,7 @@ public class LoginController implements Initializable {
     public LoginController(){
         con = MyDB.getInstance().getCon();
     }
+
     @FXML
     private Stage stage;
     @FXML
@@ -47,10 +61,13 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField Show;
+    @FXML
+    private Pane blurPane;
 
     @FXML
     private Button SignInButton;
-
+@FXML
+private TextField answerQuestion;
     @FXML
     private PasswordField passwordLabel;
     @FXML
@@ -58,6 +75,12 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField userNameLabel;
+    @FXML
+    private ImageView Background;
+    @FXML
+    private Rectangle rectangle;
+
+
 
     @FXML
    public void handelVisibility(ActionEvent event) {
@@ -81,17 +104,25 @@ public class LoginController implements Initializable {
     @FXML
     public void onLoginButtonClick(ActionEvent event) {
         UserService u = new UserService();
+
+        Show.setText(passwordLabel.getText());
         String name = userNameLabel.getText();
         String password = passwordLabel.getText();
         String passwordSeen = Show.getText();
-        String role = u.getUserRole(name);
 
-        if ((name.isBlank() || password.isBlank()) && passwordSeen.isBlank()) {
+        String role = u.getUserRole(name);
+        User user=new User(1,name,password,role);
+
+        if ((name.isBlank() && password.isBlank()) || passwordSeen.isBlank()) {
             CheckDetail.setText("Username or Password fields are blank!");
         } else {
             System.out.println("Role retrieved from the database: " + role);
 
-            if (u.isPasswordMatch(name, password ,passwordSeen)) {
+            if (u.isPasswordMatch(user)!=0) {
+                int userId = u.isPasswordMatch(user);
+                User loggedInUser = u.getUserById(userId);
+                Session.setUser(loggedInUser);
+
                 if (role != null) {
                     try {
                         FXMLLoader fxmlLoader;
@@ -104,12 +135,14 @@ public class LoginController implements Initializable {
                             stage.show();
                         } else if ("admin".equals(role)) {
                             fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
-                            Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+                            Parent root = fxmlLoader.load();
+
+                            Scene scene = new Scene(root, 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
                             stage.show();
                         } else if ("teacher".equals(role)) {
-                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/tutors/dashboardTeacherHomePageContent.fxml"));
+                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/students/homePage.fxml"));
                             Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
@@ -123,6 +156,27 @@ public class LoginController implements Initializable {
                 CheckDetail.setText("Password does not match");
             }
         }
+
+
+
+    }
+    private BoxBlur blurEffect = new BoxBlur();
+    private void applyBlurEffect() {
+
+        blurEffect.setWidth(100);
+        blurEffect.setHeight(100);
+        // Create a timeline to animate the blur effect
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0.5),
+                        new KeyValue(blurEffect.widthProperty(), 1000),
+                        new KeyValue(blurEffect.heightProperty(),1000 )
+                )
+        );
+        blurPane.setEffect(blurEffect);
+
+
+        // Play the timeline
+        timeline.play();
     }
 
     @FXML
@@ -135,23 +189,70 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void forgetPassword(ActionEvent event){
+    public void forgetPassword(ActionEvent event) throws SQLException {
         UserService u = new UserService();
         forgetPasswordAnchor.setVisible(false);
         successOperationContainer.setVisible(false);
         confirmationAnchor.setVisible(true);
-        if(u.getPassword(userNameLabel.getText()))
-        {
-            questionText.setText(userNameLabel.getText());
-        }
-        else
-            questionText.setText("you don't have account");
+        questionText.setText(u.getquestion(userNameLabel.getText()));
 
+    }
+    @FXML
+    public void confirmAnswer(ActionEvent event) throws SQLException {
+        UserService u = new UserService();
+        Random random = new Random();
+        int rand=1000000+random.nextInt(99999999);
+        String numberString = String.valueOf(rand);
+        StringBuilder formattedNumber = new StringBuilder();
+        for (int i = 0; i < numberString.length(); i++) {
+            formattedNumber.append(numberString.charAt(i));
+            if ((i + 1) % 2 == 0 && i < numberString.length() - 1) {
+                formattedNumber.append("-");
+            }
+        }
+        String randString = formattedNumber.toString();
+        if(u.confirmAnswer(questionText.getText(),answerQuestion.getText())) {
+            forgetPasswordAnchor.setVisible(false);
+            successOperationContainer.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+            confirmationAnchor.setVisible(false);
+            try {
+
+                SMS.setAccountSID("ACd3443809359cb57f1af6d42fe97e5ef5");
+                SMS.setAuthToken("ad6f55c5405874b91ea4847008b89db5");
+
+
+                String recipientPhoneNumber = "+21656330810";
+                String senderPhoneNumber = "+16364890351";
+                String message = "Use this code to reset your password.\n Your code is: "+randString;
+
+
+                SMS.sendSMS(recipientPhoneNumber, senderPhoneNumber, message);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            forgetPasswordAnchor.setVisible(true);
+            successOperationContainer.setVisible(false);
+            confirmationAnchor.setVisible(false);
+        }
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
       forgetPasswordAnchor.setVisible(false);
       confirmationAnchor.setVisible(false);
         confirmationAnchor.setVisible(false);
+        blurPane.setVisible(true);
+        applyBlurEffect();
+
+
+
+
     }
+
+
+
 }
