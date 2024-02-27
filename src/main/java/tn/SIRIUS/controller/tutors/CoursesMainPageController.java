@@ -263,6 +263,7 @@ public class CoursesMainPageController implements Initializable {
     private List<QuizQuestion> quizQuestions;
     private Section sectionQuiz;
     private int idQuizDelete;
+    private DashboardTutorHomePageController dashboardTutorHomePageController;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         // Init visibilities and variables
@@ -305,6 +306,9 @@ public class CoursesMainPageController implements Initializable {
                     if(volumeBarSectionVid.isPressed())
                         mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
                 });
+    }
+    public void setCoursesMainPageController(DashboardTutorHomePageController controller){
+        dashboardTutorHomePageController = controller;
     }
     public void showCoursesList(){
         CourseService courseService = new CourseService();
@@ -1153,7 +1157,7 @@ public class CoursesMainPageController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/whiteboard.fxml"));
             Parent root = fxmlLoader.load();
             WhiteBoardController controller = fxmlLoader.getController();
-            controller.setCourseId(courseID);
+            controller.setCourseId(courseID,dashboardTutorHomePageController);
             pageContainer.getChildren().clear();
             pageContainer.getChildren().add(root);
         }catch (IOException e){

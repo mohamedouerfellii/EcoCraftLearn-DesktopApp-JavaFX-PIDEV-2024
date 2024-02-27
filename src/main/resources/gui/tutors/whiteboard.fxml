@@ -2,6 +2,7 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,5 +39,26 @@
             </ScrollPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="leftUserContainer" layoutX="425.0" layoutY="13.0" prefHeight="35.0" prefWidth="314.0" styleClass="failed-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label fx:id="leftUserTxt" layoutX="45.0" layoutY="5.0" prefHeight="23.0" prefWidth="207.0" styleClass="failed-msg" stylesheets="@../../style/coursesMainPage.css" text="#11 Ouerfelli Mohamed left !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="268.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/close-line.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="joinedStudentContainer" layoutX="425.0" layoutY="13.0" prefHeight="35.0" prefWidth="314.0" styleClass="success-operation-container" stylesheets="@../../style/coursesMainPage.css" visible="false">
+         <children>
+            <Label fx:id="joinedTxt" layoutX="31.0" layoutY="5.0" styleClass="success-msg" stylesheets="@../../style/coursesMainPage.css" text="#11 Ouerfelli Mohamed joined !" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="282.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/checkbox-circle-fill.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button layoutX="1085.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#disconnect" prefHeight="42.0" prefWidth="101.0" styleClass="courses-home-page-btn" stylesheets="@../../style/style.css" text="End Room" />
    </children>
 </AnchorPane>

@@ -188,6 +188,7 @@ public class CoursesMainPageController implements Initializable {
     private double currentVolume;
     private int rateValue;
     private int userTest;
+    private HomePageController homePageController;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         registeredCoursePage.setVisible(false);
@@ -221,6 +222,9 @@ public class CoursesMainPageController implements Initializable {
         rateValue = 0;
         incorrectPasswordCounter = 0;
         userTest = 4;
+    }
+    public void setHomePageController(HomePageController controller){
+        homePageController = controller;
     }
     public void notifySuccess(){
         successOperationContainer.setVisible(true);
@@ -795,7 +799,7 @@ public class CoursesMainPageController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/gui/students/whiteboard.fxml"));
             Parent root = fxmlLoader.load();
             WhiteBoardController controller = fxmlLoader.getController();
-            controller.setCourseId(currentCourse.getId());
+            controller.setCourseId(currentCourse.getId(),homePageController);
             mainPageContainer.getChildren().clear();
             mainPageContainer.getChildren().add(root);
         }catch (IOException e){

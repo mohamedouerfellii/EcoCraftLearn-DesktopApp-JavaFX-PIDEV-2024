@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
@@ -15,5 +16,6 @@
             <Text fx:id="tutorName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tutor-name" text="Ouerfelli Mohamed" wrappingWidth="178.93664932250977" />
          </children>
       </HBox>
+      <Button layoutX="1054.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#disconnect" prefHeight="42.0" prefWidth="101.0" styleClass="courses-home-page-btn" stylesheets="@../../style/style.css" text="Disconnect" />
    </children>
 </AnchorPane>

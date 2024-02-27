@@ -129,6 +129,7 @@ public class DashboardTutorHomePageController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/gui/tutors/CoursesMainPage.fxml")));
                 Parent page = fxmlLoader.load();
                 coursesMainPageController = fxmlLoader.getController();
+                coursesMainPageController.setCoursesMainPageController(this);
                 mainContentContainer.getChildren().clear();
                 mainContentContainer.getChildren().setAll(page);
             }catch (IOException ex){
@@ -168,5 +169,52 @@ public class DashboardTutorHomePageController implements Initializable {
                 throw new RuntimeException();
             }
         });
+    }
+    public void backToCoursesPage(){
+        String styleMenuBtnClicked =
+                """
+                -fx-font-family: "Jost Medium";
+                -fx-font-size: 16;
+                -fx-background-color: #fff;
+                -fx-background-radius: 24 0 0 24;
+                -fx-text-fill: #1D6611;""";
+        String styleMenuBtnNormal =
+                """
+                -fx-font-family: "Jost Medium";
+                -fx-font-size: 16;
+                -fx-background-color: transparent;
+                -fx-text-fill: #D5FFDC;""";
+        coursesBtn.setStyle(styleMenuBtnClicked);
+        coursesBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/dark/graduation-cap-fill.png")));
+        if(dashboardBtn.getStyle().equals(styleMenuBtnClicked)){
+            dashboardBtn.setStyle(styleMenuBtnNormal);
+            dashboardBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/dashboard-fill.png")));
+        }
+        if(eventsBtn.getStyle().equals(styleMenuBtnClicked)){
+            eventsBtn.setStyle(styleMenuBtnNormal);
+            eventsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/calendar-event-line.png")));
+        }
+        if(forumBtn.getStyle().equals(styleMenuBtnClicked)){
+            forumBtn.setStyle(styleMenuBtnNormal);
+            forumBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/group-fill.png")));
+        }
+        if(productsBtn.getStyle().equals(styleMenuBtnClicked)){
+            productsBtn.setStyle(styleMenuBtnNormal);
+            productsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/shopping-bag-3-fill.png")));
+        }
+        if(collectsBtn.getStyle().equals(styleMenuBtnClicked)){
+            collectsBtn.setStyle(styleMenuBtnNormal);
+            collectsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/recycle-fill.png")));
+        }
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/gui/tutors/CoursesMainPage.fxml")));
+            Parent page = fxmlLoader.load();
+            coursesMainPageController = fxmlLoader.getController();
+            coursesMainPageController.setCoursesMainPageController(this);
+            mainContentContainer.getChildren().clear();
+            mainContentContainer.getChildren().setAll(page);
+        }catch (IOException ex){
+            throw new RuntimeException();
+        }
     }
 }

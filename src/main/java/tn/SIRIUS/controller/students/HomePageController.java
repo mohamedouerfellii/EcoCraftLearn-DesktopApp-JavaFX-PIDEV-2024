@@ -187,6 +187,7 @@ public class HomePageController implements Initializable {
             Parent root = fxmlLoader.load();
             coursesMainPageController = fxmlLoader.getController();
             coursesMainPageController.getCourses(this.courses);
+            coursesMainPageController.setHomePageController(this);
             mainPageContainer.getChildren().clear();
             mainPageContainer.getChildren().add(root);
             currentPage = "courses";
