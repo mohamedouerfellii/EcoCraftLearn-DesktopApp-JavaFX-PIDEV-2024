@@ -213,6 +213,24 @@ public class UserService {
         }
         return 0;
     }
+    public boolean update(User user){
+        String query = "UPDATE `users` SET `firstName`=?,`password`=?where idUser=? ";
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2,user.getLastName());
+            statement.setInt(3, user.getId());
+
+            if(statement.executeUpdate() == 1){
+                statement.close();
+                return true;
+            }
+            statement.close();
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
     public User getUserById(int id){
         String sql = "SELECT * FROM users WHERE idUser = ?";
         try{
@@ -233,8 +251,50 @@ public class UserService {
         }
         return null;
     }
+    public User getUserByFirstName(String name){
+        String sql = "SELECT * FROM users WHERE firstName = ?";
+        User user = null;
+        try{
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1,name);
+            ResultSet resultSet = stm.executeQuery();
+
+            while(resultSet.next()){
+              //  user.setId(resultSet.getInt("idUser"));
+             //   user.setFirstName(resultSet.getString("firstName"));
+            //    user.setLastName(resultSet.getString("lastName"));
+            //    user.setLastName(resultSet.getString("password"));
+            //    user.setRoles(resultSet.getString("role"));
+           //     user.setImage(resultSet.getString("image"));
+                user= new User(resultSet.getInt("idUser"),resultSet.getString("firstName"),resultSet.getString("lastName"),resultSet.getInt("numTel"),resultSet.getString("email"),resultSet.getString("gender") ,resultSet.getString("password"),resultSet.getString("image"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
     public List<User> getAllFilterByName(){
-        String query = "SELECT * FROM users  ORDER BY firstname DESC";
+        String query = "SELECT * FROM users  ORDER BY firstname ASC";
+        List<User> userList = new ArrayList<>();
+        try(Statement stm = con.createStatement()){
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()){
+                userList.add(new User(
+                        rs.getInt("idUser"),rs.getString("firstname"),
+                        rs.getString("lastname"),rs.getInt("numTel"),
+                        rs.getString("Email"),rs.getString("gender"),
+                        rs.getString("password"),rs.getString("role"),
+                        rs.getString("image"),rs.getBoolean("isActive"),
+                        rs.getInt("nbrPtsCollects")));
+
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return userList;
+    }
+    public List<User> getAllFilterByRole(){
+        String query = "SELECT * FROM users  ORDER BY role ASC";
         List<User> userList = new ArrayList<>();
         try(Statement stm = con.createStatement()){
             ResultSet rs = stm.executeQuery(query);

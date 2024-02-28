@@ -4,7 +4,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,6 +21,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import tn.SIRIUS.controller.SignUpController;
 import javafx.fxml.FXML;
@@ -31,6 +38,7 @@ import tn.SIRIUS.utils.ChatServer;
 import java.io.IOException;
 import java.net.*;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static javafx.application.Application.launch;
 
@@ -92,15 +100,18 @@ public class HomePageController implements Initializable {
     @FXML
     private ScrollPane coursesScrollPane;
     @FXML
-    private VBox coursesVboxHomePage;
+    private VBox vboxMessage;
     @FXML
     private Pane blurPane;
     @FXML
     private Rectangle messageRectangle;
+
+
     @FXML
-    private TextArea messageArea;
+    private Button sendBtn;
     private BoxBlur blurEffect = new BoxBlur();
     private static DatagramSocket socket;
+    private int count;
 
     static {
         try {
@@ -110,8 +121,6 @@ public class HomePageController implements Initializable {
         }
     }
 
-    private GraphicsContext gc;
-    private String[] colors;
     private static InetAddress address;
 
     static {
@@ -125,17 +134,48 @@ public class HomePageController implements Initializable {
     ;
     @FXML
     private TextField textFieldMessage;
-
-    private static final String IDENTIFIER = "Jarray Abdo";
+    @FXML
+    private AnchorPane userCont;
+@FXML
+private ScrollPane scrollPaneMessage;
+@FXML
+private Label messageCunt;
     private static final int SERVER_PORT = 12345;
 User loggingUser=Session.getUser();
+@FXML
+private void userContainer(ActionEvent event) {
+    userCont.setVisible(true);
+
+}
+@FXML
+private void closeChat(ActionEvent event) {
+    blurPane.setVisible(false);
+    blurEffect.setWidth(0);
+    blurEffect.setHeight(0);
+    // Create a timeline to animate the blur effect
+    Timeline timeline = new Timeline(
+            new KeyFrame(javafx.util.Duration.seconds(0.5),
+                    new KeyValue(blurEffect.widthProperty(), 0),
+                    new KeyValue(blurEffect.heightProperty(), 0)
+            )
+    );
+    paneitem.setEffect(blurEffect);
+    vboxitem.setEffect(blurEffect);
+    hboxitem.setEffect(blurEffect);
+
+    // Play the timeline
+    timeline.play();
+    count = 0;
+    messageCunt.setText(String.valueOf(count));
+}
     @Override
     public void initialize(URL url, ResourceBundle rb){
         User loggedInUser = Session.getUser();
-
+        count = 0;
         profilImgContainer.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
         welcomeMsg.setText("Welcome "+loggedInUser.getFirstName()+"!");
-// send initialization message to the server
+
+
         byte[] uuid = ("init;" + loggedInUser.getFirstName()+";").getBytes();
         DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
         try {
@@ -144,31 +184,71 @@ User loggingUser=Session.getUser();
             throw new RuntimeException(e);
         }
 
-        new Thread(new ClientThread()).start();
+sendBtn.setOnAction(event1 -> {
+    String temp =textFieldMessage.getText() + "\n"; // message to send
+    HBox hbox = new HBox();
+    hbox.setAlignment(Pos.CENTER_RIGHT);
+    hbox.setPadding(new Insets(5, 5, 5, 5));
 
+    Label label = new Label(temp);
+    label.setStyle("-fx-background-color: #39932C; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+    label.setWrapText(true); // Allow text to wrap to multiple lines if needed
+    label.setPadding(new Insets(5, 10, 5, 10));
+    vboxMessage.setSpacing(7);
+    hbox.setPadding(new Insets(5, 10, 5, 10));
+    hbox.getChildren().add(label);
+    vboxMessage.getChildren().add(hbox);
+
+    byte[] msg = temp.getBytes(); // convert to bytes
+    textFieldMessage.clear(); // remove text from input box
+    // create a packet & send
+    DatagramPacket send = new DatagramPacket(msg, msg.length, address, SERVER_PORT);
+
+    try {
+        socket.send(send);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+
+
+});
         textFieldMessage.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String temp = loggingUser.getFirstName() + ":" + textFieldMessage.getText(); // message to send
-                String current = messageArea.getText();
-                messageArea.setText(current + textFieldMessage.getText() + "\n"); // update messages on screen
-                byte[] msg = temp.getBytes(); // convert to bytes
-                textFieldMessage.setText(""); // remove text from input box
+                String temp =textFieldMessage.getText() + "\n"; // message to send
+                HBox hbox = new HBox();
+                hbox.setAlignment(Pos.CENTER_RIGHT);
+                hbox.setPadding(new Insets(5, 5, 5, 5));
 
+                Label label = new Label(temp);
+                label.setStyle("-fx-background-color: #39932C; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                label.setWrapText(true); // Allow text to wrap to multiple lines if needed
+                label.setPadding(new Insets(5, 10, 5, 10));
+                vboxMessage.setSpacing(7);
+                hbox.setPadding(new Insets(5, 10, 5, 10));
+                hbox.getChildren().add(label);
+                vboxMessage.getChildren().add(hbox);
+
+                byte[] msg = temp.getBytes(); // convert to bytes
+                textFieldMessage.clear(); // remove text from input box
                 // create a packet & send
                 DatagramPacket send = new DatagramPacket(msg, msg.length, address, SERVER_PORT);
-                try {
-                    socket.send(send);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
 
+                    try {
+                        socket.send(send);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+            }
+
+        });
+        new Thread(new ClientThread()).start();
         }
 
 
     @FXML
     public void logOut(ActionEvent event)  throws IOException {
+        Session.logout();
         FXMLLoader fxmlLoader = new FXMLLoader(SignUpController.class.getResource("/gui/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
@@ -176,9 +256,11 @@ User loggingUser=Session.getUser();
         stage.show();
     }
     @FXML
-    public void bulring(ActionEvent event) throws IOException {
+    public void bulring(ActionEvent event){
         blurPane.setVisible(true);
         applyBlurEffect();
+        count = 0;
+        messageCunt.setText(String.valueOf(count));
     }
 
 
@@ -187,21 +269,43 @@ User loggingUser=Session.getUser();
 
         @Override
         public void run() {
-            System.out.println("starting thread");
+            System.out.println("Starting thread");
+
             while (true) {
                 DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
+
                 try {
+
                     socket.receive(packet);
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                String message = new String(packet.getData(), 0, packet.getLength()) + "\n";
-                String current = messageArea.getText();
-                messageArea.setText(current+ message);
+
+                String message = new String(packet.getData(), 0, packet.getLength());
+                HBox hbox = new HBox();
+                hbox.setAlignment(Pos.CENTER_LEFT);
+                hbox.setPadding(new Insets(5, 5, 5, 10));
+                    Label label = new Label(loggingUser.getFirstName()+": "+message);
+                    label.setStyle("-fx-background-color: grey ; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                    label.setPadding(new Insets(5, 10, 5, 10));
+                    label.setWrapText(true);
+                    hbox.getChildren().add(label);
+
+                    Platform.runLater(() -> {
+
+                        vboxMessage.setSpacing(7);
+                        vboxMessage.getChildren().add(hbox);
+
+
+                        count++;
+                        System.out.println(count);
+                        messageCunt.setText(String.valueOf(count));
+                    });
+
             }
         }
     }
-
         private void applyBlurEffect() {
 
             blurEffect.setWidth(0);
@@ -220,5 +324,6 @@ User loggingUser=Session.getUser();
             // Play the timeline
             timeline.play();
         }
+
     }
 

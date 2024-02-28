@@ -20,7 +20,13 @@ public class User {
 
     }
 
-    public User(int id,String firstName, String lastName, int number, String Email, String gender, String Password, String roles,String image,boolean isActive,int nbrPtsCollects) {
+    public User(int id, String firstName, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        Password = password;
+    }
+
+    public User(int id, String firstName, String lastName, int number, String Email, String gender, String Password, String roles, String image, boolean isActive, int nbrPtsCollects) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,9 +69,17 @@ public class User {
         this.Email = Email;
         this.gender = gender;
         this.Password = Password;
-
         this.Image=image;
 
+    }
+
+    public User(int idUser, String firstName, String lastName, String password, String role, String image) {
+        this.id = idUser;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.Password = password;
+        this.roles = role;
+        this.Image = image;
     }
 
     public int getId() {

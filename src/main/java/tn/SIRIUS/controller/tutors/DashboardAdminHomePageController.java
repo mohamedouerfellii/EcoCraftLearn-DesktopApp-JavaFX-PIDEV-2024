@@ -176,6 +176,7 @@ public class DashboardAdminHomePageController implements Initializable {
     @FXML
     public void logOut(ActionEvent event)  throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SignUpController.class.getResource("/gui/Login.fxml"));
+        Session.logout();
         Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

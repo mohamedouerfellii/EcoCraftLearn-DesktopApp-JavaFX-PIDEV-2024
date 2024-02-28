@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -148,7 +149,7 @@
             </HBox>
          </children>
       </VBox>
-      <HBox fx:id="hboxitem" alignment="CENTER_RIGHT" layoutX="545.0" layoutY="20.0" prefHeight="60.0" prefWidth="797.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
+      <HBox fx:id="hboxitem" alignment="CENTER_RIGHT" layoutX="262.0" layoutY="20.0" prefHeight="60.0" prefWidth="779.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
                <children>
@@ -178,11 +179,17 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0">
+                     <children>
+                        <Label fx:id="messageCunt" text="0" textFill="WHITE" />
+                     </children></HBox>
                </children>
             </HBox>
-            <HBox prefHeight="50.0" prefWidth="80.0">
+            <HBox prefHeight="56.0" prefWidth="71.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
                      <graphic>
@@ -201,14 +208,6 @@
                   <Insets right="-260.0" />
                </HBox.margin>
             </Circle>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../icons/dark/arrow-down-s-fill.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="260.0" />
-               </HBox.margin>
-            </ImageView>
          </children>
       </HBox>
       <Pane fx:id="paneitem" layoutX="151.0" layoutY="79.0" prefHeight="635.0" prefWidth="1194.0" styleClass="main-content-container" stylesheets="@../../style/style.css">
@@ -219,7 +218,7 @@
                   <Image url="@../../images/homePageStudent/welcome-img.png" />
                </image>
             </ImageView>
-            <Label fx:id="welcomeMsg" layoutX="69.0" layoutY="60.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Hello Mohamed!">
+            <Label fx:id="welcomeMsg" layoutX="69.0" layoutY="60.0" prefHeight="47.0" prefWidth="322.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Hello Mohamed!">
                <font>
                   <Font name="Jost Regular" size="32.0" />
                </font>
@@ -291,28 +290,48 @@
                   <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" styleClass="most-popular-courses-btn" text="Most Popular" />
                </children>
             </HBox>
+            <AnchorPane fx:id="userCont" layoutX="920.0" layoutY="3.0" prefHeight="227.0" prefWidth="255.0" visible="false">
+               <children>
+                  <Button layoutX="56.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="141.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Account" />
+                  <Button layoutX="45.0" layoutY="161.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="169.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Contact Us" />
+                  <Button layoutX="69.0" layoutY="88.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Wallet" />
+               </children>
+               <styleClass>
+                  <String fx:value="nbr-courses-completed" />
+                  <String fx:value="welcome-container" />
+                  <String fx:value="home-page-container" />
+               </styleClass>
+            </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="blurPane" layoutX="400.0" layoutY="150.0" prefHeight="426.0" prefWidth="607.0" styleClass="glass-effect" stylesheets="@../../style/button.css">
+      <Pane fx:id="blurPane" layoutX="536.0" layoutY="150.0" prefHeight="426.0" prefWidth="485.0" styleClass="glass-effect" stylesheets="@../../style/button.css" visible="false">
          <children>
-            <TextArea fx:id="messageArea" layoutY="47.0" prefHeight="345.0" prefWidth="607.0" />
-            <Button layoutX="547.0" mnemonicParsing="false" styleClass="Details-button" stylesheets="@../../style/button.css">
+            <Button fx:id="closeChat" layoutX="411.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeChat" styleClass="Details-button" stylesheets="@../../style/button.css">
                <graphic>
-                  <ImageView fx:id="closeWarningPassword" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../icons/dark/close-circle-filll.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Line endX="457.20001220703125" layoutX="150.0" layoutY="45.0" startX="-150.0" />
-            <Label fx:id="welcomeMsg2" layoutX="14.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Messages">
+            <Line endX="18.20001220703125" layoutX="150.0" layoutY="45.0" startX="-150.0" />
+            <ScrollPane hbarPolicy="NEVER" layoutY="50.0" prefHeight="336.0" prefWidth="486.0" styleClass="courses-scroll-pane" stylesheets="@../../style/style.css">
+               <content>
+                  <VBox fx:id="vboxMessage" prefHeight="342.0" prefWidth="471.0" styleClass="courses-vbox-home-page">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Label fx:id="welcomeMsg2" layoutX="14.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Student Chat">
                <font>
                   <Font name="Jost Regular" size="32.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldMessage" layoutY="387.0" prefHeight="39.0" prefWidth="607.0" promptText="Write Message..." />
-            <Button fx:id="sendBtn" layoutX="512.0" layoutY="386.0" mnemonicParsing="false" styleClass="Details-button" text="Send">
+            <TextField fx:id="textFieldMessage" layoutY="387.0" prefHeight="39.0" prefWidth="486.0" promptText="Write Message..." />
+            <Button fx:id="sendBtn" layoutX="372.0" layoutY="385.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="98.0" styleClass="Details-button" text="Send">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="22.0">
                      <image>
@@ -323,5 +342,14 @@
             </Button>
          </children>
       </Pane>
+      <Button layoutX="1280.0" layoutY="26.0" mnemonicParsing="false" onAction="#userContainer" prefHeight="40.0" prefWidth="56.0" styleClass="forget-password" stylesheets="@../../style/button.css">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/arrow-down-s-fill.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

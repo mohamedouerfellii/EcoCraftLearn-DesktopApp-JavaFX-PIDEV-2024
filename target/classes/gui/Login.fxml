@@ -96,11 +96,11 @@
             <font>
                <Font size="25.0" />
             </font></Label>
-         <AnchorPane fx:id="forgetPasswordAnchor" layoutX="77.0" layoutY="126.0" prefHeight="354.0" prefWidth="484.0" styleClass="delete-warning-container" stylesheets="@../style/coursesMainPage.css" visible="false">
+         <AnchorPane fx:id="forgetPasswordAnchor" layoutX="77.0" layoutY="126.0" prefHeight="354.0" prefWidth="484.0" styleClass="delete-warning-container" stylesheets="@../style/coursesMainPage.css">
             <children>
                <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="RED" />
-               <Label layoutX="92.0" layoutY="3.0" styleClass="warning-delete-label" stylesheets="@../style/coursesMainPage.css" text="Two Factor Authentification !" />
-               <Button layoutX="423.0" layoutY="-1.0" mnemonicParsing="false" styleClass="Details-button" stylesheets="@../style/button.css">
+               <Label layoutX="142.0" layoutY="3.0" styleClass="warning-delete-label" stylesheets="@../style/coursesMainPage.css" text="Forget Password !" />
+               <Button layoutX="423.0" layoutY="-1.0" mnemonicParsing="false" onAction="#closeForgetPassword" styleClass="Details-button" stylesheets="@../style/button.css">
                   <graphic>
                      <ImageView fx:id="closebtn1" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -109,16 +109,17 @@
                      </ImageView>
                   </graphic>
                </Button>
-               <Text layoutX="62.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="A code has been send to your Email" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
-               <Button fx:id="confirmccodeBtn1" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../style/coursesMainPage.css" text="Confirm" />
-               <PasswordField fx:id="confirmationLabel1" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter your Confirmation code" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
+               <Text layoutX="62.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="A code has been send to your Phone" textAlignment="CENTER" wrappingWidth="394.8240966796875" />
+               <Button fx:id="confirmccodeBtn1" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onAction="#confirmCode" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../style/coursesMainPage.css" text="Confirm" />
+               <PasswordField fx:id="codeLabel" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Enter your Confirmation code" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
+               <Label fx:id="timerLabel" layoutX="214.0" layoutY="134.0" prefHeight="18.0" prefWidth="78.0" underline="true" />
             </children>
          </AnchorPane>
          <AnchorPane fx:id="confirmationAnchor" layoutX="78.0" layoutY="127.0" prefHeight="354.0" prefWidth="484.0" styleClass="delete-warning-container" stylesheets="@../style/coursesMainPage.css" visible="false">
             <children>
                <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="RED" />
                <Label layoutX="147.0" layoutY="3.0" styleClass="warning-delete-label" stylesheets="@../style/coursesMainPage.css" text="Forget Password !" />
-               <Button layoutX="423.0" layoutY="-1.0" mnemonicParsing="false" styleClass="Details-button" stylesheets="@../style/button.css">
+               <Button layoutX="423.0" layoutY="-1.0" mnemonicParsing="false" onAction="#closeForgetPassword" styleClass="Details-button" stylesheets="@../style/button.css">
                   <graphic>
                      <ImageView fx:id="closebtn" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -140,6 +141,26 @@
                      <Insets bottom="-10.0" />
                   </padding>
                </Label>
+            </children>
+         </AnchorPane>
+         <AnchorPane fx:id="changePassword" layoutX="78.0" layoutY="127.0" prefHeight="354.0" prefWidth="484.0" styleClass="delete-warning-container" stylesheets="@../style/coursesMainPage.css">
+            <children>
+               <Line endX="271.13330078125" layoutX="198.0" layoutY="41.0" startX="-180.066650390625" stroke="RED" />
+               <Label layoutX="142.0" layoutY="3.0" styleClass="warning-delete-label" stylesheets="@../style/coursesMainPage.css" text="Forget Password !" />
+               <Button layoutX="423.0" layoutY="-1.0" mnemonicParsing="false" onAction="#closeForgetPassword" styleClass="Details-button" stylesheets="@../style/button.css">
+                  <graphic>
+                     <ImageView fx:id="closebtn11" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../icons/dark/close-circle-filll.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Text layoutX="32.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="Update Your Password" textAlignment="CENTER" wrappingWidth="274.82409286499023" />
+               <Button fx:id="confirmccodeBtn11" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onAction="#UpdatePassword" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../style/coursesMainPage.css" text="Confirm" />
+               <PasswordField fx:id="confirmNewPassword" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Confirm New Password" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
+               <Label fx:id="timerLabel1" layoutX="214.0" layoutY="134.0" prefHeight="18.0" prefWidth="78.0" underline="true" />
+               <PasswordField fx:id="newPassword" layoutX="32.0" layoutY="106.0" prefHeight="52.0" prefWidth="428.0" promptText="New Password" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
             </children>
          </AnchorPane>
 

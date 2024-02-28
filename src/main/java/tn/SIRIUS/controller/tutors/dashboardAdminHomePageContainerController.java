@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -52,7 +53,8 @@ public class dashboardAdminHomePageContainerController implements Initializable 
     private Label top3NbrRegistred;
     @FXML
     private TextField searchInput;
-
+@FXML
+        private Button filter;
     List<User> users = new ArrayList<>();
 
 
@@ -67,10 +69,19 @@ public class dashboardAdminHomePageContainerController implements Initializable 
     }
 
     @FXML
-    public void showFilterUser(){
+    public void showFilterUser() {
         UserService userService = new UserService();
 
-        users= userService.getAllFilterByName();
+        if ("By name".equals(filter.getText())) {
+            // Initial action
+            filter.setText("By role");
+            users = userService.getAllFilterByRole();
+        } else {
+            // Alternative action when the button is clicked again
+            filter.setText("By name");
+            users = userService.getAllFilterByName();
+        }
+
         displayUsers();
     }
     @FXML
@@ -96,12 +107,14 @@ public class dashboardAdminHomePageContainerController implements Initializable 
         try {
             feedbackContentContainer.getChildren().clear();
             for (User u : users) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
+                if (!(u.getRoles().equals("admin")))
+                {  FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/tutors/usersDashboardItem.fxml"));
                 Parent root = fxmlLoader.load();
                 userDashboardItemController itemController = fxmlLoader.getController();
                 itemController.setFeedBackData(u);
                 feedbackContentContainer.getChildren().add(root);
+            }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

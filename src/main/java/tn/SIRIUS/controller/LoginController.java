@@ -20,12 +20,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.events.MouseEvent;
 import tn.SIRIUS.api.SMS;
 import tn.SIRIUS.controller.tutors.DashboardAdminHomePageController;
 import tn.SIRIUS.controller.tutors.OperationAdminController;
 import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
+import tn.SIRIUS.services.GURDService;
 import tn.SIRIUS.services.UserService;
 import tn.SIRIUS.utils.MyDB;
 
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -198,8 +201,96 @@ private TextField answerQuestion;
 
     }
     @FXML
+    private Label timerLabel;
+    @FXML
+    private PasswordField codeLabel;
+    private int secondsElapsed = 30;
+    @FXML
+    private AnchorPane changePassword;
+@FXML
+public void closeForgetPassword(ActionEvent event) {
+    forgetPasswordAnchor.setVisible(false);
+    successOperationContainer.setVisible(false);
+    confirmationAnchor.setVisible(false);
+}
+
+        @FXML
+        private PasswordField newPassword;
+    @FXML
+    private PasswordField confirmNewPassword;
+    @FXML
+    public void UpdatePassword(ActionEvent event) {
+        if(newPassword.getText().equals(confirmNewPassword.getText())){
+            UserService u = new UserService();
+           GURDService g = new GURDService();
+            String password =  BCrypt.hashpw(newPassword.getText(), BCrypt.gensalt());
+            User user1 = u.getUserByFirstName(userNameLabel.getText());
+            System.out.println(user1 +"before update");
+            if(user1 != null){
+                User user= new User(user1.getId(),user1.getFirstName(),user1.getLastName(),user1.getNumber(),user1.getEmail(),user1.getGender(),password,user1.getImage());
+                g.update(user);
+                System.out.println(user +" after update");
+                changePassword.setVisible(false);
+                successOperationContainer.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> successOperationContainer.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+                confirmationAnchor.setVisible(false);
+                forgetPasswordAnchor.setVisible(false);
+                changePassword.setVisible(false);
+            }
+
+        }
+    }
+    @FXML
+    public void confirmCode(ActionEvent event) throws SQLException {
+
+        if(resetCode.equals(codeLabel.getText())){
+            changePassword.setVisible(true);
+
+    }
+
+    }
+    private String resetCode = generateRandomNumber();
+    @FXML
     public void confirmAnswer(ActionEvent event) throws SQLException {
         UserService u = new UserService();
+         // Implement this method to generate a unique code
+
+        if(u.confirmAnswer(questionText.getText(),answerQuestion.getText())) {
+            try {
+                SMS.setAccountSID("ACd3443809359cb57f1af6d42fe97e5ef5");
+                SMS.setAuthToken("ad6f55c5405874b91ea4847008b89db5");
+                String recipientPhoneNumber = "+21656330810";
+                String senderPhoneNumber = "+16364890351";
+                String message = "Use this code to reset your password.\n Your code is: " + resetCode + "\n Remember this code is valid for 30 seconds.";
+                SMS.sendSMS(recipientPhoneNumber, senderPhoneNumber, message);
+                forgetPasswordAnchor.setVisible(true);
+                confirmationAnchor.setVisible(false);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event1 -> {
+                    secondsElapsed--;
+                    timerLabel.setText(secondsElapsed + " seconds");
+                    if(secondsElapsed == 0){
+                        forgetPasswordAnchor.setVisible(false);
+                        confirmationAnchor.setVisible(false);
+                    }
+                }));
+                timeline.setCycleCount(30);
+                timeline.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+
+
+    public String generateRandomNumber() {
         Random random = new Random();
         int rand=1000000+random.nextInt(99999999);
         String numberString = String.valueOf(rand);
@@ -210,35 +301,8 @@ private TextField answerQuestion;
                 formattedNumber.append("-");
             }
         }
-        String randString = formattedNumber.toString();
-        if(u.confirmAnswer(questionText.getText(),answerQuestion.getText())) {
-            forgetPasswordAnchor.setVisible(false);
-            successOperationContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
-            confirmationAnchor.setVisible(false);
-            try {
-
-                SMS.setAccountSID("ACd3443809359cb57f1af6d42fe97e5ef5");
-                SMS.setAuthToken("ad6f55c5405874b91ea4847008b89db5");
-
-
-                String recipientPhoneNumber = "+21656330810";
-                String senderPhoneNumber = "+16364890351";
-                String message = "Use this code to reset your password.\n Your code is: "+randString;
-
-
-                SMS.sendSMS(recipientPhoneNumber, senderPhoneNumber, message);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            forgetPasswordAnchor.setVisible(true);
-            successOperationContainer.setVisible(false);
-            confirmationAnchor.setVisible(false);
-        }
+       String randString = formattedNumber.toString();
+        return randString;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -247,7 +311,7 @@ private TextField answerQuestion;
         confirmationAnchor.setVisible(false);
         blurPane.setVisible(true);
         applyBlurEffect();
-
+        changePassword.setVisible(false);
 
 
 
