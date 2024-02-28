@@ -5,5 +5,6 @@ module tn.SIRIUS {
 
     opens tn.SIRIUS.EcoCraftLearning to javafx.fxml;
     opens tn.SIRIUS.controller.tutors to javafx.fxml;
+    opens tn.SIRIUS.controller.students to javafx.fxml;
     exports tn.SIRIUS.EcoCraftLearning;
 }

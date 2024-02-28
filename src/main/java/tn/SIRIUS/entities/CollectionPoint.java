@@ -1,10 +1,23 @@
 package tn.SIRIUS.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CollectionPoint {
     private int idcollectionPoint;
     private String nameCollectionPoint;
     private  String adressCollectionPoint;
     private  Float capacity;
+
+    public List<Collect> getCollects() {
+        return collects;
+    }
+
+    public void setCollects(List<Collect> collects) {
+        this.collects = collects;
+    }
+
+    private List<Collect> collects=new ArrayList<>();
 
     public CollectionPoint(int idcollectionPoint, String nameCollectionPoint, String adressCollectionPoint, Float capacity) {
         this.idcollectionPoint = idcollectionPoint;

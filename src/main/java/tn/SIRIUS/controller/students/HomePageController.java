@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.scene.layout.Pane;
 import tn.SIRIUS.entities.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class HomePageController implements Initializable {
@@ -67,10 +69,12 @@ public class HomePageController implements Initializable {
     private ScrollPane coursesScrollPane;
     @FXML
     private VBox coursesVboxHomePage;
+    @FXML
+    private Pane mainContentContainer;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Profile Image
-        Image profileImg = new Image("/resources/images/profilePictures/12.jpg");
+        Image profileImg = new Image(getClass().getResourceAsStream("/images/profilePictures/12.jpg"));
         profilImgContainer.setFill(new ImagePattern(profileImg));
         //Msg and Notifications
         Label nbrNotif = new Label();
@@ -85,7 +89,7 @@ public class HomePageController implements Initializable {
         String welcomeText = "Welcome Abdallah!";
         welcomeMsg.setText(welcomeText);
         //Most progressed courses
-        Image mostProgressedCourseImg = new Image("/resources/images/coursesImg/Finished-Basket-3-cropped.jpg");
+        Image mostProgressedCourseImg = new Image(getClass().getResourceAsStream("/images/coursesImg/Finished-Basket-3-cropped.jpg"));
         mostProgressedCourseImgContainer.setFill(new ImagePattern(mostProgressedCourseImg));
         double prcProg = 99.0;
         double progressCourseValue = (prcProg / 100.0) * 360;
@@ -114,34 +118,105 @@ public class HomePageController implements Initializable {
                 -fx-background-color: transparent;
                 -fx-text-fill: #D5FFDC;""";
         homeBtn.setStyle(styleMenuBtnClicked);
-        homeBtnImg.setImage(new Image("/resources/icons/dark/home-4-fill.png"));
-        coursesBtn.setOnMouseEntered(e -> coursesBtn.setStyle(styleMenuBtnHover) );
-        coursesBtn.setOnMouseExited(e -> coursesBtn.setStyle(styleMenuBtnNormal) );
-        eventsBtn.setOnMouseEntered(e -> eventsBtn.setStyle(styleMenuBtnHover) );
-        eventsBtn.setOnMouseExited(e -> eventsBtn.setStyle(styleMenuBtnNormal) );
-        forumBtn.setOnMouseEntered(e -> forumBtn.setStyle(styleMenuBtnHover) );
-        forumBtn.setOnMouseExited(e -> forumBtn.setStyle(styleMenuBtnNormal) );
-        productsBtn.setOnMouseEntered(e -> productsBtn.setStyle(styleMenuBtnHover) );
-        productsBtn.setOnMouseExited(e -> productsBtn.setStyle(styleMenuBtnNormal) );
-        collectsBtn.setOnMouseEntered(e -> collectsBtn.setStyle(styleMenuBtnHover) );
-        collectsBtn.setOnMouseExited(e -> collectsBtn.setStyle(styleMenuBtnNormal));
-        logoutBtn.setOnMouseEntered(e -> logoutBtn.setStyle(styleMenuBtnHover) );
-        logoutBtn.setOnMouseExited(e -> logoutBtn.setStyle(styleMenuBtnNormal) );
+        homeBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/dark/home-4-fill.png")));
+//        coursesBtn.setOnMouseEntered(e -> coursesBtn.setStyle(styleMenuBtnHover) );
+//        coursesBtn.setOnMouseExited(e -> coursesBtn.setStyle(styleMenuBtnNormal) );
+//        eventsBtn.setOnMouseEntered(e -> eventsBtn.setStyle(styleMenuBtnHover) );
+//        eventsBtn.setOnMouseExited(e -> eventsBtn.setStyle(styleMenuBtnNormal) );
+//        forumBtn.setOnMouseEntered(e -> forumBtn.setStyle(styleMenuBtnHover) );
+//        forumBtn.setOnMouseExited(e -> forumBtn.setStyle(styleMenuBtnNormal) );
+//        productsBtn.setOnMouseEntered(e -> productsBtn.setStyle(styleMenuBtnHover) );
+//        productsBtn.setOnMouseExited(e -> productsBtn.setStyle(styleMenuBtnNormal) );
+//        collectsBtn.setOnMouseEntered(e -> collectsBtn.setStyle(styleMenuBtnHover) );
+//        collectsBtn.setOnMouseExited(e -> collectsBtn.setStyle(styleMenuBtnNormal));
+//        logoutBtn.setOnMouseEntered(e -> logoutBtn.setStyle(styleMenuBtnHover) );
+//        logoutBtn.setOnMouseExited(e -> logoutBtn.setStyle(styleMenuBtnNormal) );
         //Courses part
         coursesScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        Course course = new Course(1,"/resources/images/coursesImg/tote_428_597_s_c1_428_597_int_c1.png","test course display","Description",1,"08h 30m",250.0f,5,"20-01-2024",0);
-        try {
-            for (int i = 0; i < 6; i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesHomePageItem.fxml"));
-                Parent root = fxmlLoader.load();
-                CoursesHomePageItemController itemController = fxmlLoader.getController();
-                itemController.setCourseData(course);
-                coursesVboxHomePage.getChildren().add(root);
+        Course course = new Course(1,"/images/coursesImg/tote_428_597_s_c1_428_597_int_c1.png","test course display","Description",1,"08h 30m",250.0f,5,"20-01-2024",0);
+//        try {
+//            for (int i = 0; i < 6; i++) {
+//                FXMLLoader fxmlLoader = new FXMLLoader();
+//                fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesHomePageItem.fxml"));
+//                Parent root = fxmlLoader.load();
+//                CoursesHomePageItemController itemController = fxmlLoader.getController();
+//                itemController.setCourseData(course);
+//                coursesVboxHomePage.getChildren().add(root);
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+
+
+
+        homeBtn.setOnMouseClicked(e -> {
+            homeBtn.setStyle(styleMenuBtnClicked);
+            homeBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/dark/home-4-fill.png")));
+            if(coursesBtn.getStyle().equals(styleMenuBtnClicked)){
+                coursesBtn.setStyle(styleMenuBtnNormal);
+                coursesBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/graduation-cap-fill.png")));
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            if(eventsBtn.getStyle().equals(styleMenuBtnClicked)){
+                eventsBtn.setStyle(styleMenuBtnNormal);
+                eventsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/calendar-event-line.png")));
+            }
+            if(forumBtn.getStyle().equals(styleMenuBtnClicked)){
+                forumBtn.setStyle(styleMenuBtnNormal);
+                forumBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/group-fill.png")));
+            }
+            if(productsBtn.getStyle().equals(styleMenuBtnClicked)){
+                productsBtn.setStyle(styleMenuBtnNormal);
+                productsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/shopping-bag-3-fill.png")));
+            }
+            if(collectsBtn.getStyle().equals(styleMenuBtnClicked)){
+                collectsBtn.setStyle(styleMenuBtnNormal);
+                collectsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/recycle-fill.png")));
+            }
+            try{
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/homePage.fxml"));
+                mainContentContainer.getChildren().removeAll();
+                Parent allPage = fxmlLoader.load();
+                Parent page = (Parent) allPage.lookup("#mainContentContainer");
+                mainContentContainer.getChildren().setAll(page.getChildrenUnmodifiable());
+            }catch (IOException ex){
+                throw new RuntimeException();
+            }
+        });
+
+        collectsBtn.setOnMouseClicked(e -> {
+            collectsBtn.setStyle(styleMenuBtnClicked);
+            collectsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/dark/recycle-fill.png")));
+            if(coursesBtn.getStyle().equals(styleMenuBtnClicked)){
+                coursesBtn.setStyle(styleMenuBtnNormal);
+                coursesBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/graduation-cap-fill.png")));
+            }
+            if(eventsBtn.getStyle().equals(styleMenuBtnClicked)){
+                eventsBtn.setStyle(styleMenuBtnNormal);
+                eventsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/calendar-event-line.png")));
+            }
+            if(forumBtn.getStyle().equals(styleMenuBtnClicked)){
+                forumBtn.setStyle(styleMenuBtnNormal);
+                forumBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/group-fill.png")));
+            }
+            if(productsBtn.getStyle().equals(styleMenuBtnClicked)){
+                productsBtn.setStyle(styleMenuBtnNormal);
+                productsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/shopping-bag-3-fill.png")));
+            }
+            if(homeBtn.getStyle().equals(styleMenuBtnClicked)){
+                homeBtn.setStyle(styleMenuBtnNormal);
+                homeBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/home-4-fill.png")));
+            }
+            try{
+                Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/students/ptsCollectMainPage.fxml")));
+                mainContentContainer.getChildren().clear();
+                mainContentContainer.getChildren().setAll(page);
+            }catch (IOException ex){
+                throw new RuntimeException();
+            }
+        });
+
 
     }
 }

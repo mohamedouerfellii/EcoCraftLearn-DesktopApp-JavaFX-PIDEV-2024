@@ -1,4 +1,4 @@
-package tn.SIRIUS.controller.tutors;
+package tn.SIRIUS.controller.students;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,11 +19,6 @@ public class CollectionPtsItemController {
     @FXML
     private Label collectionPtsName;
 
-    @FXML
-    private Button deleteCollectionPtsBtn;
-
-    @FXML
-    private Button showUpdateCollectionPtsBtn;
 
     @FXML
     private Button viewCollectionsBtn;
@@ -38,18 +33,15 @@ public class CollectionPtsItemController {
         collectionPtsName.setText(collectionPoint.getNameCollectionPoint());
         collectionPtsAdress.setText(collectionPoint.getAdressCollectionPoint());
         collectionPtsCapacity.setText(collectionPoint.getCapacity().toString()+ " KG" );
-        deleteCollectionPtsBtn.setOnAction(e->{
-            ptsCollectMainPageController.getConfirmDeleteCollectionPtContainer().setVisible(true);
-            ptsCollectMainPageController.setIdtodelete(collectionPoint.getIdcollectionPoint());
-        });
-        showUpdateCollectionPtsBtn.setOnAction(event -> {
-            try {
-                ptsCollectMainPageController.recover(collectionPoint);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        viewCollectionsBtn.setOnMouseClicked(e->{
+            ptsCollectMainPageController.getCollectsPage().setVisible(true);
+            ptsCollectMainPageController.showCollections(collectionPoint);
         });
 
-     }
+    }
+
+
+
+
 
 }

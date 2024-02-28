@@ -119,7 +119,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="UpdateCollectionPtsContainer" prefHeight="658.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css" visible="false">
+      <AnchorPane fx:id="UpdateCollectionPtsContainer" prefHeight="658.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css">
          <children>
             <AnchorPane layoutX="319.0" layoutY="76.0" prefHeight="391.0" prefWidth="546.0" styleClass="ptscollect-add-formulaire" stylesheets="@../../style/StylePtsCollection.css">
                <children>
@@ -190,7 +190,7 @@
          </children>
       </AnchorPane>
       <Button fx:id="openNewCollectionPts" layoutX="996.0" layoutY="140.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" styleClass="add-new-course-btn" stylesheets="@../../style/coursesMainPage.css" text="New Collection Point" />
-      <AnchorPane fx:id="confirmDeleteCollectionPtContainer" prefHeight="666.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css">
+      <AnchorPane fx:id="confirmDeleteCollectionPtContainer" prefHeight="666.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css" visible="false">
          <children>
             <AnchorPane layoutX="330.0" layoutY="130.0" prefHeight="222.0" prefWidth="490.0" styleClass="ptscollect-add-formulaire" stylesheets="@../../style/StylePtsCollection.css">
                <children>
