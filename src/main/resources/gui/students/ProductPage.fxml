@@ -168,8 +168,14 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="-1.0" prefHeight="635.0" prefWidth="1200.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                        <AnchorPane fx:id="cartAnchorepaneContainer" layoutX="-1.0" prefHeight="635.0" prefWidth="1200.0" styleClass="cartAnchorepaneContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
                            <children>
+                              <Pane layoutX="35.0" layoutY="24.0" prefHeight="162.0" prefWidth="1086.0" styleClass="Panecart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="173.0" layoutX="21.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Label alignment="CENTER" layoutX="421.0" layoutY="48.0" prefHeight="53.0" prefWidth="183.0" styleClass="Title" text="My Carts" />
+                                 </children>
+                              </Pane>
                               <ScrollPane hbarPolicy="NEVER" layoutX="53.0" layoutY="211.0" prefHeight="407.0" prefWidth="774.0" styleClass="ScrolPaneContainerSousCarte" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" vbarPolicy="NEVER">
                                  <content>
                                     <VBox fx:id="cartItemsContainer" prefHeight="413.0" prefWidth="774.0" spacing="10.0" styleClass="cartItemsContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" />
@@ -184,12 +190,6 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Pane layoutX="35.0" layoutY="24.0" prefHeight="162.0" prefWidth="1086.0" styleClass="Panecart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="173.0" layoutX="21.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Label alignment="CENTER" layoutX="421.0" layoutY="48.0" prefHeight="53.0" prefWidth="183.0" styleClass="Title" text="My Carts" />
-                                 </children>
-                              </Pane>
                               <Pane layoutX="834.0" layoutY="234.0" prefHeight="373.0" prefWidth="341.0" styleClass="ContainerTotalPrice" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                                  <children>
                                     <Line endX="12.0" layoutX="283.0" layoutY="75.0" startX="-239.0" />
@@ -208,15 +208,15 @@
                                     </VBox>
                                  </children>
                               </Pane>
-                              <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="683.0" layoutY="75.0" maxHeight="526.0" prefHeight="526.0" prefWidth="500.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css">
+                              <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="318.0" layoutY="71.0" maxHeight="526.0" prefHeight="526.0" prefWidth="500.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css">
                                  <children>
-                                    <Button fx:id="PasserOrderBtn" layoutX="299.0" layoutY="433.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Order" />
-                                    <TextField fx:id="InputPhoneOrder" layoutX="204.0" layoutY="212.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Phone Number" styleClass="InputsOrder" />
-                                    <TextField fx:id="InputEmailOrder" layoutX="205.0" layoutY="127.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter your email" styleClass="InputsOrder" stylesheets="@../../styles/StyleForm.css" />
-                                    <TextField fx:id="InputCityOrder" layoutX="205.0" layoutY="270.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Your addresse" styleClass="InputsOrder" />
-                                    <Label layoutX="53.0" layoutY="127.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="Email :" />
-                                    <Label layoutX="51.0" layoutY="212.0" prefHeight="45.0" prefWidth="107.0" styleClass="Title" text="Phone :" />
-                                    <Label layoutX="53.0" layoutY="277.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="City :" />
+                                    <Button fx:id="PasserOrderBtn" layoutX="121.0" layoutY="415.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="275.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Order" />
+                                    <TextField fx:id="InputPhoneOrder" layoutX="150.0" layoutY="199.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Phone Number" styleClass="InputsOrder" />
+                                    <TextField fx:id="InputEmailOrder" layoutX="150.0" layoutY="127.0" prefHeight="45.0" prefWidth="262.0" promptText="Exemple : zied@gmail.com" styleClass="InputsOrder" stylesheets="@../../styles/StyleForm.css" />
+                                    <TextField fx:id="InputCityOrder" layoutX="152.0" layoutY="263.0" prefHeight="45.0" prefWidth="183.0" promptText="Enter Your addresse" styleClass="InputsOrder" />
+                                    <Label layoutX="65.0" layoutY="127.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="Email :" />
+                                    <Label layoutX="63.0" layoutY="198.0" prefHeight="45.0" prefWidth="107.0" styleClass="Title" text="Phone :" />
+                                    <Label layoutX="65.0" layoutY="263.0" prefHeight="45.0" prefWidth="85.0" styleClass="Title" text="adresse :" />
                                     <Button fx:id="CloserOrder" layoutX="443.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleCloserorder" prefHeight="34.0" prefWidth="43.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
@@ -228,14 +228,24 @@
                                     </Button>
                                     <Line endX="101.0" layoutX="327.0" layoutY="82.0" startX="-239.0" />
                                     <Label layoutX="110.0" layoutY="26.0" prefHeight="45.0" prefWidth="296.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Confirm Your Order " />
-                                    <Button fx:id="OrderMapBtn" layoutX="51.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleOrderMap" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Map" />
+                                    <Button fx:id="OrderMapBtn" layoutX="359.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleOrderMap" prefHeight="39.0" prefWidth="48.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../icons/road-map-line.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="InputLongitude" layoutX="32.0" layoutY="341.0" prefHeight="45.0" prefWidth="183.0" promptText="Enter Your addresse" styleClass="InputsOrder" visible="false" />
+                                    <TextField fx:id="InputLatitude" layoutX="245.0" layoutY="341.0" prefHeight="45.0" prefWidth="183.0" promptText="Enter Your addresse" styleClass="InputsOrder" visible="false" />
+                                    <Pane fx:id="mapContainer" layoutX="4.0" layoutY="-2.0" maxHeight="527.0" maxWidth="500.0" minHeight="521.0" minWidth="493.0" prefHeight="527.0" prefWidth="493.0" styleClass="mapContainer" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
+                                       <children>
+                                          <WebView fx:id="mapWebView" layoutX="18.0" layoutY="10.0" maxHeight="526.0" maxWidth="554.0" minHeight="440.0" minWidth="458.0" prefHeight="504.0" prefWidth="458.0" styleClass="webview" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
-                              <Pane fx:id="mapContainer" layoutX="55.0" maxHeight="500.0" maxWidth="643.0" minHeight="381.0" minWidth="500.0" prefHeight="500.0" prefWidth="509.0">
-                                 <children>
-                                    <WebView fx:id="mapWebView" layoutX="-4.0" layoutY="2.0" prefHeight="500.0" prefWidth="511.0" />
-                                 </children>
-                              </Pane>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="CarteVide" layoutX="424.0" layoutY="69.0" prefHeight="58.0" prefWidth="275.0" styleClass="CarteVide" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" visible="false">
@@ -256,6 +266,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="BtnMycommande" layoutX="795.0" layoutY="30.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="My Orders" />
                      </children>
                   </Pane>
                   <AnchorPane fx:id="CartAnchorPane" layoutX="314.0" layoutY="244.0" prefHeight="294.0" prefWidth="447.0" styleClass="CartAnchorPane" stylesheets="@../../styles/StyleCart.css" visible="false">

@@ -189,3 +189,20 @@
     -fx-background-color: transparent;
 
 }
+
+.mapContainer
+{
+    -fx-background-color: #fff ;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #000000;
+}
+.webview
+{
+
+    -fx-border-radius: 15 15 15 15;
+}
+.closemap
+{
+    -fx-background-color: transparent;
+}

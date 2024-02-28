@@ -42,7 +42,8 @@ public class ProductService implements ICRUD<Product> {
         String query = "SELECT * FROM PRODUCTS";
         List<Product> productList = new ArrayList<>();
         try (Statement stm = con.createStatement();
-             ResultSet rs = stm.executeQuery(query)) {
+             ResultSet rs = stm.executeQuery(query))
+                       {
             while (rs.next()) {
                 Product product = new Product(
                         rs.getInt("idProduct"),
@@ -61,7 +62,6 @@ public class ProductService implements ICRUD<Product> {
             System.out.println("Error fetching products: " + ex.getMessage());
 
         }
-
         return productList;
     }
 

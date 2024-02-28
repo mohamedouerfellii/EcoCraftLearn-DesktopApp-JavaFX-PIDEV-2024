@@ -12,7 +12,7 @@ public class EcoCraftLearning extends Application {
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(EcoCraftLearning.class.getResource("/gui/students/ProductPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EcoCraftLearning.class.getResource("/gui/admins/ProduitPageController.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),1350,720);
         stage.setTitle("First Try");
         stage.setScene(scene);
@@ -25,4 +25,6 @@ public class EcoCraftLearning extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+
 }

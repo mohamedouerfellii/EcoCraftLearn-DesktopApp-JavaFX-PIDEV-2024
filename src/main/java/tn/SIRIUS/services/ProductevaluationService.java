@@ -64,10 +64,10 @@ public class ProductevaluationService implements ICRUD<Productsevaluation> {
     }
 
     public List<Productsevaluation> getAllByIdProductNotConfirmed(int idProduct) {
-        String query = "SELECT * FROM productsevaluations WHERE product = ? AND isConfirmed = 1";
+        String query = "SELECT * FROM productsevaluations WHERE product = ? AND isConfirmed = 0";
         List<Productsevaluation> productsevaluationList = new ArrayList<>();
         try (PreparedStatement pstmt = con.prepareStatement(query)) {
-            pstmt.setInt(1, idProduct); // Set the value for the parameter
+            pstmt.setInt(1, idProduct);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Productsevaluation productsevaluation = new Productsevaluation(
@@ -96,12 +96,10 @@ public class ProductevaluationService implements ICRUD<Productsevaluation> {
             statement.setDouble(1, productsevaluation.getRate());
             statement.setString(2,productsevaluation.getReview());
             statement.setInt(3,productsevaluation.getIdEvaluation());
-
             if(statement.executeUpdate() == 1){
                 statement.close();
                 return true;
             }
-
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
         }

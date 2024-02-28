@@ -1,0 +1,64 @@
+.btnOrders
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.AnchorPaneCommande
+{
+    -fx-border-color: #fff ;
+    -fx-background-color: transparent;
+}
+.title-order
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 36;
+    -fx-fill: #000000;
+}
+
+
+.ScrolPaneCommande{
+    -fx-background-color: #fff  ;
+}
+.ScrolPaneCommande .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneCommande .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneCommande .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneCommande .scroll-bar:vertical .increment-button,
+.ScrolPaneCommande .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.HboxItemCommande
+{
+    -fx-background-color: Transparent;
+
+}
+
+.anchorPaneContainerItem
+{
+
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #fff;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+
+}
+.VboxTableProduct
+{
+    -fx-background-color: Transparent;
+    -fx-spacing: 25px;
+    -fx-padding: 30px;
+}

@@ -234,6 +234,12 @@ public class ProductPage implements Initializable{
     private TextField InputCityOrder;
 
     @FXML
+    private TextField InputLongitude;
+
+    @FXML
+    private TextField InputLatitude;
+
+    @FXML
     private Button PasserOrderBtn;
     private float initialPrice;
 
@@ -273,7 +279,7 @@ private VBox Containeritemreview;
     }
 
 
-    User user = new User(1,"ssss","mohamed","ssssss@",12345,"Admin","male",1,1,"");
+    User user = new User(1,"DEEELEE3AAAA","mohamed","ssssss@",12345,"Admin","male",1,1,"");
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -315,9 +321,11 @@ private VBox Containeritemreview;
 
         });
 
+
+
         PasserOrderBtn.setOnAction(event -> {
             
-            if (PasserCommande(0, 0)) {
+            if (PasserCommande()) {
                     CartsService cartsservice = new CartsService();
                     Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
                     cartsservice.updateIsConfirmed(carts.getIdCarts());
@@ -510,7 +518,7 @@ private VBox Containeritemreview;
 
 
        Passerrating.setOnAction(e -> {
-
+           System.out.println("eee");
            int productid = product.getIdProduct();
            String review = InputReview.getText();
            double rating =InputRatingStar.getRating();
@@ -532,7 +540,6 @@ private VBox Containeritemreview;
                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemReviewProduct.fxml"));
                HBox HboxContainerReview = fxmlLoader.load();
                ItemReviewProduct itemReviewProduct = fxmlLoader.getController();
-
                itemReviewProduct.setData(productsevaluation);
                Containeritemreview.getChildren().add(HboxContainerReview);
            }
@@ -540,11 +547,6 @@ private VBox Containeritemreview;
        catch (IOException e) {
            throw new RuntimeException(e);
        }
-
-
-
-
-
     }
 
 
@@ -732,6 +734,7 @@ private VBox Containeritemreview;
 
     @FXML
     private void handleDetailsBtnleft(ActionEvent event) {
+
         productDescriptionLeft.setVisible(true);
         AnchorPanedetailProduct.setVisible(false);
         lineMiniDetailsBtn.setVisible(false);
@@ -742,14 +745,20 @@ private VBox Containeritemreview;
     @FXML
     void handleOrderMap(ActionEvent event) {
         mapContainer.setVisible(true);
-        WebView webView = new WebView();
-        webView.getEngine().loadContent("<html>"
+        WebView mapWebView = new WebView();
+        String htmlContent = "<html>"
                 + "<head>"
+                + "<style>"
+                + "#map {"
+                + "  width: 100%;"
+                + "  height: 100%;"
+                + "}"
+                + "</style>"
                 + "<link rel=\"stylesheet\" href=\"https://openlayers.org/en/v4.6.5/css/ol.css\" type=\"text/css\">"
                 + "<script src=\"https://openlayers.org/en/v4.6.5/build/ol.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"map\" class=\"map\" style=\"width: 650px; height: 500px;\"></div>"
+                + "<div id=\"map\" class=\"map\"></div>"
                 + "<script>"
                 + "var map = new ol.Map({"
                 + "  target: 'map',"
@@ -759,49 +768,65 @@ private VBox Containeritemreview;
                 + "    })"
                 + "  ],"
                 + "  view: new ol.View({"
-                + "    center: ol.proj.fromLonLat([9.5375, 33.8869])," // Centre sur la Tunisie
-                + "    zoom: 7" // Ajustez le zoom selon vos besoins
+                + "    center: ol.proj.fromLonLat([9.5375, 33.8869]),"
+                + "    zoom: 7"
                 + "  })"
                 + "});"
-                + "map.on('click', function(event) {" // Ajoutez un gestionnaire d'événements de clic sur la carte OpenLayers
-                + "  var lonLat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');" // Transformez les coordonnées du clic en EPSG:4326
-                + "  var longitude = lonLat[0];" // Obtenez la longitude
-                + "  var latitude = lonLat[1];" // Obtenez la latitude
-                + "  alert(longitude + ',' + latitude);" // Affichez les coordonnées dans une alerte
-                + "  webView.getEngine().executeScript(\"handleClick(\" + longitude + \",\" + latitude + \");\");" // Appelez la fonction JavaFX avec les coordonnées
+                + "map.on('click', function(event) {"
+                + "  var lonLat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');"
+                + "  var longitude = lonLat[0];"
+                + "  var latitude = lonLat[1];"
+                + "  alert(longitude + ',' + latitude);"
                 + "});"
                 + "</script>"
                 + "</body>"
-                + "</html>");
+                + "</html>";
 
-        mapContainer.getChildren().add(webView);
 
-        // Fonction JavaFX pour traiter les clics sur la carte
-        webView.getEngine().setOnAlert(event1 -> {
+        mapWebView.getEngine().loadContent(htmlContent);
+
+
+        mapContainer.getChildren().add(mapWebView);
+
+
+        mapWebView.prefWidthProperty().bind(mapContainer.widthProperty());
+        mapWebView.prefHeightProperty().bind(mapContainer.heightProperty());
+
+
+        mapWebView.getEngine().setOnAlert(event1 -> {
             String[] coordinates = event1.getData().split(",");
             double longitude = Double.parseDouble(coordinates[0]);
             double latitude = Double.parseDouble(coordinates[1]);
-            boolean commandeResult = PasserCommande(longitude, latitude);
+            InputLongitude.setText(String.valueOf(longitude));
+            InputLatitude.setText(String.valueOf(latitude));
+
             System.out.println(longitude + " " + latitude);
-            if (commandeResult) {
-                System.out.println("succes");
-            } else {
-                System.out.println("failed");
-            }
+            mapContainer.setVisible(false);
         });
-
-
     }
 
 
-    public boolean PasserCommande(double longitude, double latitude) {
+
+
+
+
+
+
+
+
+
+    public boolean PasserCommande() {
 
         try {
+           double longitude = Double.parseDouble(InputLongitude.getText());
+            double latitude = Double.parseDouble(InputLatitude.getText());
             String email = InputEmailOrder.getText();
             String city = InputCityOrder.getText();
             String phoneInput = InputPhoneOrder.getText();
-            if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}")) {
-                System.out.println("Invalid phone number ");
+            float total = Float.parseFloat(totalPriceCartLabel.getText().replace("DT", ""));
+
+            if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}") || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@gmail\\.com$")) {
+                System.out.println("Failed to add order");
                 return false;
             }
             int phone = Integer.parseInt(phoneInput);
@@ -809,10 +834,15 @@ private VBox Containeritemreview;
             Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
             int cartId = carts.getIdCarts();
             CommandesService commandesService = new CommandesService();
-            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"",latitude,longitude);
+            Commandes commandes = new Commandes(0, user.getIdUser(), "", cartId, email, city, phone,"",latitude,longitude,total);
+
             int result = commandesService.add(commandes);
             if (result == 1) {
                 System.out.println("SUCCESS");
+
+                EmailSender emailSender = new EmailSender();
+                emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
+
                 CarteVide.setVisible(false);
                 return true;
             } else {
@@ -825,6 +855,7 @@ private VBox Containeritemreview;
             return false;
         }
     }
+
 
 
 

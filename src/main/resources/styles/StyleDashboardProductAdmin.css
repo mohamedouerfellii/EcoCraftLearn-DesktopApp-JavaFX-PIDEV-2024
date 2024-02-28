@@ -5,7 +5,6 @@
 {
     -fx-border-color: #fff ;
     -fx-background-color: transparent;
-
 }
 .AnchorPanedetailsProduct
 {
@@ -55,6 +54,8 @@
     -fx-background-color: transparent;
 }
 
+
+
 .VboxTableProduct
 {
     -fx-background-color: #fff;
@@ -87,24 +88,7 @@
     -fx-background-radius: 50px;
 }
 
-.one-course-scroll-pane{
-    -fx-background-color: #D5FFDC;
-}
-.one-course-scroll-pane .scroll-bar:vertical{
-    -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 2px;
-}
-.one-course-scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #1D6611;
-}
-.one-course-scroll-pane .scroll-bar:vertical .thumb:hover {
-    -fx-opacity: 0.6;
-}
-.one-course-scroll-pane .scroll-bar:vertical .increment-button,
-.one-course-scroll-pane .scroll-bar:vertical .decrement-button {
-    -fx-background-color: transparent;
-}
+
 .one-course-details-container{
     -fx-background-color: #D5FFDC;
 }

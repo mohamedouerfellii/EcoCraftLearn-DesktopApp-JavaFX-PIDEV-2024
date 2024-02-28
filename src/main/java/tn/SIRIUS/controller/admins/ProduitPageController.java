@@ -24,7 +24,9 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import tn.SIRIUS.entities.Commandes;
 import tn.SIRIUS.entities.Product;
+import tn.SIRIUS.services.CommandesService;
 import tn.SIRIUS.services.ProductService;
 
 import java.io.ByteArrayInputStream;
@@ -99,10 +101,15 @@ public class ProduitPageController implements Initializable {
     @FXML
     private Button GoBackBtn;
 
+   @FXML
+    private VBox VboxCommandeAdmin;
 
+       @FXML
+      private AnchorPane AnchorPaneCommande;
 
 
     public List<Product> recentlyAdded;
+    public List<Commandes> ListCommandes;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recentlyAdded = new ArrayList<>(recentlyAdded());
@@ -128,9 +135,9 @@ public class ProduitPageController implements Initializable {
 
 
     public void refresh()
-    {   ProductService productService = new ProductService();
+    {     ProductService productService = new ProductService();
           recentlyAdded = productService.getAll();
-        VboxTableProduct.getChildren().clear();
+          VboxTableProduct.getChildren().clear();
 
         try {
             for (Product product : recentlyAdded)
@@ -290,11 +297,94 @@ public void showQrCode(Product product) {
 
 }
 
-
     @FXML
     void handleCloseQrcode(ActionEvent event) {
         paneqrCode.setVisible(false);
     }
+
+    public List<Commandes> recentlyAddedCommande()
+    {
+        List<Commandes> ListCommandes = new ArrayList<>();
+       CommandesService commandesService = new CommandesService();
+        ListCommandes = commandesService.getAll();
+        return ListCommandes;
+
+    }
+
+
+    @FXML
+    void handleOpenOrder(ActionEvent event) {
+
+        AnchorPaneCommande.setVisible(true);
+        AnchorPaneProductBack.setVisible(false);
+
+        CommandesService commandesService = new CommandesService();
+        ListCommandes = commandesService.getAll();
+        VboxCommandeAdmin.getChildren().clear();
+        try {
+            for (Commandes commandes : ListCommandes)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/admins/ItemCommandeAdmin.fxml"));
+
+                HBox HboxItemCommande = fxmlLoader.load();
+
+                ItemCommandeAdmin itemCommandeAdmin = fxmlLoader.getController();
+                itemCommandeAdmin.setProduitPageController(this);
+                itemCommandeAdmin.setDataCommande(commandes);
+
+                VboxCommandeAdmin.getChildren().add(HboxItemCommande);
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+    }
+
+    public void refreshCommande()
+    {
+
+        CommandesService commandesService = new CommandesService();
+        ListCommandes = commandesService.getAll();
+        VboxCommandeAdmin.getChildren().clear();
+        try {
+            for (Commandes commandes : ListCommandes)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/admins/ItemCommandeAdmin.fxml"));
+
+                HBox HboxItemCommande = fxmlLoader.load();
+
+                ItemCommandeAdmin itemCommandeAdmin = fxmlLoader.getController();
+                itemCommandeAdmin.setProduitPageController(this);
+                itemCommandeAdmin.setDataCommande(commandes);
+
+                VboxCommandeAdmin.getChildren().add(HboxItemCommande);
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+@FXML
+void GoBackBtnCommande(ActionEvent event) {
+
+    AnchorPaneCommande.setVisible(false);
+    AnchorPaneProductBack.setVisible(true);
+
+}
+public  void updateStat(Commandes commandes)
+{
+    CommandesService commandesService = new CommandesService();
+    commandesService.updateStatus(commandes);
+    refreshCommande();
+
+}
 
 
 }

@@ -19,11 +19,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="Container" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ProduitPageController">
    <children>
-      <AnchorPane fx:id="AnchorPaneProductBack" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+      <AnchorPane fx:id="AnchorPaneProductBack" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
          <children>
-            <ScrollPane hbarPolicy="NEVER" layoutX="98.0" layoutY="82.0" prefHeight="561.0" prefWidth="1045.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/Style1.css" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" layoutX="98.0" layoutY="82.0" prefHeight="561.0" prefWidth="1045.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="565.0" prefWidth="1043.0" spacing="15.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+                  <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="565.0" prefWidth="1046.0" spacing="15.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                      <padding>
                         <Insets left="10.0" top="15.0" />
                      </padding>
@@ -48,8 +48,8 @@
                   <Insets left="-40.0" />
                </padding>
             </HBox>
-            <Label layoutX="36.0" layoutY="19.0" prefHeight="47.0" prefWidth="253.0" styleClass="TextShop" stylesheets="@../../styles/Style1.css" text="List of Product" />
-            <Pane fx:id="paneqrCode" layoutX="419.0" layoutY="158.0" prefHeight="343.0" prefWidth="358.0" styleClass="PaneQrcode" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+            <Label layoutX="119.0" layoutY="19.0" prefHeight="47.0" prefWidth="215.0" styleClass="TextShop" stylesheets="@../../styles/Style1.css" text="List of Product" />
+            <Pane fx:id="paneqrCode" layoutX="419.0" layoutY="158.0" prefHeight="343.0" prefWidth="358.0" styleClass="PaneQrcode" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
                <children>
                   <ImageView fx:id="ImageQrcode" fitHeight="241.0" fitWidth="302.0" layoutX="31.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
                   <Line endX="-7.0" layoutX="305.0" layoutY="59.0" startX="-239.0" />
@@ -65,6 +65,7 @@
                   </Button>
                </children>
             </Pane>
+            <Button fx:id="btnOrders" layoutX="831.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleOpenOrder" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
@@ -261,6 +262,21 @@
                   </ImageView>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneCommande" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneCommande" stylesheets="@../../styles/StyleCommande.css">
+         <children>
+            <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="523.0" layoutY="18.0" prefHeight="53.0" prefWidth="123.0" styleClass="title-order" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
+            <ScrollPane fx:id="ScrolPaneCommande" hbarPolicy="NEVER" layoutX="99.0" layoutY="95.0" prefHeight="540.0" prefWidth="1016.0" styleClass="ScrolPaneCommande" stylesheets="@../../styles/StyleCommande.css" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="VboxCommandeAdmin" alignment="CENTER" prefHeight="547.0" prefWidth="1014.0" spacing="15.0" styleClass="VboxCommandeAdmin" stylesheets="@../../styles/StyleCommande.css">
+                     <padding>
+                        <Insets top="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Button layoutX="100.0" layoutY="20.0" mnemonicParsing="false" onAction="#GoBackBtnCommande" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
          </children>
       </AnchorPane>
    </children>

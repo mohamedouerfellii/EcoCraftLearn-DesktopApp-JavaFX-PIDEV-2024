@@ -17,10 +17,12 @@ public class Commandes {
 
     private  double longitude;
 
+    private float total;
+
     public Commandes() {
     }
 
-    public Commandes(int idCommande, int owner, String commandeDate, int cart, String email, String city, int phone ,String status,double latitude,double longitude) {
+    public Commandes(int idCommande, int owner, String commandeDate, int cart, String email, String city, int phone ,String status,double latitude,double longitude,float total) {
         this.idCommande = idCommande;
         this.owner = owner;
         this.commandeDate = commandeDate;
@@ -31,6 +33,7 @@ public class Commandes {
         this.status = status;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.total = total;
     }
 
     public int getIdCommande() {
@@ -113,6 +116,14 @@ public class Commandes {
         this.longitude = longitude;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
         return "Commandes{" +
@@ -124,10 +135,13 @@ public class Commandes {
                 ", city='" + city + '\'' +
                 ", phone=" + phone +
                 ", status='" + status + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", total=" + total +
                 '}';
+
     }
+
 
 
 }
