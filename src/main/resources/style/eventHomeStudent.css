@@ -1,0 +1,193 @@
+.page-container{
+    -fx-background-color: #D5FFDC;
+}
+.event-grid-item{
+    -fx-background-color: #D5FFDC;
+}
+.event-scroll-pane-item{
+    -fx-background-color: #D5FFDC;
+}
+.event-scroll-pane-item .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.event-scroll-pane-item .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.event-scroll-pane-item .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.event-scroll-pane-item .scroll-bar:vertical .increment-button,
+.event-scroll-pane-item .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.tri-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.tri-btn:hover{
+    -fx-opacity: 1;
+}
+.event-item-container{
+    -fx-background-radius: 24;
+    -fx-border-radius: 24;
+    -fx-background-color: #7DC145;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.img-item-container {
+    -fx-arc-height: 24;
+    -fx-arc-width: 24;
+}
+.enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+.enroll-btn:hover{
+    -fx-opacity: 0.8;
+}
+.nbr-registred-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.course-title-item{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+
+.AnchorPanedetail
+{-fx-background-color: #D5FFDC;
+}
+
+.courses-details-left{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+}
+.grid-container-desc{
+    -fx-background-color: #a5f5b8;
+}
+.price-course-text{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 30;
+    -fx-fill: #19BB1C;
+}
+.text-mini-detail{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.text-mini-detail-content{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+
+.course-details-img{
+    -fx-arc-width: 16;
+    -fx-arc-height: 16;
+}
+.courses-mini-description-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-fill: #000000;
+}
+.one-detail-container{
+    -fx-background-color: transparent;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0 0 0.5 0;
+}
+
+.descbtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.descbtn:hover
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #19BB1C;
+    -fx-text-fill: #D5FFDC;
+    -fx-cursor: hand;
+}
+
+.detailbtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.detailbtn:hover
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #19BB1C;
+    -fx-text-fill: #D5FFDC;
+    -fx-cursor: hand;
+}
+.AnchorpaneParticipant
+{
+    -fx-background-color: #D5FFDC;
+}
+.title-form{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 36;
+    -fx-fill: #000000;
+}
+
+
+
+.MyParticipationScrolPnae{
+    -fx-background-color: #D5FFDC;
+}
+.MyParticipationScrolPnae .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.MyParticipationScrolPnae .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.MyParticipationScrolPnae .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.MyParticipationScrolPnae .scroll-bar:vertical .increment-button,
+.MyParticipationScrolPnae .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.VboxMyParticipation
+{
+    -fx-background-color: #D5FFDC;
+}
+
+
+.canselBtn
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15 15 15 15;
+    -fx-border-color: red;
+    -fx-text-fill: red;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}

@@ -190,5 +190,6 @@ public class DashboardTutorHomePageController implements Initializable {
                 throw new RuntimeException();
             }
         });
+
     }
 }

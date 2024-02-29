@@ -4,3 +4,96 @@
     -fx-border-color: #1D6611;
     -fx-border-radius: 15 15 15 15;
 }
+
+.AnchorPaneParticipant
+{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: #fff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+
+
+.ScrolpaneParticipant{
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #D5FFDC;
+}
+.ScrolpaneParticipant .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolpaneParticipant .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.ScrolpaneParticipant .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.ScrolpaneParticipant .scroll-bar:vertical .increment-button,
+.ScrolpaneParticipant .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+.VboxParticipant
+{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+.HboxContainerParticipant
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+    -fx-border-color: #fff;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+
+
+}
+.AnchorPaneItemParticipant
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+    -fx-border-color: #fff;
+}
+.CloseParticipant
+{
+    -fx-background-color: transparent;
+
+}
+
+.deleteParticipant
+{
+    -fx-background-color: transparent;
+
+}
+.rateContainer
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-radius: 15 15 15 15;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 2, 2);
+}
+.add-card-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 28;
+    -fx-fill: #000000;
+}
+
+.closebtnrate
+{
+    -fx-background-color: transparent;
+}

@@ -10,6 +10,7 @@ public class UserService {
         con = MyDB.getInstance().getCon();
     }
     public boolean isPasswordMatch(int idUser,String password){
+
         String qry = "SELECT firstName FROM USERS WHERE idUser = ? AND password = ?";
         try{
             PreparedStatement stm = con.prepareStatement(qry);

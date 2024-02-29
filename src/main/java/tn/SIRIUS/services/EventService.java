@@ -1,6 +1,8 @@
 package tn.SIRIUS.services;
 
+import tn.SIRIUS.entities.Course;
 import tn.SIRIUS.entities.Event;
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
 
@@ -63,7 +65,6 @@ public class EventService implements ICRUD<Event> {
                         rs.getString("place"),
                         rs.getInt("placeNbr"),
                         rs.getInt("price")
-
                 ));
             }
         }catch (SQLException ex){
@@ -71,7 +72,6 @@ public class EventService implements ICRUD<Event> {
         }
         return eventList;
     }
-
     @Override
     public boolean update(Event event) {
         String query = "UPDATE EVENTS SET title = ? , description = ? , startDate = ? , endDate = ? , attachment = ? , owner = ? , eventType = ? , place = ? , placeNbr = ? , price = ? WHERE idEvent = ?";
@@ -99,7 +99,6 @@ public class EventService implements ICRUD<Event> {
         }
         return false;
     }
-
     @Override
     public boolean delete(int idEvent) {
 
@@ -117,6 +116,138 @@ public class EventService implements ICRUD<Event> {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public List<Event> getEventRegistered(int idUser){
+        List<Event> eventsRegistered = new ArrayList<>();
+        String query = "SELECT * FROM EVENTS E JOIN EVENTSPARTICIPATIONS EP ON E.idEvent = EP.event WHERE EP.participant = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idUser);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                eventsRegistered.add(new Event(
+                        rs.getInt("idEvent"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDate("startDate").toString(),
+                        rs.getDate("endDate").toString(),
+                        rs.getString("attachment"),
+                        rs.getInt("owner"),
+                        rs.getString("eventType"),
+                        rs.getString("place"),
+                        rs.getInt("placeNbr"),
+                        rs.getInt("price")
+                        ));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return eventsRegistered;
+    }
+
+
+    public List<Event> getEventUser(int idUser){
+        List<Event> eventsUser = new ArrayList<>();
+        String query = "SELECT * FROM EVENTS E JOIN EVENTSPARTICIPATIONS EP ON E.idEvent = EP.event WHERE EP.participant = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setInt(1,idUser);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                eventsUser.add(new Event(
+                        rs.getInt("idEvent"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDate("startDate").toString(),
+                        rs.getDate("endDate").toString(),
+                        rs.getString("attachment"),
+                        rs.getInt("owner"),
+                        rs.getString("eventType"),
+                        rs.getString("place"),
+                        rs.getInt("placeNbr"),
+                        rs.getInt("price")
+                ));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return eventsUser;
+    }
+
+    public boolean deleteParticipation(int event, int idUser) {
+        String qry = "DELETE FROM eventsparticipations WHERE event = ? AND participant = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1, event);
+            stm.setInt(2, idUser);
+            if (stm.executeUpdate() == 1) {
+                stm.close();
+                return true;
+            }
+            stm.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+    public void decrementPlaceNbr(int idEvent) {
+        String query = "UPDATE events SET placeNbr = placeNbr - 1 WHERE idEvent = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idEvent);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void incrementPlaceNbr(int idEvent) {
+        String query = "UPDATE events SET placeNbr = placeNbr + 1 WHERE idEvent = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idEvent);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public double SommeRateofEvent(int idEvent){
+        double rate = 0;
+        String query = "SELECT sum(rate) FROM eventsevaluations WHERE event = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idEvent);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                rate = resultSet.getDouble("sum(rate)");
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return rate;
+    }
+
+    public int countNBrOfRate(int idEvent){
+        int rate = 0;
+        String query = "SELECT count(rate) FROM eventsevaluations WHERE event = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idEvent);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                rate = resultSet.getInt("count(rate)");
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return rate;
     }
 
 }

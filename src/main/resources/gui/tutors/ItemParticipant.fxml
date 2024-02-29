@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+
+
+<HBox fx:id="HboxContainerParticipant" styleClass="HboxContainerParticipant" stylesheets="@../../style/StyleDetailsEvent.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.ItemParticipantController">
+   <children>
+      <AnchorPane fx:id="AnchorPaneItemParticipant" prefHeight="100.0" prefWidth="533.0" styleClass="AnchorPaneItemParticipant" stylesheets="@../../style/StyleDetailsEvent.css">
+         <children>
+            <Button fx:id="DeleteeParticipant" layoutX="459.0" layoutY="25.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="deleteParticipant" stylesheets="@../../style/StyleDetailsEvent.css">
+               <graphic>
+                  <ImageView fitHeight="73.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/event/delete-bin-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Circle fx:id="ParticipantImageContainer" fill="DODGERBLUE" layoutX="56.0" layoutY="48.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label fx:id="ParticipantName" layoutX="112.0" layoutY="15.0" prefHeight="35.0" prefWidth="253.0" styleClass="course-item-title" stylesheets="@../../style/coursesMainPage.css" text="FirstName Last Name" />
+            <Label fx:id="EmailParticipant" layoutX="112.0" layoutY="55.0" prefHeight="25.0" prefWidth="294.0" styleClass="course-item-date" stylesheets="@../../style/coursesMainPage.css" text="gachita.Zied@esprit.tn" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

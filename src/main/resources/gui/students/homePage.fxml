@@ -16,15 +16,160 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="home-page-container" stylesheets="@../../../resources/style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.students.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="home-page-container" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.HomePageController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="20.0" prefHeight="680.0" prefWidth="120.0" styleClass="leftMenuContainer" stylesheets="@../../../resources/style/style.css">
+      <HBox alignment="CENTER_RIGHT" layoutX="545.0" layoutY="20.0" prefHeight="60.0" prefWidth="797.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
+                     <image>
+                        <Image url="@../../icons/dark/search-2-line.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="searchInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
+                     <HBox.margin>
+                        <Insets left="-390.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="-40.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="80.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-message-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="80.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-notification-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox fx:id="notifCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+               </children>
+            </HBox>
+            <Circle fx:id="profilImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="profil-img-container">
+               <HBox.margin>
+                  <Insets right="-260.0" />
+               </HBox.margin>
+            </Circle>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/dark/arrow-down-s-fill.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="260.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <Pane fx:id="mainPageContainer" layoutX="151.0" layoutY="79.0" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/style.css">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="20.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="welcome-container" width="535.0" />
+            <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="292.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" styleClass="welcome-img">
+               <image>
+                  <Image url="@../../images/homePageStudent/welcome-img.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="welcomeMsg" layoutX="69.0" layoutY="60.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Hello Mohamed!">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="93.0" prefHeight="47.0" prefWidth="184.0" styleClass="second-welcome-msg" stylesheets="@../../style/style.css" text="its good to see you again">
+               <font>
+                  <Font name="Jost Regular" size="12.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="573.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="courses-completed-container" width="300.0" />
+            <Label layoutX="591.0" layoutY="27.0" prefHeight="137.0" prefWidth="104.0" styleClass="nbr-courses-completed" stylesheets="@../../style/style.css" text="11" />
+            <Label fx:id="welcomeMsg1" layoutX="693.0" layoutY="45.0" prefHeight="64.0" prefWidth="129.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Courses" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Narrow" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="welcomeMsg11" layoutX="694.0" layoutY="82.0" prefHeight="64.0" prefWidth="151.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="completed" textAlignment="CENTER">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="889.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="courses-completed-container" width="300.0" />
+            <Label layoutX="907.0" layoutY="27.0" prefHeight="137.0" prefWidth="104.0" styleClass="nbr-courses-completed" stylesheets="@../../style/style.css" text="11" />
+            <Label fx:id="welcomeMsg12" layoutX="1009.0" layoutY="45.0" prefHeight="64.0" prefWidth="129.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Courses" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Narrow" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="welcomeMsg111" layoutX="1010.0" layoutY="82.0" prefHeight="64.0" prefWidth="151.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="completed" textAlignment="CENTER">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="20.0" layoutY="193.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-container" width="536.0" />
+            <Circle fx:id="mostProgressedCourseImgContainer" fill="DODGERBLUE" layoutX="59.0" layoutY="228.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-img-container" />
+            <Label fx:id="mostProgressedCourseTitle" layoutX="108.0" layoutY="194.0" prefHeight="47.0" prefWidth="289.0" styleClass="most-progressed-course-title" stylesheets="@../../style/style.css" text="Newspaper weave baskets">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="mostProgressedCourseTutorName" layoutX="109.0" layoutY="215.0" prefHeight="47.0" prefWidth="184.0" styleClass="most-progressed-course-tutor-name" stylesheets="@../../style/style.css" text="its good to see you again">
+               <font>
+                  <Font name="Jost Regular" size="12.0" />
+               </font>
+            </Label>
+            <Arc fx:id="mostProgressedCoursePrc" fill="DODGERBLUE" layoutX="410.0" layoutY="228.0" length="300.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-prc" type="ROUND" />
+            <Circle fill="#7dc145" layoutX="410.0" layoutY="228.0" radius="25.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label fx:id="mostProgressedCoursePrcVal" layoutX="387.0" layoutY="218.0" styleClass="most-progressed-course-prc-val" stylesheets="@../../style/style.css" text="83.5%" />
+            <Button fx:id="mostProgressedCourseBtn" layoutX="454.0" layoutY="211.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="88.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css" text="continue" />
+            <ScrollPane fx:id="coursesScrollPane" hbarPolicy="NEVER" layoutX="23.0" layoutY="355.0" prefHeight="255.0" prefWidth="533.0" styleClass="courses-scroll-pane" stylesheets="@../../style/style.css">
+               <content>
+                  <VBox fx:id="coursesVboxHomePage" prefHeight="272.0" prefWidth="534.0" spacing="5.0" styleClass="courses-vbox-home-page" stylesheets="@../../style/style.css">
+                     <padding>
+                        <Insets left="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Label fx:id="courseTitle" layoutX="26.0" layoutY="274.0" prefHeight="47.0" prefWidth="289.0" styleClass="course-title" stylesheets="@../../style/style.css" text="Courses">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="3.0" layoutY="312.0" prefHeight="46.0" prefWidth="460.0" spacing="5.0">
+               <children>
+                  <Button fx:id="allCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="122.0" styleClass="all-courses-btn" stylesheets="@../../style/style.css" text="All Courses" />
+                  <Button fx:id="newestCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="newest-courses-btn" stylesheets="@../../style/style.css" text="Newest" />
+                  <Button fx:id="topRatedCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="top-rated-courses-btn" text="Top Rated" />
+                  <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" styleClass="most-popular-courses-btn" text="Most Popular" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <VBox alignment="TOP_CENTER" layoutX="28.0" layoutY="20.0" prefHeight="680.0" prefWidth="120.0" styleClass="leftMenuContainer" stylesheets="@../../style/style.css">
          <children>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
                   <ImageView fitHeight="80.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="logoContainer">
                      <image>
-                        <Image url="@../../../resources/images/logoLight.png" />
+                        <Image url="@../../images/logoLight.png" />
                      </image>
                      <HBox.margin>
                         <Insets top="4.0" />
@@ -34,11 +179,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="homeBtn" alignment="CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Home">
+                  <Button fx:id="homeBtn" alignment="CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#homeBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Home">
                      <graphic>
                         <ImageView fx:id="homeBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="home-btn-img">
                            <image>
-                              <Image url="@../../../resources/icons/light/home-4-fill.png" />
+                              <Image url="@../../icons/light/home-4-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -47,11 +192,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="coursesBtn" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Courses">
+                  <Button fx:id="coursesBtn" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Courses">
                      <graphic>
                         <ImageView fx:id="coursesBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/graduation-cap-fill.png" />
+                              <Image url="@../../icons/light/graduation-cap-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -63,11 +208,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="eventsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Events">
+                  <Button fx:id="eventsBtn" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#eventsBtnClicked" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Events">
                      <graphic>
                         <ImageView fx:id="eventsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/calendar-event-line.png" />
+                              <Image url="@../../icons/light/calendar-event-line.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -79,11 +224,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="forumBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Forum">
+                  <Button fx:id="forumBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Forum">
                      <graphic>
                         <ImageView fx:id="forumBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/group-fill.png" />
+                              <Image url="@../../icons/light/group-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -95,11 +240,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="productsBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Products">
+                  <Button fx:id="productsBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Products">
                      <graphic>
                         <ImageView fx:id="productsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/shopping-bag-3-fill.png" />
+                              <Image url="@../../icons/light/shopping-bag-3-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -111,11 +256,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="80.0">
                <children>
-                  <Button fx:id="collectsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Collects">
+                  <Button fx:id="collectsBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Collects">
                      <graphic>
                         <ImageView fx:id="collectsBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/recycle-fill.png" />
+                              <Image url="@../../icons/light/recycle-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -127,11 +272,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="85.0">
                <children>
-                  <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../../resources/style/style.css" text="Logout">
+                  <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" prefHeight="70.4" prefWidth="82.4" styleClass="menu-btn" stylesheets="@../../style/style.css" text="Logout">
                      <graphic>
                         <ImageView fx:id="logoutBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/icons/light/logout-box-fill.png" />
+                              <Image url="@../../icons/light/logout-box-fill.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -146,150 +291,5 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="545.0" layoutY="20.0" prefHeight="60.0" prefWidth="797.0" styleClass="headerContainer" stylesheets="@../../../resources/style/style.css">
-         <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../../resources/style/style.css">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
-                     <image>
-                        <Image url="@../../../resources/icons/dark/search-2-line.png" />
-                     </image>
-                  </ImageView>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../../resources/style/style.css">
-                     <HBox.margin>
-                        <Insets left="-390.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <padding>
-                  <Insets left="-40.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="80.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../../resources/style/style.css" translateY="8.0">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../resources/icons/light/icons8-message-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../../resources/style/style.css" translateX="-26.0" translateY="9.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="80.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../../resources/style/style.css" translateY="8.0">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../resources/icons/light/icons8-notification-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <HBox fx:id="notifCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../../resources/style/style.css" translateX="-26.0" translateY="9.0" />
-               </children>
-            </HBox>
-            <Circle fx:id="profilImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="profil-img-container">
-               <HBox.margin>
-                  <Insets right="-260.0" />
-               </HBox.margin>
-            </Circle>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../resources/icons/dark/arrow-down-s-fill.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="260.0" />
-               </HBox.margin>
-            </ImageView>
-         </children>
-      </HBox>
-      <Pane layoutX="151.0" layoutY="79.0" prefHeight="635.0" prefWidth="1194.0" styleClass="main-content-container" stylesheets="@../../../resources/style/style.css">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="20.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="welcome-container" width="535.0" />
-            <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="292.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" styleClass="welcome-img">
-               <image>
-                  <Image url="@../../../resources/images/homePageStudent/welcome-img.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="welcomeMsg" layoutX="69.0" layoutY="60.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../../resources/style/style.css" text="Hello Mohamed!">
-               <font>
-                  <Font name="Jost Regular" size="32.0" />
-               </font>
-            </Label>
-            <Label layoutX="71.0" layoutY="93.0" prefHeight="47.0" prefWidth="184.0" styleClass="second-welcome-msg" stylesheets="@../../../resources/style/style.css" text="its good to see you again">
-               <font>
-                  <Font name="Jost Regular" size="12.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="573.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="courses-completed-container" width="300.0" />
-            <Label layoutX="591.0" layoutY="27.0" prefHeight="137.0" prefWidth="104.0" styleClass="nbr-courses-completed" stylesheets="@../../../resources/style/style.css" text="11" />
-            <Label fx:id="welcomeMsg1" layoutX="693.0" layoutY="45.0" prefHeight="64.0" prefWidth="129.0" styleClass="welcome-msg" stylesheets="@../../../resources/style/style.css" text="Courses" textAlignment="CENTER">
-               <font>
-                  <Font name="Arial Narrow" size="32.0" />
-               </font>
-            </Label>
-            <Label fx:id="welcomeMsg11" layoutX="694.0" layoutY="82.0" prefHeight="64.0" prefWidth="151.0" styleClass="welcome-msg" stylesheets="@../../../resources/style/style.css" text="completed" textAlignment="CENTER">
-               <font>
-                  <Font name="Jost Regular" size="32.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutX="889.0" layoutY="16.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="courses-completed-container" width="300.0" />
-            <Label layoutX="907.0" layoutY="27.0" prefHeight="137.0" prefWidth="104.0" styleClass="nbr-courses-completed" stylesheets="@../../../resources/style/style.css" text="11" />
-            <Label fx:id="welcomeMsg12" layoutX="1009.0" layoutY="45.0" prefHeight="64.0" prefWidth="129.0" styleClass="welcome-msg" stylesheets="@../../../resources/style/style.css" text="Courses" textAlignment="CENTER">
-               <font>
-                  <Font name="Arial Narrow" size="32.0" />
-               </font>
-            </Label>
-            <Label fx:id="welcomeMsg111" layoutX="1010.0" layoutY="82.0" prefHeight="64.0" prefWidth="151.0" styleClass="welcome-msg" stylesheets="@../../../resources/style/style.css" text="completed" textAlignment="CENTER">
-               <font>
-                  <Font name="Jost Regular" size="32.0" />
-               </font>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" layoutX="20.0" layoutY="193.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-container" width="536.0" />
-            <Circle fx:id="mostProgressedCourseImgContainer" fill="DODGERBLUE" layoutX="59.0" layoutY="228.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-img-container" />
-            <Label fx:id="mostProgressedCourseTitle" layoutX="108.0" layoutY="194.0" prefHeight="47.0" prefWidth="289.0" styleClass="most-progressed-course-title" stylesheets="@../../../resources/style/style.css" text="Newspaper weave baskets">
-               <font>
-                  <Font name="Jost Regular" size="32.0" />
-               </font>
-            </Label>
-            <Label fx:id="mostProgressedCourseTutorName" layoutX="109.0" layoutY="215.0" prefHeight="47.0" prefWidth="184.0" styleClass="most-progressed-course-tutor-name" stylesheets="@../../../resources/style/style.css" text="its good to see you again">
-               <font>
-                  <Font name="Jost Regular" size="12.0" />
-               </font>
-            </Label>
-            <Arc fx:id="mostProgressedCoursePrc" fill="DODGERBLUE" layoutX="410.0" layoutY="228.0" length="300.0" radiusX="30.0" radiusY="30.0" startAngle="90.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="most-progressed-course-prc" type="ROUND" />
-            <Circle fill="#7dc145" layoutX="410.0" layoutY="228.0" radius="25.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <Label fx:id="mostProgressedCoursePrcVal" layoutX="387.0" layoutY="218.0" styleClass="most-progressed-course-prc-val" stylesheets="@../../../resources/style/style.css" text="83.5%" />
-            <Button fx:id="mostProgressedCourseBtn" layoutX="454.0" layoutY="211.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="88.0" styleClass="most-progressed-course-btn" stylesheets="@../../../resources/style/style.css" text="continue" />
-            <ScrollPane fx:id="coursesScrollPane" hbarPolicy="NEVER" layoutX="23.0" layoutY="355.0" prefHeight="255.0" prefWidth="533.0" styleClass="courses-scroll-pane" stylesheets="@../../../resources/style/style.css">
-               <content>
-                  <VBox fx:id="coursesVboxHomePage" prefHeight="272.0" prefWidth="534.0" spacing="5.0" styleClass="courses-vbox-home-page" stylesheets="@../../../resources/style/style.css">
-                     <padding>
-                        <Insets left="5.0" top="5.0" />
-                     </padding>
-                  </VBox>
-               </content>
-            </ScrollPane>
-            <Label fx:id="courseTitle" layoutX="26.0" layoutY="274.0" prefHeight="47.0" prefWidth="289.0" styleClass="course-title" stylesheets="@../../../resources/style/style.css" text="Courses">
-               <font>
-                  <Font name="Jost Regular" size="32.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" layoutX="3.0" layoutY="312.0" prefHeight="46.0" prefWidth="460.0" spacing="5.0">
-               <children>
-                  <Button fx:id="allCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="122.0" styleClass="all-courses-btn" stylesheets="@../../../resources/style/style.css" text="All Courses" />
-                  <Button fx:id="newestCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="newest-courses-btn" stylesheets="@../../../resources/style/style.css" text="Newest" />
-                  <Button fx:id="topRatedCoursesBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="top-rated-courses-btn" text="Top Rated" />
-                  <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" styleClass="most-popular-courses-btn" text="Most Popular" />
-               </children>
-            </HBox>
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

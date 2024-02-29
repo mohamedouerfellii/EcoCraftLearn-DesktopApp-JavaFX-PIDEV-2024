@@ -22,20 +22,28 @@ public class ItemEventController {
     @FXML
     private Button showCourseDetailsBtn;
     private Event event;
-    private HomePageEventController homePageEventController;
 
-    public void setDataEvent(Event event,HomePageEventController controller) {
-        eventItemTitle.setText(event.getTitle());
-        placeEventDispo.setText(String.valueOf(event.getPlaceNbr())+" Places");
-        dateEvent.setText("From "+event.getStartDate()+" To "+event.getEndDate());
-        eventItemImgContainer.setFill(new ImagePattern(
-                new Image(event.getAttachment())
-        ));
-        this.event = event;
-        homePageEventController = controller;
+
+
+    private HomePageEventController homePageEventController = new HomePageEventController();
+
+    public void setDataEvent(Event ev) {
+        eventItemTitle.setText(ev.getTitle());
+        placeEventDispo.setText(String.valueOf(ev.getPlaceNbr())+" Places");
+        dateEvent.setText("From "+ev.getStartDate()+" To "+ev.getEndDate());
+        eventItemImgContainer.setFill(new ImagePattern(new Image(ev.getAttachment())));
+
+        this.event = ev;
     }
     @FXML
     public void showDetailsEventBtnClicked(MouseEvent e){
         homePageEventController.showEventDeatils(event);
     }
+
+    public void setHomePageEventController(HomePageEventController homePageEventController) {
+        this.homePageEventController = homePageEventController;
+    }
+
+
+
 }

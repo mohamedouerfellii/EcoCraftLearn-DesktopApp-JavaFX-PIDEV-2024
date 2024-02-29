@@ -17,12 +17,14 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import tn.SIRIUS.entities.Event;
+import tn.SIRIUS.entities.Eventsparticipations;
 import tn.SIRIUS.services.EventService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import javafx.scene.input.MouseEvent;
+import tn.SIRIUS.services.EventparticipationsService;
 import tn.SIRIUS.services.UserService;
 
 import java.io.File;
@@ -34,74 +36,159 @@ import java.util.ResourceBundle;
 
 public class HomePageEventController implements Initializable {
     @FXML
-    private AnchorPane homePageEventController;
+    private AnchorPane AnchorPaneParticipant;
+
     @FXML
-    private Button addNewEventBtn;
-    @FXML
-    private VBox eventsListContainer;
-    @FXML
-    private AnchorPane eventDetailsContainer;
-    @FXML
-    private Label idLabelDetail;
-    @FXML
-    private Text titleLabelDetail;
-    @FXML
-    private Text descriptionLabelDetail;
-    @FXML
-    private Text dateLabelDetail;
-    @FXML
-    private Text priceLabelDetail;
-    @FXML
-    private Text placeLabelDetail;
-    @FXML
-    private Text typeLabelDetail;
-    @FXML
-    private Text nbrPlaceLabelDetail;
-    @FXML
-    private Button goBackEventDetBtn;
-    @FXML
-    private Rectangle eventDetailsImgContainer;
-    @FXML
-    private AnchorPane addEventPageContainer;
-    @FXML
-    private ImageView imgAddEventPreview;
-    @FXML
-    private TextField titleInputAddEvent;
+    private VBox VboxParticipant;
+
     @FXML
     private TextArea addDescEvent;
-    @FXML
-    private TextField addEventPrice;
-    @FXML
-    private TextField addEventPlace;
-    @FXML
-    private TextField addEventNbrPlace;
-    @FXML
-    private TextField addEventType;
-    @FXML
-    private DatePicker addEventStartDate;
+
     @FXML
     private DatePicker addEventEndDate;
+
     @FXML
     private Button addEventFormBtn;
+
     @FXML
-    private AnchorPane successOperationContainer;
+    private TextField addEventNbrPlace;
+
+    @FXML
+    private AnchorPane addEventPageContainer;
+
+    @FXML
+    private TextField addEventPlace;
+
+    @FXML
+    private TextField addEventPrice;
+
+    @FXML
+    private DatePicker addEventStartDate;
+
+    @FXML
+    private TextField addEventType;
+
+    @FXML
+    private Button addNewEventBtn;
+
+    @FXML
+    private Button chooseImgAddEvent;
+
+    @FXML
+    private ImageView closeWarningPassword;
+
+    @FXML
+    private Button confirmDeleteCourseBtn;
+
+    @FXML
+    private Text dateLabelDetail;
+
+    @FXML
+    private ImageView deleteCourseBtnImg;
+
+    @FXML
+    private Button deleteEventBtn;
+
+    @FXML
+    private Text descriptionLabelDetail;
+
+    @FXML
+    private ImageView editCourseBtnImg;
+
+    @FXML
+    private Button editEventBtn;
+
+    @FXML
+    private AnchorPane eventDetailsContainer;
+
+    @FXML
+    private Rectangle eventDetailsImgContainer;
+
+    @FXML
+    private VBox eventsListContainer;
+
     @FXML
     private AnchorPane failedOperationContainer;
-    @FXML
-    private AnchorPane warningDeleteEventContainer;
-    @FXML
-    private PasswordField passwordConfirmDelete;
+
     @FXML
     private AnchorPane failedOperationEditContainer;
+
+    @FXML
+    private Button goBackEventDetBtn;
+
+    @FXML
+    private Button goBackEventDetailsBtn;
+
+    @FXML
+    private AnchorPane homePageEventController;
+
+    @FXML
+    private Label idLabelDetail;
+
+    @FXML
+    private ImageView imgAddEventPreview;
+
+    @FXML
+    private Text nbrPlaceLabelDetail;
+
+    @FXML
+    private PasswordField passwordConfirmDelete;
+
+    @FXML
+    private Label passwordIncorrectContainer;
+
+    @FXML
+    private Label passwordIncorrectContainer1;
+
+    @FXML
+    private Text placeLabelDetail;
+
+    @FXML
+    private Text priceLabelDetail;
+
+    @FXML
+    private TextField searchInput;
+
+  @FXML
+  private Button CloseParticipant;
+
+    @FXML
+    private Button showEventParticipantsBtn;
+
+    @FXML
+    private AnchorPane successOperationContainer;
+
+    @FXML
+    private TextField titleInputAddEvent;
+
+    @FXML
+    private Text titleLabelDetail;
+
+    @FXML
+    private Text typeLabelDetail;
+
+    @FXML
+    private AnchorPane warningDeleteEventContainer;
     private String addEventImgPath;
     private List<Event> events;
     private Event currentEvent;
+    public Button getShowEventParticipantsBtn() {
+        return showEventParticipantsBtn;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         warningDeleteEventContainer.setVisible(false);
         addEventPageContainer.setVisible(false);
         eventDetailsContainer.setVisible(false);
+        AnchorPaneParticipant.setVisible(false);
         showAllEvents();
+
+
+        CloseParticipant.setOnMouseClicked(event -> {
+            AnchorPaneParticipant.setVisible(false);
+        });
+
+
     }
     // Event Start
     public void showAllEvents(){
@@ -114,7 +201,8 @@ public class HomePageEventController implements Initializable {
                 fxmlLoader.setLocation(Objects.requireNonNull(getClass().getResource("/gui/tutors/ItemEvent.fxml")));
                 Parent root = fxmlLoader.load();
                 ItemEventController controller = fxmlLoader.getController();
-                controller.setDataEvent(event,this);
+                controller.setHomePageEventController(this);
+                controller.setDataEvent(event);
                 eventsListContainer.getChildren().add(root);
             }catch (IOException e){
                 System.out.println(e.getMessage());
@@ -135,6 +223,7 @@ public class HomePageEventController implements Initializable {
         ));
         eventDetailsContainer.setVisible(true);
         currentEvent = event;
+        showEventParticipantsBtn.setOnAction(e->showEventParticipants(event));
     }
     public void notifySuccess(){
         successOperationContainer.setVisible(true);
@@ -174,6 +263,9 @@ public class HomePageEventController implements Initializable {
         String place = addEventPlace.getText();
         String startDate = addEventStartDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String endDate = addEventEndDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+
+
         int nbrPlace = Integer.parseInt(addEventNbrPlace.getText());
         String type = addEventType.getText();
         Event event = new Event(
@@ -181,9 +273,9 @@ public class HomePageEventController implements Initializable {
                 addEventImgPath,1,type,place,nbrPlace,price);
         if (addEventFormBtn.getText().equals("Add Event")){
             if(eventService.add(event)){
-                    showAllEvents();
-                    clearInputsEvent();
-                    notifySuccess();
+                showAllEvents();
+                clearInputsEvent();
+                notifySuccess();
             } else
                 notifyFailed();
         } else {
@@ -259,13 +351,39 @@ public class HomePageEventController implements Initializable {
             timeline.play();
         }
     }
-    @FXML
-    public void showEventParticipantsBtnClicked(MouseEvent ev){
+  public  void showEventParticipants(Event event){
+      VboxParticipant.getChildren().clear();
+      AnchorPaneParticipant.setVisible(true);
+      EventparticipationsService eventparticipationsService = new EventparticipationsService();
+      List<Eventsparticipations> list = eventparticipationsService.getAll();
+      try { for(Eventsparticipations e : list) {
+          System.out.println(e.getEvent().getIdEvent());
+          System.out.println(event.getIdEvent());
+          if (e.getEvent().getIdEvent() == event.getIdEvent()) {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/tutors/ItemParticipant.fxml"));
+              Parent root = null;
 
+              root = loader.load();
+
+              ItemParticipantController itemParticipantController = loader.getController();
+              itemParticipantController.setDataParticipant(e);
+              itemParticipantController.setHomePageEventController(this);
+              VboxParticipant.getChildren().add(root);
+              System.out.println(e);
+
+          }
+
+
+      }} catch (IOException e) {
+          throw new RuntimeException(e);
+      }}
+
+    public void deleteparticipant(Eventsparticipations participant){
+        EventparticipationsService eventparticipationsService = new EventparticipationsService();
+         int idparticipant = participant.getIdParticipation();
+        eventparticipationsService.delete(idparticipant);
+        showEventParticipants(currentEvent);
     }
-}
 
 
-
-
-
+  }

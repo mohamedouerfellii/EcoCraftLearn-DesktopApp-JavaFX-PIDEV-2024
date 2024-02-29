@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="page-container" stylesheets="@../../style/eventHomeStudent.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.EventPageController">
+   <children>
+      <Button fx:id="goMyparticipant" layoutX="950.0" layoutY="24.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="150.0" styleClass="tri-btn" stylesheets="@../../style/eventHomeStudent.css" text="My Participations" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="113.0" layoutY="85.0" prefHeight="521.0" prefWidth="956.0" styleClass="event-scroll-pane-item" stylesheets="@../../style/eventHomeStudent.css">
+         <content>
+            <VBox prefHeight="519.0" prefWidth="941.0" styleClass="vbox-container" stylesheets="@../../style/coursesStudentMainPage.css">
+               <children>
+                  <GridPane fx:id="gridPane" hgap="10.0" prefHeight="341.0" prefWidth="1003.0" styleClass="event-grid-item" stylesheets="@../../style/eventHomeStudent.css" vgap="10.0">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <HBox alignment="CENTER" layoutX="54.0" layoutY="22.0" prefHeight="46.0" prefWidth="476.0" spacing="5.0">
+         <children>
+            <Button fx:id="AllEvents" mnemonicParsing="false" prefHeight="34.0" prefWidth="122.0" styleClass="tri-btn" stylesheets="@../../style/eventHomeStudent.css" text="All Events" />
+            <Button fx:id="NewestEvent" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="tri-btn" stylesheets="@../../style/eventHomeStudent.css" text="Newest" />
+            <Button fx:id="TopRatedEvent" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="tri-btn" stylesheets="@../../style/eventHomeStudent.css" text="Top Rated" />
+         </children>
+      </HBox>
+      <AnchorPane fx:id="AnchorPanedetail" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetail" stylesheets="@../../style/eventHomeStudent.css">
+         <children>
+            <Button fx:id="gobackEventDetail" layoutX="51.0" layoutY="21.0" mnemonicParsing="false" onAction="#handlegobackEventDetail" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" text="Go Back" />
+            <Rectangle fx:id="AttachmentEventDetail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="80.0" layoutY="141.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />
+            <AnchorPane fx:id="rateContainer" layoutX="473.0" layoutY="181.0" prefHeight="189.0" prefWidth="263.0" styleClass="rateContainer" stylesheets="@../../style/StyleDetailsEvent.css" visible="false">
+               <children>
+                  <Text layoutX="100.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="add-card-text" text="Rating" wrappingWidth="86.0" />
+                  <Button fx:id="closerate" layoutX="212.0" layoutY="14.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="32.0" styleClass="closebtnrate" stylesheets="@../../style/StyleDetailsEvent.css">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+                           <image>
+                              <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/close-circle-filll.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="AddRateBtn" layoutX="90.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" stylesheets="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/style.css" text="Rate !" />
+                  <Rating fx:id="RateEvent" layoutX="52.0" layoutY="70.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="MiniPaneDetail" layoutX="747.0" layoutY="73.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/eventHomeStudent.css">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="57.0" layoutY="6.0" prefHeight="458.0" prefWidth="316.0" spacing="15.0">
+                     <children>
+                        <Text fx:id="PriceDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="price-course-text" text="216 TND">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="316.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/user-2-fill.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="54.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Title :" wrappingWidth="69.40498352050781" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="TitleEventdetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Ouerfelli Mohamed" wrappingWidth="183.4798903465271">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="225.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/time-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="55.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Type :" wrappingWidth="69.40498352050781" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="TypeEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Test " wrappingWidth="184.74008192618567">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="45.0" prefWidth="149.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="3.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="48.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Start date :" wrappingWidth="99.80494689941406" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="StartDateEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="24-02-2024" wrappingWidth="147.13335382938385">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="201.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="55.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="End Date :" wrappingWidth="99.99999999999994" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="EndDateEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="24-02-2024" wrappingWidth="150.4666064977646">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="272.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/list-ordered-2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="54.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="NBR Place :" wrappingWidth="110.0" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="NBRPlaceEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="6" wrappingWidth="136.66685914993286">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="299.0" spacing="5.0" styleClass="one-detail-container" stylesheets="@../../style/eventHomeStudent.css">
+                           <children>
+                              <AnchorPane prefHeight="46.0" prefWidth="256.0">
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/article-line.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="53.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Place :" wrappingWidth="69.40498352050781" />
+                                 </children>
+                              </AnchorPane>
+                              <Text fx:id="PlaceEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail-content" text="Tataouine" wrappingWidth="143.8401117324829">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER" layoutX="748.0" layoutY="562.0" prefHeight="39.0" prefWidth="428.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleminiDetailsBtn" prefHeight="39.0" prefWidth="92.0" styleClass="detailbtn" stylesheets="@../../style/eventHomeStudent.css" text="Details" />
+                  <Button mnemonicParsing="false" onAction="#handleminiDescriptionBtn" prefHeight="39.0" prefWidth="92.0" styleClass="descbtn" stylesheets="@../../style/eventHomeStudent.css" text="Description" />
+               </children>
+            </HBox>
+            <AnchorPane fx:id="MiniDescDetail" layoutX="747.0" layoutY="73.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../style/eventHomeStudent.css" visible="false">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="10.0" layoutY="9.0" prefHeight="456.0" prefWidth="407.0" styleClass="course-scroll-pane-item-desc" stylesheets="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/coursesStudentMainPage.css">
+                     <content>
+                        <VBox alignment="CENTER" prefHeight="454.0" prefWidth="411.0" styleClass="grid-container-desc" stylesheets="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/coursesStudentMainPage.css">
+                           <children>
+                              <Text fx:id="DescEventDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="&quot;It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).&quot;" textAlignment="CENTER" wrappingWidth="348.5367431640625" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <Button fx:id="openrate" layoutX="609.0" layoutY="503.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" text="Rate" />
+            <Rating fx:id="RatingDetail" layoutX="88.0" layoutY="502.0" />
+            <Text fx:id="TotalRate" layoutX="280.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="(3)" wrappingWidth="39.333333333333485" />
+            <Pane layoutX="76.0" layoutY="499.0" prefHeight="46.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneMyparticipation" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorpaneParticipant" stylesheets="@../../style/eventHomeStudent.css" visible="false">
+         <children>
+            <Button fx:id="gobackparticipation" layoutX="112.0" layoutY="41.0" mnemonicParsing="false" onAction="#handlegobackparticipation" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" text="Go Back" />
+            <Label alignment="CENTER" layoutX="470.0" layoutY="20.0" prefHeight="53.0" prefWidth="306.0" styleClass="title-form" stylesheets="@../../style/eventHomeStudent.css" text="My Participations" />
+            <ScrollPane hbarPolicy="NEVER" layoutX="145.0" layoutY="103.0" prefHeight="522.0" prefWidth="956.0" styleClass="MyParticipationScrolPnae" stylesheets="@../../style/eventHomeStudent.css">
+               <content>
+                  <GridPane fx:id="GridPaneParticipation" hgap="10.0" prefHeight="521.0" prefWidth="955.0" styleClass="event-grid-item" stylesheets="@../../style/eventHomeStudent.css" vgap="10.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

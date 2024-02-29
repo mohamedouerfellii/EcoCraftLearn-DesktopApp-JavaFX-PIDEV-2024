@@ -1,7 +1,6 @@
 .AnchorHomePageEvent
 {
     -fx-background-color: #fff;
-
     -fx-border-radius: 15 15 15 15;
 }
 
@@ -93,3 +92,12 @@
 {
     -fx-opacity: 0.6;
 }
+.AnchorPaneParticipantContainer
+{
+    -fx-background-color: #fff;
+    -fx-border-radius: 15 15 15 15;
+}
+
+
+
+

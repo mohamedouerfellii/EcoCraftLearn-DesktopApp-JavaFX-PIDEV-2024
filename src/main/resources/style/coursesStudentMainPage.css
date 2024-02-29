@@ -1,0 +1,465 @@
+.courses-main-page-container{
+    -fx-background-color: transparent;
+}
+.item-main-container{
+    -fx-background-color: #D5FFDC;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 2, 2);
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+    -fx-cursor: hand;
+}
+.item-main-container:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 2, 2);
+}
+.item-container{
+    -fx-background-color: transparent;
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+}
+.course-item-container{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #7DC145;
+    -fx-border-width: 1px;
+}
+.course-item-container:hover{
+    -fx-border-color: #1D6611;
+}
+.right-container{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 20 0 0 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 2, 2);
+}
+.tutor-course-label{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 18;
+    -fx-fill: #000000;
+}
+.course-title-item{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+.registred-nbr-course-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-fill: #000000;
+}
+.course-grid-item{
+    -fx-background-color: #D5FFDC;
+}
+.course-scroll-pane-item{
+    -fx-background-color: #D5FFDC;
+}
+.course-scroll-pane-item .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.course-scroll-pane-item .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.course-scroll-pane-item .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.course-scroll-pane-item .scroll-bar:vertical .increment-button,
+.course-scroll-pane-item .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.course-info-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 0 20 20 0;
+}
+.enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+.enroll-btn:hover{
+    -fx-opacity: 0.8;
+}
+.view-details-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #000000;
+}
+.view-details-label:hover{
+    -fx-opacity: 1;
+}
+.view-details-label{
+    -fx-cursor: hand;
+}
+.grid-container{
+    -fx-background-color: #D5FFDC;
+}
+.nbr-registred-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.nbr-person-rated-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 13;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.registered-course-page{
+    -fx-background-color: #D5FFDC;
+}
+.course-registered-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: #7DC145;
+    -fx-border-width: 0 0 1 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 2, 2);
+}
+.img-registered-pane{
+    -fx-background-color: #7DC145;
+    -fx-background-radius: 0 16 16 0;
+    -fx-border-radius: 0 16 16 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 2, 2);
+}
+.course-registered-container:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 2, 2);
+}
+.course-registered-img-container{
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
+}
+.course-registered-title-item{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-text-fill: #000000;
+}
+.more-courses-registered{
+    -fx-cursor: hand;
+}
+.more-courses-registered:hover{
+    -fx-opacity: 0.8;
+}
+.options-registered-courses-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.5;
+}
+.options-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.options-label:hover{
+    -fx-opacity: 1;
+}
+.title-form{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 36;
+    -fx-fill: #000000;
+}
+.course-details-img{
+    -fx-arc-width: 16;
+    -fx-arc-height: 16;
+}
+.title-course-details{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 36;
+    -fx-text-fill: #000000;
+}
+.tutor-course-details-name{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 26;
+    -fx-fill: #000000;
+}
+.nbr-person-rated-text-details{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 13;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.courses-details-left{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+}
+.details-desc-enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #D5FFDC;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.details-desc-enroll-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-background-color: #19BB1C;
+    -fx-text-fill: #D5FFDC;
+    -fx-cursor: hand;
+}
+.enroll-course-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+.enroll-course-btn:hover{
+    -fx-opacity: 0.6;
+}
+.one-detail-container{
+    -fx-background-color: transparent;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0 0 0.5 0;
+}
+.text-mini-detail{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.text-mini-detail-content{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 20;
+    -fx-fill: #000000;
+}
+.price-course-text{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 30;
+    -fx-fill: #19BB1C;
+}
+.courses-mini-description-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-fill: #000000;
+}
+.grid-container-desc{
+    -fx-background-color: #a5f5b8;
+}
+.course-scroll-pane-item-desc{
+    -fx-background-color: #a5f5b8;
+}
+.course-scroll-pane-item-desc .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.course-scroll-pane-item-desc .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.course-scroll-pane-item-desc .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.course-scroll-pane-item-desc .scroll-bar:vertical .increment-button,
+.course-scroll-pane-item-desc .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.payment-method{
+    -fx-background-color: #fff;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0.5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 2, 2);
+}
+.add-card-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 28;
+    -fx-fill: #000000;
+}
+.payment-text{
+    -fx-font-family: "Jost Light";
+    -fx-font-size: 18;
+    -fx-fill: #000000;
+}
+.payment-form-input{
+    -fx-background-color: #fff;
+    -fx-border-radius: 6px;
+    -fx-border-color: #999;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+}
+.enroll-confirmation-container{
+    -fx-background-color: #D5FFDC ;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #19BB1C;
+}
+.enroll-confirmation-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-text-fill: #19BB1C;
+}
+.enroll-confirmation-text{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
+}
+.confirm-enroll-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #19BB1C;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+.confirm-enroll-btn:hover{
+    -fx-opacity: 0.6;
+}
+.password-confirmation-input{
+    -fx-background-color: #D5FFDC;
+    -fx-border-radius: 6px;
+    -fx-border-color: #19BB1C;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+}
+.scroll-pane-sections-container{
+    -fx-background-color: #D5FFDC;
+}
+.scroll-pane-sections-container .scroll-bar:vertical{
+    -fx-background-color: #D5FFDC;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .thumb:hover {
+    -fx-opacity: 0.6;
+}
+.scroll-pane-sections-container .scroll-bar:vertical .increment-button,
+.scroll-pane-sections-container .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #D5FFDC;
+}
+.volume-bar-section-vid {
+    -fx-background-color: #e9fdec;
+}
+.volume-bar-section-vid .track {
+    -fx-background-color: #e9fdec;
+    -fx-cursor: hand;
+}
+.volume-bar-section-vid .thumb {
+    -fx-background-color: #1D6611;
+    -fx-cursor: hand;
+}
+.play-video-btn{
+    -fx-background-color: #000000;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+.play-video-btn:hover{
+    -fx-opacity: 0.6;
+}
+.one-section-view-container{
+    -fx-background-color: transparent;
+}
+.sections-view-list-container{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #D5FFDC;
+    -fx-border-width: 0 0 0 1;
+}
+.section-content-view-container{
+    -fx-background-color: #D5FFDC;
+}
+.time-vid-play-section{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+.speed-vid{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+.section-item-container{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #19BB1C;
+    -fx-border-width: 0 0 1 0;
+    -fx-cursor: hand;
+}
+.section-title-content{
+    -fx-font-family: "Jost";
+    -fx-font-size: 24;
+    -fx-text-fill: #212832;
+}
+.main-description-container{
+    -fx-background-color: #D5FFDC;
+}
+.section-desc-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-text-fill: #212832;
+}
+.description-section-details-container{
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #D5FFDC;
+    -fx-border-width: 2px;
+}
+.section-desc-label{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 22;
+    -fx-text-fill: #212832;
+}
+.section-desc-content{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 18;
+    -fx-text-fill: #495057;
+}
+.feedback-input{
+    -fx-control-inner-background: #D5FFDC;
+    -fx-border-radius: 6px;
+    -fx-border-color: #000000;
+    -fx-background-radius: 6px;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Jost Medium";
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+}
+.feedback-container{
+    -fx-background-color: #D5FFDC;
+    -fx-border-radius: 24px;
+    -fx-background-radius: 24px;
+    -fx-border-color: #000000;
+}
+.star-rate{
+    -fx-cursor: hand;
+}
+.delete-btn{
+    -fx-background-color: red;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.delete-btn:hover{
+    -fx-opacity: 0.6;
+}
+.feedback-item-container{
+    -fx-background-color: #a5f5b8;
+    -fx-background-radius: 24px;
+}
+.feedback-content-text{
+    -fx-font-family: "Jost";
+    -fx-font-size: 18;
+    -fx-text-fill: #000000;
+}
+.vbox-container{
+    -fx-background-color: #D5FFDC;
+}
