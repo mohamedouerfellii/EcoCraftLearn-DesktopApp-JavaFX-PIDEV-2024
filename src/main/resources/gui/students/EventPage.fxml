@@ -39,7 +39,7 @@
             <Button fx:id="TopRatedEvent" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="tri-btn" stylesheets="@../../style/eventHomeStudent.css" text="Top Rated" />
          </children>
       </HBox>
-      <AnchorPane fx:id="AnchorPanedetail" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetail" stylesheets="@../../style/eventHomeStudent.css">
+      <AnchorPane fx:id="AnchorPanedetail" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetail" stylesheets="@../../style/eventHomeStudent.css" visible="false">
          <children>
             <Button fx:id="gobackEventDetail" layoutX="51.0" layoutY="21.0" mnemonicParsing="false" onAction="#handlegobackEventDetail" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" text="Go Back" />
             <Rectangle fx:id="AttachmentEventDetail" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="80.0" layoutY="141.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="633.0" />
@@ -74,7 +74,7 @@
                                  <children>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/user-2-fill.png" />
+                                          <Image url="@../../icons/event/sticky-note-line.png" />
                                        </image>
                                     </ImageView>
                                     <Text layoutX="54.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Title :" wrappingWidth="69.40498352050781" />
@@ -96,7 +96,7 @@
                                  <children>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/time-line.png" />
+                                          <Image url="@../../icons/event/pages-fill.png" />
                                        </image>
                                     </ImageView>
                                     <Text layoutX="55.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Type :" wrappingWidth="69.40498352050781" />
@@ -115,7 +115,7 @@
                                  <children>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="3.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                          <Image url="@../../icons/event/calendar-check-line.png" />
                                        </image>
                                     </ImageView>
                                     <Text layoutX="48.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Start date :" wrappingWidth="99.80494689941406" />
@@ -134,7 +134,7 @@
                                  <children>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/calendar-check-line.png" />
+                                          <Image url="@../../icons/event/calendar-close-line.png" />
                                        </image>
                                     </ImageView>
                                     <Text layoutX="55.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="End Date :" wrappingWidth="99.99999999999994" />
@@ -172,7 +172,7 @@
                                  <children>
                                     <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../Users/rouka/OneDrive/Bureau/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours%20(1)/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/icons/dark/article-line.png" />
+                                          <Image url="@../../icons/event/map-pin-line%20(1).png" />
                                        </image>
                                     </ImageView>
                                     <Text layoutX="53.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-mini-detail" text="Place :" wrappingWidth="69.40498352050781" />
@@ -210,7 +210,7 @@
             </AnchorPane>
             <Button fx:id="openrate" layoutX="609.0" layoutY="503.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="enroll-btn" text="Rate" />
             <Rating fx:id="RatingDetail" layoutX="88.0" layoutY="502.0" />
-            <Text fx:id="TotalRate" layoutX="280.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="(3)" wrappingWidth="39.333333333333485" />
+            <Text fx:id="TotalRate" layoutX="276.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courses-mini-description-text" text="(3)" wrappingWidth="22.666646321614735" />
             <Pane layoutX="76.0" layoutY="499.0" prefHeight="46.0" prefWidth="200.0" />
          </children>
       </AnchorPane>

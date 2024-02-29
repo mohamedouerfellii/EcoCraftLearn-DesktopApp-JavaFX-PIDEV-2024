@@ -114,7 +114,11 @@ public class EventPageController implements Initializable {
     @FXML
     private Text TotalRate;
 
+       @FXML
+       private Button TopRatedEvent;
 
+    @FXML
+    private Button AllEvents;
     @FXML
     private GridPane GridPaneParticipation;
     List<Event> events;
@@ -128,8 +132,10 @@ public class EventPageController implements Initializable {
     private int userID;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         getAllEvent();
         rateContainer.setVisible(false);
+
         goMyparticipant.setOnAction(event -> {
          getAllEventByUser();
           });
@@ -138,6 +144,16 @@ public class EventPageController implements Initializable {
         });
         closerate.setOnAction(event2 -> {
             rateContainer.setVisible(false);
+        });
+
+        AllEvents.setOnAction(event -> {
+            getAllEvent();
+        });
+
+        gridPane.getChildren().clear();
+        TopRatedEvent.setOnAction(event -> {
+
+            getTopRated();
         });
 
 
@@ -208,6 +224,31 @@ public class EventPageController implements Initializable {
             }
         }
     }
+
+
+    public void getTopRated(){
+
+        EventService eventService = new EventService();
+        events = eventService.TrieEventsTopRated();
+       //events.remove(eventsRegistered);
+        System.out.println("teetetetet");
+        System.out.println(events);
+        int column = 0;
+        int row = 1;
+        gridPane.getChildren().clear();
+        for(Event event : events){
+            try{
+                if(column == 3){
+                    column = 0;
+                    row++;
+                }
+                loadEventItem(column++,row,event);
+            }catch(IOException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 
 
     @FXML
@@ -301,6 +342,8 @@ public void CancelParticipation(Event e) {
     getAllEventByUser();
     getAllEvent();
 }
+
+
 
 
 

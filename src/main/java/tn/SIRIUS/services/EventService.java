@@ -12,14 +12,15 @@ import java.util.List;
 
 public class EventService implements ICRUD<Event> {
     private Connection con;
-    public EventService(){
+
+    public EventService() {
         con = MyDB.getInstance().getCon();
     }
 
     @Override
     public boolean add(Event event) {
         String query = "INSERT INTO EVENTS (title,description,startDate,endDate,attachment,owner,eventType,place,placeNbr,price) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        try{
+        try {
             PreparedStatement statement = con.prepareStatement(query);
 
 
@@ -28,19 +29,19 @@ public class EventService implements ICRUD<Event> {
             statement.setString(3, event.getStartDate());
             statement.setString(4, event.getEndDate());
             statement.setString(5, event.getAttachment());
-            statement.setInt(6,1);
-            statement.setString(7,event.getEventType());
-            statement.setString(8,event.getPlace());
+            statement.setInt(6, 1);
+            statement.setString(7, event.getEventType());
+            statement.setString(8, event.getPlace());
             statement.setInt(9, event.getPlaceNbr());
             statement.setFloat(10, event.getPrice());
 
 
-            if(statement.executeUpdate() == 1){
+            if (statement.executeUpdate() == 1) {
                 statement.close();
                 return true;
             }
             statement.close();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return false;
@@ -50,9 +51,9 @@ public class EventService implements ICRUD<Event> {
     public List<Event> getAll() {
         String query = "SELECT * FROM EVENTS ";
         List<Event> eventList = new ArrayList<>();
-        try(Statement stm = con.createStatement()){
+        try (Statement stm = con.createStatement()) {
             ResultSet rs = stm.executeQuery(query);
-            while (rs.next()){
+            while (rs.next()) {
                 eventList.add(new Event(
                         rs.getInt("idEvent"),
                         rs.getString("title"),
@@ -67,11 +68,12 @@ public class EventService implements ICRUD<Event> {
                         rs.getInt("price")
                 ));
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return eventList;
     }
+
     @Override
     public boolean update(Event event) {
         String query = "UPDATE EVENTS SET title = ? , description = ? , startDate = ? , endDate = ? , attachment = ? , owner = ? , eventType = ? , place = ? , placeNbr = ? , price = ? WHERE idEvent = ?";
@@ -99,32 +101,34 @@ public class EventService implements ICRUD<Event> {
         }
         return false;
     }
+
     @Override
     public boolean delete(int idEvent) {
 
         String qry = "DELETE FROM events WHERE idEvent = ?";
-        try{
+        try {
             PreparedStatement stm = con.prepareStatement(qry);
-            stm.setInt(1,idEvent);
-            if(stm.executeUpdate() == 1){
+            stm.setInt(1, idEvent);
+            if (stm.executeUpdate() == 1) {
                 stm.close();
 
                 return true;
             }
             stm.close();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return false;
     }
-    public List<Event> getEventRegistered(int idUser){
+
+    public List<Event> getEventRegistered(int idUser) {
         List<Event> eventsRegistered = new ArrayList<>();
         String query = "SELECT * FROM EVENTS E JOIN EVENTSPARTICIPATIONS EP ON E.idEvent = EP.event WHERE EP.participant = ?";
-        try{
+        try {
             PreparedStatement stm = con.prepareStatement(query);
-            stm.setInt(1,idUser);
+            stm.setInt(1, idUser);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 eventsRegistered.add(new Event(
                         rs.getInt("idEvent"),
                         rs.getString("title"),
@@ -137,23 +141,23 @@ public class EventService implements ICRUD<Event> {
                         rs.getString("place"),
                         rs.getInt("placeNbr"),
                         rs.getInt("price")
-                        ));
+                ));
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return eventsRegistered;
     }
 
 
-    public List<Event> getEventUser(int idUser){
+    public List<Event> getEventUser(int idUser) {
         List<Event> eventsUser = new ArrayList<>();
         String query = "SELECT * FROM EVENTS E JOIN EVENTSPARTICIPATIONS EP ON E.idEvent = EP.event WHERE EP.participant = ?";
-        try{
+        try {
             PreparedStatement stm = con.prepareStatement(query);
-            stm.setInt(1,idUser);
+            stm.setInt(1, idUser);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 eventsUser.add(new Event(
                         rs.getInt("idEvent"),
                         rs.getString("title"),
@@ -168,7 +172,7 @@ public class EventService implements ICRUD<Event> {
                         rs.getInt("price")
                 ));
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return eventsUser;
@@ -190,6 +194,7 @@ public class EventService implements ICRUD<Event> {
         }
         return false;
     }
+
     public void decrementPlaceNbr(int idEvent) {
         String query = "UPDATE events SET placeNbr = placeNbr - 1 WHERE idEvent = ?";
         try {
@@ -214,7 +219,7 @@ public class EventService implements ICRUD<Event> {
         }
     }
 
-    public double SommeRateofEvent(int idEvent){
+    public double SommeRateofEvent(int idEvent) {
         double rate = 0;
         String query = "SELECT sum(rate) FROM eventsevaluations WHERE event = ?";
         try {
@@ -232,7 +237,7 @@ public class EventService implements ICRUD<Event> {
         return rate;
     }
 
-    public int countNBrOfRate(int idEvent){
+    public int countNBrOfRate(int idEvent) {
         int rate = 0;
         String query = "SELECT count(rate) FROM eventsevaluations WHERE event = ?";
         try {
@@ -250,4 +255,40 @@ public class EventService implements ICRUD<Event> {
         return rate;
     }
 
+    public List<Event> TrieEventsTopRated() {
+        List<Event> eventsTopRated = new ArrayList<>();
+        String query = "SELECT E.*, MAX(EP.rate) AS max_rate " +
+                "FROM EVENTS E " +
+                "JOIN eventsevaluations EP ON E.idEvent = EP.event " +
+                "GROUP BY E.idEvent " +
+                "ORDER BY max_rate DESC LIMIT 10";
+
+        try {
+            PreparedStatement stm = con.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                eventsTopRated.add(new Event(
+                        rs.getInt("idEvent"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDate("startDate").toString(),
+                        rs.getDate("endDate").toString(),
+                        rs.getString("attachment"),
+                        rs.getInt("owner"),
+                        rs.getString("eventType"),
+                        rs.getString("place"),
+                        rs.getInt("placeNbr"),
+                        rs.getInt("price")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log or handle the exception appropriately
+        }
+        return eventsTopRated;
+    }
+
+
+
 }
+
+

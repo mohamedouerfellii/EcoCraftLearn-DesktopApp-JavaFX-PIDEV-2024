@@ -263,9 +263,6 @@ public class HomePageEventController implements Initializable {
         String place = addEventPlace.getText();
         String startDate = addEventStartDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String endDate = addEventEndDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-
-
         int nbrPlace = Integer.parseInt(addEventNbrPlace.getText());
         String type = addEventType.getText();
         Event event = new Event(
