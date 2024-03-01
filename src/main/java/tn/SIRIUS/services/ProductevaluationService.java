@@ -1,5 +1,6 @@
 package tn.SIRIUS.services;
 
+import tn.SIRIUS.entities.Product;
 import tn.SIRIUS.entities.Productsevaluation;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
@@ -90,36 +91,32 @@ public class ProductevaluationService implements ICRUD<Productsevaluation> {
 
     @Override
     public boolean update(Productsevaluation productsevaluation) {
-        String query = "UPDATE productsevaluations SET rate = ? , review = ? WHERE idEvaluation = ?";
-        try{
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setDouble(1, productsevaluation.getRate());
-            statement.setString(2,productsevaluation.getReview());
-            statement.setInt(3,productsevaluation.getIdEvaluation());
-            if(statement.executeUpdate() == 1){
-                statement.close();
-                return true;
-            }
-        }catch (SQLException ex){
-            System.out.println(ex.getMessage());
-        }
+
         return false;
     }
 
     @Override
     public boolean delete(int idEvaluation) {
-        String qry = "DELETE FROM productsevaluations WHERE idEvaluation = ?";
-        try{
-            PreparedStatement stm = con.prepareStatement(qry);
-            stm.setInt(1,idEvaluation);
-            if(stm.executeUpdate() == 1){
-                stm.close();
-                return true;
-            }
-            stm.close();
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+
         return false;
     }
+
+       public int isUserrated(Product product) {
+       int evaluatorValue = 0 ;
+       String query = "SELECT evaluator FROM productsevaluations WHERE product = ?";
+       try{
+           PreparedStatement statement = con.prepareStatement(query);
+           statement.setInt(1, product.getIdProduct());
+           ResultSet rs = statement.executeQuery();
+           while(rs.next()){
+               evaluatorValue = rs.getInt("evaluator");
+           }
+           statement.close();
+       }catch (SQLException ex){
+           System.out.println(ex.getMessage());
+       }
+       return evaluatorValue;
+       }
+
+
 }

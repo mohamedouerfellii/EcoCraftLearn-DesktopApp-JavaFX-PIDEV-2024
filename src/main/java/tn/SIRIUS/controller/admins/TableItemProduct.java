@@ -43,12 +43,8 @@ public class TableItemProduct {
 
     public void setData(Product product) {
 
-        String imageUrl = product.getImage();
-        String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
-        Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
-        RectangleImage.setFill(new ImagePattern(img1));
 
-
+        RectangleImage.setFill(new ImagePattern(new Image("file:///" +product.getImage().replace("\\","/"))));
         NameProduct.setText(product.getName());
       //  DescProduct.setText(product.getDescription());
         DateProduct.setText(product.getAddDate());

@@ -16,7 +16,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -80,8 +79,8 @@ public class ProductPage implements Initializable{
     private Button OrderMapBtn;
 
 
-    @FXML
-    private WebView WebViewMapOrder;
+
+
 
 
     @FXML
@@ -242,8 +241,9 @@ public class ProductPage implements Initializable{
     private Button PasserOrderBtn;
     private float initialPrice;
 
-    private WebView webView;
-    private WebEngine webEngine;
+
+
+
     @FXML
     private TextField InputSearchProduct;
 
@@ -265,6 +265,21 @@ public class ProductPage implements Initializable{
     private List <Productsevaluation> Listreview;
 
     public List<Commandes> ListOrderClient;
+
+    private List<Product> TopRated;
+
+    @FXML
+    private Button TopRatedProduct;
+
+
+    @FXML
+    private Button AllProductBtn;
+
+
+    @FXML
+    private Button WinnerProductBtn;
+
+    private List<Product> Winner;
 
     @FXML
     private void handleAddProductBtn(ActionEvent event) {
@@ -353,8 +368,78 @@ public class ProductPage implements Initializable{
         });
 
 
+        TopRatedProduct.setOnAction(event -> Toprated() );
+        AllProductBtn.setOnAction(event -> ShowProductList());
+
+
+        WinnerProductBtn.setOnAction(event ->  Winnerproduct () );
+
     }
 
+
+    public void Toprated () {
+        ProductService productService = new ProductService();
+        TopRated = productService.TrieTopRatedProduts();
+        GridContainerProduct.getChildren().clear();
+        TopRated = new ArrayList<>(TopRated);
+        int column = 0;
+        int row = 1;
+
+        for (Product product : TopRated) {
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                VBox boxProduct = fxmlLoader.load();
+
+                ItemProduct itemProduct = fxmlLoader.getController();
+                itemProduct.setProductPage(this);
+                itemProduct.setData(product);
+
+                if (column == 3) {
+                    column = 0;
+                    ++row;
+                }
+                GridContainerProduct.add(boxProduct, column++, row);
+                GridContainerProduct.setMargin(boxProduct, new Insets(10));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
+    public void Winnerproduct () {
+        ProductService productService = new ProductService();
+        Winner = productService.WinnerProducts();
+        GridContainerProduct.getChildren().clear();
+        Winner = new ArrayList<>(Winner);
+        int column = 0;
+        int row = 1;
+
+        for (Product product : Winner) {
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                VBox boxProduct = fxmlLoader.load();
+
+                ItemProduct itemProduct = fxmlLoader.getController();
+                itemProduct.setProductPage(this);
+                itemProduct.setData(product);
+
+                if (column == 3) {
+                    column = 0;
+                    ++row;
+                }
+                GridContainerProduct.add(boxProduct, column++, row);
+                GridContainerProduct.setMargin(boxProduct, new Insets(10));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
 
     public void ShowProductList()
     {
@@ -374,7 +459,7 @@ public class ProductPage implements Initializable{
                 VBox boxProduct = fxmlLoader.load();
 
                 ItemProduct itemProduct = fxmlLoader.getController();
-               //itemProduct.setProductPage(this);
+               itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
                 if (column == 3) {
@@ -475,8 +560,8 @@ public class ProductPage implements Initializable{
                         .title("Product Added")
                         .text("Product :" + product.getName() + " has been added successfully.")
                         .showInformation();
-
                          ShowProductList();
+
             } else {
                 Notifications.create()
                         .text("Product :" + product.getName() + "Failed to add the product.")
@@ -507,19 +592,13 @@ public class ProductPage implements Initializable{
     }
    public void showProductDetailsClient(Product product) {
 
-
        AnchorPanedetailProduct.setVisible(true);
        lineMiniDetailsBtn.setVisible(true);
         AnchorPaneDetailsProctClient.setVisible(true);
         PaneGroupProduct.setVisible(false);
-        String imageUrl = product.getImage();
-        String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
-        Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
-
-
 
       //IdProductdetailsClient.setText(String.valueOf(product.getIdProduct()));
-       RectangleDetailProduct.setFill(new ImagePattern(img1));
+       RectangleDetailProduct.setFill(new ImagePattern(new Image("file:///" +product.getImage().replace("\\","/"))));
        NameProductdetailsClient.setText(product.getName());
        DescProductdetailsClient.setText(product.getDescription());
        dateProductDetailsClient.setText(product.getAddDate());
@@ -529,13 +608,24 @@ public class ProductPage implements Initializable{
        PriceProductDetailsClient.setText(price + "  DT");
 
            Passerrating.setOnAction(e -> {
-           System.out.println("eee");
-           int productid = product.getIdProduct();
-           String review = InputReview.getText();
-           double rating =InputRatingStar.getRating();
-           ProductevaluationService productevaluationService = new ProductevaluationService();
-           Productsevaluation productsevaluation = new Productsevaluation(0,rating, review, "", productid, user.getIdUser(),0);
-           productevaluationService.add(productsevaluation);
+               ProductevaluationService productevaluationService = new ProductevaluationService();
+            int id= productevaluationService.isUserrated(product);
+            if (id != user.getIdUser())
+            {
+
+                System.out.println("eee");
+                int productid = product.getIdProduct();
+                String review = InputReview.getText();
+                double rating =InputRatingStar.getRating();
+                Productsevaluation productsevaluation = new Productsevaluation(0,rating, review, "", productid, user.getIdUser(),0);
+                productevaluationService.add(productsevaluation);
+            }
+            else {
+                System.out.println("You Are Already Rated");
+            }
+           InputReview.clear();
+
+
 
        });
 
@@ -559,6 +649,8 @@ public class ProductPage implements Initializable{
            throw new RuntimeException(e);
        }
     }
+
+
 
 
     public void remplireCartProduct(Product product) {

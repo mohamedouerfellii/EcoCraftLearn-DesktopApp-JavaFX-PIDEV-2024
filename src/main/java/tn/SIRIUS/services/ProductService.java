@@ -45,9 +45,8 @@ public class ProductService implements ICRUD<Product> {
              ResultSet rs = stm.executeQuery(query))
                        {
             while (rs.next()) {
-                Product product = new Product(
+                        Product product = new Product(
                         rs.getInt("idProduct"),
-                        //rs.getInt(columnIndex:1),--
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getString("image"),
@@ -150,6 +149,64 @@ public class ProductService implements ICRUD<Product> {
         return productList;
     }
 
+    public List<Product> TrieTopRatedProduts() {
+        List<Product> productList = new ArrayList<>();
+        String query = "SELECT P.*, MAX(PE.rate) AS max_rate " +
+                "FROM PRODUCTS P " +
+                "JOIN productsevaluations PE ON P.idProduct  = PE.product  " +
+                "GROUP BY P.idProduct " +
+                "ORDER BY max_rate DESC LIMIT 10";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("idProduct"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("image"),
+                        rs.getFloat("price"),
+                        0,
+                        rs.getString("addDate"),
+                        rs.getInt("quantite")
+                );
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+
+    public List<Product> WinnerProducts() {
+        List<Product> productList = new ArrayList<>();
+        String query = "SELECT p.* " +
+                "FROM products p " +
+                "JOIN souscarts s ON p.idProduct = s.id_product " +
+                "GROUP BY p.idProduct " +
+                "ORDER BY COUNT(s.id_product) DESC";
+
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("idProduct"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("image"),
+                        rs.getFloat("price"),
+                        0,
+                        rs.getString("addDate"),
+                        rs.getInt("quantite")
+                );
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
 
 
 

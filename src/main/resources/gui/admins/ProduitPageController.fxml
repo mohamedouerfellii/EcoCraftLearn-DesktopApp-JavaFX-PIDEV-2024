@@ -70,9 +70,9 @@
       </AnchorPane>
       <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
          <children>
-            <Button fx:id="GoBackBtn" layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoBackBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
-            <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="341.0" layoutX="762.0" layoutY="91.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="389.0" />
-            <Button fx:id="DeleteBtnProduct" layoutX="877.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Delete">
+            <Button fx:id="GoBackBtn" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoBackBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
+            <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="360.0" layoutX="706.0" layoutY="72.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="481.0" />
+            <Button fx:id="DeleteBtnProduct" layoutX="745.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Delete">
                <graphic>
                   <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
                      <image>
@@ -81,7 +81,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="BtnOpenUpdate" layoutX="877.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Edit">
+            <Button fx:id="BtnOpenUpdate" layoutX="947.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Edit">
                <graphic>
                   <ImageView fx:id="editCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +90,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane layoutX="89.0" layoutY="93.0" prefHeight="526.0" prefWidth="597.0" styleClass="pane-data-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+            <Pane layoutX="89.0" layoutY="69.0" prefHeight="550.0" prefWidth="597.0" styleClass="pane-data-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                <children>
                   <ScrollPane hbarPolicy="NEVER" layoutX="32.0" layoutY="12.0" prefHeight="507.0" prefWidth="532.0" styleClass="one-course-scroll-pane" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                      <content>
@@ -169,12 +169,12 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <children>
-                                    <Label styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Posted Date :">
+                                    <Label prefHeight="35.0" prefWidth="151.0" styleClass="label-details" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Posted Date :">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Text fx:id="dateProductDetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="24-10-2024" wrappingWidth="142.6953125">
+                                    <Text fx:id="dateProductDetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="24-10-2024" wrappingWidth="166.6953125">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
@@ -264,7 +264,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPaneCommande" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneCommande" stylesheets="@../../styles/StyleCommande.css">
+      <AnchorPane fx:id="AnchorPaneCommande" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneCommande" stylesheets="@../../styles/StyleCommande.css" visible="false">
          <children>
             <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="523.0" layoutY="18.0" prefHeight="53.0" prefWidth="123.0" styleClass="title-order" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
             <ScrollPane fx:id="ScrolPaneCommande" hbarPolicy="NEVER" layoutX="90.0" layoutY="94.0" prefHeight="550.0" prefWidth="1050.0" styleClass="ScrolPaneCommande" stylesheets="@../../styles/StyleCommande.css" vbarPolicy="NEVER">

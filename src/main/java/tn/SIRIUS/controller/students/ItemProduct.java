@@ -43,10 +43,8 @@ public class ItemProduct {
     public void setData(Product product) {
 
 
-        String imageUrl = product.getImage();
-        String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
-        Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
-        RectangleImageProduct.setFill(new ImagePattern(img1));
+
+        RectangleImageProduct.setFill(new ImagePattern(new Image("file:///" +product.getImage().replace("\\","/"))));
 
         NameProduct.setText(product.getName());
         DescProduct.setText(product.getDescription());
@@ -55,7 +53,6 @@ public class ItemProduct {
         Priceproduct.setText(price + "  DT");
 
         RectangleImageProduct.setOnMouseClicked( e -> productPage.showProductDetailsClient(product));
-
 
         AddToCartBtn.setOnMouseClicked(e -> {
             productPage.remplireCartProduct(product);

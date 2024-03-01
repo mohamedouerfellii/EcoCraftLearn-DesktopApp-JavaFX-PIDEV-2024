@@ -276,6 +276,13 @@
                               </Text>
                            </children>
                         </AnchorPane>
+                        <VBox layoutX="22.0" layoutY="83.0" prefHeight="185.0" prefWidth="171.0">
+                           <children>
+                              <Button fx:id="AllProductBtn" mnemonicParsing="false" prefHeight="70.0" prefWidth="179.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="All Product" />
+                              <Button fx:id="TopRatedProduct" mnemonicParsing="false" prefHeight="70.0" prefWidth="179.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Top Rated" />
+                              <Button fx:id="WinnerProductBtn" mnemonicParsing="false" prefHeight="70.0" prefWidth="179.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Winner Product" />
+                           </children>
+                        </VBox>
                      </children>
                   </Pane>
                   <AnchorPane fx:id="CartAnchorPane" layoutX="314.0" layoutY="244.0" prefHeight="294.0" prefWidth="447.0" styleClass="CartAnchorPane" stylesheets="@../../styles/StyleCart.css" visible="false">
@@ -321,7 +328,7 @@
                                           <Insets left="80.0" top="30.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Label fx:id="Labelvalue" prefHeight="32.0" prefWidth="16.0" text="0">
+                                    <Label fx:id="Labelvalue" prefHeight="35.0" prefWidth="25.0" styleClass="Quantite" stylesheets="@../../styles/StyleCart.css" text="0">
                                        <HBox.margin>
                                           <Insets left="10.0" top="30.0" />
                                        </HBox.margin>

@@ -175,10 +175,7 @@ public class ProduitPageController implements Initializable {
         AnchorPaneProductBack.setVisible(false);
         AnchorPanedetailsProduct.setVisible(true);
 
-        String imageUrl = product.getImage();
-        String formattedUrl = imageUrl.substring(imageUrl.indexOf("/images"));
-        Image img1 = new Image(getClass().getResourceAsStream(formattedUrl));
-        RectangleDetailProduct.setFill(new ImagePattern(img1));
+        RectangleDetailProduct.setFill(new ImagePattern(new Image("file:///" +product.getImage().replace("\\","/"))));
         IdProductdetails.setText(String.valueOf(product.getIdProduct()));
         NameProductdetails.setText(product.getName());
         DescProductdetails.setText(product.getDescription());

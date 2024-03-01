@@ -1,9 +1,11 @@
 .CartAnchorPane
 {
-    -fx-background-color: #D5FFDC ;
+    -fx-background-color: #fff ;
     -fx-border-radius: 24px;
     -fx-background-radius: 24px;
     -fx-border-color: #000000;
+
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 }
 
 .Title
@@ -11,4 +13,10 @@
     -fx-font-family: "Jost Medium";
     -fx-font-size: 30;
     -fx-fill: #000000;
+}
+.Quantite
+{
+    -fx-text-fill: #000000;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
 }

@@ -39,8 +39,8 @@ public class SousCartItem {
 
 
         if (sousCart.getProduct() != null) {
-        Image img = new Image(sousCart.getProduct().getImage());
-        sousCartProductImg.setFill(new ImagePattern(img));
+
+        sousCartProductImg.setFill(new ImagePattern(new Image("file:///" +sousCart.getProduct().getImage().replace("\\","/"))));
         sousCartProductprice.setText(String.valueOf(sousCart.getProduct().getPrice()));
         sousCartProductName.setText(sousCart.getProduct().getName());
         sousCartProductQuantite.setText(String.valueOf(sousCart.getQuantiteProduct()));
