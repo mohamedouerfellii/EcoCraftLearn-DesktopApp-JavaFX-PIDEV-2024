@@ -1,12 +1,21 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.SIRIUS.entities.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +28,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CourseService;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -72,12 +86,26 @@ public class HomePageController implements Initializable {
     private Pane mainPageContainer;
     @FXML
     private TextField searchInput;
+    @FXML
+    private AnchorPane demandeJoinWBContainer;
+    @FXML
+    private Circle demandeJoinWBImg;
+    @FXML
+    private Label courseWBJTitle;
+    private MediaPlayer whiteboardPlayer;
     private CoursesMainPageController coursesMainPageController;
     private String styleMenuBtnClicked;
     private String styleMenuBtnNormal;
     private List<Course> courses;
     private CourseService courseService;
+    private Course courseWB;
     private String currentPage;
+    private int userTest;
+    private boolean isWaiting;
+    private static DatagramSocket socket;
+    private static InetAddress address;
+    private static final int SERVER_PORT = 12345;
+    private Thread clientThread;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         //Profile Image
@@ -125,6 +153,20 @@ public class HomePageController implements Initializable {
         // Init Page
         currentPage = "home";
         showAllCourses();
+        userTest = 2;
+        // Sending connection packet to the Whiteboard server
+        try {
+            socket = new DatagramSocket();
+            address = InetAddress.getByName("localhost");
+            byte[] uuid = ("studentJoinServer;" + userTest+ ";").getBytes();
+            DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
+            socket.send(initialize);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        isWaiting = true;
+        clientThread = new Thread(new HomePageController.ClientThread());
+        clientThread.start();
     }
     // Menu
     @FXML
@@ -223,5 +265,67 @@ public class HomePageController implements Initializable {
             }
         } else
             coursesMainPageController.getCourses(courses);
+    }
+    private class ClientThread implements Runnable{
+        @Override
+        public void run(){
+            System.out.println("thread start");
+            byte[] incoming = new byte[256];
+            while (true) {
+                DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
+                try {
+                    socket.receive(packet);
+                    String msg = new String(packet.getData(), 0, packet.getLength());
+                    if (msg.contains("courseAlert;")) {
+                        String[] allData = msg.split(";");
+                        int courseId = Integer.parseInt(allData[1]);
+                        courseWB = courseService.getOne(courseId);
+                        System.out.println(msg);
+                        Platform.runLater(() -> {
+                            demandeJoinWBImg.setFill(new ImagePattern(new Image(
+                                    "file:/"+courseWB.getImage().replace("\\","/")
+                            )));
+                            courseWBJTitle.setText(courseWB.getTitle());
+                            demandeJoinWBContainer.setVisible(true);
+                            String musicFile = "C:/Users/ouerfelli mohamed/Desktop/EcoCraftLearning/src/main/resources/Microsoft Teams Call Sound.mp3";
+                            Media sound = new Media(new File(musicFile).toURI().toString());
+                            whiteboardPlayer = new MediaPlayer(sound);
+                            whiteboardPlayer.play();
+                            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(41000), e -> {
+                                whiteboardPlayer.dispose();
+                                demandeJoinWBContainer.setVisible(false);
+                            }));
+                            timeline.setCycleCount(1);
+                            timeline.play();
+                        });
+                    }
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+    }
+    @FXML
+    public void joWBMeeting(MouseEvent event){
+        whiteboardPlayer.dispose();
+        demandeJoinWBContainer.setVisible(false);
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/students/whiteboard.fxml"));
+            Parent root = fxmlLoader.load();
+            WhiteBoardController controller = fxmlLoader.getController();
+            controller.setCourseId(courseWB.getId(),this);
+            System.out.println("iddd"+courseWB.getId());
+            mainPageContainer.getChildren().clear();
+            mainPageContainer.getChildren().add(root);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    @FXML
+    public void declineWBMeeting(MouseEvent event){
+        whiteboardPlayer.dispose();
+        demandeJoinWBContainer.setVisible(false);
     }
 }

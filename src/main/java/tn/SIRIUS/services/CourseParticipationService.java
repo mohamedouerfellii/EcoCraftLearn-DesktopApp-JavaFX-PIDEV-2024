@@ -4,7 +4,9 @@ import tn.SIRIUS.utils.MyDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 public class CourseParticipationService {
     private Connection con;
@@ -43,5 +45,21 @@ public class CourseParticipationService {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public List<Integer> getEnrolledUsers(int idCourse){
+        String qry = "SELECT participant FROM COURSEPARTICIPATIONS WHERE course = ?";
+        List<Integer> participants = new ArrayList<>();
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idCourse);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                participants.add(rs.getInt("participant"));
+            }
+            stm.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return participants;
     }
 }

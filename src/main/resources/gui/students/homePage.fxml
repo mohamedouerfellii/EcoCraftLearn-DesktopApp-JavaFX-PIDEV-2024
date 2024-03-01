@@ -291,5 +291,42 @@
             </HBox>
          </children>
       </VBox>
+      <AnchorPane fx:id="demandeJoinWBContainer" layoutX="458.0" layoutY="47.0" prefHeight="120.0" prefWidth="499.0" styleClass="demandeJoinWBContainer" stylesheets="@../../style/style.css" visible="false">
+         <children>
+            <Circle fx:id="demandeJoinWBImg" fill="DODGERBLUE" layoutX="53.0" layoutY="74.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label fx:id="courseWBJTitle" layoutX="102.0" layoutY="50.0" prefHeight="47.0" prefWidth="189.0" styleClass="most-progressed-course-title" stylesheets="@../../style/style.css" text="JavaScript Course">
+               <font>
+                  <Font name="Jost Regular" size="32.0" />
+               </font>
+            </Label>
+            <Label layoutX="172.0" layoutY="1.0" prefHeight="47.0" prefWidth="150.0" styleClass="second-welcome-msg" stylesheets="@../../style/style.css" text="WhiteBoard Meeting">
+               <font>
+                  <Font name="Jost Regular" size="12.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutX="367.0" layoutY="44.0" prefHeight="63.0" prefWidth="113.0" spacing="10.0">
+               <children>
+                  <Button fx:id="declineWBBtn" mnemonicParsing="false" onMouseClicked="#declineWBMeeting" prefHeight="32.0" prefWidth="32.0" styleClass="declineWBBtn" stylesheets="@../../style/style.css">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/close-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="joinWBBtn" mnemonicParsing="false" onMouseClicked="#joWBMeeting" prefHeight="32.0" prefWidth="32.0" styleClass="joinWBBtn" stylesheets="@../../style/style.css">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/user-shared-2-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -45,7 +45,7 @@ public class WhiteBoardController implements Initializable {
     }
     public void setCourseId(int id,HomePageController controller){
         homePageController = controller;
-        student = new User(2,"Mohamed","Ouerfelli","mohamedouerfelli3@gmail.com","");
+        student = new User(4,"Mohamed","Ouerfelli","mohamedouerfelli3@gmail.com","");
         courseId = id;
         try {
             socket = new DatagramSocket();
@@ -57,7 +57,7 @@ public class WhiteBoardController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        new Thread(new ClientThread()).start();
+        new  Thread(new WhiteBoardController.ClientThread()).start();
     }
     @FXML
     public void disconnect(MouseEvent event){

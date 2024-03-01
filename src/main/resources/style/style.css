@@ -158,3 +158,25 @@
     -fx-font-size: 12;
     -fx-text-fill: #000000;
 }
+.demandeJoinWBContainer{
+    -fx-background-color: #d4edda;
+    -fx-border-color: #19BB1C;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+}
+.joinWBBtn{
+    -fx-background-color: #19BB1C;
+    -fx-background-radius: 50;
+    -fx-cursor: hand;
+}
+.joinWBBtn:hover{
+    -fx-opacity: 0.6;
+}
+.declineWBBtn{
+    -fx-background-color: red;
+    -fx-background-radius: 50;
+    -fx-cursor: hand;
+}
+.declineWBBtn:hover{
+    -fx-opacity: 0.6;
+}

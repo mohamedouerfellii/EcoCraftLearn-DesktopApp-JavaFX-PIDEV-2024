@@ -1,8 +1,11 @@
 package tn.SIRIUS.utils;
 
+import tn.SIRIUS.services.CourseParticipationService;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,7 +24,9 @@ public class WhiteBoardServer {
     private static Map<Integer,ArrayList<Integer>> rooms = new TreeMap<>();
     private static Map<Integer,ArrayList<String>> roomStudentConnected = new TreeMap<>();
     private static Map<Integer,String> roomTutorsConnected = new TreeMap<>();
+    private static Map<Integer,Integer> studentsJoined = new TreeMap<>();
     private static InetAddress address;
+    private static CourseParticipationService courseParticipationService = new CourseParticipationService();
     static {
         try{
             address = InetAddress.getByName("localhost");
@@ -57,6 +62,7 @@ public class WhiteBoardServer {
             String msg = new String(packet.getData(),0, packet.getLength());
             // Create room
             if(msg.contains("initRoom;")){
+                System.out.println("done");
                 String[] allData = msg.split(";");
                 int courseId = Integer.parseInt(allData[1]);
                 int roomKey = courseId + userPort;
@@ -64,6 +70,33 @@ public class WhiteBoardServer {
                 roomStudentConnected.put(roomKey,new ArrayList<>());
                 roomTutorsConnected.put(roomKey,msg.replace("initRoom;",""));
                 tutorsIDs.add(userPort);
+                // sending alert to student
+                List<Integer> particiants = courseParticipationService.getEnrolledUsers(courseId);
+                System.out.println(particiants);
+                System.out.println("dsdf");
+                System.out.println(studentsJoined);
+                for(int idStudent : particiants){
+                    if(studentsJoined.containsKey(idStudent)){
+                        int forward_port = studentsJoined.get(idStudent);
+                        String alert = "courseAlert;" + courseId + ";";
+                        System.out.println("alert : "+alert);
+                        byte[] byteMessage = alert.getBytes();
+                        DatagramPacket forward = new DatagramPacket(byteMessage,byteMessage.length,address,forward_port);
+                        try{
+                            socket.send(forward);
+                        }catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
+            }
+            // Student Joining Server
+            else if(msg.contains("studentJoinServer;")){
+                String[] allData = msg.split(";");
+                int studentId = Integer.parseInt(allData[1]);
+                if(studentsJoined.containsKey(studentId))
+                    studentsJoined.remove(studentId);
+                studentsJoined.put(studentId,userPort);
             }
             // Room end
             else if(msg.contains("roomEnd;")){
