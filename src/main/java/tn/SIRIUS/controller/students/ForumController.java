@@ -3,6 +3,7 @@ package tn.SIRIUS.controller.students;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Insets;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import tn.SIRIUS.controller.tutors.CourseDashboardItemController;
@@ -172,7 +173,8 @@ public class ForumController implements Initializable {
     @FXML
     private Rectangle newCommentAttachment;
 
-
+ @FXML
+ private TextField searchPost;
 
 
     public AnchorPane getShowCommentsConatainer() {
@@ -257,16 +259,19 @@ public class ForumController implements Initializable {
 
 
     public void addNewPost() {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        String newPostText = NewPostText.getText();
-        Post post = new Post(1, newPostText, attachmentPath, user.getIdUser(), currentDateTime);
-        PostService postService = new PostService();
-        if (postService.add(post) == 1) {
-            acuill = postService.getAll();
-            showPosts();
+        if(!NewPostText.getText().isEmpty() || attachmentPath != null) {
 
+
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            String newPostText = NewPostText.getText();
+            Post post = new Post(1, newPostText, attachmentPath, user.getIdUser(), currentDateTime);
+            PostService postService = new PostService();
+            if (postService.add(post) == 1) {
+                acuill = postService.getAll();
+                showPosts();
+
+            }
         }
-
 
         //ShowPopularPeople();
         attachmentPath = null;
@@ -573,6 +578,52 @@ public void  deleteComment(Comment comment) {
 
 
 
+
+
+    @FXML
+    void search(KeyEvent event) {
+        String searchText = searchPost.getText();
+        List<Post> acuillF = new ArrayList<>();
+        if (!searchText.isEmpty()) {
+            acuillF = acuill.stream()
+                    .filter(item -> item.getContent().contains(searchText)).toList();
+
+
+            if (forum.getChildren().size() > 1) {
+                forum.getChildren().remove(3, forum.getChildren().size()); // Remove all children except the first one
+            }
+            // Collections.sort(acuillF, (c1, c2) -> c2.getPostedDate().compareTo(c1.getPostedDate()));
+            try {
+                for (Post post : acuillF) {
+
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
+                    Parent p = fxmlLoader.load();
+                    PostItem postItem = fxmlLoader.getController();
+                    postItem.setForumController(this);
+                    postItem.setData(post);
+
+
+                    if (showAllPosts) {
+//                    postItem.ReactionPressed();
+                        forum.getChildren().add(p);
+                        postItem.getAboutPostBtn().setVisible(false);
+                    } else if (post.getUser().getIdUser() == user.getIdUser()) {
+                        forum.getChildren().add(p);
+                        postItem.getAboutPostBtn().setVisible(true);
+
+                    }
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }else {
+            showPosts();
+        }
+
+    }
 
 
 

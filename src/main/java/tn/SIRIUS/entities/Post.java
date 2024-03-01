@@ -3,12 +3,13 @@ package tn.SIRIUS.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 public class Post {
-   private  int idPost;
-   private  String content;
-   private  String attachment;
-    private  int owner;
+        private  int idPost;
+        private  String content;
+        private  String attachment;
+        private  int owner;
     private LocalDateTime postedDate;
     private User user;
 
@@ -47,6 +48,19 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return idPost == post.idPost && owner == post.owner && Objects.equals(content, post.content) && Objects.equals(attachment, post.attachment) && Objects.equals(postedDate, post.postedDate) && Objects.equals(user, post.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPost, content, attachment, owner, postedDate, user);
     }
 
     public String getAttachment() {
