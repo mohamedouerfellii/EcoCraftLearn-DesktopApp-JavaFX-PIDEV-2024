@@ -87,4 +87,37 @@ public class CommandesService implements ICRUD<Commandes> {
     public boolean delete(int id) {
         return false;
     }
+
+
+    public List<Commandes> getAllByIdUser(int id) {
+        String query = "SELECT * FROM commandes WHERE owner = ?";
+        List<Commandes> CommandesList = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Commandes c = new Commandes();
+                c.setIdCommande(rs.getInt("idCommande"));
+                c.setOwner(rs.getInt("owner"));
+                c.setCart(rs.getInt("cart"));
+                c.setCommandeDate(rs.getString("commandeDate"));
+                c.setEmail(rs.getString("email"));
+                c.setCity(rs.getString("city"));
+                c.setPhone(rs.getInt("phone"));
+                c.setStatus(rs.getString("status"));
+                c.setLatitude(rs.getDouble("latitude"));
+                c.setLongitude(rs.getDouble("longitude"));
+                c.setTotal(rs.getFloat("total"));
+                CommandesList.add(c);
+            }
+            return CommandesList;
+
+
+        } catch (SQLException e) {
+
+        }
+        return null;
+
+    }
 }

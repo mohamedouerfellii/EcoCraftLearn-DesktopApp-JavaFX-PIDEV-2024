@@ -100,6 +100,31 @@ public class SousCartService implements ICRUD<SousCart> {
         return false;
     }
 
+    public void decrementAllQuantities(int idCart) {
+        String qry = "UPDATE products p " +
+                "INNER JOIN (SELECT id_product, SUM(QuantiteProduct) AS total_quantity " +
+                "FROM souscarts " +
+                "WHERE idCart = ? " +
+                "GROUP BY id_product) s " +
+                "ON p.idProduct = s.id_product " +
+                "SET p.quantite = p.quantite - s.total_quantity";
+
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1, idCart);
+            stm.executeUpdate();
+            stm.close();
+            System.out.println("Quantities decremented successfully for all products in cart " + idCart);
+        } catch (SQLException e) {
+            System.out.println("Error while decrementing quantities: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
 
 
 }

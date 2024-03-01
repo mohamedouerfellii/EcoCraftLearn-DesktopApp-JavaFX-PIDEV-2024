@@ -47,6 +47,7 @@ public class ProductService implements ICRUD<Product> {
             while (rs.next()) {
                 Product product = new Product(
                         rs.getInt("idProduct"),
+                        //rs.getInt(columnIndex:1),--
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getString("image"),
@@ -143,14 +144,11 @@ public class ProductService implements ICRUD<Product> {
                 productList.add(product);
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return productList;
     }
-
 
 
 

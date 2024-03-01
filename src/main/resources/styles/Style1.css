@@ -256,8 +256,8 @@
 /*ItemProduct***************************************************************************/
 
 .RectangleImageProduct {
-    -fx-border-color: transparent;
-    -fx-background-radius: 15 15 15 15;
+    -fx-arc-height: 16;
+    -fx-arc-width: 16;
 }
 
 
@@ -277,26 +277,22 @@
 }
 
 .NameProduct {
-    -fx-font-family: "Jost";
-    -fx-font-size: 2em;
-    -fx-text-fill: #1D6611;
-    -fx-alignment: center;
-    -fx-wrap-text: true;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 30;
+    -fx-fill: #000000;
 }
 .Priceproduct
 {
-    -fx-font-family: "Jost";
-    -fx-font-size: 2em;
-    -fx-text-fill: #000000;
-    -fx-alignment: center;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 24;
+    -fx-fill: #000000;
 }
 .DescProduct
 {
-    -fx-font-family: "Jost";
-    -fx-font-size: 15;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
     -fx-text-fill: #000000;
-    -fx-alignment: center;
-    -fx-wrap-text: true;
 }
 /* Style de base pour le bouton */
 .BtnAcheter {

@@ -49,15 +49,12 @@ public class EmailSender {
             htmlContent = htmlContent.replace("[CityPlaceholder]", city);
             htmlContent = htmlContent.replace("[totalPricePlaceholder]", String.valueOf(total));
 
-
             message.setContent(htmlContent, "text/html; charset=utf-8");
             Transport.send(message);
             System.out.println("E-mail de confirmation envoye avec succes à " + recipientEmail);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'envoi de l'e-mail de confirmation : " + e.getMessage());
         }
-
-
 
     }
 

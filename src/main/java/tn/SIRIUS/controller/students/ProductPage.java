@@ -34,6 +34,24 @@ import java.util.ResourceBundle;
 
 public class ProductPage implements Initializable{
 
+
+    @FXML
+    private AnchorPane SoldeOut;
+
+   @FXML
+   private Button BtnMycommande;
+
+
+    @FXML
+    private VBox VboxCommandeClient;
+
+    @FXML
+    private  AnchorPane AnchorPaneMyorders;
+
+
+    @FXML
+    private  AnchorPane quantitevide;
+
     @FXML
     private TextField Langitudde;
 
@@ -69,8 +87,7 @@ public class ProductPage implements Initializable{
     @FXML
     private Pane mapContainer;
 
-    @FXML
-    private AnchorPane AnchorQuantitéInsuffisante;
+
 
     @FXML
     private Button VideCartBtn;
@@ -128,26 +145,7 @@ public class ProductPage implements Initializable{
     @FXML
     private AnchorPane HomeAnchorPane;
 
-    @FXML
-    private Button HomeBtn;
 
-    @FXML
-    private Button HomeBtn1;
-
-    @FXML
-    private Button HomeBtn2;
-
-    @FXML
-    private Button HomeBtn3;
-
-    @FXML
-    private Button HomeBtn4;
-
-    @FXML
-    private Button HomeBtn5;
-
-    @FXML
-    private Button HomeBtn6;
 
     @FXML
     private TextArea InputDescription;
@@ -218,6 +216,7 @@ public class ProductPage implements Initializable{
     private List<Product> recentlyAdded;
     @FXML
     private Button openCart;
+
     @FXML
     private AnchorPane cartAnchorepaneContainer;
 
@@ -261,9 +260,11 @@ public class ProductPage implements Initializable{
     private Button Passerrating;
 
 
-@FXML
-private VBox Containeritemreview;
+    @FXML
+    private VBox Containeritemreview;
     private List <Productsevaluation> Listreview;
+
+    public List<Commandes> ListOrderClient;
 
     @FXML
     private void handleAddProductBtn(ActionEvent event) {
@@ -279,7 +280,7 @@ private VBox Containeritemreview;
     }
 
 
-    User user = new User(1,"DEEELEE3AAAA","mohamed","ssssss@",12345,"Admin","male",1,1,"");
+    User user = new User(1,"Zied","mohamed","ssssss@",12345,"Admin","male",1,1,"");
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -312,7 +313,9 @@ private VBox Containeritemreview;
 
         CartAnchorPane.setVisible(false);
         cartAnchorepaneContainer.setVisible(false);
+
         openCart.setOnAction(event -> showSousCarts());
+
         hideCartBtn.setOnAction(event -> cartAnchorepaneContainer.setVisible(false));
 
 
@@ -335,7 +338,6 @@ private VBox Containeritemreview;
 
 
         VideCartBtn.setOnAction(event -> {
-
             CartsService cartsservice = new CartsService();
             Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
             cartsservice.delete(carts.getIdCarts());
@@ -344,14 +346,11 @@ private VBox Containeritemreview;
         });
 
 
+        BtnMycommande.setOnAction(event -> {
+            AnchorPaneMyorders.setVisible(true);
+            showMyOrders();
 
-
-
-
-
-
-
-
+        });
 
 
     }
@@ -368,6 +367,7 @@ private VBox Containeritemreview;
         int row = 1;
 
         for (Product product : recentlyAdded) {
+
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
@@ -458,16 +458,20 @@ private VBox Containeritemreview;
             String description = InputDescription.getText();
             float price = Float.parseFloat(InputPrice.getText());
             int quantite= Integer.parseInt(InputQuantite.getText());
-
             String image = PictureChooser.getImage().getUrl().toString();
-
             ProductService productService = new ProductService();
+
+            if (name.isEmpty() || description.isEmpty() || image.isEmpty()) {
+                return;
+            }
 
             Product product = new Product(0, name, description, image, price, 1, "",quantite);
             int result = productService.add(product);
 
             if (result == 1) {
-                Notifications.create()
+                clearInputsproduct();
+
+                         Notifications.create()
                         .title("Product Added")
                         .text("Product :" + product.getName() + " has been added successfully.")
                         .showInformation();
@@ -484,6 +488,15 @@ private VBox Containeritemreview;
             System.out.println("An error occurred while adding the product: " + ex.getMessage());
             ex.printStackTrace();
         }
+    }
+
+    public void clearInputsproduct() {
+
+        InputName.clear();
+        InputDescription.clear();
+        InputPrice.clear();
+        InputQuantite.clear();
+
     }
 
     @FXML
@@ -513,11 +526,9 @@ private VBox Containeritemreview;
 
        QuantiteProductDetailclient.setText(String.valueOf(product.getQuantite()));
        float price = product.getPrice();
-       PriceProductDetailsClient.setText(price + "  TND");
+       PriceProductDetailsClient.setText(price + "  DT");
 
-
-
-       Passerrating.setOnAction(e -> {
+           Passerrating.setOnAction(e -> {
            System.out.println("eee");
            int productid = product.getIdProduct();
            String review = InputReview.getText();
@@ -558,6 +569,23 @@ private VBox Containeritemreview;
         TotalPriceLabel.setText(String.valueOf(initialPrice));
     }
 
+    public void checkQuantity(Product product) {
+
+        ProductService productService = new ProductService();
+        int TestQuantity = productService.getProductQuantityById(product.getIdProduct());
+        if (TestQuantity ==0) {
+            CartAnchorPane.setVisible(false);
+            SoldeOut.setVisible(true);
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> SoldeOut.setVisible(false)));
+            timeline.setCycleCount(1);
+            timeline.play();
+
+
+        }
+
+
+    }
+
     @FXML
     void decrementValue(ActionEvent event) {
         if (valueQuantite > 1) {
@@ -569,7 +597,6 @@ private VBox Containeritemreview;
 
     public void updateTotalPriceLabel(boolean increase) {
         float totalPrice = Float.parseFloat(TotalPriceLabel.getText());
-
 
         if (increase) {
             totalPrice += initialPrice;
@@ -623,8 +650,8 @@ private VBox Containeritemreview;
                     }
                 }
             } else {
-                AnchorQuantitéInsuffisante.setVisible(true);
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> AnchorQuantitéInsuffisante.setVisible(false)));
+                quantitevide.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> quantitevide.setVisible(false)));
                 timeline.setCycleCount(1);
                 timeline.play();
             }
@@ -656,6 +683,7 @@ private VBox Containeritemreview;
         CartsService cartsService = new CartsService();
         Carts carts = cartsService.getByIdIfNotConfirmed(user.getIdUser());
         SousCartService sousCartService = new SousCartService();
+
        if(carts != null){ List<SousCart> sousCarts = sousCartService.getSousCartsWithProductInfo(carts.getIdCarts());
         for (SousCart sousCart : sousCarts) {
 
@@ -673,10 +701,13 @@ private VBox Containeritemreview;
                 throw new RuntimeException(e);
             }}
         }else {
+           //System.out.println("carte viddeee");
            CarteVide.setVisible(true);
            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> CarteVide.setVisible(false)));
            timeline.setCycleCount(1);
            timeline.play();
+
+
         }
     }
 
@@ -805,16 +836,6 @@ private VBox Containeritemreview;
         });
     }
 
-
-
-
-
-
-
-
-
-
-
     public boolean PasserCommande() {
 
         try {
@@ -829,6 +850,7 @@ private VBox Containeritemreview;
                 System.out.println("Failed to add order");
                 return false;
             }
+
             int phone = Integer.parseInt(phoneInput);
             CartsService cartsservice = new CartsService();
             Carts carts = cartsservice.getByIdIfNotConfirmed(user.getIdUser());
@@ -840,10 +862,15 @@ private VBox Containeritemreview;
             if (result == 1) {
                 System.out.println("SUCCESS");
 
+                SousCartService sousCartService = new SousCartService();
+                sousCartService.decrementAllQuantities(cartId);
+
+                clearInputOrder();
+
                 EmailSender emailSender = new EmailSender();
                 emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
 
-                CarteVide.setVisible(false);
+                cartAnchorepaneContainer.setVisible(false);
                 return true;
             } else {
                 System.out.println("FAILED");
@@ -856,8 +883,55 @@ private VBox Containeritemreview;
         }
     }
 
+    public void clearInputOrder() {
+
+        InputLongitude.clear();
+        InputLatitude.clear();
+        InputEmailOrder.clear();
+        InputCityOrder.clear();
+        InputPhoneOrder.clear();
+
+    }
 
 
+    @FXML
+    void GobackOrder(ActionEvent event) {
+
+        AnchorPaneMyorders.setVisible(false);
+        PaneGroupProduct.setVisible(true);
+
+    }
+
+
+
+   public void showMyOrders() {
+
+       CommandesService commandesService = new CommandesService();
+       ListOrderClient = commandesService.getAllByIdUser(user.getIdUser());
+       VboxCommandeClient.getChildren().clear();
+       try {
+           for (Commandes commandes : ListOrderClient)
+           {
+               FXMLLoader fxmlLoader = new FXMLLoader();
+               fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemCommandeClient.fxml"));
+
+               HBox HboxItemCommande = fxmlLoader.load();
+
+               ItemCommandeClient itemCommandeClient = fxmlLoader.getController();
+
+
+               itemCommandeClient.setProductPage(this);
+
+               itemCommandeClient.setDataCommande(commandes);
+
+               VboxCommandeClient.getChildren().add(HboxItemCommande);
+           }
+       }
+       catch (IOException e) {
+           throw new RuntimeException(e);
+       }
+
+   }
 
 
 }

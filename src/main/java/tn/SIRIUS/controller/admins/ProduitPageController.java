@@ -135,7 +135,9 @@ public class ProduitPageController implements Initializable {
 
 
     public void refresh()
-    {     ProductService productService = new ProductService();
+    {
+
+        ProductService productService = new ProductService();
           recentlyAdded = productService.getAll();
           VboxTableProduct.getChildren().clear();
 
@@ -346,7 +348,6 @@ public void showQrCode(Product product) {
 
     public void refreshCommande()
     {
-
         CommandesService commandesService = new CommandesService();
         ListCommandes = commandesService.getAll();
         VboxCommandeAdmin.getChildren().clear();
@@ -385,6 +386,12 @@ public  void updateStat(Commandes commandes)
     refreshCommande();
 
 }
+
+
+
+
+
+
 
 
 }

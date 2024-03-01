@@ -19,11 +19,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="Container" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ProduitPageController">
    <children>
-      <AnchorPane fx:id="AnchorPaneProductBack" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
+      <AnchorPane fx:id="AnchorPaneProductBack" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
          <children>
-            <ScrollPane hbarPolicy="NEVER" layoutX="98.0" layoutY="82.0" prefHeight="561.0" prefWidth="1045.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="NEVER" layoutX="98.0" layoutY="82.0" prefHeight="550.0" prefWidth="1050.0" styleClass="ScrolPaneProductBack" stylesheets="@../../styles/StyleDashboardProductAdmin.css" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="565.0" prefWidth="1046.0" spacing="15.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
+                  <VBox fx:id="VboxTableProduct" alignment="CENTER" prefHeight="550.0" prefWidth="1050.0" spacing="15.0" styleClass="VboxTableProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                      <padding>
                         <Insets left="10.0" top="15.0" />
                      </padding>
@@ -267,9 +267,9 @@
       <AnchorPane fx:id="AnchorPaneCommande" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneCommande" stylesheets="@../../styles/StyleCommande.css">
          <children>
             <Label fx:id="labelAddSectionPageTitle111" alignment="CENTER" layoutX="523.0" layoutY="18.0" prefHeight="53.0" prefWidth="123.0" styleClass="title-order" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
-            <ScrollPane fx:id="ScrolPaneCommande" hbarPolicy="NEVER" layoutX="99.0" layoutY="95.0" prefHeight="540.0" prefWidth="1016.0" styleClass="ScrolPaneCommande" stylesheets="@../../styles/StyleCommande.css" vbarPolicy="NEVER">
+            <ScrollPane fx:id="ScrolPaneCommande" hbarPolicy="NEVER" layoutX="90.0" layoutY="94.0" prefHeight="550.0" prefWidth="1050.0" styleClass="ScrolPaneCommande" stylesheets="@../../styles/StyleCommande.css" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="VboxCommandeAdmin" alignment="CENTER" prefHeight="547.0" prefWidth="1014.0" spacing="15.0" styleClass="VboxCommandeAdmin" stylesheets="@../../styles/StyleCommande.css">
+                  <VBox fx:id="VboxCommandeAdmin" alignment="CENTER" prefHeight="550.0" prefWidth="1050.0" spacing="15.0" styleClass="VboxCommandeAdmin" stylesheets="@../../styles/StyleCommande.css">
                      <padding>
                         <Insets top="15.0" />
                      </padding>

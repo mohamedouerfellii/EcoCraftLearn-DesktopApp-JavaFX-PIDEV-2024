@@ -55,8 +55,11 @@ public class ItemProduct {
         Priceproduct.setText(price + "  DT");
 
         RectangleImageProduct.setOnMouseClicked( e -> productPage.showProductDetailsClient(product));
+
+
         AddToCartBtn.setOnMouseClicked(e -> {
             productPage.remplireCartProduct(product);
+            productPage.checkQuantity(product);
         });
     }
 

@@ -4,7 +4,7 @@
 .AnchorPaneProductBack
 {
     -fx-border-color: #fff ;
-    -fx-background-color: transparent;
+    -fx-background-color: #fff;
 }
 .AnchorPanedetailsProduct
 {
@@ -58,6 +58,7 @@
 
 .VboxTableProduct
 {
+    -fx-border-color: #fff ;
     -fx-background-color: #fff;
 
 }

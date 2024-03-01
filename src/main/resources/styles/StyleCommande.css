@@ -10,7 +10,7 @@
 .AnchorPaneCommande
 {
     -fx-border-color: #fff ;
-    -fx-background-color: transparent;
+    -fx-background-color: #fff;
 }
 .title-order
 {
@@ -39,9 +39,17 @@
     -fx-background-color: transparent;
 }
 
+.VboxCommandeAdmin
+{    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+    -fx-spacing: 25px;
+    -fx-padding: 25px;
+}
+
 .HboxItemCommande
 {
     -fx-background-color: Transparent;
+
 
 }
 
@@ -61,4 +69,15 @@
     -fx-background-color: Transparent;
     -fx-spacing: 25px;
     -fx-padding: 30px;
+}
+
+
+
+.AnchorPaneMyorders
+{
+
+    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
 }
