@@ -174,7 +174,7 @@ private void closeChat(ActionEvent event) {
         count = 0;
         profilImgContainer.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
         welcomeMsg.setText("Welcome "+loggedInUser.getFirstName()+"!");
-
+       vboxMessage.setStyle("-fx-background-color: #D5FFDC;");
 
         byte[] uuid = ("init;" + loggedInUser.getFirstName()+";").getBytes();
         DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
@@ -185,13 +185,13 @@ private void closeChat(ActionEvent event) {
         }
 
 sendBtn.setOnAction(event1 -> {
-    String temp =textFieldMessage.getText() + "\n"; // message to send
+    String temp =loggedInUser.getFirstName() + ": " +textFieldMessage.getText() + "\n"; // message to send
     HBox hbox = new HBox();
     hbox.setAlignment(Pos.CENTER_RIGHT);
     hbox.setPadding(new Insets(5, 5, 5, 5));
 
     Label label = new Label(temp);
-    label.setStyle("-fx-background-color: #39932C; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+    label.setStyle("-fx-background-color: #7BE41B; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
     label.setWrapText(true); // Allow text to wrap to multiple lines if needed
     label.setPadding(new Insets(5, 10, 5, 10));
     vboxMessage.setSpacing(7);
@@ -214,13 +214,13 @@ sendBtn.setOnAction(event1 -> {
 });
         textFieldMessage.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String temp =textFieldMessage.getText() + "\n"; // message to send
+                String temp = loggedInUser.getFirstName() + ": " + textFieldMessage.getText() + "\n"; // message to send
                 HBox hbox = new HBox();
                 hbox.setAlignment(Pos.CENTER_RIGHT);
                 hbox.setPadding(new Insets(5, 5, 5, 5));
 
                 Label label = new Label(temp);
-                label.setStyle("-fx-background-color: #39932C; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                label.setStyle("-fx-background-color: #7BE41B; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
                 label.setWrapText(true); // Allow text to wrap to multiple lines if needed
                 label.setPadding(new Insets(5, 10, 5, 10));
                 vboxMessage.setSpacing(7);
@@ -244,6 +244,49 @@ sendBtn.setOnAction(event1 -> {
         });
         new Thread(new ClientThread()).start();
         }
+    private class ClientThread implements Runnable {
+        private final byte[] incoming = new byte[256];
+
+        @Override
+        public void run() {
+            System.out.println("Starting thread");
+
+            while (true) {
+                DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
+
+                try {
+                    socket.receive(packet);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                String message = new String(packet.getData(), 0, packet.getLength());
+
+                // Extract sender's name and message content
+                String[] parts = message.split(":");
+                String senderName = parts[0].trim();
+                String actualMessage = parts[1].trim();
+
+                HBox hbox = new HBox();
+                hbox.setAlignment(Pos.CENTER_LEFT);
+                hbox.setPadding(new Insets(5, 5, 5, 10));
+                Label label = new Label(senderName + ": " + actualMessage);
+                label.setStyle("-fx-background-color: grey ; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                label.setPadding(new Insets(5, 10, 5, 10));
+                label.setWrapText(true);
+                hbox.getChildren().add(label);
+
+                Platform.runLater(() -> {
+                    vboxMessage.setSpacing(7);
+                    vboxMessage.getChildren().add(hbox);
+
+                    count++;
+                    System.out.println(count);
+                    messageCunt.setText(String.valueOf(count));
+                });
+            }
+        }
+    }
 
 
     @FXML
@@ -264,48 +307,7 @@ sendBtn.setOnAction(event1 -> {
     }
 
 
-    private class ClientThread implements Runnable {
-        private final byte[] incoming = new byte[256];
 
-        @Override
-        public void run() {
-            System.out.println("Starting thread");
-
-            while (true) {
-                DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
-
-                try {
-
-                    socket.receive(packet);
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                String message = new String(packet.getData(), 0, packet.getLength());
-                HBox hbox = new HBox();
-                hbox.setAlignment(Pos.CENTER_LEFT);
-                hbox.setPadding(new Insets(5, 5, 5, 10));
-                    Label label = new Label(loggingUser.getFirstName()+": "+message);
-                    label.setStyle("-fx-background-color: grey ; -fx-background-radius: 20px; -fx-text-fill: rgb(239,242,255); -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
-                    label.setPadding(new Insets(5, 10, 5, 10));
-                    label.setWrapText(true);
-                    hbox.getChildren().add(label);
-
-                    Platform.runLater(() -> {
-
-                        vboxMessage.setSpacing(7);
-                        vboxMessage.getChildren().add(hbox);
-
-
-                        count++;
-                        System.out.println(count);
-                        messageCunt.setText(String.valueOf(count));
-                    });
-
-            }
-        }
-    }
         private void applyBlurEffect() {
 
             blurEffect.setWidth(0);

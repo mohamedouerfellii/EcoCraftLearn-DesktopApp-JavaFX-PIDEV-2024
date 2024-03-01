@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.tutors;
 
+import com.google.protobuf.StringValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
 import tn.SIRIUS.services.UserService;
@@ -53,19 +55,23 @@ public class dashboardAdminHomePageContainerController implements Initializable 
     private Label top3NbrRegistred;
     @FXML
     private TextField searchInput;
+
+    @FXML
+    private Label nbrTotStudents1;
 @FXML
         private Button filter;
     List<User> users = new ArrayList<>();
-
+User user;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
         UserService srv=new UserService();
         int nb=srv.getNbrStudent("student");
-        nbrStudents.setText(String.valueOf(nb));
+       nbrStudents.setText(String.valueOf(nb));
         //showUsers
             showAllUsers();
         //handleSearch();
+
     }
 
     @FXML

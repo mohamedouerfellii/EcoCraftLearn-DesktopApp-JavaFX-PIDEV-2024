@@ -223,13 +223,12 @@ public void closeForgetPassword(ActionEvent event) {
         if(newPassword.getText().equals(confirmNewPassword.getText())){
             UserService u = new UserService();
            GURDService g = new GURDService();
-            String password =  BCrypt.hashpw(newPassword.getText(), BCrypt.gensalt());
+            String password = String.valueOf(newPassword.getText().hashCode());
             User user1 = u.getUserByFirstName(userNameLabel.getText());
-            System.out.println(user1 +"before update");
+
             if(user1 != null){
                 User user= new User(user1.getId(),user1.getFirstName(),user1.getLastName(),user1.getNumber(),user1.getEmail(),user1.getGender(),password,user1.getImage());
                 g.update(user);
-                System.out.println(user +" after update");
                 changePassword.setVisible(false);
                 successOperationContainer.setVisible(true);
                 Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> successOperationContainer.setVisible(false)));

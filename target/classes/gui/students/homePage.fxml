@@ -304,7 +304,7 @@
             </AnchorPane>
          </children>
       </Pane>
-      <Pane fx:id="blurPane" layoutX="536.0" layoutY="150.0" prefHeight="426.0" prefWidth="485.0" styleClass="glass-effect" stylesheets="@../../style/button.css" visible="false">
+      <Pane fx:id="blurPane" layoutX="536.0" layoutY="150.0" prefHeight="426.0" prefWidth="485.0" styleClass="glass-effect" stylesheets="@../../style/button.css">
          <children>
             <Button fx:id="closeChat" layoutX="411.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeChat" styleClass="Details-button" stylesheets="@../../style/button.css">
                <graphic>
@@ -330,7 +330,7 @@
                   <Font name="Jost Regular" size="32.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldMessage" layoutY="387.0" prefHeight="39.0" prefWidth="486.0" promptText="Write Message..." />
+            <TextField fx:id="textFieldMessage" layoutY="387.0" prefHeight="39.0" prefWidth="486.0" promptText="Write a Message..." styleClass="search-bar" />
             <Button fx:id="sendBtn" layoutX="372.0" layoutY="385.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="98.0" styleClass="Details-button" text="Send">
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="22.0">

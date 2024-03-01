@@ -21,8 +21,10 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.mindrot.jbcrypt.BCrypt;
 import org.w3c.dom.events.MouseEvent;
 import tn.SIRIUS.controller.SignUpController;
+import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.GURDService;
 import tn.SIRIUS.services.UserService;
@@ -180,9 +182,11 @@ public class OperationAdminController implements Initializable {
     }
     @FXML
     public void confirmDeleteUser(ActionEvent event) throws IOException {
-        String password = passwordConfirmDelete.getText();
+        String password = String.valueOf(passwordConfirmDelete.getText().hashCode());
+        System.out.println(password);
         UserService userService = new UserService();
-        if(userService.isPasswordConfirmed(1,password)){
+        if(userService.isPasswordConfirmed(Session.getUser().getId(), password)){
+            System.out.println("done");
             GURDService courseService = new GURDService();
             if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
                 passwordConfirmDelete.clear();
@@ -222,7 +226,8 @@ String lastName=editlastnameuser.getText();
 String Email=editemailuser.getText();
 int number=Integer.parseInt(editnumberuser.getText());
 String gender=editgenderuser.getText();
-String Password=editpassworduser.getText();
+        String Password = String.valueOf(editpassworduser.getText().hashCode());
+
         GURDService serv=new GURDService();
 
         User user=new User(id, firstName, lastName, number, Email, gender, Password,addCourseImgPath);
@@ -231,7 +236,11 @@ String Password=editpassworduser.getText();
         if (serv.update(user))
         {
             System.out.println("SUCCES");
+            showUserDetails(user);
         }
+
+        editanchorpane.setVisible(false);
+        coursesDetailsContainer.setVisible(true);
     }
     @FXML
     private void chooseImage() {
@@ -257,5 +266,6 @@ String Password=editpassworduser.getText();
         stage.setScene(scene);
         stage.show();
     }
+
 
 }

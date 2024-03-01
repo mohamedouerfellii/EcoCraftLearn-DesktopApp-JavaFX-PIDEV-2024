@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<VBox fx:id="feedbackItemContainer" alignment="TOP_CENTER" prefHeight="171.0" prefWidth="845.0" styleClass="feedback-item-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.userDashboardItemController">
+<VBox fx:id="feedbackItemContainer" alignment="TOP_CENTER" prefHeight="171.0" prefWidth="845.0" style="-fx-background-color: D5FFDC;" styleClass="feedback-item-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.userDashboardItemController">
    <children>
       <HBox prefHeight="75.0" prefWidth="200.0">
          <children>

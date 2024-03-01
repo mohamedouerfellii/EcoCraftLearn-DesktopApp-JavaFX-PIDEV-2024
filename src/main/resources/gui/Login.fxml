@@ -158,9 +158,9 @@
                </Button>
                <Text layoutX="32.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="warning-delete-text" text="Update Your Password" textAlignment="CENTER" wrappingWidth="274.82409286499023" />
                <Button fx:id="confirmccodeBtn11" layoutX="254.0" layoutY="274.0" mnemonicParsing="false" onAction="#UpdatePassword" prefHeight="50.0" prefWidth="188.0" styleClass="confirm-delete-course-btn" stylesheets="@../style/coursesMainPage.css" text="Confirm" />
+               <PasswordField fx:id="newPassword" layoutX="32.0" layoutY="106.0" prefHeight="52.0" prefWidth="428.0" promptText="New Password" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
                <PasswordField fx:id="confirmNewPassword" layoutX="32.0" layoutY="184.0" prefHeight="52.0" prefWidth="428.0" promptText="Confirm New Password" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
                <Label fx:id="timerLabel1" layoutX="214.0" layoutY="134.0" prefHeight="18.0" prefWidth="78.0" underline="true" />
-               <PasswordField fx:id="newPassword" layoutX="32.0" layoutY="106.0" prefHeight="52.0" prefWidth="428.0" promptText="New Password" styleClass="password-confirm-delete-course" stylesheets="@../style/coursesMainPage.css" />
             </children>
          </AnchorPane>
 

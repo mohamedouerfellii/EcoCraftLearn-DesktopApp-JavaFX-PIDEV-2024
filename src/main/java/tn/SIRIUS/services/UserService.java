@@ -25,10 +25,10 @@ public class UserService {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("password");
-                String enteredPassword = user.getPassword();
+                String enteredPassword = String.valueOf(user.getPassword().hashCode());
 
                 // Check if the entered password matches the stored hashed password
-                if (BCrypt.checkpw(enteredPassword, storedHashedPassword)) {
+                if (storedHashedPassword.equals(enteredPassword)) {
                     return rs.getInt("idUser");
                 }
             }
@@ -37,6 +37,7 @@ public class UserService {
         }
         return 0;
     }
+
     public boolean isPasswordConfirmed(int idUser,String password){
         String qry = "SELECT password FROM users WHERE  idUser = ? AND password = ?";
         try{
