@@ -147,8 +147,8 @@ public void recoverComment(Comment comment) {
     newContent.setText(content);
     newContent.setStyle("-fx-control-inner-background: lightgrey; -fx-text-fill: black ; -fx-font: 12px Jost medium");
     newContent.setWrapText(true);
-    contentConatainer.setPrefHeight(textHeight + 50);
-    commentContainer.setMinHeight(contentConatainer.getPrefHeight()+10);//commentContainer.setPrefHeight( + 50);
+    contentConatainer.setPrefHeight(textHeight + 60);
+    commentContainer.setMinHeight(contentConatainer.getPrefHeight()+25);//commentContainer.setPrefHeight( + 50);
     HBox hBox = new HBox();
     hBox.setPrefHeight(35.2);
     hBox.setPrefWidth(590.0);
@@ -194,8 +194,8 @@ if (attachment != null && !attachment.isEmpty()) {
         double lineHeight = 20;
         double textHeight1 = numLines * lineHeight;
         newContent.setMinHeight(textHeight1);
-        double minHeight = 76;
-        double contentHeight = 35.2 + newContent.getMinHeight() + 20;
+        double minHeight = 80;
+        double contentHeight = 35.2 + newContent.getMinHeight() + 30;
         if (attachment != null && !attachment.isEmpty()) {
             Image img = new Image(attachment);
 

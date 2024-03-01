@@ -238,6 +238,7 @@ public class ForumController implements Initializable {
                 deletePostContainer.setVisible(false);
 
             }
+            ShowPopularPeople();
 
         });
         cancelDeletePostBtn.setOnAction(e->{
@@ -271,9 +272,10 @@ public class ForumController implements Initializable {
                 showPosts();
 
             }
+
         }
 
-        //ShowPopularPeople();
+        ShowPopularPeople();
         attachmentPath = null;
         NewPostText.clear();
         newImage.setHeight(0);
