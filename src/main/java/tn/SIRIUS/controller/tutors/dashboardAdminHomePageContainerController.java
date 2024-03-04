@@ -66,8 +66,6 @@ User user;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         UserService srv=new UserService();
-        int nb=srv.getNbrStudent("student");
-       nbrStudents.setText(String.valueOf(nb));
         //showUsers
             showAllUsers();
         //handleSearch();
@@ -118,7 +116,7 @@ User user;
                 fxmlLoader.setLocation(getClass().getResource("/gui/tutors/usersDashboardItem.fxml"));
                 Parent root = fxmlLoader.load();
                 userDashboardItemController itemController = fxmlLoader.getController();
-                itemController.setFeedBackData(u);
+                itemController.setUserData(u);
                 feedbackContentContainer.getChildren().add(root);
             }
             }

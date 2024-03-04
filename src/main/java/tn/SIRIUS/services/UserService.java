@@ -7,7 +7,6 @@ import tn.SIRIUS.utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class UserService {
     private Connection con;
     public UserService(){

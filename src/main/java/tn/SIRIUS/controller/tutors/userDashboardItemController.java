@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
@@ -42,15 +43,23 @@ private AnchorPane doneAction;
 
     @FXML
     private Circle imageCircle;
-
+@FXML
+private Circle banImg;
     @FXML
     private Label roleLabel;
     private User user;
 
-    public void setFeedBackData(User user){
+    public void setUserData(User user){
         imageCircle.setFill(new ImagePattern(
                 new Image(user.getImage().replace("\\","/"))
         ));
+        if(!user.isActive()){
+            banImg.setVisible(true);
+            banImg.setFill(new ImagePattern(new Image("/images/banIcon.png")));
+        }
+
+        else
+            banImg.setVisible(false);
         fullNameLabel.setText(user.getFirstName()+" "+user.getLastName());
         roleLabel.setText(user.getRoles());
         this.user = user;
@@ -66,9 +75,9 @@ private AnchorPane doneAction;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/operationAdmin.fxml"));
         Parent root = fxmlLoader.load();
         OperationAdminController controller = fxmlLoader.getController();
-        controller.showUserDetails(user);
+        controller.showUserDetails(this.user);
         Scene scene = new Scene(root, 1350, 720);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 
@@ -81,21 +90,24 @@ private AnchorPane doneAction;
         boolean currentUserState = usr.isUserActive(id);
 
         if (currentUserState) {
-            // User is currently active, so ban the user
+
             usr.updateUserIsActive(id, false);
             doneAction.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneAction.setVisible(false)));
             timeline.setCycleCount(1);
             timeline.play();
-            System.out.println("User banned");
+            banImg.setVisible(true);
+            banImg.setFill(new ImagePattern(new Image("/images/banIcon.png")));
+
         } else {
-            // User is currently banned, so unban the user
+
             usr.updateUserIsActive(id, true);
             doneAction.setVisible(true);
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> doneAction.setVisible(false)));
             timeline.setCycleCount(1);
             timeline.play();
-            System.out.println("User unbanned");
+
+            banImg.setVisible(false);
         }
 
     }

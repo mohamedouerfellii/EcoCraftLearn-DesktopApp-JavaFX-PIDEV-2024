@@ -165,7 +165,11 @@ public class OperationAdminController implements Initializable {
         passwordLabelDetail.setText(user.getPassword());
         genderLabelDetail.setText(user.getGender());
         nbrPtCollectLabelDetail.setText(String.valueOf(user.getNbrPtsCollects()));
-        isActiveLabelDetail.setText(String.valueOf(user.isActive()));
+        if(user.isActive())
+            isActiveLabelDetail.setText("Active");
+        else
+            isActiveLabelDetail.setText("Banned");
+
         numberLabelDetail.setText(String.valueOf(user.getNumber()));
 
     }
@@ -183,10 +187,10 @@ public class OperationAdminController implements Initializable {
     @FXML
     public void confirmDeleteUser(ActionEvent event) throws IOException {
         String password = String.valueOf(passwordConfirmDelete.getText().hashCode());
-        System.out.println(password);
+
         UserService userService = new UserService();
         if(userService.isPasswordConfirmed(Session.getUser().getId(), password)){
-            System.out.println("done");
+
             GURDService courseService = new GURDService();
             if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
                 passwordConfirmDelete.clear();
