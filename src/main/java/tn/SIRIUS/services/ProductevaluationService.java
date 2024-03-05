@@ -5,8 +5,10 @@ import tn.SIRIUS.entities.Productsevaluation;
 import tn.SIRIUS.iservices.ICRUD;
 import tn.SIRIUS.utils.MyDB;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProductevaluationService implements ICRUD<Productsevaluation> {
@@ -17,14 +19,13 @@ public class ProductevaluationService implements ICRUD<Productsevaluation> {
     }
     @Override
     public int add(Productsevaluation productsevaluation) {
-        String query = "INSERT INTO productsevaluations (rate,review ,product,evaluator,isConfirmed) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO productsevaluations (rate,product,evaluator) VALUES (?,?,?)";
         try{
             PreparedStatement statement = con.prepareStatement(query);
             statement.setDouble(1, productsevaluation.getRate());
-            statement.setString(2,productsevaluation.getReview());
-            statement.setInt(3,productsevaluation.getProduct());
-            statement.setInt(4,productsevaluation.getEvaluator());
-            statement.setInt(5,productsevaluation.getIsConfirmed());
+            statement.setInt(2,productsevaluation.getProduct());
+            statement.setInt(3,productsevaluation.getEvaluator());
+
 
             if(statement.executeUpdate() == 1){
                 statement.close();
@@ -39,55 +40,11 @@ public class ProductevaluationService implements ICRUD<Productsevaluation> {
 
     @Override
     public List<Productsevaluation> getAll() {
-        String query = "SELECT * FROM productsevaluations";
-        List<Productsevaluation> productsevaluationList = new ArrayList<>();
-        try (Statement stm = con.createStatement();
-             ResultSet rs = stm.executeQuery(query)) {
-            while (rs.next()) {
-                Productsevaluation productsevaluation = new Productsevaluation(
-                        rs.getInt("idEvaluation"),
-                        rs.getInt("rate"),
-                        rs.getString("review"),
-                        rs.getString("evaluationDate"),
-                        rs.getInt("product"),
-                        rs.getInt("evaluator"),
-                        rs.getInt("isConfirmed")
-                );
-                productsevaluationList.add(productsevaluation);
-            }
 
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-
-        }
-
-        return productsevaluationList;
+        return null;
     }
 
-    public List<Productsevaluation> getAllByIdProductNotConfirmed(int idProduct) {
-        String query = "SELECT * FROM productsevaluations WHERE product = ? AND isConfirmed = 0";
-        List<Productsevaluation> productsevaluationList = new ArrayList<>();
-        try (PreparedStatement pstmt = con.prepareStatement(query)) {
-            pstmt.setInt(1, idProduct);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    Productsevaluation productsevaluation = new Productsevaluation(
-                            rs.getInt("idEvaluation"),
-                            rs.getInt("rate"),
-                            rs.getString("review"),
-                            rs.getString("evaluationDate"),
-                            rs.getInt("product"),
-                            rs.getInt("evaluator"),
-                            rs.getInt("isConfirmed")
-                    );
-                    productsevaluationList.add(productsevaluation);
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return productsevaluationList;
-    }
+
 
     @Override
     public boolean update(Productsevaluation productsevaluation) {

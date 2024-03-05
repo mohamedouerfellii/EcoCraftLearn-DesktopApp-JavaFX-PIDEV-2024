@@ -9,7 +9,7 @@
 }
 .Panecart
 {
-    -fx-background-color: #D5FFDC;
+    -fx-background-color: #fff;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
@@ -47,11 +47,11 @@
 {
     -fx-min-width: 1200px;
     -fx-max-width: 1200px;
-    -fx-min-height: 635px;
-    -fx-max-height: 635px;
-    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-min-height: 650px;
+    -fx-max-height: 650px;
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
+    -fx-border-color: #D5FFDC; /* Couleur de la bordure par défaut */
     -fx-border-width: 2px; /* Largeur de la bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }
@@ -83,11 +83,11 @@
 .cartItemsContainer
 {    -fx-spacing: 15px;
     -fx-padding: 15px;
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
 }
 
 .ScrolPaneContainerSousCarte{
-    -fx-background-color: transparent;  ;
+    -fx-background-color: #D5FFDC;  ;
 }
 .ScrolPaneContainerSousCarte .scroll-bar:vertical{
     -fx-background-color: transparent;

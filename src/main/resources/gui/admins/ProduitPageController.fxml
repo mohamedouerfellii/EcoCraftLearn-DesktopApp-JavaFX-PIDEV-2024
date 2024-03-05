@@ -68,7 +68,7 @@
             <Button fx:id="btnOrders" layoutX="831.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleOpenOrder" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
+      <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
          <children>
             <Button fx:id="GoBackBtn" layoutX="21.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoBackBtn" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
             <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="360.0" layoutX="706.0" layoutY="72.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="481.0" />
@@ -96,7 +96,7 @@
                      <content>
                         <VBox prefHeight="505.0" prefWidth="535.0" styleClass="one-course-details-container" stylesheets="@../../styles/StyleDashboardProductAdmin.css">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="788.0" spacing="50.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="788.0" spacing="50.0" visible="false">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

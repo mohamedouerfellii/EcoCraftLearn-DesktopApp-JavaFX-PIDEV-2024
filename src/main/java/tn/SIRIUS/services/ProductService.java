@@ -125,11 +125,20 @@ public class ProductService implements ICRUD<Product> {
     public List<Product> searchProducts(String search) {
         List<Product> productList = new ArrayList<>();
         try {
-            String query = "SELECT * FROM PRODUCTS WHERE (name LIKE ? OR description LIKE ?) AND image IS NOT NULL";
+            String query = "SELECT * FROM PRODUCTS WHERE (name LIKE ? OR description LIKE ? OR quantite LIKE ? OR price LIKE ? OR addDate LIKE ?) AND image IS NOT NULL";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             String searchQuery = "%" + search + "%";
+            String searchQuery2 = "%" + search + "%";
+            String searchQuery3 = "%" + search + "%";
+            String searchQuery4 = "%" + search + "%";
+            String searchQuery5 = "%" + search + "%";
+
             preparedStatement.setString(1, searchQuery);
-            preparedStatement.setString(2, searchQuery);
+            preparedStatement.setString(2, searchQuery2);
+            preparedStatement.setString(3, searchQuery3);
+            preparedStatement.setString(4, searchQuery4);
+            preparedStatement.setString(5, searchQuery5);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -137,6 +146,10 @@ public class ProductService implements ICRUD<Product> {
                 product.setIdProduct(resultSet.getInt("idProduct"));
                 product.setName(resultSet.getString("name"));
                 product.setDescription(resultSet.getString("description"));
+                product.setPrice(resultSet.getFloat("price"));
+                product.setQuantite(resultSet.getInt("quantite"));
+                product.setAddDate(resultSet.getString("addDate"));
+
                 product.setImage(resultSet.getString("image"));
 
 
@@ -208,6 +221,41 @@ public class ProductService implements ICRUD<Product> {
         return productList;
     }
 
+    public double SommeRateofEvent(int idProduct){
+        double rate = 0;
+        String query = "SELECT sum(rate) FROM productsevaluations WHERE product = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idProduct);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                rate = resultSet.getDouble("sum(rate)");
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return rate;
+    }
+
+    public int countNBrOfRate(int idProduct) {
+        int rate = 0;
+        String query = "SELECT count(rate) FROM productsevaluations WHERE product = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idProduct);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                rate = resultSet.getInt("count(rate)");
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return rate;
+    }
 
 
 

@@ -121,6 +121,24 @@ public class SousCartService implements ICRUD<SousCart> {
     }
 
 
+   public int countNbrOfsouscarts(int idCart){
+       int nbr = 0;
+       String query = "SELECT count(id_SousCarts) FROM souscarts WHERE idCart = ? ";
+       try {
+           PreparedStatement statement = con.prepareStatement(query);
+           statement.setInt(1, idCart);
+           ResultSet resultSet = statement.executeQuery();
+           if (resultSet.next()) {
+               nbr = resultSet.getInt("count(id_SousCarts)");
+           }
+           resultSet.close();
+           statement.close();
+       } catch (SQLException ex) {
+           System.out.println(ex.getMessage());
+       }
+       return nbr;
+   }
+
 
 
 

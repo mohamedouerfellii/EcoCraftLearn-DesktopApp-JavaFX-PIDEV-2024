@@ -2,6 +2,7 @@ package tn.SIRIUS.controller.students;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +17,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import netscape.javascript.JSObject;
 import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
 import tn.SIRIUS.entities.*;
@@ -262,7 +265,6 @@ public class ProductPage implements Initializable{
 
     @FXML
     private VBox Containeritemreview;
-    private List <Productsevaluation> Listreview;
 
     public List<Commandes> ListOrderClient;
 
@@ -281,6 +283,14 @@ public class ProductPage implements Initializable{
 
     private List<Product> Winner;
 
+
+
+    @FXML
+    private WebView mapWebView;
+    @FXML
+    private Label nbrSourCart;
+
+
     @FXML
     private void handleAddProductBtn(ActionEvent event) {
         AnchorFormProduct.setVisible(true);
@@ -296,6 +306,7 @@ public class ProductPage implements Initializable{
 
 
     User user = new User(1,"Zied","mohamed","ssssss@",12345,"Admin","male",1,1,"");
+    User user1 = new User(2,"aaa","aa","ssssss@",12345,"Admin","male",1,1,"");
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -543,10 +554,17 @@ public class ProductPage implements Initializable{
             String description = InputDescription.getText();
             float price = Float.parseFloat(InputPrice.getText());
             int quantite= Integer.parseInt(InputQuantite.getText());
-            String image = PictureChooser.getImage().getUrl().toString();
+
             ProductService productService = new ProductService();
+            String image = PictureChooser.getImage().getUrl().toString();
+
+            if (image.startsWith("file:/")) {
+                image = image.substring("file:/".length());
+            }
+
 
             if (name.isEmpty() || description.isEmpty() || image.isEmpty()) {
+
                 return;
             }
 
@@ -605,49 +623,26 @@ public class ProductPage implements Initializable{
 
        QuantiteProductDetailclient.setText(String.valueOf(product.getQuantite()));
        float price = product.getPrice();
-       PriceProductDetailsClient.setText(price + "  DT");
+       PriceProductDetailsClient.setText(price + " DT");
 
            Passerrating.setOnAction(e -> {
                ProductevaluationService productevaluationService = new ProductevaluationService();
             int id= productevaluationService.isUserrated(product);
-            if (id != user.getIdUser())
+            if (id != user1.getIdUser())
             {
 
-                System.out.println("eee");
                 int productid = product.getIdProduct();
-                String review = InputReview.getText();
                 double rating =InputRatingStar.getRating();
-                Productsevaluation productsevaluation = new Productsevaluation(0,rating, review, "", productid, user.getIdUser(),0);
+                Productsevaluation productsevaluation = new Productsevaluation(0,rating, "", productid, user1.getIdUser());
                 productevaluationService.add(productsevaluation);
+                ShowProductList();
             }
             else {
                 System.out.println("You Are Already Rated");
             }
-           InputReview.clear();
-
-
 
        });
 
-
-
-       ProductevaluationService productevaluationService = new ProductevaluationService();
-       Listreview = productevaluationService.getAllByIdProductNotConfirmed(product.getIdProduct());
-       Containeritemreview.getChildren().clear();
-       try {
-           for (Productsevaluation productsevaluation : Listreview)
-           {
-               FXMLLoader fxmlLoader = new FXMLLoader();
-               fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemReviewProduct.fxml"));
-               HBox HboxContainerReview = fxmlLoader.load();
-               ItemReviewProduct itemReviewProduct = fxmlLoader.getController();
-               itemReviewProduct.setData(productsevaluation);
-               Containeritemreview.getChildren().add(HboxContainerReview);
-           }
-       }
-       catch (IOException e) {
-           throw new RuntimeException(e);
-       }
     }
 
 
@@ -732,6 +727,8 @@ public class ProductPage implements Initializable{
                     sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
                     sousCartService.add(sousCart);
                     cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
+                   int nbr = sousCartService.countNbrOfsouscarts(cart.getIdCarts());
+                    nbrSourCart.setText(String.valueOf(nbr)); //nbrSourCart
                 } else {
                     cart = new Carts(1, 0, 0, user.getIdUser());
                     if (cartsservice.add(cart) == 1) {
@@ -739,6 +736,7 @@ public class ProductPage implements Initializable{
                         sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
                         sousCartService.add(sousCart);
                         cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
+
                     }
                 }
             } else {
@@ -866,67 +864,39 @@ public class ProductPage implements Initializable{
     }
 
     @FXML
-    void handleOrderMap(ActionEvent event) {
-        mapContainer.setVisible(true);
-        WebView mapWebView = new WebView();
-        String htmlContent = "<html>"
-                + "<head>"
-                + "<style>"
-                + "#map {"
-                + "  width: 100%;"
-                + "  height: 100%;"
-                + "}"
-                + "</style>"
-                + "<link rel=\"stylesheet\" href=\"https://openlayers.org/en/v4.6.5/css/ol.css\" type=\"text/css\">"
-                + "<script src=\"https://openlayers.org/en/v4.6.5/build/ol.js\"></script>"
-                + "</head>"
-                + "<body>"
-                + "<div id=\"map\" class=\"map\"></div>"
-                + "<script>"
-                + "var map = new ol.Map({"
-                + "  target: 'map',"
-                + "  layers: ["
-                + "    new ol.layer.Tile({"
-                + "      source: new ol.source.OSM()"
-                + "    })"
-                + "  ],"
-                + "  view: new ol.View({"
-                + "    center: ol.proj.fromLonLat([9.5375, 33.8869]),"
-                + "    zoom: 7"
-                + "  })"
-                + "});"
-                + "map.on('click', function(event) {"
-                + "  var lonLat = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');"
-                + "  var longitude = lonLat[0];"
-                + "  var latitude = lonLat[1];"
-                + "  alert(longitude + ',' + latitude);"
-                + "});"
-                + "</script>"
-                + "</body>"
-                + "</html>";
-
-
-        mapWebView.getEngine().loadContent(htmlContent);
-
-
-        mapContainer.getChildren().add(mapWebView);
-
-
-        mapWebView.prefWidthProperty().bind(mapContainer.widthProperty());
-        mapWebView.prefHeightProperty().bind(mapContainer.heightProperty());
-
-
-        mapWebView.getEngine().setOnAlert(event1 -> {
-            String[] coordinates = event1.getData().split(",");
-            double longitude = Double.parseDouble(coordinates[0]);
-            double latitude = Double.parseDouble(coordinates[1]);
-            InputLongitude.setText(String.valueOf(longitude));
-            InputLatitude.setText(String.valueOf(latitude));
-
-            System.out.println(longitude + " " + latitude);
-            mapContainer.setVisible(false);
-        });
+    void handleCloseMap(ActionEvent event)
+    {
+        mapContainer.setVisible(false);
     }
+
+
+
+    @FXML
+    void handleOrderMap(ActionEvent event) {
+
+        mapContainer.setVisible(true);
+        WebEngine we = mapWebView.getEngine();
+        String pathMap = "file:///C:/projet Pidev/EcoCraftLearning/src/main/resources/Api/map.html";
+        we.load(pathMap);
+        we.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+            JSObject window = (JSObject) we.executeScript("window");
+            window.setMember("javaConnector", this);
+
+        });
+
+    }
+    public void updateCoordinatesAndName(String latitude, String longitude, String cityName) {
+        Platform.runLater(() -> {
+            InputLatitude.setText(latitude);
+            InputLongitude.setText(longitude);
+            InputCityOrder.setText(cityName);
+        });
+        System.out.println(latitude);
+        System.out.println(longitude);
+        System.out.println(cityName);
+    }
+
+
 
     public boolean PasserCommande() {
 
@@ -959,8 +929,8 @@ public class ProductPage implements Initializable{
 
                 clearInputOrder();
 
-                EmailSender emailSender = new EmailSender();
-                emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
+              //EmailSender emailSender = new EmailSender();
+                // emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
 
                 cartAnchorepaneContainer.setVisible(false);
                 return true;

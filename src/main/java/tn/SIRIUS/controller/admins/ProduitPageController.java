@@ -251,7 +251,15 @@ public class ProduitPageController implements Initializable {
 
             float price = Float.parseFloat(InputPriceUpdate.getText());
             int quantite = Integer.parseInt(InputQuantiteupdate.getText());
+
+
+
             String image = InputImageUpdate.getImage().getUrl().toString();
+            if (image.startsWith("file:/")) {
+
+                image = image.substring("file:/".length());
+            }
+            System.out.println(image);
 
             ProductService productService = new ProductService();
             Product product = new Product(id, name, description, image, price, 1, "",quantite);

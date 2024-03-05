@@ -30,8 +30,6 @@ public class ItemCommandeClient {
         TotalCommande.setText(commandes.getTotal() + " DT");
         StatusCommande.setText(commandes.getStatus());
 
-
-
     }
 
     public void setProductPage(ProductPage productpage) {

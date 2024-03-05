@@ -1,11 +1,11 @@
 .AnchorForm {
     -fx-min-width: 1200px;
     -fx-max-width: 1200px;
-    -fx-min-height: 635px;
-    -fx-max-height: 635px;
-    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-min-height: 650px;
+    -fx-max-height: 650px;
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
+    -fx-border-color: #D5FFDC; /* Couleur de la bordure par défaut */
     -fx-border-width: 2px; /* Largeur de la bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }
@@ -93,14 +93,15 @@
 .GoBackBtn
 {
     -fx-font-family: "Jost Medium";
-    -fx-font-size: 20;
-    -fx-background-color: #1D6611;
+    -fx-font-size: 12;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .GoBackBtn:hover
 {
-    -fx-opacity: 0.6;
+    -fx-opacity: 0.8;
 }
 .AddBtn
 {

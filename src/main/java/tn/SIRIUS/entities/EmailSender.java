@@ -12,7 +12,6 @@ public class EmailSender {
     public static void sendConfirmationEmail(String recipientEmail, String usernames, String city, double total) {
         final String username = "zgachita15@gmail.com";
         final String password = "ybql lfwj powi kkfh";
-
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -42,6 +41,7 @@ public class EmailSender {
             }).start();
 
             String htmlFilePath = "C:\\projet Pidev\\EcoCraftLearning\\src\\main\\resources\\Api\\TemplateEmail.html";
+
             String htmlContent = new String(Files.readAllBytes(Paths.get(htmlFilePath)));
 
 

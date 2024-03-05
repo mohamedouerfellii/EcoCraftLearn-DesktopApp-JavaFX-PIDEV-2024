@@ -21,7 +21,7 @@
 
 
 .ScrolPaneCommande{
-    -fx-background-color: #fff  ;
+    -fx-background-color: #D5FFDC  ;
 }
 .ScrolPaneCommande .scroll-bar:vertical{
     -fx-background-color: transparent;
@@ -40,8 +40,8 @@
 }
 
 .VboxCommandeAdmin
-{    -fx-border-color: #fff ;
-    -fx-background-color: #fff;
+{    -fx-border-color: #D5FFDC ;
+    -fx-background-color: #D5FFDC;
     -fx-spacing: 25px;
     -fx-padding: 25px;
 }
@@ -61,7 +61,7 @@
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-color: #fff;
     -fx-border-width: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
 
 }
 .VboxTableProduct
@@ -71,13 +71,10 @@
     -fx-padding: 30px;
 }
 
-
-
 .AnchorPaneMyorders
 {
-
-    -fx-border-color: #fff ;
-    -fx-background-color: #fff;
+    -fx-border-color: #D5FFDC ;
+    -fx-background-color: #D5FFDC;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
 }

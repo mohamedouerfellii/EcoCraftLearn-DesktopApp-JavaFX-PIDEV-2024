@@ -183,18 +183,18 @@
 /* Pane Product style*/
 
 .PaneGroupProduct {
-    -fx-background-color: #fff; /* Couleur de fond */
-    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
-    -fx-border-width: 2px; /* Largeur de la bordure */
-    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    /*-fx-background-radius: 15 15 15 15; !* Rayon de bordure *!*/
+    /*-fx-border-color: #fff; !* Couleur de la bordure par défaut *!*/
+    /*-fx-border-width: 2px; !* Largeur de la bordure *!*/
+    /*-fx-border-radius: 15 15 15 15; !* Rayon de la bordure *!*/
 }
 .AddProductBtn
 {
 
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 
@@ -210,7 +210,7 @@
 }
 
 .ScrolPaneProduct{
-    -fx-background-color: #ffffff  ;
+    -fx-background-color: #D5FFDC  ;
 }
 .ScrolPaneProduct .scroll-bar:vertical{
     -fx-background-color: transparent;
@@ -218,7 +218,7 @@
     -fx-padding: 2px;
 }
 .ScrolPaneProduct .scroll-bar:vertical .thumb {
-    -fx-background-color: #1D6611;
+    -fx-background-color: #000000;
 }
 .ScrolPaneProduct .scroll-bar:vertical .thumb:hover {
     -fx-background-color: rgba(0, 0, 0, 0.68);
@@ -260,31 +260,37 @@
     -fx-arc-width: 16;
 }
 
-
+.BoxProduct
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+   -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
+}
 
 .ItemProductPane {
     -fx-background-color: #D5FFDC; /* Couleur de fond */
-    -fx-background-radius: 15; /* Rayon de bordure */
-    -fx-border-color: #fff; /* Couleur du contour */
+    -fx-border-color: #000000; /* Couleur de la bordure */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-width: 1px; /* Largeur du contour */
-    -fx-border-radius: 15; /* Rayon du contour */
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 
-    -fx-min-width: 300px;
-       -fx-max-width: 300px;
-       -fx-min-height: 454px;
-       -fx-max-height: 454px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-min-width: 300px; /* Largeur minimale */
+    -fx-min-height: 450px; /* Hauteur minimale */
+    -fx-max-width: 300px; /* Largeur maximale */
+    -fx-max-height: 450px; /* Hauteur maximale */
 }
 
+
 .NameProduct {
-    -fx-font-family: "Jost Medium";
-    -fx-font-size: 30;
-    -fx-fill: #000000;
+    -fx-font-family: "Jost";
+    -fx-font-size: 20;
+    -fx-fill: #252B42;
 }
 .Priceproduct
 {
     -fx-font-family: "Jost Medium";
-    -fx-font-size: 24;
+    -fx-font-size: 16;
     -fx-fill: #000000;
 }
 .DescProduct
@@ -298,19 +304,23 @@
 .BtnAcheter {
     -fx-font-family: "Jost";
     -fx-font-size: 20;
-    -fx-background-color: #1D6611;
-    -fx-text-fill: #D5FFDC;
-    -fx-background-radius: 8px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 25px; /* Corner radius */
+    -fx-border-color:#000000 ;
+    -fx-border-radius: 25px;
+    -fx-border-width: 1px;
 }
 
-.BtnAcheter:hover
-{
+
+
+.BtnAcheter:hover {
     -fx-opacity: 0.6;
 }
 
 
 .GridContainerProduct {
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
     -fx-hgap: 5px; /* Espacement horizontal entre les cellules */
     -fx-vgap: 5px; /* Espacement vertical entre les cellules */
 }

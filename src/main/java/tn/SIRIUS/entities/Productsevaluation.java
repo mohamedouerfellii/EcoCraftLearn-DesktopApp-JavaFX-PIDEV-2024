@@ -4,26 +4,23 @@ public class Productsevaluation {
    private int idEvaluation;
    private double rate;
 
-   private String review;
-
    private  String evaluationDate;
 
    private int product;
    private int evaluator;
-   private int isConfirmed;
+
 
 
     public Productsevaluation() {
     }
 
-    public Productsevaluation(int idEvaluation, double rate, String review, String evaluationDate, int product, int evaluator, int isConfirmed) {
+    public Productsevaluation(int idEvaluation, double rate, String evaluationDate, int product, int evaluator) {
         this.idEvaluation = idEvaluation;
         this.rate = rate;
-        this.review = review;
         this.evaluationDate = evaluationDate;
         this.product = product;
         this.evaluator = evaluator;
-        this.isConfirmed = isConfirmed;
+
     }
 
     public int getIdEvaluation() {
@@ -40,14 +37,6 @@ public class Productsevaluation {
 
     public void setRate(double rate) {
         this.rate = rate;
-    }
-
-    public String getReview() {
-        return review;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
     }
 
     public String getEvaluationDate() {
@@ -74,24 +63,16 @@ public class Productsevaluation {
         this.evaluator = evaluator;
     }
 
-    public int getIsConfirmed() {
-        return isConfirmed;
-    }
 
-    public void setIsConfirmed(int isConfirmed) {
-        this.isConfirmed = isConfirmed;
-    }
 
     @Override
     public String toString() {
         return "Productsevaluation{" +
                 "idEvaluation=" + idEvaluation +
                 ", rate=" + rate +
-                ", review='" + review + '\'' +
                 ", evaluationDate='" + evaluationDate + '\'' +
                 ", product=" + product +
                 ", evaluator=" + evaluator +
-                ", isConfirmed=" + isConfirmed +
                 '}';
     }
 }
