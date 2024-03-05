@@ -6,10 +6,17 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -24,6 +31,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import tn.SIRIUS.entities.Commandes;
 import tn.SIRIUS.entities.Product;
 import tn.SIRIUS.services.CommandesService;
@@ -101,15 +109,46 @@ public class ProduitPageController implements Initializable {
     @FXML
     private Button GoBackBtn;
 
+    @FXML
+    private TextField InputSearchProduct;
+
    @FXML
     private VBox VboxCommandeAdmin;
 
        @FXML
       private AnchorPane AnchorPaneCommande;
 
+    @FXML
+    private AnchorPane AnchorPaneStatestique;
 
     public List<Product> recentlyAdded;
     public List<Commandes> ListCommandes;
+
+    @FXML
+    private Button Statestiqueproduct;
+
+
+    @FXML
+    private BarChart<String, Integer> barChart;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+
+    @FXML
+    private Button TrieBtnProduct;
+
+    public List<Product> TrieProduct;
+
+    @FXML
+    private AnchorPane SuccesAddProduct;
+
+    @FXML
+    private AnchorPane failedAddProduct;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recentlyAdded = new ArrayList<>(recentlyAdded());
@@ -130,14 +169,48 @@ public class ProduitPageController implements Initializable {
         }
         AnchorPaneProductBack.setVisible(true);
         AnchorPanedetailsProduct.setVisible(false);
+
+
+        Statestiqueproduct.setOnAction(e -> {
+            AfficherStat();
+            AnchorPaneStatestique.setVisible(true);
+
+        });
+
+        TrieBtnProduct.setOnAction(e -> {
+            AfficherTriPrice();
+        });
+
+        refresh();
+
     }
 
+public void AfficherTriPrice()
+{
+    ProductService productService = new ProductService();
+    TrieProduct = productService.TrieParPrice();
+    VboxTableProduct.getChildren().clear();
 
+    try {
+        for (Product product : TrieProduct)
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/admins/TableItemProduct.fxml"));
+            HBox BoxTableProduct = fxmlLoader.load();
+            TableItemProduct tableItemProduct = fxmlLoader.getController();
+            tableItemProduct.setProduitPageController(this);
+            tableItemProduct.setData(product);
+            VboxTableProduct.getChildren().add(BoxTableProduct);
+        }
+    }
+    catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+}
 
     public void refresh()
     {
-
-        ProductService productService = new ProductService();
+          ProductService productService = new ProductService();
           recentlyAdded = productService.getAll();
           VboxTableProduct.getChildren().clear();
 
@@ -168,7 +241,56 @@ public class ProduitPageController implements Initializable {
     }
 
 
+    public void NotifSuccess()
+    {
+        SuccesAddProduct.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> SuccesAddProduct.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
 
+    }
+
+    public void NotifFailed()
+    {
+        failedAddProduct.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedAddProduct.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    public void ShowProductListsearch(List<Product> products) {
+        VboxTableProduct.getChildren().clear();
+
+        try {
+            for (Product product : recentlyAdded)
+            {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/admins/TableItemProduct.fxml"));
+                HBox BoxTableProduct = fxmlLoader.load();
+                TableItemProduct tableItemProduct = fxmlLoader.getController();
+                tableItemProduct.setProduitPageController(this);
+                tableItemProduct.setData(product);
+                VboxTableProduct.getChildren().add(BoxTableProduct);
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void showAllProducts(String searchText) {
+        ProductService productService = new ProductService();
+        recentlyAdded = productService.searchProducts(searchText);
+        ShowProductListsearch(recentlyAdded);
+    }
+
+    @FXML
+    private void handlesearch() {
+        String searchText = InputSearchProduct.getText().trim();
+        VboxTableProduct.getChildren().clear();
+        showAllProducts(searchText);
+    }
 
     public void showProductDetails(Product product) {
 
@@ -183,7 +305,6 @@ public class ProduitPageController implements Initializable {
         QuantityProductdetail.setText(String.valueOf(product.getQuantite()));
         float price = product.getPrice();
         PriceProductDetails.setText(price + "DT");
-
     }
 
 
@@ -193,14 +314,12 @@ public class ProduitPageController implements Initializable {
         AnchorPanedetailsProduct.setVisible(false);
     }
 
-
-
     @FXML
     void handleDeleteBtnProduct(ActionEvent event) {
 
         ProductService productService = new ProductService();
         if (productService.delete(Integer.valueOf(IdProductdetails.getText())))
-        {
+        {    NotifSuccess();
             refresh();
             AnchorPaneProductBack.setVisible(true);
             AnchorPanedetailsProduct.setVisible(false);
@@ -251,9 +370,6 @@ public class ProduitPageController implements Initializable {
 
             float price = Float.parseFloat(InputPriceUpdate.getText());
             int quantite = Integer.parseInt(InputQuantiteupdate.getText());
-
-
-
             String image = InputImageUpdate.getImage().getUrl().toString();
             if (image.startsWith("file:/")) {
 
@@ -265,11 +381,17 @@ public class ProduitPageController implements Initializable {
             Product product = new Product(id, name, description, image, price, 1, "",quantite);
 
             if (productService.update(product)) {
-                System.out.println("success");
+                InputNameUpdate.clear();
+                InputDescUpdate.clear();
+                InputPriceUpdate.clear();
+                InputQuantiteupdate.clear();
+                //InputImageUpdate.setImage(null);
+                NotifSuccess();
+
                 refresh();
                 showProductDetails(product);
             } else {
-                System.out.println("FAILED");
+                NotifFailed();
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid price format: " + e.getMessage());
@@ -393,6 +515,47 @@ public  void updateStat(Commandes commandes)
 }
 
 
+
+    @FXML
+    void handleCloseStat(ActionEvent event) {
+        AnchorPaneStatestique.setVisible(false);
+    }
+
+
+
+
+
+    void AfficherStat() {
+
+
+        AnchorPaneStatestique.setVisible(true);
+        ProductService productService = new ProductService();
+        List<Float> prices = productService.getAllPrices();
+
+
+        int countPriceLessThan10 = 0;
+        int countPriceBetween10And50 = 0;
+        int countPriceGreaterThan50 = 0;
+
+        for (Float price : prices) {
+            if (price < 10) {
+                countPriceLessThan10++;
+            } else if (price >= 10 && price <= 50) {
+                countPriceBetween10And50++;
+            } else {
+                countPriceGreaterThan50++;
+            }
+        }
+        barChart.getData().clear();
+        xAxis.setLabel("Price Range");
+        xAxis.setCategories(FXCollections.observableArrayList("Price < 10", "10 <= Price <= 50", "Price > 50"));
+        yAxis.setLabel("Number of Products");
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("Price < 10", countPriceLessThan10));
+        series.getData().add(new XYChart.Data<>("10 <= Price <= 50", countPriceBetween10And50));
+        series.getData().add(new XYChart.Data<>("Price > 50", countPriceGreaterThan50));
+        barChart.getData().add(series);
+    }
 
 
 

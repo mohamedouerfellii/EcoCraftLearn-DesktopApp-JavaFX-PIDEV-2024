@@ -22,7 +22,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import netscape.javascript.JSObject;
-import org.controlsfx.control.Notifications;
 import org.controlsfx.control.Rating;
 import tn.SIRIUS.entities.*;
 import tn.SIRIUS.services.*;
@@ -283,12 +282,24 @@ public class ProductPage implements Initializable{
 
     private List<Product> Winner;
 
-
-
     @FXML
     private WebView mapWebView;
     @FXML
     private Label nbrSourCart;
+
+    @FXML
+    private AnchorPane SuccesAddProduct;
+
+    @FXML
+    private AnchorPane failedAddProduct;
+
+    @FXML
+    private AnchorPane failedAddToCart;
+
+    @FXML
+    private AnchorPane insufficientquantity;
+    @FXML
+    private AnchorPane FailedRate;
 
 
     @FXML
@@ -385,6 +396,8 @@ public class ProductPage implements Initializable{
 
         WinnerProductBtn.setOnAction(event ->  Winnerproduct () );
 
+        lineMiniDetailsBtn.setVisible(true);
+
     }
 
 
@@ -470,7 +483,7 @@ public class ProductPage implements Initializable{
                 VBox boxProduct = fxmlLoader.load();
 
                 ItemProduct itemProduct = fxmlLoader.getController();
-               itemProduct.setProductPage(this);
+                itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
                 if (column == 3) {
@@ -499,7 +512,7 @@ public class ProductPage implements Initializable{
                 VBox boxProduct = fxmlLoader.load();
 
                 ItemProduct itemProduct = fxmlLoader.getController();
-                //itemProduct.setProductPage(this);
+                itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
                 if (column == 3) {
@@ -542,8 +555,56 @@ public class ProductPage implements Initializable{
     }
 
 
+ public void NotifSuccess()
+ {
+     SuccesAddProduct.setVisible(true);
+     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> SuccesAddProduct.setVisible(false)));
+     timeline.setCycleCount(1);
+     timeline.play();
 
+ }
 
+ public void NotifFailed()
+ {
+     failedAddProduct.setVisible(true);
+     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedAddProduct.setVisible(false)));
+     timeline.setCycleCount(1);
+     timeline.play();
+ }
+
+ public void NotifFailedAddToCart()
+ {
+
+     failedAddToCart.setVisible(true);
+     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedAddToCart.setVisible(false)));
+     timeline.setCycleCount(1);
+     timeline.play();
+
+ }
+
+ public void Notifinsuffisante()
+ {
+
+     insufficientquantity.setVisible(true);
+     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> insufficientquantity.setVisible(false)));
+     timeline.setCycleCount(1);
+     timeline.play();
+ }
+ public void NotifSoldeOut()
+ {
+     SoldeOut.setVisible(true);
+     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> SoldeOut.setVisible(false)));
+     timeline.setCycleCount(1);
+     timeline.play();
+ }
+
+    public void NotifFailedRate()
+    {
+        FailedRate.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> FailedRate.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
 
     @FXML
@@ -564,7 +625,7 @@ public class ProductPage implements Initializable{
 
 
             if (name.isEmpty() || description.isEmpty() || image.isEmpty()) {
-
+                NotifFailed();
                 return;
             }
 
@@ -572,21 +633,15 @@ public class ProductPage implements Initializable{
             int result = productService.add(product);
 
             if (result == 1) {
-                clearInputsproduct();
-
-                         Notifications.create()
-                        .title("Product Added")
-                        .text("Product :" + product.getName() + " has been added successfully.")
-                        .showInformation();
+                         clearInputsproduct();
+                         NotifSuccess();
                          ShowProductList();
 
             } else {
-                Notifications.create()
-                        .text("Product :" + product.getName() + "Failed to add the product.")
-                        .showInformation();;
+                NotifFailed();
             }
         } catch (NumberFormatException ex) {
-            System.out.println("Invalid price format. Please enter a valid number.");
+            NotifFailed();
         } catch (Exception ex) {
             System.out.println("An error occurred while adding the product: " + ex.getMessage());
             ex.printStackTrace();
@@ -599,6 +654,7 @@ public class ProductPage implements Initializable{
         InputDescription.clear();
         InputPrice.clear();
         InputQuantite.clear();
+        //PictureChooser.setImage(null);
 
     }
 
@@ -636,9 +692,12 @@ public class ProductPage implements Initializable{
                 Productsevaluation productsevaluation = new Productsevaluation(0,rating, "", productid, user1.getIdUser());
                 productevaluationService.add(productsevaluation);
                 ShowProductList();
+                NotifSuccess();
+                AnchorPanerating.setVisible(true);
             }
             else {
-                System.out.println("You Are Already Rated");
+                AnchorPanerating.setVisible(false);
+                NotifFailedRate();
             }
 
        });
@@ -651,26 +710,18 @@ public class ProductPage implements Initializable{
     public void remplireCartProduct(Product product) {
         CartAnchorPane.setVisible(true);
         NumeroProductLabel.setText(String.valueOf(product.getIdProduct()));
-        NomProductLabel.setText(product.getName());
+      //NomProductLabel.setText(product.getName());
         initialPrice = product.getPrice();
         TotalPriceLabel.setText(String.valueOf(initialPrice));
     }
 
     public void checkQuantity(Product product) {
-
         ProductService productService = new ProductService();
         int TestQuantity = productService.getProductQuantityById(product.getIdProduct());
         if (TestQuantity ==0) {
             CartAnchorPane.setVisible(false);
-            SoldeOut.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> SoldeOut.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
-
-
+            NotifSoldeOut();
         }
-
-
     }
 
     @FXML
@@ -727,6 +778,7 @@ public class ProductPage implements Initializable{
                     sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
                     sousCartService.add(sousCart);
                     cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
+
                    int nbr = sousCartService.countNbrOfsouscarts(cart.getIdCarts());
                     nbrSourCart.setText(String.valueOf(nbr)); //nbrSourCart
                 } else {
@@ -736,14 +788,12 @@ public class ProductPage implements Initializable{
                         sousCart = new SousCart(0, cart.getIdCarts(), id_produit, quantite);
                         sousCartService.add(sousCart);
                         cartsservice.updateTotalPrice(cart.getIdCarts(), cart.getTotalPrice() + totalPrice);
-
+                        int nbr = sousCartService.countNbrOfsouscarts(cart.getIdCarts());
+                        nbrSourCart.setText(String.valueOf(nbr)); //nbrSourCart
                     }
                 }
             } else {
-                quantitevide.setVisible(true);
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> quantitevide.setVisible(false)));
-                timeline.setCycleCount(1);
-                timeline.play();
+                Notifinsuffisante();
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -791,11 +841,7 @@ public class ProductPage implements Initializable{
                 throw new RuntimeException(e);
             }}
         }else {
-           //System.out.println("carte viddeee");
-           CarteVide.setVisible(true);
-           Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> CarteVide.setVisible(false)));
-           timeline.setCycleCount(1);
-           timeline.play();
+           NotifFailedAddToCart();
 
 
         }
@@ -836,7 +882,6 @@ public class ProductPage implements Initializable{
    @FXML
     private void handlecloserating(ActionEvent event) {
        AnchorPanerating.setVisible(false);
-
     }
 
     @FXML
@@ -889,12 +934,20 @@ public class ProductPage implements Initializable{
         Platform.runLater(() -> {
             InputLatitude.setText(latitude);
             InputLongitude.setText(longitude);
-            InputCityOrder.setText(cityName);
+
+            String[] parts = cityName.split("\\s|,", 2);
+            if (parts.length > 1) {
+                String addressAfterSpaceOrComma = parts[1];
+                InputCityOrder.setText(addressAfterSpaceOrComma);
+            } else {
+                InputCityOrder.setText(cityName);
+            }
         });
         System.out.println(latitude);
         System.out.println(longitude);
         System.out.println(cityName);
     }
+
 
 
 
@@ -909,7 +962,7 @@ public class ProductPage implements Initializable{
             float total = Float.parseFloat(totalPriceCartLabel.getText().replace("DT", ""));
 
             if (phoneInput.length() != 8 || !phoneInput.matches("\\d{8}") || !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@gmail\\.com$")) {
-                System.out.println("Failed to add order");
+                NotifFailed();
                 return false;
             }
 
@@ -922,20 +975,20 @@ public class ProductPage implements Initializable{
 
             int result = commandesService.add(commandes);
             if (result == 1) {
-                System.out.println("SUCCESS");
 
+                NotifSuccess();
                 SousCartService sousCartService = new SousCartService();
                 sousCartService.decrementAllQuantities(cartId);
 
                 clearInputOrder();
 
-              //EmailSender emailSender = new EmailSender();
+                 //EmailSender emailSender = new EmailSender();
                 // emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
 
                 cartAnchorepaneContainer.setVisible(false);
                 return true;
             } else {
-                System.out.println("FAILED");
+                NotifFailed();
                 return false;
             }
         } catch (Exception ex) {

@@ -257,6 +257,49 @@ public class ProductService implements ICRUD<Product> {
         return rate;
     }
 
+    public List<Float> getAllPrices() {
+        List<Float> prices = new ArrayList<>();
+        String query = "SELECT price FROM products";
+        try {
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                float price = resultSet.getFloat("price");
+                prices.add(price);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return prices;
+    }
+
+    public List<Product> TrieParPrice() {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM products ORDER BY price DESC";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setIdProduct(resultSet.getInt("idProduct"));
+                product.setName(resultSet.getString("name"));
+                product.setDescription(resultSet.getString("description"));
+                product.setPrice(resultSet.getFloat("price"));
+                product.setQuantite(resultSet.getInt("quantite"));
+                product.setAddDate(resultSet.getString("addDate"));
+                product.setImage(resultSet.getString("image"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+
+    }
+
+
 
 
 }

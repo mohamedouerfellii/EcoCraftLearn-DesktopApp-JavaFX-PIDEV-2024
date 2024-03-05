@@ -268,13 +268,13 @@
 }
 
 .ItemProductPane {
-    -fx-background-color: #D5FFDC; /* Couleur de fond */
-    -fx-border-color: #000000; /* Couleur de la bordure */
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-border-color: #fff; /* Couleur de la bordure */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-width: 1px; /* Largeur du contour */
 
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
     -fx-min-width: 300px; /* Largeur minimale */
     -fx-min-height: 450px; /* Hauteur minimale */
     -fx-max-width: 300px; /* Largeur maximale */

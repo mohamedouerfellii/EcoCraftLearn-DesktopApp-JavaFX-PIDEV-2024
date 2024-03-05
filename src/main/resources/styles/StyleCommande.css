@@ -21,7 +21,7 @@
 
 
 .ScrolPaneCommande{
-    -fx-background-color: #D5FFDC  ;
+    -fx-background-color: #fff  ;
 }
 .ScrolPaneCommande .scroll-bar:vertical{
     -fx-background-color: transparent;
@@ -40,11 +40,37 @@
 }
 
 .VboxCommandeAdmin
-{    -fx-border-color: #D5FFDC ;
+{    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+    -fx-spacing: 25px;
+    -fx-padding: 25px;
+}
+.VboxCommandeClient
+{
+    -fx-border-color: #D5FFDC ;
     -fx-background-color: #D5FFDC;
     -fx-spacing: 25px;
     -fx-padding: 25px;
 }
+.ScrolPaneCommandeClient{
+    -fx-background-color: #D5FFDC  ;
+}
+.ScrolPaneCommandeClient .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneCommandeClient .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneCommandeClient .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneCommandeClient .scroll-bar:vertical .increment-button,
+.ScrolPaneCommandeClient .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
 
 .HboxItemCommande
 {
@@ -61,7 +87,7 @@
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-color: #fff;
     -fx-border-width: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 
 }
 .VboxTableProduct

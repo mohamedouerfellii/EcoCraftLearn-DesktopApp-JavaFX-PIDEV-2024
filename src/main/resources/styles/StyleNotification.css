@@ -1,0 +1,8 @@
+.success-operation-container{
+    -fx-background-color: #d4edda;
+    -fx-border-color: #19BB1C;
+}
+.failed-operation-container{
+    -fx-background-color: #f8d7da;
+    -fx-border-color: #d64242;
+}

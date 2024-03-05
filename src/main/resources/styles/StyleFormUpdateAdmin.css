@@ -1,10 +1,14 @@
 .FormUpdateAdmin
 {
+    -fx-min-width: 1200px;
+    -fx-max-width: 1200px;
+    -fx-min-height: 650px;
+    -fx-max-height: 650px;
     -fx-background-color: #fff; /* Couleur de fond */
-    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
-    -fx-border-color: #000000; /* Couleur de la bordure par défaut */
+    /* -fx-background-radius: 15 15 15 15;  Rayon de bordure */
+    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
     -fx-border-width: 2px; /* Largeur de la bordure */
-    -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
+    /* -fx-border-radius: 15 15 15 15;  Rayon de la bordure */
 
 }
 .InputTextField

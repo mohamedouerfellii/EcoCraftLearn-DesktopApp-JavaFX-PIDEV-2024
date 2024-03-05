@@ -53,7 +53,11 @@ public class TableItemProduct {
 
         DetailsBtnProduct.setOnMouseClicked(e ->  produitPageController.showProductDetails(product));
 
-        qrcodeBtn.setOnAction(e -> produitPageController.showQrCode(product));
+        qrcodeBtn.setOnAction(e -> {
+            produitPageController.showQrCode(product);
+        });
+
+
 
 
     }

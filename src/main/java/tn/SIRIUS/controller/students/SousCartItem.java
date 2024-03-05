@@ -41,9 +41,15 @@ public class SousCartItem {
         if (sousCart.getProduct() != null) {
 
         sousCartProductImg.setFill(new ImagePattern(new Image("file:///" +sousCart.getProduct().getImage().replace("\\","/"))));
-        sousCartProductprice.setText(String.valueOf(sousCart.getProduct().getPrice()));
+
+        float price = sousCart.getProduct().getPrice();
+
+        sousCartProductprice.setText(price + " DT");
         sousCartProductName.setText(sousCart.getProduct().getName());
-        sousCartProductQuantite.setText(String.valueOf(sousCart.getQuantiteProduct()));
+        int quantite = sousCart.getQuantiteProduct();
+
+        sousCartProductQuantite.setText("Quantity : "+quantite);
+
             DeleteBtnSousCart.setOnMouseClicked(e -> {
                 productPage.deleteSouscarte(sousCart);
             });
