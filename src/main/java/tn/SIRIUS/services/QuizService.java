@@ -49,6 +49,27 @@ public class QuizService{
         }
         return quiz;
     }
+    public Quiz getQuizById(int idQuiz){
+        String query = "SELECT * FROM QUIZZES WHERE idQuiz = ?";
+        Quiz quiz = new Quiz();
+        try{
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idQuiz);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                quiz.setIdQuiz(rs.getInt(1));
+                quiz.setSection(rs.getInt(2));
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        if(quiz.getIdQuiz() != 0){
+            QuizQuestionService quizQuestionService = new QuizQuestionService();
+            List<QuizQuestion> quizQuestions = quizQuestionService.getAllByQuiz(quiz.getIdQuiz());
+            quiz.setQuestions(quizQuestions);
+        }
+        return quiz;
+    }
     public boolean delete(int quizId){
         String qry = "DELETE FROM QUIZZES WHERE idQuiz = ?";
         try{

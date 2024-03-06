@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -16,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import tn.SIRIUS.entities.Course;
+import tn.SIRIUS.entities.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,8 +29,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
-import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CourseService;
+import tn.SIRIUS.services.QuizAnswerService;
+import tn.SIRIUS.services.SectionService;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,8 +39,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class HomePageController implements Initializable {
@@ -92,6 +97,19 @@ public class HomePageController implements Initializable {
     private Circle demandeJoinWBImg;
     @FXML
     private Label courseWBJTitle;
+    @FXML private AnchorPane quizContainer;
+    @FXML private Text courseTitleQuiz;
+    @FXML private Text sectionTitleQuiz;
+    @FXML private Text quizQuestionPlay;
+    @FXML private Text quizQuestionRep1;
+    @FXML private Text quizQuestionRep2;
+    @FXML private Text quizQuestionRep3;
+    @FXML private Text quizQuestionRep4;
+    @FXML private AnchorPane quizCountReadyContainer;
+    @FXML private Text countForReady;
+    @FXML private Text timerQuiz;
+    @FXML private VBox questionAnswersContainer;
+    private Timeline countDownTimeline;
     private MediaPlayer whiteboardPlayer;
     private CoursesMainPageController coursesMainPageController;
     private String styleMenuBtnClicked;
@@ -106,8 +124,21 @@ public class HomePageController implements Initializable {
     private static InetAddress address;
     private static final int SERVER_PORT = 12345;
     private Thread clientThread;
+    private Quiz quizToPlay;
+    private int currentQuestionIndex;
+    private int totQuestionNbr;
+    private Map<QuizQuestion,String> answerQuestionsMap = new HashMap<>();
+    private SectionService sectionService;
+    private QuizAnswerService quizAnswerService;
+    private int idSectionComingFrom;
+    private Course currentCourseQuiz;
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        sectionService = new SectionService();
+        quizAnswerService = new QuizAnswerService();
+        quizContainer.setVisible(false);
+        quizCountReadyContainer.setVisible(false);
+        userTest = 4;
         //Profile Image
         Image profileImg = new Image("/images/profilePictures/12.jpg");
         profilImgContainer.setFill(new ImagePattern(profileImg));
@@ -153,7 +184,6 @@ public class HomePageController implements Initializable {
         // Init Page
         currentPage = "home";
         showAllCourses();
-        userTest = 2;
         // Sending connection packet to the Whiteboard server
         try {
             socket = new DatagramSocket();
@@ -239,7 +269,7 @@ public class HomePageController implements Initializable {
     }
     // Home Page Start
     public void showAllCourses(){
-        courses = courseService.getCoursesNotRegistered(2);
+        courses = courseService.getCoursesNotRegistered(userTest);
         for (Course course : courses){
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -327,5 +357,240 @@ public class HomePageController implements Initializable {
     public void declineWBMeeting(MouseEvent event){
         whiteboardPlayer.dispose();
         demandeJoinWBContainer.setVisible(false);
+    }
+    // Quiz play
+    @FXML
+    public void goBackFromQuizPlay(MouseEvent event){
+
+    }
+    @FXML
+    public void cardAnswer1Clicked(MouseEvent event){
+        countDownTimeline.stop(); // Stop the timer
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.setOnFinished(e -> questionAnswersContainer.setDisable(false));
+        fadeOutTransition.play();
+        answerQuestionsMap.put(quizToPlay.getQuestions().get(currentQuestionIndex),"Choice 1");
+        answerQuestionSkip(quizToPlay.getQuestions().get(currentQuestionIndex));
+    }
+    @FXML
+    public void cardAnswer2Clicked(MouseEvent event){
+        countDownTimeline.stop(); // Stop the timer
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.setOnFinished(e -> questionAnswersContainer.setDisable(false));
+        fadeOutTransition.play();
+        answerQuestionsMap.put(quizToPlay.getQuestions().get(currentQuestionIndex),"Choice 2");
+        answerQuestionSkip(quizToPlay.getQuestions().get(currentQuestionIndex));
+    }
+    @FXML
+    public void cardAnswer3Clicked(MouseEvent event){
+        countDownTimeline.stop(); // Stop the timer
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.setOnFinished(e -> questionAnswersContainer.setDisable(false));
+        fadeOutTransition.play();
+        answerQuestionsMap.put(quizToPlay.getQuestions().get(currentQuestionIndex),"Choice 3");
+        answerQuestionSkip(quizToPlay.getQuestions().get(currentQuestionIndex));
+    }
+    @FXML
+    public void cardAnswer4Clicked(MouseEvent event){
+        countDownTimeline.stop(); // Stop the timer
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+        fadeOutTransition.setFromValue(1.0);
+        fadeOutTransition.setToValue(0.0);
+        fadeOutTransition.setOnFinished(e -> questionAnswersContainer.setDisable(false));
+        fadeOutTransition.play();
+        answerQuestionsMap.put(quizToPlay.getQuestions().get(currentQuestionIndex),"Choice 4");
+        answerQuestionSkip(quizToPlay.getQuestions().get(currentQuestionIndex));
+    }
+    public void setUpQuizPlay(Quiz quiz){
+        quizToPlay = quiz;
+        Section section = sectionService.getSectionById(quizToPlay.getSection());
+        idSectionComingFrom = section.getIdSection();
+        currentCourseQuiz = courseService.getOne(section.getCourse());
+        courseTitleQuiz.setText(currentCourseQuiz.getTitle());
+        sectionTitleQuiz.setText(section.getTitle());
+        // Animation start
+        quizCountReadyContainer.setOpacity(0);
+        quizCountReadyContainer.setVisible(true);
+        Timeline timeline = new Timeline();
+        // Add keyframes for countdown from 3 to 0
+        for (int i = 3; i >= 0; i--) {
+            final int countValue = i;
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(3 - i), e -> {
+                countForReady.setText(Integer.toString(countValue));
+                countForReady.setOpacity(1.0);
+            });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        // Fade in Counter begin
+        KeyFrame fadeInCountKeyFrame = new KeyFrame(Duration.seconds(0.25), e -> {
+            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(0.25), quizCountReadyContainer);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+        });
+        timeline.getKeyFrames().add(fadeInCountKeyFrame);
+        // Fade out Counter begin
+        // Show quiz play page
+        KeyFrame showPlayKeyFrame = new KeyFrame(Duration.seconds(3.5), e -> {
+            quizCountReadyContainer.setVisible(false);
+            currentQuestionIndex = 0;
+            totQuestionNbr = quizToPlay.getQuestions().size();
+            quizContainer.setVisible(true);
+            questionPlay(quizToPlay.getQuestions().get(0));
+        });
+        timeline.getKeyFrames().add(showPlayKeyFrame);
+        timeline.play();
+    }
+    public void questionPlay(QuizQuestion quizQuestion){
+        quizQuestionPlay.setText(quizQuestion.getQuestion());
+        quizQuestionRep1.setText(quizQuestion.getChoice_1());
+        quizQuestionRep2.setText(quizQuestion.getChoice_2());
+        quizQuestionRep3.setText(quizQuestion.getChoice_3());
+        quizQuestionRep4.setText(quizQuestion.getChoice_4());
+        FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+        fadeInTransition.setFromValue(0);
+        fadeInTransition.setToValue(1.0);
+        fadeInTransition.play();
+        AtomicInteger remainingTime = new AtomicInteger(60);
+        timerQuiz.setText(Integer.toString(remainingTime.get()));
+        countDownTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> {
+                    int timeLeft = remainingTime.decrementAndGet();
+                    timerQuiz.setText(Integer.toString(timeLeft));
+                    if (timeLeft == 0) {
+                        countDownTimeline.stop(); // Stop the timer
+                        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
+                        fadeOutTransition.setFromValue(1.0);
+                        fadeOutTransition.setToValue(0.0);
+                        fadeOutTransition.play();
+                        answerQuestiontimeOut(quizQuestion); // Time out
+                    }
+                })
+        );
+        countDownTimeline.setCycleCount(60);
+        countDownTimeline.play();
+    }
+    public void answerQuestiontimeOut(QuizQuestion quizQuestion){
+        if(currentQuestionIndex < totQuestionNbr-1){
+            answerQuestionsMap.put(quizQuestion,"Time End");
+            currentQuestionIndex++;
+            questionPlay(quizToPlay.getQuestions().get(currentQuestionIndex));
+        } else {
+            answerQuestionsMap.put(quizQuestion,"Time End");
+            calculateScoreQuiz(answerQuestionsMap);
+        }
+    }
+    public void answerQuestionSkip(QuizQuestion quizQuestion){
+        if(currentQuestionIndex < totQuestionNbr-1){
+            currentQuestionIndex++;
+            questionPlay(quizToPlay.getQuestions().get(currentQuestionIndex));
+        } else {
+            calculateScoreQuiz(answerQuestionsMap);
+        }
+    }
+    public void calculateScoreQuiz(Map<QuizQuestion,String> answers){
+        int nbrCorrect = 0;
+        for(Map.Entry<QuizQuestion,String> entry : answers.entrySet()){
+            if(entry.getKey().getCorrect_choice().equals(entry.getValue()))
+                nbrCorrect++;
+        }
+        float result = ((float) nbrCorrect/totQuestionNbr)*100;
+        System.out.println("result :"+result);
+        if(result < 50){
+            quizCountReadyContainer.setStyle("-fx-background-color: #ff001e");
+            countForReady.setStyle("""
+                    -fx-font-family: "Jost SemiBold";
+                        -fx-font-size: 50;
+                        -fx-fill: #ffffff;""");
+            countForReady.setText("Hard Luck you got "+result+"% !");
+            quizCountReadyContainer.setVisible(true);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), quizCountReadyContainer);
+            fadeInTransition.setFromValue(0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+                quizCountReadyContainer.setVisible(true);
+            }));
+            timeline.setCycleCount(1);
+            timeline.setOnFinished(e ->{
+                try{
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesMainPage.fxml"));
+                    Parent root = fxmlLoader.load();
+                    coursesMainPageController = fxmlLoader.getController();
+                    coursesMainPageController.getCourses(this.courses);
+                    coursesMainPageController.setHomePageController(this);
+                    mainPageContainer.getChildren().clear();
+                    coursesMainPageController.goBackFromQuiz(courses,courseService.getCourseRegistered(userTest),currentCourseQuiz);
+                    mainPageContainer.getChildren().add(root);
+                    currentPage = "courses";
+                }catch (IOException ee){
+                    System.out.println(ee.getMessage());
+                }
+                quizContainer.setVisible(false);
+                quizCountReadyContainer.setVisible(false);
+                quizCountReadyContainer.setStyle("-fx-background-color: #000000");
+            });
+            timeline.play();
+            answers.clear();
+            countForReady.setStyle("""
+                    -fx-font-family: "Jost SemiBold";
+                        -fx-font-size: 100;
+                        -fx-fill: #ffffff;""");
+        }else {
+            User student = new User(userTest,"","","","");
+            //quizAnswerService.addAnswer(
+            //                    new QuizAnswer(0,student,quizToPlay,result,"")
+            //            )
+            boolean test = true;
+            if(test){
+                quizCountReadyContainer.setStyle("-fx-background-color: #19BB1C");
+                countForReady.setStyle("""
+                        -fx-font-family: "Jost SemiBold";
+                            -fx-font-size: 50;
+                            -fx-fill: #ffffff;""");
+                countForReady.setText("Congratulations you got "+result+"% !");
+                quizCountReadyContainer.setVisible(true);
+                FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), quizCountReadyContainer);
+                fadeInTransition.setFromValue(0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.play();
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+                    quizCountReadyContainer.setVisible(true);
+                }));
+                timeline.setCycleCount(1);
+                timeline.setOnFinished(e ->{
+                    try{
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("/gui/students/coursesMainPage.fxml"));
+                        Parent root = fxmlLoader.load();
+                        coursesMainPageController = fxmlLoader.getController();
+                        coursesMainPageController.getCourses(this.courses);
+                        coursesMainPageController.setHomePageController(this);
+                        mainPageContainer.getChildren().clear();
+                        coursesMainPageController.goBackFromQuiz(courses,courseService.getCourseRegistered(userTest),currentCourseQuiz);
+                        mainPageContainer.getChildren().add(root);
+                        currentPage = "courses";
+                    }catch (IOException ee){
+                        System.out.println(ee.getMessage());
+                    }
+                    quizContainer.setVisible(false);
+                    quizCountReadyContainer.setVisible(false);
+                    quizCountReadyContainer.setStyle("-fx-background-color: #000000");
+                });
+                timeline.play();
+                answers.clear();
+                countForReady.setStyle("""
+                        -fx-font-family: "Jost SemiBold";
+                            -fx-font-size: 100;
+                            -fx-fill: #ffffff;""");
+            }
+        }
     }
 }

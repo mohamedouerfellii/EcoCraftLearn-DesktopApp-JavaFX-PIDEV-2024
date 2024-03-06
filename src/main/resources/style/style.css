@@ -180,3 +180,47 @@
 .declineWBBtn:hover{
     -fx-opacity: 0.6;
 }
+/* quiz style */
+.quizContainer{
+    -fx-background-color: #D5FFDC;
+}
+.courseQuizTitle{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 36;
+    -fx-fill: #000000;
+}
+.sectionTitleQuiz{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 28;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.timerQuiz{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 32;
+    -fx-fill: #000000;
+}
+.quizCardQuestion{
+    -fx-background-color: #7DC145;
+    -fx-border-radius: 56px;
+    -fx-background-radius: 56px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.quizCardQuestion:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 4, 0);
+}
+.courseQuizQuestion{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 32;
+    -fx-opacity: 0.6;
+    -fx-fill: #000000;
+}
+.quizCountReadyContainer{
+    -fx-background-color: rgb(0, 0, 0);
+}
+.countForReady{
+    -fx-font-family: "Jost SemiBold";
+    -fx-font-size: 100;
+    -fx-fill: #ffffff;
+}

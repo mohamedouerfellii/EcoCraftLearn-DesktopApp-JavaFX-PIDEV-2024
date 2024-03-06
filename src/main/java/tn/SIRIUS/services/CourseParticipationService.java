@@ -62,4 +62,48 @@ public class CourseParticipationService {
         }
         return participants;
     }
+    public Set<Integer> getTotNbrStudentByTutor(int idTutor){
+        CourseService courseService = new CourseService();
+        List<Integer> coursesIds = courseService.getListIdCoursesByTutor(idTutor);
+        Set<Integer> usersEnrolledId = new HashSet<>();
+        for(int idC : coursesIds){
+            List<Integer> listIdByCourse = getEnrolledUsers(idC);
+            usersEnrolledId.addAll(listIdByCourse);
+        }
+        return usersEnrolledId;
+    }
+    public int getLastMonthEnrolled(int idTutor){
+        CourseService courseService = new CourseService();
+        List<Integer> coursesIds = courseService.getListIdCoursesByTutor(idTutor);
+        Set<Integer> usersEnrolled = new HashSet<>();
+        for(int idC : coursesIds) {
+            String qry = "SELECT participant FROM COURSEPARTICIPATIONS WHERE course = ? AND participationDate >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)";
+            try {
+                PreparedStatement stm = con.prepareStatement(qry);
+                stm.setInt(1,idC);
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()){
+                    usersEnrolled.add(rs.getInt("participant"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return usersEnrolled.size();
+    }
+    public List<Integer> countGenderStudentByTutor(int idTutor){
+        UserService userService = new UserService();
+        List<Integer> genderNumberList = new ArrayList<>();
+        int maleCount = 0;
+        int femaleCount = 0;
+        Set<Integer> enrolledIds = getTotNbrStudentByTutor(idTutor);
+        for(int id : enrolledIds){
+            String gender = userService.getUserGender(id);
+            if(gender.equals("Male")) maleCount++;
+            else femaleCount++;
+        }
+        genderNumberList.add(maleCount);
+        genderNumberList.add(femaleCount);
+        return genderNumberList;
+    }
 }

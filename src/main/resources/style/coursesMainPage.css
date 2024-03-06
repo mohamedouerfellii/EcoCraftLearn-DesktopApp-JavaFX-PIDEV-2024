@@ -439,3 +439,14 @@
 .edit-section-btn:hover{
     -fx-opacity: 0.8;
 }
+.alert-course-type{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: red;
+}
+.error-input-course{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-fill: red;
+}

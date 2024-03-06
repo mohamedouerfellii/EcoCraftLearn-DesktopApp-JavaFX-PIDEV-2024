@@ -177,7 +177,7 @@ public class CourseService implements ICRUD<Course> {
                         rs.getInt("nbrPersonRated")
                 ));
             }
-            if (!courseList.isEmpty() || !courseRegistered.isEmpty())
+            if (!courseList.isEmpty() && !courseRegistered.isEmpty())
                 courseList.removeAll(courseRegistered);
         }catch (SQLException ex){
             System.out.println(ex.getMessage());
@@ -208,5 +208,43 @@ public class CourseService implements ICRUD<Course> {
             System.out.println(e.getMessage());
         }
         return courseRegistered;
+    }
+    public List<Integer> getListIdCoursesByTutor(int idTutor){
+        String qry = "SELECT idCourse FROM COURSES WHERE tutor = ?";
+        List<Integer> idLists = new ArrayList<>();
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idTutor);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                idLists.add(rs.getInt("idCourse"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idLists;
+    }
+    public List<Course> top3CoursesByTutor(int idTutor){
+        String query = "SELECT * FROM COURSES ORDER BY nbrRegistred DESC LIMIT 3";
+        List<Course> courseList = new ArrayList<>();
+        try(Statement stm = con.createStatement()){
+            ResultSet rs = stm.executeQuery(query);
+            while (rs.next()){
+                UserService userService = new UserService();
+                User tutor = userService.getCourseTutor(rs.getInt("tutor"));
+                courseList.add(new Course(
+                        rs.getInt("idCourse"),rs.getString("image"),
+                        rs.getString("title"),rs.getString("description"),
+                        tutor,rs.getString("duration"),
+                        rs.getFloat("price"),rs.getInt("nbrSection"),
+                        rs.getDate("postedDate").toString(),rs.getInt("nbrRegistred"),
+                        rs.getFloat("rate"),
+                        rs.getInt("nbrPersonRated")
+                ));
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return courseList;
     }
 }

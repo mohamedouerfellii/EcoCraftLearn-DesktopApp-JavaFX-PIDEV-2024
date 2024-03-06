@@ -721,8 +721,7 @@ public class CoursesMainPageController implements Initializable {
             deleteFeedbackBtn.setVisible(true);
             deleteFeedbackBtn.setOnMouseClicked(e -> {
                     if(fbService.deleteFeedback(feedback)){
-                        registeredCoursesBtnClicked(null);
-                        ratingCourseContainer.setVisible(false);
+                        closeRating(null);
                     }
             });
         }
@@ -808,5 +807,14 @@ public class CoursesMainPageController implements Initializable {
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
+    }
+    // Quiz play
+    public void setUpQuizPlay(Quiz quiz){
+        homePageController.setUpQuizPlay(quiz);
+    }
+    public void goBackFromQuiz(List<Course> notRegistered,List<Course> registeredCourse,Course currentCourse){
+        setUpLearningPage(currentCourse);
+        this.courses = notRegistered;
+        this.registeredCourses = registeredCourse;
     }
 }

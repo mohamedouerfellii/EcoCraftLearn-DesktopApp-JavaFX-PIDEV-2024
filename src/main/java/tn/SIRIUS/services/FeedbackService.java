@@ -167,4 +167,29 @@ public class FeedbackService {
         }
         return false;
     }
+    public List<Feedback> getFeedbackByTutor(int idTutor){
+        CourseService courseService = new CourseService();
+        UserService userService = new UserService();
+        List<Integer> coursesIds = courseService.getListIdCoursesByTutor(idTutor);
+        List<Feedback> feedbacks = new ArrayList<>();
+        String qry = "SELECT * FROM COURSEFEEDBACKS WHERE course = ?";
+        for(int id : coursesIds){
+            try {
+                PreparedStatement stm = con.prepareStatement(qry);
+                stm.setInt(1,id);
+                ResultSet rs = stm.executeQuery();
+                while (rs.next()){
+                    User owner = userService.getCourseTutor(rs.getInt("owner"));
+                    feedbacks.add(
+                            new Feedback(rs.getInt("idFeedback"),owner,
+                                    rs.getString("postedDate"),rs.getString("content"),
+                                    rs.getInt("rate"),rs.getInt("course"))
+                    );
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return feedbacks;
+    }
 }

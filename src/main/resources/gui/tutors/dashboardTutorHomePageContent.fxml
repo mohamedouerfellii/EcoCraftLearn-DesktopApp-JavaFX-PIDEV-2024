@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 
-<Pane fx:id="mainDashContentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.dashboardTutorHomePageContentController">
+<Pane fx:id="mainDashContentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.dashboardTutorHomePageContentController">
    <children>
       <HBox alignment="CENTER" layoutX="19.0" layoutY="10.0" prefHeight="140.0" prefWidth="1166.0" spacing="40.0" styleClass="global-info-container" stylesheets="@../../style/dashboardAdminStyle.css">
          <children>
@@ -33,20 +33,7 @@
                      <children>
                         <Label prefHeight="30.0" prefWidth="124.0" styleClass="title-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="Total Students" />
                         <Label fx:id="nbrTotStudents" styleClass="nbr-tot-students" stylesheets="@../../style/dashboardAdminStyle.css" text="258" />
-                        <HBox alignment="CENTER" prefHeight="19.0" prefWidth="195.0" spacing="5.0">
-                           <children>
-                              <ImageView fx:id="arrowTotStd" fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/dark/arrow-up-line.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="prcTotEtd" styleClass="prc-tot-etd" stylesheets="@../../style/dashboardAdminStyle.css" text="16%" />
-                              <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="this month" />
-                           </children>
-                        </HBox>
+                        <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="In All Courses" />
                      </children>
                   </VBox>
                </children>
@@ -67,19 +54,10 @@
                   <VBox alignment="CENTER" prefHeight="148.0" prefWidth="230.0">
                      <children>
                         <Label prefHeight="30.0" prefWidth="124.0" styleClass="title-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="New Students" />
-                        <Label fx:id="nbrTotStudents1" styleClass="nbr-new-students" stylesheets="@../../style/dashboardAdminStyle.css" text="258" />
+                        <Label fx:id="nbrNewStudent" styleClass="nbr-new-students" stylesheets="@../../style/dashboardAdminStyle.css" text="258" />
                         <HBox alignment="CENTER" prefHeight="19.0" prefWidth="195.0" spacing="5.0">
                            <children>
-                              <ImageView fx:id="arrowNewStd" fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/dark/arrow-up-line.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="prcNewEtd" styleClass="prc-new-etd" stylesheets="@../../style/dashboardAdminStyle.css" text="16%" />
-                              <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="this month" />
+                              <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="Enrolled this month" />
                            </children>
                         </HBox>
                      </children>
@@ -105,16 +83,7 @@
                         <Label fx:id="nbrCoursesTutor" styleClass="nbr-tot-students" stylesheets="@../../style/dashboardAdminStyle.css" text="258" />
                         <HBox alignment="CENTER" prefHeight="19.0" prefWidth="195.0" spacing="5.0">
                            <children>
-                              <ImageView fx:id="arrowNbrCourses" fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../icons/dark/arrow-up-line.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label fx:id="prcCoursesAdd" styleClass="prc-tot-etd" stylesheets="@../../style/dashboardAdminStyle.css" text="16%" />
-                              <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="this month" />
+                              <Label styleClass="month-global-info" stylesheets="@../../style/dashboardAdminStyle.css" text="Added to your account" />
                            </children>
                         </HBox>
                      </children>
@@ -185,7 +154,7 @@
                   <Insets left="20.0" top="5.0" />
                </VBox.margin>
             </Line>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
+            <AnchorPane fx:id="courseT1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
                <VBox.margin>
                   <Insets left="20.0" top="5.0" />
                </VBox.margin>
@@ -200,7 +169,7 @@
                   <Label layoutX="479.0" layoutY="17.0" styleClass="course-title" stylesheets="@../../style/dashboardAdminStyle.css" text="1" />
                </children>
             </AnchorPane>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
+            <AnchorPane fx:id="courseT2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
                <children>
                   <Circle fx:id="top2CourseImgContainer" fill="DODGERBLUE" layoutX="33.0" layoutY="30.0" radius="28.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                   <VBox alignment="CENTER_LEFT" layoutX="78.0" layoutY="4.0" prefHeight="45.0" prefWidth="186.0">
@@ -215,7 +184,7 @@
                   <Insets left="20.0" top="5.0" />
                </VBox.margin>
             </AnchorPane>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
+            <AnchorPane fx:id="courseT3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="500.0">
                <children>
                   <Circle fx:id="top3CourseImgContainer" fill="DODGERBLUE" layoutX="33.0" layoutY="30.0" radius="28.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                   <VBox alignment="CENTER_LEFT" layoutX="78.0" layoutY="4.0" prefHeight="45.0" prefWidth="186.0">

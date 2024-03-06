@@ -15,6 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="home-page-container" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.HomePageController">
    <children>
@@ -324,6 +325,76 @@
                         </ImageView>
                      </graphic>
                   </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="quizContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="quizContainer" stylesheets="@../../style/style.css">
+         <children>
+            <Button layoutX="41.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#goBackFromQuizPlay" prefHeight="32.0" prefWidth="32.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/arrow-left-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Text fx:id="timerQuiz" layoutX="1267.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timerQuiz" text="60" />
+            <HBox alignment="CENTER" layoutX="120.0" layoutY="11.0" prefHeight="86.0" prefWidth="1123.0">
+               <children>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <Text fx:id="courseTitleQuiz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizTitle" text="Course" />
+                        <Text fx:id="sectionTitleQuiz" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sectionTitleQuiz" text="Course" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox fx:id="questionAnswersContainer" alignment="TOP_CENTER" layoutY="135.0" prefHeight="582.0" prefWidth="1350.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="163.0" prefWidth="1350.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="170.0" prefWidth="1209.0">
+                           <children>
+                              <Text fx:id="quizQuestionPlay" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizTitle" text="Question" textAlignment="CENTER" wrappingWidth="1223.4002075195312" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="434.0" prefWidth="1300.0" spacing="10.0">
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#cardAnswer1Clicked" prefHeight="386.0" prefWidth="325.0" styleClass="quizCardQuestion" stylesheets="@../../style/style.css">
+                           <children>
+                              <Text fx:id="quizQuestionRep1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizQuestion" text="app/http/Controllers" textAlignment="CENTER" wrappingWidth="300.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#cardAnswer2Clicked" prefHeight="386.0" prefWidth="325.0" styleClass="quizCardQuestion" stylesheets="@../../style/style.css">
+                           <children>
+                              <Text fx:id="quizQuestionRep2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizQuestion" text="app/http/Views" textAlignment="CENTER" wrappingWidth="300.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#cardAnswer3Clicked" prefHeight="386.0" prefWidth="325.0" styleClass="quizCardQuestion" stylesheets="@../../style/style.css">
+                           <children>
+                              <Text fx:id="quizQuestionRep3" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizQuestion" text="app/http/Views" textAlignment="CENTER" wrappingWidth="300.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#cardAnswer4Clicked" prefHeight="386.0" prefWidth="325.0" styleClass="quizCardQuestion" stylesheets="@../../style/style.css">
+                           <children>
+                              <Text fx:id="quizQuestionRep4" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="courseQuizQuestion" text="app/http/routes" textAlignment="CENTER" wrappingWidth="300.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="quizCountReadyContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="quizCountReadyContainer" stylesheets="@../../style/style.css">
+         <children>
+            <HBox alignment="CENTER" layoutX="3.0" layoutY="240.0" prefHeight="230.0" prefWidth="1350.0">
+               <children>
+                  <Text fx:id="countForReady" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="countForReady" text="0" textAlignment="CENTER" wrappingWidth="1345.900161743164" />
                </children>
             </HBox>
          </children>

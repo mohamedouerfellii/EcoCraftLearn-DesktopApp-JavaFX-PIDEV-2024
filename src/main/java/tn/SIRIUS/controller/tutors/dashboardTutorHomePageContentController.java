@@ -1,5 +1,7 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.scene.layout.AnchorPane;
+import tn.SIRIUS.entities.Course;
 import tn.SIRIUS.entities.Feedback;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,9 +16,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import tn.SIRIUS.entities.User;
+import tn.SIRIUS.services.CourseParticipationService;
+import tn.SIRIUS.services.CourseService;
+import tn.SIRIUS.services.FeedbackService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class dashboardTutorHomePageContentController implements Initializable {
@@ -46,12 +53,49 @@ public class dashboardTutorHomePageContentController implements Initializable {
     private Label top3CourseTitle;
     @FXML
     private Label top3NbrRegistred;
+    @FXML private Label nbrTotStudents;
+    @FXML private Label nbrNewStudent;
+    @FXML private Label nbrCoursesTutor;
+    @FXML private AnchorPane courseT1;
+    @FXML private AnchorPane courseT2;
+    @FXML private AnchorPane courseT3;
+    private int userTest;
+    private CourseParticipationService courseParticipationService = new CourseParticipationService();
+    private CourseService courseService = new CourseService();
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        userTest = 1;
+        // Stat
+        int nbrTotStd = courseParticipationService.getTotNbrStudentByTutor(userTest).size();
+        int nbrNewStd = courseParticipationService.getLastMonthEnrolled(userTest);
+        int nbrCourseTt = courseService.getListIdCoursesByTutor(userTest).size();
+        if(nbrTotStd < 10 ) nbrTotStudents.setText("00"+nbrTotStd);
+        else if(nbrTotStd > 10 && nbrTotStd < 100) nbrTotStudents.setText("0"+nbrTotStd);
+        else nbrTotStudents.setText(String.valueOf(nbrTotStd));
+        if(nbrNewStd < 10 ) nbrNewStudent.setText("00"+nbrNewStd);
+        else if(nbrNewStd > 10 && nbrNewStd < 100) nbrNewStudent.setText("0"+nbrNewStd);
+        else nbrNewStudent.setText(String.valueOf(nbrNewStd));
+        if(nbrCourseTt < 10 ) nbrCoursesTutor.setText("00"+nbrNewStd);
+        else if(nbrCourseTt > 10 && nbrCourseTt < 100) nbrCoursesTutor.setText("0"+nbrNewStd);
+        else nbrCoursesTutor.setText(String.valueOf(nbrNewStd));
+        //Gender Ratio
+        List<Integer> genderCountList = courseParticipationService.countGenderStudentByTutor(userTest);
+        int nbrMale = genderCountList.get(0);
+        int nbrFemale = genderCountList.get(1);
+        ObservableList<PieChart.Data> genderRatioDate = FXCollections.observableArrayList(new PieChart.Data("Male",nbrMale),new PieChart.Data("Female",nbrFemale));
+        genderRatio.setData(genderRatioDate);
+        genderRatioMDesc.setText("( "+nbrMale+" Male Students )");
+        genderRatioFDesc.setText("( "+nbrFemale+" Female Students )");
         //Feedback
-        Feedback feedback = new Feedback(1,new User(2,"Ouerfelli","Mohemed","mohamedouerfelli3@gmail.com",""),"02-10-2024","“Your knowledge and clear communication made learning",4,1);
+        showFeedbacks();
+        //Top 3 Courses
+        showTop3Courses();
+    }
+    public void showFeedbacks(){
+        FeedbackService feedbackService = new FeedbackService();
+        List<Feedback> feedbacks = feedbackService.getFeedbackByTutor(userTest);
         try{
-            for(int i=0; i<5; i++){
+            for(Feedback feedback : feedbacks){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/tutors/feedbackDashboardItem.fxml"));
                 Parent item = fxmlLoader.load();
@@ -62,23 +106,43 @@ public class dashboardTutorHomePageContentController implements Initializable {
         }catch (IOException e){
             throw new RuntimeException(e);
         }
-        //Gender Ratio
-        ObservableList<PieChart.Data> genderRatioDate = FXCollections.observableArrayList(new PieChart.Data("Male",25),new PieChart.Data("Female",15));
-        genderRatio.setData(genderRatioDate);
-        genderRatioMDesc.setText("( 25 Male Students )");
-        genderRatioFDesc.setText("( 15 Female Students )");
-        //Top 3 Courses
-        /*Image top1Img = new Image(getClass().getResourceAsStream("/images/coursesImg/Furoshiki_Wrapping_Step_2_546_595_s_c1dd_546_595_int_c1.png"));
-        top1CourseImgContainer.setFill(new ImagePattern(top1Img));*/
-        top1CourseTitle.setText("Japanese Furoshiki");
-        top1NbrRegistred.setText("107 Registered students");
-       /* Image top2Img = new Image(getClass().getResourceAsStream("/images/coursesImg/tote_428_597_s_c1_428_597_int_c1.png"));
-        top2CourseImgContainer.setFill(new ImagePattern(top2Img));*/
-        top2CourseTitle.setText("Reversible Tote");
-        top2NbrRegistred.setText("88 Registered students");
-       /* Image top3Img = new Image(getClass().getResourceAsStream("/images/coursesImg/Finished-Basket-3-cropped.jpg"));
-        top3CourseImgContainer.setFill(new ImagePattern(top3Img));*/
-        top3CourseTitle.setText("Newspaper weave baskets");
-        top3NbrRegistred.setText("57 Registered students");
+    }
+    public void showTop3Courses(){
+        List<Course> top3Courses = courseService.top3CoursesByTutor(userTest);
+        if(top3Courses.isEmpty()){
+            courseT1.setVisible(false);
+            courseT2.setVisible(false);
+            courseT3.setVisible(false);
+        } else if(top3Courses.size() == 1){
+            Image top1Img = new Image("file:/" + top3Courses.get(0).getImage());
+            top1CourseImgContainer.setFill(new ImagePattern(top1Img));
+            top1CourseTitle.setText(top3Courses.get(0).getTitle());
+            top1NbrRegistred.setText(top3Courses.get(0).getNbrRegistred()+" Registered students");
+            courseT2.setVisible(false);
+            courseT3.setVisible(false);
+        } else if(top3Courses.size() == 2){
+            Image top1Img = new Image("file:/" + top3Courses.get(0).getImage());
+            top1CourseImgContainer.setFill(new ImagePattern(top1Img));
+            top1CourseTitle.setText(top3Courses.get(0).getTitle());
+            top1NbrRegistred.setText(top3Courses.get(0).getNbrRegistred()+" Registered students");
+            Image top2Img = new Image("file:/" + top3Courses.get(1).getImage());
+            top2CourseImgContainer.setFill(new ImagePattern(top2Img));
+            top2CourseTitle.setText(top3Courses.get(1).getTitle());
+            top2NbrRegistred.setText(top3Courses.get(1).getNbrRegistred()+" Registered students");
+            courseT3.setVisible(false);
+        } else{
+            Image top1Img = new Image("file:/" + top3Courses.get(0).getImage());
+            top1CourseImgContainer.setFill(new ImagePattern(top1Img));
+            top1CourseTitle.setText(top3Courses.get(0).getTitle());
+            top1NbrRegistred.setText(top3Courses.get(0).getNbrRegistred()+" Registered students");
+            Image top2Img = new Image("file:/" + top3Courses.get(1).getImage());
+            top2CourseImgContainer.setFill(new ImagePattern(top2Img));
+            top2CourseTitle.setText(top3Courses.get(1).getTitle());
+            top2NbrRegistred.setText(top3Courses.get(1).getNbrRegistred()+" Registered students");
+            Image top3Img = new Image("file:/" + top3Courses.get(2).getImage());
+            top3CourseImgContainer.setFill(new ImagePattern(top3Img));
+            top3CourseTitle.setText(top3Courses.get(2).getTitle());
+            top3NbrRegistred.setText(top3Courses.get(2).getNbrRegistred()+" Registered students");
+        }
     }
 }

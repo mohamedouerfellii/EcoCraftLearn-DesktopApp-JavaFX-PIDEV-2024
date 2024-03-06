@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import tn.SIRIUS.utils.WhiteBoardServer;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,6 +20,9 @@ public class EcoCraftLearning extends Application {
         stage.setTitle("EcoCraft Learning");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logoDark.png")));
         stage.setResizable(false);
+        stage.setOnCloseRequest(e -> {
+            WhiteBoardServer.closeWhiteBoardServer();
+        });
         stage.show();
     }
 

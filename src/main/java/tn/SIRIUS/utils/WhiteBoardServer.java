@@ -26,6 +26,7 @@ public class WhiteBoardServer {
     private static Map<Integer,String> roomTutorsConnected = new TreeMap<>();
     private static Map<Integer,Integer> studentsJoined = new TreeMap<>();
     private static InetAddress address;
+    private static boolean running;
     private static CourseParticipationService courseParticipationService = new CourseParticipationService();
     static {
         try{
@@ -50,8 +51,13 @@ public class WhiteBoardServer {
             System.out.println(e.getMessage());
         }
     }
+    public static void closeWhiteBoardServer(){
+        running = false;
+        socket.close();
+    }
     public static void main(String[] args){
-        while (true){
+        running = true;
+        while (running){
             DatagramPacket packet = new DatagramPacket(incoming, incoming.length); // prepare packet
             try{
                 socket.receive(packet);

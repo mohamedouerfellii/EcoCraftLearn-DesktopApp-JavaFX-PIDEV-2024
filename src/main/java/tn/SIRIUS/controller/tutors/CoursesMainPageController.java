@@ -248,6 +248,10 @@ public class CoursesMainPageController implements Initializable {
     private Label nbrQuestionQuizEdit;
     @FXML
     private AnchorPane pageContainer;
+    @FXML
+    private AnchorPane cntrlSaisieCourse;
+    @FXML
+    private AnchorPane cntrlSaisieCourseEdit;
     private Quiz quizToEdit;
     private List<Section> sections;
     private String addCourseImgPath;
@@ -306,6 +310,8 @@ public class CoursesMainPageController implements Initializable {
                     if(volumeBarSectionVid.isPressed())
                         mediaPlayer.setVolume(volumeBarSectionVid.getValue()/100);
                 });
+        cntrlSaisieCourse.setVisible(false);
+        cntrlSaisieCourseEdit.setVisible(false);
     }
     public void setCoursesMainPageController(DashboardTutorHomePageController controller){
         dashboardTutorHomePageController = controller;
@@ -330,26 +336,31 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     void addNewCourse(MouseEvent event) {
-        String title = titleInputAddCourse.getText();
-        String description = addCourseDesc.getText();
-        float price = Float.parseFloat(addCoursePrice.getText());
-        String duration = addCourseDuration.getText();
-        CourseService courseService = new CourseService();
-        Course course = new Course(0,addCourseImgPath,title,description,new User(1,"","","",""),duration,price,0,"",0,0,0);
-        if(courseService.add(course)){
-            showCoursesList();
-            addCoursePane.setVisible(false);
-            successOperationContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
+        if(titleInputAddCourse.getText().isEmpty() || addCourseDesc.getText().isEmpty() || addCoursePrice.getText().isEmpty() || addCourseDuration.getText().isEmpty() || addCourseImgPath.isEmpty()){
+            cntrlSaisieCourse.setVisible(true);
         }
-        else {
-            addCoursePane.setVisible(false);
-            failedOperationContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
+         else {
+            String title = titleInputAddCourse.getText();
+            String description = addCourseDesc.getText();
+            float price = Float.parseFloat(addCoursePrice.getText());
+            String duration = addCourseDuration.getText();
+            CourseService courseService = new CourseService();
+            Course course = new Course(0,addCourseImgPath,title,description,new User(1,"","","",""),duration,price,0,"",0,0,0);
+            if(courseService.add(course)){
+                showCoursesList();
+                addCoursePane.setVisible(false);
+                successOperationContainer.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
+            else {
+                addCoursePane.setVisible(false);
+                failedOperationContainer.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationContainer.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
         }
     }
     public void showCourseDetails(Course course) {
@@ -551,30 +562,34 @@ public class CoursesMainPageController implements Initializable {
     }
     @FXML
     public void editCourse(MouseEvent event){
-        int id = Integer.parseInt(idLabelDetail.getText().replace("#",""));
-        String title = editTitleInputAddCourse.getText();
-        String description = editCourseDesc.getText();
-        float price = Float.parseFloat(editCoursePrice.getText());
-        String duration = editCourseDuration.getText();
-        CourseService courseService = new CourseService();
-        Course course = new Course(id,addCourseImgPath,title,description,new User(1,"","","","S"),duration,price,0,"",0,0.0f,0);
-        if(courseService.update(course)){
-            showCoursesList();
-            coursesEditContainer.setVisible(false);
-            showCourseDetails(course);
-            successOperationContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
-        }
-        else {
-            coursesEditContainer.setVisible(false);
-            addCoursePane.setVisible(false);
-            showCourseDetails(course);
-            failedOperationEditContainer.setVisible(true);
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
-            timeline.setCycleCount(1);
-            timeline.play();
+        if(editTitleInputAddCourse.getText().isEmpty() || editCourseDesc.getText().isEmpty() || editCoursePrice.getText().isEmpty() || editCourseDuration.getText().isEmpty() || addCourseImgPath.isEmpty()){
+            cntrlSaisieCourseEdit.setVisible(true);
+        } else{
+            int id = Integer.parseInt(idLabelDetail.getText().replace("#",""));
+            String title = editTitleInputAddCourse.getText();
+            String description = editCourseDesc.getText();
+            float price = Float.parseFloat(editCoursePrice.getText());
+            String duration = editCourseDuration.getText();
+            CourseService courseService = new CourseService();
+            Course course = new Course(id,addCourseImgPath,title,description,new User(1,"","","","S"),duration,price,0,"",0,0.0f,0);
+            if(courseService.update(course)){
+                showCoursesList();
+                coursesEditContainer.setVisible(false);
+                showCourseDetails(course);
+                successOperationContainer.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> successOperationContainer.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
+            else {
+                coursesEditContainer.setVisible(false);
+                addCoursePane.setVisible(false);
+                showCourseDetails(course);
+                failedOperationEditContainer.setVisible(true);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> failedOperationEditContainer.setVisible(false)));
+                timeline.setCycleCount(1);
+                timeline.play();
+            }
         }
     }
     // Section part
@@ -952,6 +967,11 @@ public class CoursesMainPageController implements Initializable {
         }
     }
     @FXML
+    public void closeCntrllSaisieC(MouseEvent event){
+        cntrlSaisieCourse.setVisible(false);
+        cntrlSaisieCourseEdit.setVisible(false);
+    }
+    @FXML
     public void addQuiz(MouseEvent event){
         if(quizQuestions.size() < 3){
             failedOperationQuizAddContainer.setVisible(true);
@@ -975,6 +995,7 @@ public class CoursesMainPageController implements Initializable {
                         setSectionPlay(sectionQuiz);
                         clearAddQuizInputs();
                         quizAddFormPageContainer.setVisible(false);
+                        goBackSectionFromQuizAdd(null);
                         notifySuccess();
                     } else
                         notifyFailed();
@@ -1167,6 +1188,7 @@ public class CoursesMainPageController implements Initializable {
     }
     // resources clean
     public void cleanup(){
+        if (mediaPlayer!=null)
         mediaPlayer.dispose();
         if (sections != null)
             sections.clear();

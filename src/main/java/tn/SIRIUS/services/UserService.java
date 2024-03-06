@@ -47,4 +47,20 @@ public class UserService {
         }
         return tutor;
     }
+    public String getUserGender(int idUser){
+        String qry = "SELECT gender FROM USERS WHERE idUser = ?";
+        String gender = "";
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idUser);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()){
+                gender = rs.getString("gender");
+            }
+            stm.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return gender;
+    }
 }
