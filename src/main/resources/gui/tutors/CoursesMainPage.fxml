@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1200.0" styleClass="courses-main-content-container" xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CoursesMainPageController">
+   <children>
+      <AnchorPane layoutX="50.0" layoutY="13.0" prefHeight="613.0" prefWidth="1100.0" styleClass="courses-list-container" stylesheets="@../../style/coursesMainPage.css">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" layoutX="11.0" layoutY="76.0" prefHeight="524.0" prefWidth="1076.0" styleClass="courses-list-scroll-pane" stylesheets="@../../style/coursesMainPage.css">
+               <content>
+                  <VBox fx:id="coursesListContainer" alignment="TOP_CENTER" prefHeight="524.0" prefWidth="1058.0" spacing="10.0" styleClass="list-courses-container" stylesheets="@../../style/coursesMainPage.css">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <Label layoutX="35.0" layoutY="19.0" prefWidth="150.0" styleClass="list-courses-label" stylesheets="@../../style/coursesMainPage.css" text="Your Courses" />
+            <HBox alignment="CENTER" layoutX="461.0" layoutY="13.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
+                     <image>
+                        <Image url="@../../icons/dark/search-2-line.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="searchInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
+                     <HBox.margin>
+                        <Insets left="-390.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="-40.0" />
+               </padding>
+            </HBox>
+            <Button fx:id="addNewCourseBtn" layoutX="903.0" layoutY="16.0" mnemonicParsing="false" styleClass="add-new-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Add New Course">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/add-circle-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="addCoursePane" layoutX="7.0" layoutY="6.0" prefHeight="650.0" prefWidth="1200.0" styleClass="add-new-course-main-container" stylesheets="@../../style/addNewCourse.css" visible="false">
+         <children>
+            <Button fx:id="goBackCourseBtn" layoutX="44.0" layoutY="15.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/arrow-left-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <VBox alignment="TOP_CENTER" layoutX="188.0" layoutY="73.0" prefHeight="554.0" prefWidth="590.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Title" />
+                        <Label text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="270.0" top="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TextField fx:id="titleInputAddCourse" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Add a title" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Description" />
+                        <Label text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="270.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TextArea fx:id="addCourseDesc" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" promptText="Add a little description" styleClass="description-input" stylesheets="@../../style/addNewCourse.css" />
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Price" />
+                        <Label text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="270.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TextField fx:id="addCoursePrice" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Set a price to your course" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="195.0">
+                     <children>
+                        <Label styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Course Duration" />
+                        <Label text="*" textFill="RED">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="270.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TextField fx:id="addCourseDuration" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Estimated duration of the course ( 99h 99m )" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+               </children>
+            </VBox>
+            <Button fx:id="chooseCourseImgBtn" layoutX="792.0" layoutY="139.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Choose image">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Label layoutX="482.0" layoutY="17.0" styleClass="title-form" text="Design Your Course" />
+            <ImageView fx:id="courseImgPreview" fitHeight="200.0" fitWidth="300.0" layoutX="774.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" styleClass="course-img-preview">
+               <image>
+                  <Image url="@../../images/logo version 1 (2).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="addCourseFormBtn" layoutX="791.0" layoutY="453.0" mnemonicParsing="false" onMouseClicked="#addNewCourse" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Add Course">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="coursesDetailsContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="courses-details-container" stylesheets="@../../style/coursesMainPage.css">
+         <children>
+            <Button fx:id="goBackCourseDetBtn" layoutX="69.0" layoutY="27.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="127.0" styleClass="go-back-course-btn" stylesheets="@../../style/addNewCourse.css" text="Go Back">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/arrow-left-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Rectangle fx:id="courseDetailsImgContainer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="214.0" layoutX="892.0" layoutY="93.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img-container" width="251.0" />
+            <Label alignment="CENTER" layoutX="515.0" layoutY="24.0" styleClass="title-form" stylesheets="@../../style/addNewCourse.css" text="Courses Lab !" />
+            <Pane layoutX="64.0" layoutY="93.0" prefHeight="526.0" prefWidth="800.0" styleClass="pane-data-details" stylesheets="@../../style/coursesMainPage.css">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" layoutX="32.0" layoutY="13.0" prefHeight="506.0" prefWidth="736.0" styleClass="one-course-scroll-pane" stylesheets="@../../style/coursesMainPage.css">
+                     <content>
+                        <VBox prefHeight="506.0" prefWidth="736.0" styleClass="one-course-details-container" stylesheets="@../../style/coursesMainPage.css">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="ID Course :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="idLabelDetail" prefHeight="35.0" prefWidth="390.0" styleClass="label-data" stylesheets="@../../style/coursesMainPage.css" text="#125487">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Title :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="titleLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test">
+                                       <HBox.margin>
+                                          <Insets left="78.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Description :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="descriptionLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Tutor:">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="tutorLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test">
+                                       <HBox.margin>
+                                          <Insets left="73.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Duration:">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="durationLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="First Course Test">
+                                       <HBox.margin>
+                                          <Insets left="35.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Price :">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="priceLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="125 TND">
+                                       <HBox.margin>
+                                          <Insets left="66.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="NBR Sections">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="nbrSecLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="5">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Posted Date">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="postedDateLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="24-10-2024">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="736.0" spacing="50.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <children>
+                                    <Label styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="NBR Registred">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Text fx:id="nbrRegistredLabelDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="125">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Button fx:id="editCourseBtn" layoutX="926.0" layoutY="435.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit" />
+            <Button fx:id="deleteCourseBtn" layoutX="924.0" layoutY="374.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete" />
+            <Button fx:id="addSectionBtn" layoutX="927.0" layoutY="497.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="188.0" styleClass="add-section-btn" stylesheets="@../../style/coursesMainPage.css" text="Add Section" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

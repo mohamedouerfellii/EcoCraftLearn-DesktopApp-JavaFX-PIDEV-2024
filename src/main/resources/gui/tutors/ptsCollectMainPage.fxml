@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ptsCollectPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="630.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.PtsCollectMainPageController">
+   <children>
+      <Label alignment="CENTER" layoutX="25.0" layoutY="15.0" prefHeight="71.0" prefWidth="286.0" stylesheets="@../../style/style.css" text="Collects Points" textFill="#39932c">
+         <font>
+            <Font name="Jost Regular" size="32.0" />
+         </font>
+      </Label>
+      <ScrollPane hbarPolicy="NEVER" layoutX="84.0" layoutY="85.0" prefHeight="540.0" prefWidth="882.0" styleClass="ptsCollect-scroll-pane" stylesheets="@../../style/StylePtsCollection.css" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="ptsCollectMainContainer" prefHeight="546.0" prefWidth="883.0" spacing="15.0" styleClass="ptscollect-main-page" stylesheets="@../../style/StylePtsCollection.css">
+               <padding>
+                  <Insets left="10.0" right="50.0" top="25.0" />
+               </padding></VBox>
+         </content>
+      </ScrollPane>
+      <HBox alignment="CENTER" layoutX="712.0" layoutY="26.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
+               <image>
+                  <Image url="@../../icons/dark/search-2-line.png" />
+               </image>
+            </ImageView>
+            <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
+               <HBox.margin>
+                  <Insets left="-390.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <padding>
+            <Insets left="-40.0" />
+         </padding>
+      </HBox>
+      <Separator layoutX="-1.0" layoutY="76.0" prefHeight="20.0" prefWidth="1200.0" />
+      <AnchorPane fx:id="addNewCollectionPtsContainer" prefHeight="658.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css" visible="false">
+         <children>
+            <AnchorPane layoutX="319.0" layoutY="76.0" prefHeight="391.0" prefWidth="546.0" styleClass="ptscollect-add-formulaire" stylesheets="@../../style/StylePtsCollection.css">
+               <children>
+                  <VBox layoutX="59.0" layoutY="73.0" prefHeight="214.0" prefWidth="400.0" spacing="15.0" styleClass="ptscollect-main-page" stylesheets="@../../style/StylePtsCollection.css">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="164.0" text="Collection Point Name :">
+                                 <font>
+                                    <Font name="Jost Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="newCollectionptsName" prefHeight="30.0" prefWidth="233.0" promptText="Name" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="162.0" text="Collection Point Adress :">
+                                 <font>
+                                    <Font name="Jost Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="newCollectionPtsAdress" prefHeight="110.0" prefWidth="234.0" promptText="Adresse">
+                                 <font>
+                                    <Font name="Jost Regular" size="12.0" />
+                                 </font>
+                              </TextArea>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="162.0" text="Capacity :">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="newCollectionPtsCapacity" prefHeight="30.0" prefWidth="233.0" promptText="Capacity">
+                                 <font>
+                                    <Font name="Jost Regular" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutX="249.0" layoutY="331.0" prefHeight="40.0" prefWidth="210.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="addNewCollectionptsBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="168.0" styleClass="add-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Add">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="cancelAddingNewCollectionPts" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" styleClass="delete-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Cancel">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label layoutX="160.0" layoutY="14.0" prefHeight="30.0" prefWidth="357.0" text="Add New Collection Point ">
+                     <font>
+                        <Font name="Jost Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="4.0" layoutY="46.0" prefHeight="10.0" prefWidth="540.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="UpdateCollectionPtsContainer" prefHeight="658.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css">
+         <children>
+            <AnchorPane layoutX="319.0" layoutY="76.0" prefHeight="391.0" prefWidth="546.0" styleClass="ptscollect-add-formulaire" stylesheets="@../../style/StylePtsCollection.css">
+               <children>
+                  <VBox layoutX="59.0" layoutY="73.0" prefHeight="214.0" prefWidth="400.0" spacing="15.0" styleClass="ptscollect-main-page" stylesheets="@../../style/StylePtsCollection.css">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="164.0" text="Collection Point Name :">
+                                 <font>
+                                    <Font name="Jost Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="updateCollectionptsName" prefHeight="30.0" prefWidth="233.0" promptText="Name" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="162.0" text="Collection Point Adress :">
+                                 <font>
+                                    <Font name="Jost Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="updateCollectionPtsAdress" prefHeight="110.0" prefWidth="234.0" promptText="Adresse">
+                                 <font>
+                                    <Font name="Jost Regular" size="12.0" />
+                                 </font>
+                              </TextArea>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="162.0" text="Capacity :">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="updateCollectionPtsCapacity" prefHeight="30.0" prefWidth="233.0" promptText="Capacity">
+                                 <font>
+                                    <Font name="Jost Regular" size="12.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox layoutX="249.0" layoutY="331.0" prefHeight="40.0" prefWidth="210.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="updateCollectionptsBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="168.0" styleClass="add-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Update">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="cancelUpdatingCollectionPts" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" styleClass="delete-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Cancel">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label layoutX="160.0" layoutY="14.0" prefHeight="30.0" prefWidth="357.0" text="Update Collection Point ">
+                     <font>
+                        <Font name="Jost Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="4.0" layoutY="46.0" prefHeight="10.0" prefWidth="540.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="openNewCollectionPts" layoutX="996.0" layoutY="140.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" styleClass="add-new-course-btn" stylesheets="@../../style/coursesMainPage.css" text="New Collection Point" />
+      <AnchorPane fx:id="confirmDeleteCollectionPtContainer" prefHeight="666.0" prefWidth="1200.0" styleClass="ptscollect-add-page" stylesheets="@../../style/StylePtsCollection.css" visible="false">
+         <children>
+            <AnchorPane layoutX="330.0" layoutY="130.0" prefHeight="222.0" prefWidth="490.0" styleClass="ptscollect-add-formulaire" stylesheets="@../../style/StylePtsCollection.css">
+               <children>
+                  <HBox layoutX="73.0" layoutY="151.0" prefHeight="40.0" prefWidth="400.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="deleteCollectionptsBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="168.0" styleClass="add-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Delete">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="cancelDeleteCollectionPts" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" styleClass="delete-ptscollect-btn" stylesheets="@../../style/StylePtsCollection.css" text="Cancel">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label layoutX="182.0" layoutY="20.0" prefHeight="71.0" prefWidth="136.0" text="Are You Sure ?">
+                     <font>
+                        <Font name="Jost Regular" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

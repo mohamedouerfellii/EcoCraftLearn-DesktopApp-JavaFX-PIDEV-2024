@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1000.0" styleClass="course-item-container" stylesheets="@../../style/coursesMainPage.css" xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.CourseDashboardItemController">
+   <children>
+      <Circle fx:id="courseItemImgContainer" fill="DODGERBLUE" layoutX="53.0" layoutY="50.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Label fx:id="courseItemTitle" layoutX="113.0" layoutY="20.0" prefHeight="35.0" prefWidth="369.0" styleClass="course-item-title" stylesheets="@../../style/coursesMainPage.css" text="Newspaper weave baskets" />
+      <Button fx:id="showCourseDetailsBtn" layoutX="835.0" layoutY="34.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" styleClass="show-details-btn" stylesheets="@../../style/coursesMainPage.css" text="Show details">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/light/eye-fill.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="dateCourseItem" layoutX="115.0" layoutY="57.0" prefHeight="23.0" prefWidth="330.0" styleClass="course-item-date" stylesheets="@../../style/coursesMainPage.css" text="Yesterday, at 14:20 PM" />
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="522.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/group-fill-black.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="registredCourseNbrLabel" layoutX="567.0" layoutY="42.0" styleClass="registred-nbr-label" stylesheets="@../../style/coursesMainPage.css" text="152 Registred" />
+   </children>
+</AnchorPane>

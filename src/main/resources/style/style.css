@@ -1,0 +1,158 @@
+.home-page-container{
+    -fx-background-color: #D5FFDC;
+}
+.leftMenuContainer{
+    -fx-background-color: #1D6611;
+    -fx-background-radius: 56px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.menu-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D5FFDC;
+}
+.notif-btn{
+    -fx-font-family: "Jost";
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-background-color: transparent;
+    -fx-text-fill: #D5FFDC;
+}
+.notif-count{
+    -fx-background-color: RED;
+    -fx-background-radius: 56px;
+}
+.search-bar{
+    -fx-fill: #D9D9D9;
+    -fx-border-radius: 56px;
+    -fx-arc-width: 30;
+    -fx-arc-height: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 0);
+}
+.search-input{
+    -fx-background-color: transparent;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+}
+.welcome-container, .courses-completed-container, .most-progressed-course-container{
+    -fx-fill: #7DC145;
+    -fx-border-radius: 56px;
+    -fx-arc-width: 30;
+    -fx-arc-height: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 4, 4);
+}
+.welcome-msg, .course-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 32;
+    -fx-text-fill: #000000;
+}
+.second-welcome-msg, .most-progressed-course-tutor-name{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #000000;
+}
+.nbr-courses-completed{
+    -fx-font-family: "Jost";
+    -fx-font-weight: bold;
+    -fx-font-size: 72;
+    -fx-text-fill: #000000;
+}
+.most-progressed-course-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-text-fill: #000000;
+}
+.most-progressed-course-prc{
+    -fx-fill: #000000;
+}
+.most-progressed-course-prc-val{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+.most-progressed-course-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.most-progressed-course-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 8px;
+}
+.all-courses-btn, .newest-courses-btn, .top-rated-courses-btn, .most-popular-courses-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+}
+.courses-scroll-pane{
+    -fx-background-color: #D5FFDC;
+}
+.courses-scroll-pane .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.courses-scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.courses-scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.courses-scroll-pane .scroll-bar:vertical .increment-button,
+.courses-scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+.courses-vbox-home-page{
+    -fx-background-color: #D5FFDC;
+}
+.courses-home-page-item-container{
+    -fx-background-color: #D5FFDC;
+}
+.courses-home-page-item{
+    -fx-fill: #7DC145;
+    -fx-border-radius: 56px;
+    -fx-arc-width: 30;
+    -fx-arc-height: 30;
+}
+.courses-home-page-title{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-text-fill: #000000;
+}
+.courses-home-page-tutor{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 14;
+    -fx-opacity: 0.6;
+    -fx-text-fill: #000000;
+}
+.courses-home-page-btn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.courses-home-page-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 8px;
+}
+.courses-home-page-hours{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+}

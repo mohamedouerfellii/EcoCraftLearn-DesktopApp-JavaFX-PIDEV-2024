@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="103.0" prefWidth="810.0" styleClass="collection-pts-container" stylesheets="@../../style/StylePtsCollection.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.CollectItemController">
+   <children>
+      <Label fx:id="collectMaterialType" layoutX="87.0" layoutY="10.0" prefHeight="44.0" prefWidth="202.0" text="Material Type">
+         <font>
+            <Font name="Jost Medium" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="collectDate" layoutX="114.0" layoutY="40.0" prefHeight="52.0" prefWidth="318.0" text="Date">
+         <font>
+            <Font name="Jost Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="collectQuantity" alignment="CENTER" layoutX="325.0" layoutY="20.0" prefHeight="38.0" prefWidth="135.0" text=" 15,000 kg">
+         <font>
+            <Font name="Corbel" size="20.0" />
+         </font>
+      </Label>
+      <HBox layoutX="556.0" layoutY="32.0" prefHeight="34.0" prefWidth="222.0" spacing="5.0">
+         <children>
+            <Button fx:id="deleteCollectBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="add-new-course-btn" stylesheets="@../../style/coursesMainPage.css" text="delete">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/delete-bin-5-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="updateCollectBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="107.0" styleClass="add-new-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Update">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/edit-box-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="65.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/icons8-objects-24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="92.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/icons8-calendrier-50.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="333.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/dark/icons8-weight-24.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
