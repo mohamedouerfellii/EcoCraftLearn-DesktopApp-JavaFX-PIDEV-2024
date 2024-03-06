@@ -54,6 +54,15 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button fx:id="savedPosts" layoutX="397.0" layoutY="15.0" mnemonicParsing="false" onAction="#TopBarBtnClicked" prefHeight="42.0" prefWidth="87.0" styleClass="top-bar" stylesheets="@../../css/style.css">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/dark/icons8-ruban-marque-page-48.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                      <padding>
                         <Insets left="50.0" />

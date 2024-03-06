@@ -28,6 +28,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.PostService;
+import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,7 +88,8 @@ public class PostItem  {
     @FXML
     private Button savePostBtn;
 
-
+    @FXML
+    private ImageView savePostIcon;
 
     @FXML
     private ImageView shareIcon;
@@ -101,7 +103,6 @@ public class PostItem  {
     private  ForumController forumController = new ForumController();
 
     public MenuButton getAboutPostBtn() {return AboutPostBtn;}
-
 
 
     int nbvote=0;
@@ -142,16 +143,16 @@ public class PostItem  {
         }
 
         String styleBtnClicked = "-fx-background-color: transparent;" +
-                " -fx-text-fill: white;" +
+                " -fx-text-fill: #939393;" +
                 "        -fx-border-radius: 5; " ;
 
         String styleBtnNormal = "    -fx-font-family: \"Jost Medium\";" +
-
                 "    -fx-background-color: transparent;" +
                 "    -fx-text-fill: #939393;" +
                 "    -fx-cursor: hand;";
         likePostBtn.setStyle(styleBtnNormal);
         disLikePostBtn.setStyle(styleBtnNormal);
+        savePostBtn.setStyle(styleBtnNormal);
         PostService postService = new PostService();
 
    sharePostBtn.setOnMouseEntered(e->{
@@ -251,12 +252,23 @@ public class PostItem  {
             webView.getEngine().load(getClass().getResource("/Api/Share.html").toExternalForm());
         });
    savePostBtn.setOnAction(e->{
-            System.out.println( postService.getLikes(p));
+       if (savePostBtn.getStyle().equals(styleBtnNormal)) {
+           savePostBtn.setStyle(styleBtnClicked);
+           savePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-ruban-marque-page-48.png")));
+           postService.savePost(forumController.getUser(),p);
+       } else{
+           savePostBtn.setStyle(styleBtnNormal);
+           savePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-bookmark-48.png")));
+           postService.deleteSavedPosts(forumController.getUser(),p);
+       }
 
+       if(forumController.isSavedPosts()){
+           forumController.showSavedPosts();
+       }
         });
 
 
-
+              setSavedPosts(p,forumController.getUser());
               setReactions(p,forumController.getUser());
               nbLikesPost.setText(postService.getLikes(p)+"");
 
@@ -270,7 +282,7 @@ public class PostItem  {
     public void setReactions(Post post,User user) {
 
         String styleBtnClicked = "-fx-background-color: transparent;" +
-                " -fx-text-fill: white;" +
+                " -fx-text-fill: #939393;" +
                 "        -fx-border-radius: 5; " ;
 
         PostService postService = new PostService();
@@ -291,7 +303,18 @@ public class PostItem  {
         }
     }
 
+public void setSavedPosts(Post post,User user){
 
+    String styleBtnClicked = "-fx-background-color: transparent;" +
+            " -fx-text-fill: #939393;" +
+            "        -fx-border-radius: 5; " ;
+    PostService postService = new PostService();
+    if (postService.getSavedPosts(user).contains(post)) {
+        savePostBtn.setStyle(styleBtnClicked);
+        savePostIcon.setImage(new Image(getClass().getResourceAsStream("/img/dark/icons8-ruban-marque-page-48.png")));
+    }
+
+}
 
 
 

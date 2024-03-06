@@ -271,4 +271,52 @@ public class PostService implements ICRUD<Post,User> {
     }
 
 
+
+    public  List<Post> getSavedPosts(User user){
+        List<Post> list = new ArrayList<>();
+        String qry="select * from savedPosts where owner= ? ";
+        try {
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setInt(1, user.getIdUser());
+            ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    Post post = getPostById(rs.getInt("post"));
+                    list.add(post);
+
+
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
+    public void deleteSavedPosts(User user,Post post){
+        String qry="delete from savedPosts where owner= ? and post= ? ";
+        try {
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setInt(1, user.getIdUser());
+            statement.setInt(2, post.getIdPost());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void savePost(User user,Post post){
+        String qry="insert into savedPosts (owner,post) values(?,?)";
+        try {
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setInt(1, user.getIdUser());
+            statement.setInt(2, post.getIdPost());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

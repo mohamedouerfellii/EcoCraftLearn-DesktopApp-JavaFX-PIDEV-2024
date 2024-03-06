@@ -222,6 +222,7 @@ if (attachment != null && !attachment.isEmpty()) {
     });
 
     updateCommentContentBtn.setOnAction(e->{
+        newContent.setText(forumController.convertToCensoredText(newContent.getText()));
         Comment updateComment = new Comment(comment.getIdComment(), comment.getPost(),comment.getOwner(),newContent.getText(), attachment);
         CommentService commentService = new CommentService();
         if (commentService.update(updateComment) == 1) {

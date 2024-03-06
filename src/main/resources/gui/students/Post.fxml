@@ -75,7 +75,14 @@
                         </ImageView>
                      </graphic></Button>
                   <Separator layoutX="484.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
-                  <Button fx:id="savePostBtn" mnemonicParsing="false" text="save" />
+                  <Button fx:id="savePostBtn" mnemonicParsing="false" text="save">
+                     <graphic>
+                        <ImageView fx:id="savePostIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/dark/icons8-bookmark-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Separator layoutX="244.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
                   <Button fx:id="rapportPostBtn" layoutX="568.0" layoutY="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" text="rapot" />
                </children>

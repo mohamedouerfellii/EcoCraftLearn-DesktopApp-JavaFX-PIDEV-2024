@@ -1,5 +1,6 @@
 package tn.SIRIUS.controller.students;
 
+import com.modernmt.text.profanity.ProfanityFilter;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.geometry.Insets;
@@ -134,6 +135,9 @@ public class ForumController implements Initializable {
     private Button personalPosts;
 
     @FXML
+    private Button savedPosts;
+
+    @FXML
     private AnchorPane postsMainContent;
 
     @FXML
@@ -188,6 +192,12 @@ public class ForumController implements Initializable {
     String newCommentAttachmentPath;
     private boolean showAllPosts = true;
 
+    public boolean isSavedPosts() {
+        return isSavedPosts;
+    }
+
+    private boolean isSavedPosts = false;
+
 
     public Button getConfirmDeletePostBtn() {return confirmDeletePostBtn;}
     public AnchorPane getPostsMainContent() {
@@ -205,7 +215,7 @@ public class ForumController implements Initializable {
         return user;
     }
 
-    public User user=userService.getPostById(1);
+    public User user=userService.getPostById(2);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -253,6 +263,10 @@ public class ForumController implements Initializable {
 
 
         newCommentAttachmentBtn.setOnAction(e-> newCommentAttachmentPath = newCommentAttachmentWindow());
+        personalPosts.getStyleClass().remove("top-bar-button-selected");
+        savedPosts.getStyleClass().remove("top-bar-button-selected");
+        allPosts.getStyleClass().add("top-bar-button-selected");
+
 
 
 
@@ -265,6 +279,7 @@ public class ForumController implements Initializable {
 
             LocalDateTime currentDateTime = LocalDateTime.now();
             String newPostText = NewPostText.getText();
+            newPostText =convertToCensoredText(newPostText);
             Post post = new Post(1, newPostText, attachmentPath, user.getIdUser(), currentDateTime);
             PostService postService = new PostService();
             if (postService.add(post) == 1) {
@@ -286,8 +301,13 @@ public class ForumController implements Initializable {
 
     public void showPosts() {
         if (forum.getChildren().size() > 1) {
-            forum.getChildren().remove(3, forum.getChildren().size()); // Remove all children except the first one
+            forum.getChildren().remove(2, forum.getChildren().size()); // Remove all children except the first one
+            forum.getChildren().add(createPostContainer);
         }
+        if (isSavedPosts) {
+            showSavedPosts();
+        } else{
+
         Collections.sort(acuill, (c1, c2) -> c2.getPostedDate().compareTo(c1.getPostedDate()));
         try {
             for (Post post : acuill) {
@@ -298,22 +318,20 @@ public class ForumController implements Initializable {
                 PostItem postItem = fxmlLoader.getController();
                 postItem.setForumController(this);
                 postItem.setData(post);
-
-
                 if (showAllPosts) {
-//                    postItem.ReactionPressed();
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(false);
-                } else if (post.getUser().getIdUser() == user.getIdUser()) { // Assuming getId() returns the user ID
+                } else if (post.getUser().getIdUser() == user.getIdUser()) {
                     forum.getChildren().add(p);
                     postItem.getAboutPostBtn().setVisible(true);
 
                 }
+
             }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }}
 
     }
 
@@ -360,15 +378,30 @@ public class ForumController implements Initializable {
 
     @FXML
     void TopBarBtnClicked(ActionEvent event) {
+        PostService postService = new PostService();
+        acuill = postService.getAll();
+
         if (event.getSource() == allPosts) {
             personalPosts.getStyleClass().remove("top-bar-button-selected");
+            savedPosts.getStyleClass().remove("top-bar-button-selected");
             allPosts.getStyleClass().add("top-bar-button-selected");
             forum.getChildren().removeAll();
             showAllPosts = true;
+            isSavedPosts = false;
             showPosts();
         } else if (event.getSource() == personalPosts) {
             allPosts.getStyleClass().remove("top-bar-button-selected");
+            savedPosts.getStyleClass().remove("top-bar-button-selected");
             personalPosts.getStyleClass().add("top-bar-button-selected");
+            showAllPosts = false;
+            isSavedPosts = false;
+            showPosts();
+        }else if (event.getSource()==savedPosts){
+            allPosts.getStyleClass().remove("top-bar-button-selected");
+            savedPosts.getStyleClass().add("top-bar-button-selected");
+            personalPosts.getStyleClass().remove("top-bar-button-selected");
+
+            isSavedPosts = true;
             showAllPosts = false;
             showPosts();
         }
@@ -401,11 +434,10 @@ public class ForumController implements Initializable {
         if(newattachmentPath==null){
             newattachmentPath= post.getAttachment();
         }
-        String username = "Jarray abdelmonam";
-        String img = "img/img.png";
-        int idUser = 2;
+
         LocalDateTime currentDateTime = LocalDateTime.now();
-        Post updatedpost = new Post(post.getIdPost(), updatePostText.getText(), newattachmentPath, idUser, post.getPostedDate());
+        updatePostText.setText(convertToCensoredText(updatePostText.getText()));
+        Post updatedpost = new Post(post.getIdPost(), updatePostText.getText(), newattachmentPath, user.getIdUser(), post.getPostedDate());
         PostService postService = new PostService();
         if (postService.update(updatedpost) == 1) {
 
@@ -531,6 +563,7 @@ public void showPostComments(Post post) {
 public  void addNewComment(Post p){
 
         if (newCommentIput.getText() != null && !newCommentIput.getText().isEmpty()) {
+            newCommentIput.setText(convertToCensoredText(newCommentIput.getText()));
             Comment comment = new Comment(0, p , user, newCommentIput.getText(), newCommentAttachmentPath);
             CommentService commentService = new CommentService();
             if (commentService.add(comment) == 1)
@@ -589,12 +622,9 @@ public void  deleteComment(Comment comment) {
         if (!searchText.isEmpty()) {
             acuillF = acuill.stream()
                     .filter(item -> item.getContent().contains(searchText)).toList();
-
-
             if (forum.getChildren().size() > 1) {
-                forum.getChildren().remove(3, forum.getChildren().size()); // Remove all children except the first one
+                forum.getChildren().remove(3, forum.getChildren().size());
             }
-            // Collections.sort(acuillF, (c1, c2) -> c2.getPostedDate().compareTo(c1.getPostedDate()));
             try {
                 for (Post post : acuillF) {
 
@@ -604,10 +634,7 @@ public void  deleteComment(Comment comment) {
                     PostItem postItem = fxmlLoader.getController();
                     postItem.setForumController(this);
                     postItem.setData(post);
-
-
                     if (showAllPosts) {
-//                    postItem.ReactionPressed();
                         forum.getChildren().add(p);
                         postItem.getAboutPostBtn().setVisible(false);
                     } else if (post.getUser().getIdUser() == user.getIdUser()) {
@@ -628,30 +655,49 @@ public void  deleteComment(Comment comment) {
     }
 
 
+public void showSavedPosts(){
+    if (forum.getChildren().size() > 1) {
+        forum.getChildren().remove(2, forum.getChildren().size());
+    }
+    List<Post> savedPosts = new ArrayList<>();
+    PostService postService = new PostService();
+    savedPosts = postService.getSavedPosts(user);
+    try {
+        for (Post post : savedPosts) {
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
+            Parent p = fxmlLoader.load();
+            PostItem postItem = fxmlLoader.getController();
+            postItem.setForumController(this);
+            postItem.getAboutPostBtn().setVisible(false);
+            postItem.setData(post);
+            forum.getChildren().add(p);
+        }
+} catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+    }
+
+    public static String convertToCensoredText(String text) {
+        ProfanityFilter profanityFilter = new ProfanityFilter();
+        String[] words = text.split("\\s+");
+        for (int i = 0; i < words.length; i++) {
+            if (profanityFilter.test("en", words[i])) {
+                words[i] = censorProfanity(words[i]);
+            }
+        }
+        return String.join(" ", words);
+    }
+
+    private static String censorProfanity(String word) {
+        // Replace each character in the bad word with an asterisk
+        return word.replaceAll(".", "*");
+    }
 
 }
 
 
-      /*  List<Post> sortedPosts = acuill.stream()
-                .sorted(Comparator.comparingInt(Post::getNbLikes).reversed())
-                .collect(Collectors.toList());
-
-        // Create a Map with nbLikes as key and User as value
-        Map<Integer, User> popularPeopleMap = sortedPosts.stream()
-                .collect(Collectors.toMap(Post::getNbLikes, Post::getUsername, (existing, replacement) -> existing, LinkedHashMap::new));
-
-        // Print or process the popularPeopleMap
-        popularPeopleMap.forEach((nbLikes, user) -> {
-            System.out.println("Likes: " + nbLikes);
-            System.out.println("User: " + user.getUsername());
-            System.out.println("Image: " + user.getImage());
-            // Add more processing as needed
-        });*/
-
-     //   }
-
-
-    //}
 
 
 

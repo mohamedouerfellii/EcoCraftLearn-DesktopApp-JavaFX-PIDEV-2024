@@ -50,19 +50,6 @@ public class Post {
         this.content = content;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return idPost == post.idPost && owner == post.owner && Objects.equals(content, post.content) && Objects.equals(attachment, post.attachment) && Objects.equals(postedDate, post.postedDate) && Objects.equals(user, post.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPost, content, attachment, owner, postedDate, user);
-    }
-
     public String getAttachment() {
         return attachment;
     }
@@ -85,6 +72,14 @@ public class Post {
 
     public void setPostedDate(LocalDateTime postedDate) {
         this.postedDate = postedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return idPost == post.idPost ;
     }
 
 
