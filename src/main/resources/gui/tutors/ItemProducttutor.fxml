@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<VBox fx:id="BoxProduct" styleClass="BoxProduct" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.ItemProduct">
+<VBox fx:id="BoxProduct" styleClass="BoxProduct" stylesheets="@../../styles/Style1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.ItemProducttutor">
    <children>
-      <AnchorPane fx:id="ItemProductPane" maxHeight="518.0" prefHeight="518.0" prefWidth="300.0" styleClass="ItemProductPane" stylesheets="@../../styles/Style1.css">
+      <AnchorPane fx:id="ItemProductPane" maxHeight="518.0" prefHeight="518.0" prefWidth="300.0" styleClass="ItemProductPanetutor" stylesheets="@../../styles/Style1.css">
          <children>
             <Label fx:id="NameProduct" layoutX="18.0" layoutY="255.0" minHeight="0.0" prefHeight="30.0" prefWidth="255.0" styleClass="NameProduct" stylesheets="@../../styles/Style1.css" text="Product Number " wrapText="true">
                <font>

@@ -1,7 +1,4 @@
-.GrandPageHomeProduct
-{
-    -fx-background-color: #fff;
-}
+
 
 
 
@@ -18,130 +15,34 @@
     -fx-translate-x: 20px;
     -fx-translate-y: 17px;
 }
-.BtnMenu {
-  -fx-font-family: jost;
-    -fx-background-color: transparent;
-    -fx-text-fill: #D5FFDC; /* Text color when not clicked */
-    -fx-background-radius: 15 0 0 15; /* Individual radius values for each corner */
-}
-
-
-.BtnMenu:pressed,
-.BtnMenu:hover
-
-{
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-
-.BtnMenu:hover {
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color on hover */
-}
-
-.iconsdash
-{
-
-    -fx-image: url('/icons/dashboard-fill.png');
-}
-
-
-.BtnMenu:pressed .iconsdash,
-.BtnMenu:hover .iconsdash {
-    -fx-image: url('/icons/dashboard-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-
-
-.iconCourses
-{
-    -fx-image: url('/icons/graduation-cap-fill.png');
-}
-
-
-.BtnMenu:pressed .iconCourses,
-.BtnMenu:hover .iconCourses {
-    -fx-image: url('/icons/graduation-cap-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-
-
-.iconevent
-{
-
-    -fx-image: url('/icons/calendar-event-fill.png');
-}
-
-
-.BtnMenu:pressed .iconevent,
-.BtnMenu:hover .iconevent {
-    -fx-image: url('/icons/dashboard-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-
-
-.iconforum
-{
-
-    -fx-image: url('/icons/team-fill.png');
-}
-
-
-.BtnMenu:pressed .iconforum,
-.BtnMenu:hover .iconforum {
-    -fx-image: url('/icons/team-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
 
 
 
-.iconProduct
-{
 
-    -fx-image: url('/icons/shopping-bag-2-fill.png');
-}
-
-
-.BtnMenu:pressed .iconProduct,
-.BtnMenu:hover .iconProduct {
-    -fx-image: url('/icons/shopping-bag-2-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-
-
-.iconcollect
-{
-
-    -fx-image: url('/icons/team-fill.png');
-}
-
-
-.BtnMenu:pressed .iconcollect,
-.BtnMenu:hover .iconcollect {
-    -fx-image: url('/icons/team-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
-.iconlogout
-{
-    -fx-image: url('/icons/logout-box-fill.png');
-}
-.BtnMenu:pressed .iconlogout,
-.BtnMenu:hover .iconlogout {
-    -fx-image: url('/icons/logout-box-filll.png');
-    -fx-background-color: #D5FFDC;
-    -fx-text-fill: #1D6611; /* Text color when clicked */
-}
 /*partie Homepage et Product Page*/
+
+.GrandPageHomeProduct
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 0 0 15;
+    -fx-border-color: #fff;
+    -fx-border-radius: 15 0 0 15;
+}
 
 .HomeAnchorPaneProduct
 {
-    -fx-background-color: #D5FFDC;
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 0 0 15;
+    -fx-border-color: #fff;
+    -fx-border-radius: 15 0 0 15;
+}
+
+.ContainerAlltutor
+{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15 0 0 15;
+    -fx-border-color: #fff;
+    -fx-border-radius: 15 0 0 15;
 }
 
 .MenuVbox {
@@ -189,6 +90,14 @@
     /*-fx-border-width: 2px; !* Largeur de la bordure *!*/
     /*-fx-border-radius: 15 15 15 15; !* Rayon de la bordure *!*/
 }
+
+.PaneGroupProducttutor {
+    -fx-background-color: #fff; /* Couleur de fond */
+    /*-fx-background-radius: 15 15 15 15; !* Rayon de bordure *!*/
+    /*-fx-border-color: #fff; !* Couleur de la bordure par défaut *!*/
+    /*-fx-border-width: 2px; !* Largeur de la bordure *!*/
+    /*-fx-border-radius: 15 15 15 15; !* Rayon de la bordure *!*/
+}
 .AddProductBtn
 {
 
@@ -225,6 +134,26 @@
 }
 .ScrolPaneProduct .scroll-bar:vertical .increment-button,
 .ScrolPaneProduct .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+.ScrolPaneProducttutor{
+    -fx-background-color: #fff  ;
+}
+.ScrolPaneProducttutor .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneProducttutor .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+.ScrolPaneProducttutor .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneProducttutor .scroll-bar:vertical .increment-button,
+.ScrolPaneProducttutor .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
 }
 
@@ -281,6 +210,19 @@
     -fx-max-height: 450px; /* Hauteur maximale */
 }
 
+.ItemProductPanetutor {
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-border-color: #D5FFDC; /* Couleur de la bordure */
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-width: 1px; /* Largeur du contour */
+
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-min-width: 300px; /* Largeur minimale */
+    -fx-min-height: 450px; /* Hauteur minimale */
+    -fx-max-width: 300px; /* Largeur maximale */
+    -fx-max-height: 450px; /* Hauteur maximale */
+}
 
 .NameProduct {
     -fx-font-family: "Jost";
@@ -321,6 +263,12 @@
 
 .GridContainerProduct {
     -fx-background-color: #D5FFDC;
+    -fx-hgap: 5px; /* Espacement horizontal entre les cellules */
+    -fx-vgap: 5px; /* Espacement vertical entre les cellules */
+}
+
+.GridContainerProducttutor {
+    -fx-background-color: #fff;
     -fx-hgap: 5px; /* Espacement horizontal entre les cellules */
     -fx-vgap: 5px; /* Espacement vertical entre les cellules */
 }

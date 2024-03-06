@@ -1,4 +1,4 @@
-package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.tutors;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProductPage implements Initializable{
+public class ProductPagetutor implements Initializable{
 
 
     @FXML
@@ -328,10 +328,10 @@ public class ProductPage implements Initializable{
         for (Product product : recentlyAdded) {
         try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemProducttutor.fxml"));
                 VBox boxProduct = fxmlLoader.load();
 
-                ItemProduct itemProduct = fxmlLoader.getController();
+                ItemProducttutor itemProduct = fxmlLoader.getController();
                 itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
@@ -413,10 +413,10 @@ public class ProductPage implements Initializable{
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemProducttutor.fxml"));
                 VBox boxProduct = fxmlLoader.load();
 
-                ItemProduct itemProduct = fxmlLoader.getController();
+                ItemProducttutor itemProduct = fxmlLoader.getController();
                 itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
@@ -445,10 +445,10 @@ public class ProductPage implements Initializable{
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemProducttutor.fxml"));
                 VBox boxProduct = fxmlLoader.load();
 
-                ItemProduct itemProduct = fxmlLoader.getController();
+                ItemProducttutor itemProduct = fxmlLoader.getController();
                 itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
@@ -479,10 +479,10 @@ public class ProductPage implements Initializable{
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemProducttutor.fxml"));
                 VBox boxProduct = fxmlLoader.load();
 
-                ItemProduct itemProduct = fxmlLoader.getController();
+                ItemProducttutor itemProduct = fxmlLoader.getController();
                 itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
@@ -508,10 +508,10 @@ public class ProductPage implements Initializable{
         for (Product product : products) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemProduct.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemProducttutor.fxml"));
                 VBox boxProduct = fxmlLoader.load();
 
-                ItemProduct itemProduct = fxmlLoader.getController();
+                ItemProducttutor itemProduct = fxmlLoader.getController();
                 itemProduct.setProductPage(this);
                 itemProduct.setData(product);
 
@@ -829,9 +829,9 @@ public class ProductPage implements Initializable{
 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/sousCartItem.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/sousCartItemtutor.fxml"));
                 Parent p = fxmlLoader.load();
-                SousCartItem sousCartItem = fxmlLoader.getController();
+                SousCartItemtutor sousCartItem = fxmlLoader.getController();
                 sousCartItem.setProductPage(this);
                 sousCartItem.setSousCartProduct(sousCart);
                 cartItemsContainer.getChildren().add(p);
@@ -1028,16 +1028,16 @@ public class ProductPage implements Initializable{
            for (Commandes commandes : ListOrderClient)
            {
                FXMLLoader fxmlLoader = new FXMLLoader();
-               fxmlLoader.setLocation(getClass().getResource("/gui/students/ItemCommandeClient.fxml"));
+               fxmlLoader.setLocation(getClass().getResource("/gui/tutors/ItemCommandetutor.fxml"));
 
                HBox HboxItemCommande = fxmlLoader.load();
 
-               ItemCommandeClient itemCommandeClient = fxmlLoader.getController();
+               ItemCommandetutor itemCommandeStudent = fxmlLoader.getController();
 
 
-               itemCommandeClient.setProductPage(this);
+               itemCommandeStudent.setProductPage(this);
 
-               itemCommandeClient.setDataCommande(commandes);
+               itemCommandeStudent.setDataCommande(commandes);
 
                VboxCommandeClient.getChildren().add(HboxItemCommande);
            }

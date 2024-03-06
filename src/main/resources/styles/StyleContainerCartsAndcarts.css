@@ -15,6 +15,15 @@
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 
 }
+
+.Panecarttutor
+{
+    -fx-background-color: #D5FFDC;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+
+}
 .sousCartItem
 {
     -fx-background-color: #fff;
@@ -55,6 +64,19 @@
     -fx-border-width: 2px; /* Largeur de la bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de la bordure */
 }
+
+.cartAnchorepaneContainertutor
+{
+    -fx-min-width: 1200px;
+    -fx-max-width: 1200px;
+    -fx-min-height: 650px;
+    -fx-max-height: 650px;
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-background-radius: 15 0 0 15; /* Rayon de bordure */
+    -fx-border-color: #fff; /* Couleur de la bordure par défaut */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 15 0 0 15; /* Rayon de la bordure */
+}
 .hideCartBtn
 {
     -fx-font-family: "Jost Medium";
@@ -80,10 +102,18 @@
 {
     -fx-opacity: 0.6;
 }
+
+
 .cartItemsContainer
 {    -fx-spacing: 15px;
     -fx-padding: 15px;
     -fx-background-color: #D5FFDC;
+}
+
+.cartItemsContainertutor
+{    -fx-spacing: 15px;
+    -fx-padding: 15px;
+    -fx-background-color: #fff;
 }
 
 .ScrolPaneContainerSousCarte{
@@ -102,6 +132,26 @@
 }
 .ScrolPaneContainerSousCarte .scroll-bar:vertical .increment-button,
 .ScrolPaneContainerSousCarte .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+
+.ScrolPaneContainerSousCartetutor{
+    -fx-background-color: #fff;  ;
+}
+.ScrolPaneContainerSousCartetutor .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneContainerSousCartetutor .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneContainerSousCartetutor .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneContainerSousCartetutor .scroll-bar:vertical .increment-button,
+.ScrolPaneContainerSousCartetutor .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
 }
 .totalPriceCartLabel

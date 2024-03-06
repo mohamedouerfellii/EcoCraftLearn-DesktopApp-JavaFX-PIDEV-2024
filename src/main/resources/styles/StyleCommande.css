@@ -52,6 +52,16 @@
     -fx-spacing: 25px;
     -fx-padding: 25px;
 }
+
+.VboxCommandetutor
+{
+    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+    -fx-spacing: 25px;
+    -fx-padding: 25px;
+}
+
+
 .ScrolPaneCommandeClient{
     -fx-background-color: #D5FFDC  ;
 }
@@ -68,6 +78,25 @@
 }
 .ScrolPaneCommandeClient .scroll-bar:vertical .increment-button,
 .ScrolPaneCommandeClient .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.ScrolPaneCommandetutor{
+    -fx-background-color: #fff  ;
+}
+.ScrolPaneCommandetutor .scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.ScrolPaneCommandetutor .scroll-bar:vertical .thumb {
+    -fx-background-color: #1D6611;
+}
+.ScrolPaneCommandetutor .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.68);
+}
+.ScrolPaneCommandetutor .scroll-bar:vertical .increment-button,
+.ScrolPaneCommandetutor .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
 }
 
@@ -103,4 +132,16 @@
     -fx-background-color: #D5FFDC;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
+}
+.AnchorPaneMyorderstutor
+{
+    -fx-border-color: #fff ;
+    -fx-background-color: #fff;
+    -fx-border-radius: 15 0 0 15;
+    -fx-background-radius: 15 0 0 15;
+
+    -fx-min-width: 1200px;
+    -fx-max-width: 1200px;
+    -fx-min-height: 650px;
+    -fx-max-height: 650px;
 }

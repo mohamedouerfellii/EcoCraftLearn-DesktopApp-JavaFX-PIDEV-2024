@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import tn.SIRIUS.entities.Commandes;
 
-public class ItemCommandeClient {
+public class ItemCommandeStudent {
 
     @FXML
     private Label AddresseCommande;
@@ -22,7 +22,7 @@ public class ItemCommandeClient {
     @FXML
     private Label TotalCommande;
 
-    ProductPage productPage = new ProductPage();
+    ProductPagestudent productPage = new ProductPagestudent();
 
     public void setDataCommande(Commandes commandes) {
         AddresseCommande.setText(commandes.getCity());
@@ -32,7 +32,7 @@ public class ItemCommandeClient {
 
     }
 
-    public void setProductPage(ProductPage productpage) {
+    public void setProductPage(ProductPagestudent productpage) {
         this.productPage= productpage;
     }
 

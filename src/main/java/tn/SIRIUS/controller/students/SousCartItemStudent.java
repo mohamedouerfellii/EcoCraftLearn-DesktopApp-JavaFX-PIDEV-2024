@@ -8,7 +8,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import tn.SIRIUS.entities.SousCart;
 
-public class SousCartItem {
+public class SousCartItemStudent {
 
 
 
@@ -28,11 +28,11 @@ public class SousCartItem {
     @FXML
     private Label sousCartProductprice;
 
-    public void setProductPage(ProductPage productPage) {
+    public void setProductPage(ProductPagestudent productPage) {
         this.productPage = productPage;
     }
 
-    private ProductPage productPage;
+    private ProductPagestudent productPage;
 
 
     public void setSousCartProduct(SousCart sousCart) {

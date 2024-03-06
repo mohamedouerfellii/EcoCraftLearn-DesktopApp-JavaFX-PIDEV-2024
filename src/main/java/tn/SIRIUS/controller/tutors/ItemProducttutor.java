@@ -1,4 +1,4 @@
-package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.tutors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +12,7 @@ import org.controlsfx.control.Rating;
 import tn.SIRIUS.entities.Product;
 import tn.SIRIUS.services.ProductService;
 
-public class ItemProduct {
+public class ItemProducttutor {
 
     private int valueQuantite=0;
 
@@ -46,7 +46,7 @@ public class ItemProduct {
 
     @FXML
     private Rectangle RectangleImageProduct;
-    ProductPage productPage = new ProductPage();
+    ProductPagetutor productPage = new ProductPagetutor();
 
     public void setData(Product product) {
 
@@ -78,10 +78,9 @@ public class ItemProduct {
 
     }
 
-    public void setProductPage(ProductPage productpage) {
+    public void setProductPage(ProductPagetutor productpage) {
        this.productPage= productpage;
     }
-
 
 
 
