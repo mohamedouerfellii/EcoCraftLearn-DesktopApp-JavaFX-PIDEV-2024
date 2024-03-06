@@ -31,32 +31,21 @@ public class EmailSender {
             message.setFrom(new InternetAddress("zgachita15@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Confirmation de commande");
-            new Thread(() -> {
-                try {
-                    Transport.send(message);
-                    System.out.println("Sent message successfully....");
-                } catch (MessagingException e) {
-                    throw new RuntimeException(e);
-                }
-            }).start();
 
             String htmlFilePath = "C:\\projet Pidev\\EcoCraftLearning\\src\\main\\resources\\Api\\TemplateEmail.html";
-
             String htmlContent = new String(Files.readAllBytes(Paths.get(htmlFilePath)));
-
 
             htmlContent = htmlContent.replace("[NamePlaceholder]", usernames);
             htmlContent = htmlContent.replace("[CityPlaceholder]", city);
             htmlContent = htmlContent.replace("[totalPricePlaceholder]", String.valueOf(total));
 
             message.setContent(htmlContent, "text/html; charset=utf-8");
+
             Transport.send(message);
-            System.out.println("E-mail de confirmation envoye avec succes à " + recipientEmail);
+            System.out.println("E-mail de confirmation envoyé avec succès à " + recipientEmail);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'envoi de l'e-mail de confirmation : " + e.getMessage());
         }
 
     }
-
-
 }

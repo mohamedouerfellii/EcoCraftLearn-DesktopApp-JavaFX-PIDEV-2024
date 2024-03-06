@@ -102,7 +102,18 @@
 {
     -fx-opacity: 0.6;
 }
-
+.passerCommandeBtntutor
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.passerCommandeBtntutor:hover
+{
+    -fx-opacity: 0.6;
+}
 
 .cartItemsContainer
 {    -fx-spacing: 15px;
@@ -192,6 +203,22 @@
 {
     -fx-opacity: 0.6;
 }
+
+
+.decrementValuetutor
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.decrementValuetutor:hover
+{
+    -fx-opacity: 0.6;
+}
+
+
 .incrementValue
 {
     -fx-font-family: "Jost Medium";
@@ -204,6 +231,22 @@
 {
     -fx-opacity: 0.6;
 }
+
+.incrementValuetutor
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.incrementValuetutor:hover
+{
+    -fx-opacity: 0.6;
+}
+
+
+
 .ConfirmeCartBtn
 {
     -fx-font-family: "Jost Medium";
@@ -213,6 +256,21 @@
     -fx-background-radius: 8px;
 }
 .ConfirmeCartBtn:hover
+{
+    -fx-opacity: 0.6;
+}
+
+
+
+.ConfirmeCartBtntutor
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
+}
+.ConfirmeCartBtntutor:hover
 {
     -fx-opacity: 0.6;
 }
@@ -254,7 +312,7 @@
     -fx-background-color: #fff ;
     -fx-border-radius: 24px;
     -fx-background-radius: 24px;
-    -fx-border-color: #000000;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 }
 
 .closemap

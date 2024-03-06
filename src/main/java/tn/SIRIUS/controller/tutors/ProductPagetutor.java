@@ -982,8 +982,8 @@ public class ProductPagetutor implements Initializable{
 
                 clearInputOrder();
 
-                 //EmailSender emailSender = new EmailSender();
-                // emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
+                 EmailSender emailSender = new EmailSender();
+                 emailSender.sendConfirmationEmail(email, user.getFirstName(), city, total);
 
                 cartAnchorepaneContainer.setVisible(false);
                 return true;

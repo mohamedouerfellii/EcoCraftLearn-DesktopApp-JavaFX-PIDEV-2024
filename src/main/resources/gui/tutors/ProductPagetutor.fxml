@@ -38,7 +38,7 @@
                         </HBox>
                         <Button fx:id="BtnMycommande" layoutX="795.0" layoutY="30.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="My Orders" />
                         <Label fx:id="nbrSourCart" layoutX="960.0" layoutY="19.0" prefHeight="20.0" prefWidth="7.0" text="0" textFill="RED" />
-                        <Button fx:id="AddProductBtn" layoutX="985.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleAddProductBtn" styleClass="AddProductBtn" stylesheets="@../../styles/Style1.css" text="Add New Product">
+                        <Button fx:id="AddProductBtn" layoutX="985.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleAddProductBtn" styleClass="AddProductBtntutor" stylesheets="@../../styles/Style1.css" text="Add New Product">
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,16 +65,16 @@
                               <Insets left="-40.0" />
                            </padding>
                         </HBox>
-                        <ScrollPane fx:id="ScrolPaneProduct" hbarPolicy="NEVER" layoutX="99.0" layoutY="85.0" prefHeight="544.0" prefWidth="1013.0" styleClass="ScrolPaneProducttutor" stylesheets="@../../styles/Style1.css">
+                        <ScrollPane fx:id="ScrolPaneProduct" hbarPolicy="NEVER" layoutX="99.0" layoutY="85.0" prefHeight="544.0" prefWidth="1013.0" styleClass="ScrolPaneProducttutor" stylesheets="@../../styles/Style1.css" vbarPolicy="NEVER">
                            <content>
-                              <GridPane fx:id="GridContainerProduct" alignment="CENTER" onKeyPressed="#handlesearch" prefHeight="548.0" prefWidth="1005.0" styleClass="GridContainerProducttutor" stylesheets="@../../styles/Style1.css">
+                              <GridPane fx:id="GridContainerProduct" alignment="CENTER" onKeyPressed="#handlesearch" prefHeight="548.0" prefWidth="1016.0" styleClass="GridContainerProducttutor" stylesheets="@../../styles/Style1.css">
                                  <rowConstraints>
                                     <RowConstraints fillHeight="false" minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
                            </content>
                         </ScrollPane>
-                        <Button fx:id="openCart" layoutX="918.0" layoutY="23.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="54.0" styleClass="openCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                        <Button fx:id="openCart" layoutX="918.0" layoutY="21.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="54.0" styleClass="openCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                            <graphic>
                               <ImageView fitHeight="36.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,8 +101,8 @@
                                  <children>
                                     <Line endX="12.0" layoutX="283.0" layoutY="75.0" startX="-239.0" />
                                     <Label layoutX="59.0" layoutY="25.0" prefHeight="35.0" prefWidth="241.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Order Summary " />
-                                    <Button fx:id="passerCommandeBtn" layoutX="52.0" layoutY="303.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Order" />
-                                    <Button fx:id="VideCartBtn" layoutX="199.0" layoutY="303.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Cancel" />
+                                    <Button fx:id="passerCommandeBtn" layoutX="52.0" layoutY="303.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtntutor" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Order" />
+                                    <Button fx:id="VideCartBtn" layoutX="199.0" layoutY="303.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="115.0" styleClass="passerCommandeBtntutor" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Cancel" />
                                     <VBox layoutX="60.0" layoutY="87.0" prefHeight="200.0" prefWidth="232.0">
                                        <children>
                                           <Label prefHeight="91.0" prefWidth="254.0" styleClass="Title" text="                 Total " textAlignment="CENTER" />
@@ -117,7 +117,7 @@
                               </Pane>
                               <AnchorPane fx:id="AnchorPaneFormCommande" layoutX="318.0" layoutY="71.0" maxHeight="526.0" prefHeight="526.0" prefWidth="493.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css" visible="false">
                                  <children>
-                                    <Button fx:id="PasserOrderBtn" layoutX="121.0" layoutY="415.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="275.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Order" />
+                                    <Button fx:id="PasserOrderBtn" layoutX="131.0" layoutY="415.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="275.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Order" />
                                     <TextField fx:id="InputPhoneOrder" layoutX="150.0" layoutY="199.0" prefHeight="45.0" prefWidth="262.0" promptText="Enter Phone Number" styleClass="InputsOrder" />
                                     <TextField fx:id="InputEmailOrder" layoutX="150.0" layoutY="127.0" prefHeight="45.0" prefWidth="262.0" promptText="Exemple : zied@gmail.com" styleClass="InputsOrder" stylesheets="@../../styles/StyleForm.css" />
                                     <TextField fx:id="InputCityOrder" layoutX="152.0" layoutY="263.0" prefHeight="45.0" prefWidth="183.0" promptText="Enter Your addresse" styleClass="InputsOrder" />
@@ -133,9 +133,9 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Line endX="101.0" layoutX="327.0" layoutY="82.0" startX="-239.0" />
+                                    <Line endX="101.0" layoutX="318.0" layoutY="82.0" startX="-239.0" />
                                     <Label layoutX="110.0" layoutY="26.0" prefHeight="45.0" prefWidth="296.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Confirm Your Order " />
-                                    <Button fx:id="OrderMapBtn" layoutX="359.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleOrderMap" prefHeight="39.0" prefWidth="48.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css">
+                                    <Button fx:id="OrderMapBtn" layoutX="359.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleOrderMap" prefHeight="39.0" prefWidth="48.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css">
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -180,13 +180,13 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="ConfirmeCartBtn" layoutX="129.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleConfirmeCartClicked" prefHeight="25.0" prefWidth="97.0" styleClass="ConfirmeCartBtn" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Confirme" />
+                        <Button fx:id="ConfirmeCartBtn" layoutX="140.0" layoutY="217.0" mnemonicParsing="false" onAction="#handleConfirmeCartClicked" prefHeight="25.0" prefWidth="97.0" styleClass="ConfirmeCartBtntutor" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Confirme" />
                         <Label fx:id="NumeroProductLabel" layoutX="92.0" layoutY="21.0" text="Label" visible="false" />
-                        <Line endX="7.0" layoutX="287.0" layoutY="58.0" startX="-239.0" />
+                        <Line endX="7.0" layoutX="289.0" layoutY="58.0" startX="-239.0" />
                         <Label layoutX="52.0" layoutY="8.0" prefHeight="35.0" prefWidth="241.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Choose Qunatity !" />
                         <Label layoutX="48.0" layoutY="119.0" prefHeight="33.0" prefWidth="58.0" styleClass="Title" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="Price :" />
                         <Label fx:id="TotalPriceLabel" layoutX="114.0" layoutY="116.0" prefHeight="39.0" prefWidth="72.0" styleClass="TotalPriceLabel" />
-                        <Button fx:id="incrementValue" layoutX="259.0" layoutY="119.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#incrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="incrementValue" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                        <Button fx:id="incrementValue" layoutX="259.0" layoutY="119.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#incrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="incrementValuetutor" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -196,7 +196,7 @@
                            </graphic>
                         </Button>
                         <Label fx:id="Labelvalue" layoutX="234.0" layoutY="117.0" prefHeight="35.0" prefWidth="25.0" styleClass="Quantite" stylesheets="@../../styles/StyleCart.css" text="0" />
-                        <Button fx:id="decrementValue" layoutX="196.0" layoutY="120.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#decrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="decrementValue" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
+                        <Button fx:id="decrementValue" layoutX="196.0" layoutY="120.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" onAction="#decrementValue" prefHeight="30.0" prefWidth="30.0" styleClass="decrementValuetutor" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -213,7 +213,7 @@
                <children>
                   <Label layoutX="434.0" layoutY="23.0" prefHeight="51.0" prefWidth="404.0" styleClass="title-form" stylesheets="@../../styles/StyleForm.css" text="Design Your Product" />
                   <Button fx:id="AddNewProduct" layoutX="795.0" layoutY="500.0" mnemonicParsing="false" onAction="#AddNewProduct" prefHeight="54.0" prefWidth="185.0" styleClass="AddBtn" stylesheets="@../../styles/StyleForm.css" text="Add Product" />
-                  <Button fx:id="GoBackBtn" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleGoBackBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
+                  <Button fx:id="GoBackBtn" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleGoBackBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
                   <ImageView fx:id="PictureChooser" fitHeight="194.0" fitWidth="201.0" layoutX="782.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true" styleClass="PictureChooser">
                      <image>
                         <Image url="@../../images/image%20preview.png" />
@@ -288,7 +288,7 @@
                   <Insets top="-9.0" />
                </opaqueInsets>
             </AnchorPane>
-            <AnchorPane fx:id="AnchorPaneDetailsProctClient" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneDetailsProctClient" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" visible="false">
+            <AnchorPane fx:id="AnchorPaneDetailsProctClient" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPaneDetailsProcttutor" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" visible="false">
                <children>
                   <AnchorPane fx:id="productDescriptionLeft" layoutX="668.0" layoutY="70.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" visible="false">
                      <children>
@@ -305,7 +305,7 @@
                   </AnchorPane>
                   <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="771.0" layoutY="597.0" stroke="#19bb1c" visible="false" />
                   <Line fx:id="lineMiniDetailsBtn1" endX="92.0" layoutX="888.0" layoutY="597.0" stroke="#19bb1c" visible="false" />
-                  <Button fx:id="DetailGoBackBtn" layoutX="87.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleOnDetailGoBackBtnClicked" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
+                  <Button fx:id="DetailGoBackBtn" layoutX="87.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleOnDetailGoBackBtnClicked" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
                   <Button fx:id="AddReview" layoutX="484.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleopenrating" prefHeight="35.0" prefWidth="164.0" styleClass="AddReviewBtn" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" text="Add Review" />
                   <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="365.0" layoutX="78.0" layoutY="109.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="569.0" />
                   <AnchorPane fx:id="AnchorPanedetailProduct" layoutX="668.0" layoutY="70.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
@@ -390,7 +390,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="AnchorPanerating" layoutX="386.0" layoutY="157.0" maxHeight="526.0" prefHeight="268.0" prefWidth="328.0" styleClass="AnchorPaneFormCommande" stylesheets="@../../styles/StyleForm.css" visible="false">
                      <children>
-                        <Button fx:id="Passerrating" layoutX="99.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="PasserOrderBtn" stylesheets="@../../styles/StyleForm.css" text="Rate " />
+                        <Button fx:id="Passerrating" layoutX="99.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Rate " />
                         <Button fx:id="Closerrating" layoutX="293.0" layoutY="14.0" mnemonicParsing="false" onAction="#handlecloserating" prefHeight="34.0" prefWidth="43.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
@@ -416,7 +416,7 @@
             <AnchorPane fx:id="AnchorPaneMyorders" maxHeight="656.0" maxWidth="1206.0" prefHeight="656.0" prefWidth="1206.0" styleClass="AnchorPaneMyorderstutor" stylesheets="@../../styles/StyleCommande.css" visible="false">
                <children>
                   <Label alignment="CENTER" layoutX="516.0" layoutY="22.0" prefHeight="53.0" prefWidth="183.0" styleClass="TitelMycart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css" text="My Orders" />
-                  <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#GobackOrder" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
+                  <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#GobackOrder" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
                   <ScrollPane fx:id="ScrolPaneCommande" hbarPolicy="NEVER" layoutX="90.0" layoutY="75.0" prefHeight="550.0" prefWidth="1050.0" styleClass="ScrolPaneCommandetutor" stylesheets="@../../styles/StyleCommande.css" vbarPolicy="NEVER">
                      <content>
                         <VBox fx:id="VboxCommandeClient" alignment="TOP_CENTER" prefHeight="550.0" prefWidth="1050.0" spacing="15.0" styleClass="VboxCommandetutor" stylesheets="@../../styles/StyleCommande.css">
