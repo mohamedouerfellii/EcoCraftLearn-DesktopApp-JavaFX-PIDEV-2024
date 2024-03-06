@@ -5,6 +5,7 @@ public class CourseParticipation {
     private int idParticipant;
     private int idCourse;
     private String participationDate;
+    private int sectionDone;
 
     public int getIdCP() {
         return idCP;
@@ -36,6 +37,22 @@ public class CourseParticipation {
 
     public void setParticipationDate(String participationDate) {
         this.participationDate = participationDate;
+    }
+
+    public int getSectionDone() {
+        return sectionDone;
+    }
+
+    public void setSectionDone(int sectionDone) {
+        this.sectionDone = sectionDone;
+    }
+
+    public CourseParticipation(int idCP, int idParticipant, int idCourse, String participationDate, int sectionDone) {
+        this.idCP = idCP;
+        this.idParticipant = idParticipant;
+        this.idCourse = idCourse;
+        this.participationDate = participationDate;
+        this.sectionDone = sectionDone;
     }
 
     public CourseParticipation(int idCP, int idParticipant, int idCourse, String participationDate) {

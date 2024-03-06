@@ -111,6 +111,8 @@ public class HomePageController implements Initializable {
     @FXML private VBox questionAnswersContainer;
     private Timeline countDownTimeline;
     private MediaPlayer whiteboardPlayer;
+    private MediaPlayer clappingSound;
+    private MediaPlayer timeOutSound;
     private CoursesMainPageController coursesMainPageController;
     private String styleMenuBtnClicked;
     private String styleMenuBtnNormal;
@@ -132,8 +134,10 @@ public class HomePageController implements Initializable {
     private QuizAnswerService quizAnswerService;
     private int idSectionComingFrom;
     private Course currentCourseQuiz;
+    private boolean isThreadRunning;
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        isThreadRunning = true;
         sectionService = new SectionService();
         quizAnswerService = new QuizAnswerService();
         quizContainer.setVisible(false);
@@ -296,12 +300,16 @@ public class HomePageController implements Initializable {
         } else
             coursesMainPageController.getCourses(courses);
     }
+    public void closeClientThread(){
+        isThreadRunning = false;
+        socket.close();
+    }
     private class ClientThread implements Runnable{
         @Override
         public void run(){
             System.out.println("thread start");
             byte[] incoming = new byte[256];
-            while (true) {
+            while (isThreadRunning) {
                 DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
                 try {
                     socket.receive(packet);
@@ -360,10 +368,6 @@ public class HomePageController implements Initializable {
     }
     // Quiz play
     @FXML
-    public void goBackFromQuizPlay(MouseEvent event){
-
-    }
-    @FXML
     public void cardAnswer1Clicked(MouseEvent event){
         countDownTimeline.stop(); // Stop the timer
         FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
@@ -414,6 +418,9 @@ public class HomePageController implements Initializable {
         currentCourseQuiz = courseService.getOne(section.getCourse());
         courseTitleQuiz.setText(currentCourseQuiz.getTitle());
         sectionTitleQuiz.setText(section.getTitle());
+        String musicFile = "C:/Users/ouerfelli mohamed/Desktop/EcoCraftLearning/src/main/resources/Simple 10 second countdown 4K with beep.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        timeOutSound = new MediaPlayer(sound);
         // Animation start
         quizCountReadyContainer.setOpacity(0);
         quizCountReadyContainer.setVisible(true);
@@ -448,6 +455,11 @@ public class HomePageController implements Initializable {
         timeline.play();
     }
     public void questionPlay(QuizQuestion quizQuestion){
+        timerQuiz.setStyle("""
+                -fx-font-family: "Jost Medium";
+                    -fx-font-size: 32;
+                    -fx-fill: #000000;
+                """);
         quizQuestionPlay.setText(quizQuestion.getQuestion());
         quizQuestionRep1.setText(quizQuestion.getChoice_1());
         quizQuestionRep2.setText(quizQuestion.getChoice_2());
@@ -457,12 +469,20 @@ public class HomePageController implements Initializable {
         fadeInTransition.setFromValue(0);
         fadeInTransition.setToValue(1.0);
         fadeInTransition.play();
-        AtomicInteger remainingTime = new AtomicInteger(60);
+        AtomicInteger remainingTime = new AtomicInteger(15);
         timerQuiz.setText(Integer.toString(remainingTime.get()));
         countDownTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
                     int timeLeft = remainingTime.decrementAndGet();
                     timerQuiz.setText(Integer.toString(timeLeft));
+                    if(timeLeft == 10){
+                        timerQuiz.setStyle("""
+                -fx-font-family: "Jost Medium";
+                    -fx-font-size: 36;
+                    -fx-fill: #ff0101;
+                """);
+                        timeOutSound.play();
+                    }
                     if (timeLeft == 0) {
                         countDownTimeline.stop(); // Stop the timer
                         FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), questionAnswersContainer);
@@ -473,24 +493,32 @@ public class HomePageController implements Initializable {
                     }
                 })
         );
-        countDownTimeline.setCycleCount(60);
+        countDownTimeline.setCycleCount(15);
         countDownTimeline.play();
     }
     public void answerQuestiontimeOut(QuizQuestion quizQuestion){
         if(currentQuestionIndex < totQuestionNbr-1){
+            timeOutSound.stop();
+            timeOutSound.seek(Duration.millis(0));
             answerQuestionsMap.put(quizQuestion,"Time End");
             currentQuestionIndex++;
             questionPlay(quizToPlay.getQuestions().get(currentQuestionIndex));
         } else {
+            timeOutSound.stop();
+            timeOutSound.seek(Duration.millis(0));
             answerQuestionsMap.put(quizQuestion,"Time End");
             calculateScoreQuiz(answerQuestionsMap);
         }
     }
     public void answerQuestionSkip(QuizQuestion quizQuestion){
         if(currentQuestionIndex < totQuestionNbr-1){
+            timeOutSound.stop();
+            timeOutSound.seek(Duration.millis(0));
             currentQuestionIndex++;
             questionPlay(quizToPlay.getQuestions().get(currentQuestionIndex));
         } else {
+            timeOutSound.stop();
+            timeOutSound.seek(Duration.millis(0));
             calculateScoreQuiz(answerQuestionsMap);
         }
     }
@@ -550,6 +578,10 @@ public class HomePageController implements Initializable {
             //            )
             boolean test = true;
             if(test){
+                String musicFile = "C:/Users/ouerfelli mohamed/Desktop/EcoCraftLearning/src/main/resources/Audience Clapping Sound Effects (no copyright).mp3";
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                clappingSound = new MediaPlayer(sound);
+                clappingSound.play();
                 quizCountReadyContainer.setStyle("-fx-background-color: #19BB1C");
                 countForReady.setStyle("""
                         -fx-font-family: "Jost SemiBold";
@@ -561,7 +593,7 @@ public class HomePageController implements Initializable {
                 fadeInTransition.setFromValue(0);
                 fadeInTransition.setToValue(1.0);
                 fadeInTransition.play();
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
                     quizCountReadyContainer.setVisible(true);
                 }));
                 timeline.setCycleCount(1);

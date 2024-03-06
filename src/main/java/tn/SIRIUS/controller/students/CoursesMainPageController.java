@@ -192,6 +192,9 @@ public class CoursesMainPageController implements Initializable {
     private int rateValue;
     private int userTest;
     private HomePageController homePageController;
+    private CourseParticipationService courseParticipationService;
+    private boolean isSectionCompleted;
+    private CourseParticipation cp;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         registeredCoursePage.setVisible(false);
@@ -225,6 +228,8 @@ public class CoursesMainPageController implements Initializable {
         rateValue = 0;
         incorrectPasswordCounter = 0;
         userTest = 4;
+        courseParticipationService = new CourseParticipationService();
+        isSectionCompleted = false;
     }
     public void setHomePageController(HomePageController controller){
         homePageController = controller;
@@ -507,23 +512,51 @@ public class CoursesMainPageController implements Initializable {
         }
     }
     // Learning Page
-    public void setUpLearningPage(Course course){
+    public void setUpLearningPage(Course course,boolean isOnRefresh){
         int count = 0;
+        int countForCompleted = 1;
         currentCourse = course;
         sectionsViewListContainer.getChildren().clear();
+        cp = courseParticipationService.getCourseParticipationById(userTest,course.getId());
         SectionService sectionService = new SectionService();
         sections = sectionService.getAll(course.getId());
         try{
             for(Section section : sections) {
-                if(count < 1){
-                    setSectionPlay(section);
-                    count++;
-                }
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/students/sectionItemPlay.fxml"));
                 Parent root = fxmlLoader.load();
                 SectionItemPlayController controller = fxmlLoader.getController();
-                controller.setData(section,this);
+                if(cp.getSectionDone() == 0){
+                    if(!isOnRefresh){
+                        if(count < 1){
+                            setSectionPlay(section,false);
+                            count++;
+                        }
+                    }
+                    if(countForCompleted == 1){
+                        controller.setData(section,this,false,true);
+                    }
+                    else if(countForCompleted == cp.getSectionDone()+1){
+                        controller.setData(section,this,false,true);
+                    } else if(countForCompleted <= cp.getSectionDone() && countForCompleted != 0){
+                        controller.setData(section,this,true,false);
+                    } else
+                        controller.setData(section,this,false,false);
+                } else {
+                    if(!isOnRefresh){
+                        if(count < 1){
+                            setSectionPlay(section,true);
+                            count++;
+                        }
+                    }
+                    if(countForCompleted == cp.getSectionDone()+1){
+                        controller.setData(section,this,false,true);
+                    } else if(countForCompleted <= cp.getSectionDone() && countForCompleted != 0){
+                        controller.setData(section,this,true,false);
+                    } else
+                        controller.setData(section,this,false,false);
+                }
+                countForCompleted++;
                 sectionsViewListContainer.getChildren().add(root);
             }
         }catch (IOException e){
@@ -531,7 +564,8 @@ public class CoursesMainPageController implements Initializable {
         }
         courseStudyPage.setVisible(true);
     }
-    public void setSectionPlay(Section section){
+    public void setSectionPlay(Section section,boolean isFinished){
+        isSectionCompleted = isFinished;
         if (mediaPlayer != null) mediaPlayer.dispose();
         mediaSecVid = new Media(section.getAttachment());
         mediaPlayer = new MediaPlayer(mediaSecVid);
@@ -554,6 +588,12 @@ public class CoursesMainPageController implements Initializable {
     public void updateTimeLabelVideoSection(){
         timeVideoSectionPlay.textProperty().bind(Bindings.createStringBinding(() -> { /* Callable<String> ( call() )*/
             try{
+                float progress = (float) (mediaPlayer.getCurrentTime().toSeconds() / mediaPlayer.getMedia().getDuration().toSeconds());
+                if(progress >= 0.9 && !isSectionCompleted){
+                    isSectionCompleted = true;
+                    if(courseParticipationService.updateCourseParticipationDone(cp))
+                        setUpLearningPage(currentCourse,true);
+                }
                 return getVidTime(mediaPlayer.getCurrentTime()) + " / ";
             }catch (Exception e){
                 System.out.println(e.getMessage());
@@ -792,6 +832,7 @@ public class CoursesMainPageController implements Initializable {
     public void goBackCoursesStudyClicked(MouseEvent event){
         if (mediaPlayer != null)
             mediaPlayer.dispose();
+        registeredCoursesBtnClicked(null);
         courseStudyPage.setVisible(false);
     }
     @FXML
@@ -813,7 +854,7 @@ public class CoursesMainPageController implements Initializable {
         homePageController.setUpQuizPlay(quiz);
     }
     public void goBackFromQuiz(List<Course> notRegistered,List<Course> registeredCourse,Course currentCourse){
-        setUpLearningPage(currentCourse);
+        setUpLearningPage(currentCourse,false);
         this.courses = notRegistered;
         this.registeredCourses = registeredCourse;
     }

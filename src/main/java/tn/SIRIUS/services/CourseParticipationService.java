@@ -1,5 +1,6 @@
 package tn.SIRIUS.services;
 
+import tn.SIRIUS.entities.CourseParticipation;
 import tn.SIRIUS.utils.MyDB;
 
 import java.sql.Connection;
@@ -105,5 +106,38 @@ public class CourseParticipationService {
         genderNumberList.add(maleCount);
         genderNumberList.add(femaleCount);
         return genderNumberList;
+    }
+    public CourseParticipation getCourseParticipationById(int idUser,int idCourse){
+        String qry = "SELECT * FROM COURSEPARTICIPATIONS WHERE participant = ? AND course = ?";
+        CourseParticipation courseParticipation = new CourseParticipation();
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idUser);
+            stm.setInt(2,idCourse);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()){
+                courseParticipation.setIdCP(rs.getInt("idParticipation"));
+                courseParticipation.setIdParticipant(rs.getInt("participant"));
+                courseParticipation.setIdCourse(rs.getInt("course"));
+                courseParticipation.setParticipationDate(rs.getString("participationDate"));
+                courseParticipation.setSectionDone(rs.getInt("sectionDone"));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return courseParticipation;
+    }
+    public boolean updateCourseParticipationDone(CourseParticipation courseParticipation){
+        String qry = "UPDATE COURSEPARTICIPATIONS SET sectionDone = ? WHERE idParticipation = ?";
+        int newNbrDone = courseParticipation.getSectionDone() + 1;
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,newNbrDone);
+            stm.setInt(2,courseParticipation.getIdCP());
+            if(stm.executeUpdate() == 1) return true;
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }

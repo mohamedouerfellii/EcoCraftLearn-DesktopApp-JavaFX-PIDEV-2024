@@ -331,15 +331,6 @@
       </AnchorPane>
       <AnchorPane fx:id="quizContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="quizContainer" stylesheets="@../../style/style.css">
          <children>
-            <Button layoutX="41.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#goBackFromQuizPlay" prefHeight="32.0" prefWidth="32.0" styleClass="most-progressed-course-btn" stylesheets="@../../style/style.css">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../icons/light/arrow-left-line.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Text fx:id="timerQuiz" layoutX="1267.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="timerQuiz" text="60" />
             <HBox alignment="CENTER" layoutX="120.0" layoutY="11.0" prefHeight="86.0" prefWidth="1123.0">
                <children>
@@ -390,7 +381,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="quizCountReadyContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="quizCountReadyContainer" stylesheets="@../../style/style.css">
+      <AnchorPane fx:id="quizCountReadyContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="quizCountReadyContainer" stylesheets="@../../style/style.css" visible="false">
          <children>
             <HBox alignment="CENTER" layoutX="3.0" layoutY="240.0" prefHeight="230.0" prefWidth="1350.0">
                <children>

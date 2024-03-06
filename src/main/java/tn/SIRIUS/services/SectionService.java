@@ -111,7 +111,7 @@ public class SectionService implements ICRUD<Section> {
         return sectionList;
     }
     public Section getSectionById(int idSection){
-        String query = "SELECT * FROM Sections WHERE idSection = ?";
+        String query = "SELECT * FROM SECTIONS WHERE idSection = ?";
         Section section = new Section();
         try{
             PreparedStatement stm = con.prepareStatement(query);
@@ -131,5 +131,17 @@ public class SectionService implements ICRUD<Section> {
             System.out.println(ex.getMessage());
         }
         return section;
+    }
+    public int countSectionByCourse(int idCourse){
+        String qry = "SELECT COUNT(course) AS nbr FROM SECTIONS where course = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setInt(1,idCourse);
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()) return rs.getInt("nbr");
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 }
