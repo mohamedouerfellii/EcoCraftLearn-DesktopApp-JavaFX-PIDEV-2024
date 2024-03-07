@@ -20,10 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.mindrot.jbcrypt.BCrypt;
-import tn.SIRIUS.controller.tutors.OperationAdminController;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.GRUDService;
 
 public class SignUpController implements Initializable {
     @FXML
@@ -205,7 +203,7 @@ public class SignUpController implements Initializable {
 
         }
         else {
-            GURDService u = new GURDService();
+            GRUDService u = new GRUDService();
 
             User user = new User(firstname, lastname, number, email, gender, password, roles, addUserImgPath, answer, question);
             u.add(user);

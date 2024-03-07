@@ -179,3 +179,32 @@
     -fx-background-color:#D5FFDC;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
+.rectangle-details{
+    -fx-background-color: #D5FFDC;
+}
+.item-container{
+    -fx-background-color: white;
+    -fx-background-radius: 15 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2);
+    -fx-spacing: 15px;
+    -fx-padding: 15px;
+    -fx-max-width: 1000;
+    -fx-max-height: 100;
+    -fx-border-radius: 15 15 15 15;
+}
+.user-details{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+
+
+}
+.pane-details{
+    -fx-background-color: white;
+    -fx-background-radius: 15 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2);
+    -fx-border-radius: 15 15 15 15;
+}
+.rectangle-details{
+    -fx-background-radius: 15 15 15 15;
+}

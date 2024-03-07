@@ -1,6 +1,5 @@
 package tn.SIRIUS.services;
 
-import org.mindrot.jbcrypt.BCrypt;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.utils.MyDB;
 
@@ -25,6 +24,27 @@ public class UserService {
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("password");
                 String enteredPassword = String.valueOf(user.getPassword().hashCode());
+
+                // Check if the entered password matches the stored hashed password
+                if (storedHashedPassword.equals(enteredPassword)) {
+                    return rs.getInt("idUser");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+    public int isPasswordMatch2(User user) {
+        String qry = "SELECT * FROM users WHERE firstName = ? AND role = ?";
+        try {
+            PreparedStatement stm = con.prepareStatement(qry);
+            stm.setString(1, user.getFirstName());
+            stm.setString(2, user.getRoles());
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                String storedHashedPassword = rs.getString("password");
+                String enteredPassword = user.getPassword();
 
                 // Check if the entered password matches the stored hashed password
                 if (storedHashedPassword.equals(enteredPassword)) {
@@ -186,51 +206,8 @@ public class UserService {
         }
         return false;
     }
-    public void userLoggedIn(int id,boolean b){
-        String sql ="UPDATE users set LogedIn = ? WHERE idUser = ?";
-        try{
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setBoolean(1,b);
-            stm.setInt(2,id);
-            stm.executeUpdate();
 
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
 
-    }
-    public int searchUserLoggedIn(){
-        String sql ="SELECT idUser FROM users WHERE LogedIn = ?";
-        try{
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setBoolean(1,true);
-            ResultSet resultSet = stm.executeQuery();
-            if(resultSet.next()){
-                return resultSet.getInt("idUser");
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return 0;
-    }
-    public boolean update(User user){
-        String query = "UPDATE `users` SET `firstName`=?,`password`=?where idUser=? ";
-        try{
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2,user.getLastName());
-            statement.setInt(3, user.getId());
-
-            if(statement.executeUpdate() == 1){
-                statement.close();
-                return true;
-            }
-            statement.close();
-        }catch (SQLException ex){
-            System.out.println(ex.getMessage());
-        }
-        return false;
-    }
     public User getUserById(int id){
         String sql = "SELECT * FROM users WHERE idUser = ?";
         try{
@@ -242,6 +219,38 @@ public class UserService {
                 user.setId(resultSet.getInt("idUser"));
                 user.setFirstName(resultSet.getString("firstName"));
                 user.setLastName(resultSet.getString("lastName"));
+                user.setNumber(resultSet.getInt("numTel"));
+                user.setEmail(resultSet.getString("email"));
+                user.setGender(resultSet.getString("gender"));
+                user.setPassword(resultSet.getString("password"));
+                user.setActive(resultSet.getBoolean("isActive"));
+                user.setNbrPtsCollects(resultSet.getInt("nbrPtsCollects"));
+                user.setRoles(resultSet.getString("role"));
+                user.setImage(resultSet.getString("image"));
+                return user;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public User getUserByEmail(String email){
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try{
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1,email);
+            ResultSet resultSet = stm.executeQuery();
+            if(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getInt("idUser"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setNumber(resultSet.getInt("numTel"));
+                user.setEmail(resultSet.getString("email"));
+                user.setGender(resultSet.getString("gender"));
+                user.setPassword(resultSet.getString("password"));
+                user.setActive(resultSet.getBoolean("isActive"));
+                user.setNbrPtsCollects(resultSet.getInt("nbrPtsCollects"));
                 user.setRoles(resultSet.getString("role"));
                 user.setImage(resultSet.getString("image"));
                 return user;
@@ -260,12 +269,6 @@ public class UserService {
             ResultSet resultSet = stm.executeQuery();
 
             while(resultSet.next()){
-              //  user.setId(resultSet.getInt("idUser"));
-             //   user.setFirstName(resultSet.getString("firstName"));
-            //    user.setLastName(resultSet.getString("lastName"));
-            //    user.setLastName(resultSet.getString("password"));
-            //    user.setRoles(resultSet.getString("role"));
-           //     user.setImage(resultSet.getString("image"));
                 user= new User(resultSet.getInt("idUser"),resultSet.getString("firstName"),resultSet.getString("lastName"),resultSet.getInt("numTel"),resultSet.getString("email"),resultSet.getString("gender") ,resultSet.getString("password"),resultSet.getString("image"));
             }
         }catch (SQLException e){
@@ -314,5 +317,37 @@ public class UserService {
         return userList;
     }
 
+    public User getOneUser(String email) throws SQLException {
+        String req = "SELECT * FROM `user` where email = ?";
+        PreparedStatement ps = con.prepareStatement(req);
+        ps.setString(1, email);
+
+        ResultSet rs = ps.executeQuery();
+        User user = new User();
+        user.setId(-999);
+
+        while (rs.next()) {
+            user.setId(rs.getInt("idUser"));
+            user.setFirstName(rs.getString("firstName"));
+            user.setEmail(rs.getString("email"));
+            user.setNumber(rs.getInt("num tel"));
+            user.setLastName(rs.getString("lastName"));
+            user.setActive(rs.getBoolean("isActive"));
+            user.setPassword(rs.getString("password"));
+            user.setRoles(rs.getString("role"));
+            user.setGender(rs.getString("gender"));
+            user.setNbrPtsCollects(rs.getInt("nbrPtsCollects"));
+            user.setImage(rs.getString("image"));
+            user.setQuestion(rs.getString("question"));
+            user.setAnswer(rs.getString("answer"));
+
+        }
+        ps.close();
+        return user;
+    }
+    public boolean emailExist(String email){
+        GRUDService g=new GRUDService();
+        return g.getAll().stream().anyMatch(e->e.getEmail().equals(email));
+    }
 }
 

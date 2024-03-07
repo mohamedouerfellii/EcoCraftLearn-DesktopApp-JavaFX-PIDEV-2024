@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,6 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="homeAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1350.0" styleClass="home-page-container" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.HomePageController">
    <children>
@@ -290,18 +290,153 @@
                   <Button fx:id="mostPopularCoursesBtn" mnemonicParsing="false" styleClass="most-popular-courses-btn" text="Most Popular" />
                </children>
             </HBox>
-            <AnchorPane fx:id="userCont" layoutX="920.0" layoutY="3.0" prefHeight="227.0" prefWidth="255.0" visible="false">
+            <AnchorPane fx:id="userCont" layoutX="920.0" layoutY="3.0" prefHeight="227.0" prefWidth="255.0" style="-fx-background-color: D5FFDC;" styleClass="pane-details" stylesheets="@../../style/button.css" visible="false">
                <children>
-                  <Button layoutX="56.0" layoutY="14.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="141.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Account" />
-                  <Button layoutX="45.0" layoutY="161.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="169.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Contact Us" />
-                  <Button layoutX="69.0" layoutY="88.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="129.0" styleClass="forget-password" stylesheets="@../../style/button.css" text="Wallet" />
+                  <Button fx:id="accoutButton" layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#showDetails" prefHeight="51.0" prefWidth="174.0" style="-fx-text-fill: black;" styleClass="forget-password" stylesheets="@../../style/button.css" text="Account">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/account-circle-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button layoutX="32.0" layoutY="161.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="207.0" style="-fx-text-fill: black;" styleClass="forget-password" stylesheets="@../../style/button.css" text="Contact Us">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/questionnaire-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button layoutX="15.0" layoutY="88.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="197.0" style="-fx-text-fill: black;" styleClass="forget-password" stylesheets="@../../style/button.css" text="Wallet">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/wallet-line.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
-               <styleClass>
-                  <String fx:value="nbr-courses-completed" />
-                  <String fx:value="welcome-container" />
-                  <String fx:value="home-page-container" />
-               </styleClass>
             </AnchorPane>
+         </children>
+      </Pane>
+      <Pane fx:id="detailsPane" layoutX="466.0" layoutY="141.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="530.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Text fx:id="firstNameLabelDetail" layoutX="196.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="foulen" />
+            <Text fx:id="lastNameLabelDetail" layoutX="275.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="falten" />
+            <Label layoutX="112.0" layoutY="131.0" styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Email :" />
+            <Text fx:id="emailLabelDetail" layoutX="210.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="exemple@email.com" />
+            <Label layoutX="110.0" layoutY="232.0" styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Gender :" />
+            <Text fx:id="genderLabelDetail" layoutX="235.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="Sexe" />
+            <Label layoutX="110.0" layoutY="181.0" styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Phone Number :" />
+            <Text fx:id="numberLabelDetail" layoutX="308.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="+216-**-***-***" />
+            <Label layoutX="110.0" layoutY="283.0" styleClass="label-details" stylesheets="@../../style/coursesMainPage.css" text="Number of Collect points :" />
+            <Line endX="414.20001220703125" layoutX="-25.0" layoutY="107.0" startX="157.39996337890625" />
+            <Text fx:id="nbrPtCollectLabelDetail" layoutX="416.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: jost; -fx-font-size: 20;" styleClass="label-data" text="999999" />
+            <Button layoutX="470.0" mnemonicParsing="false" onAction="#closeDetailsPane" styleClass="Details-button" stylesheets="@../../style/button.css">
+               <graphic>
+                  <ImageView fx:id="closeWarningPassword" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Circle fx:id="imgCircle" fill="DODGERBLUE" layoutX="261.0" layoutY="5.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button fx:id="editUser" layoutX="190.0" layoutY="337.0" mnemonicParsing="false" onAction="#editUserBtnClicked" prefHeight="35.0" prefWidth="142.0" styleClass="show-details-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fx:id="editCourseBtnImg1" fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/edit-box-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="editPane" layoutX="278.0" layoutY="141.0" prefHeight="411.0" prefWidth="794.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="331.0" layoutY="207.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Gender:" />
+            <Label layoutX="419.0" layoutY="207.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editgenderuser" layoutX="331.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Female/Male" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label layoutX="333.0" layoutY="121.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Phone Number:" />
+            <Label layoutX="501.0" layoutY="121.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editnumberuser" layoutX="333.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Phone Number" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="51.0" layoutY="29.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="FirstName:" />
+            <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="206.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editfirstnameUser" alignment="TOP_CENTER" layoutX="53.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new FirstName" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="53.0" layoutY="119.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="LastName:" />
+            <Label alignment="TOP_CENTER" layoutX="168.0" layoutY="29.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editlastnameuser" alignment="TOP_CENTER" layoutX="53.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new LastName" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="53.0" layoutY="206.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Email:" />
+            <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="119.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editemailuser" alignment="TOP_CENTER" layoutX="53.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Email" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="50.0" layoutY="285.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Password:" />
+            <Label layoutX="158.0" layoutY="285.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editpassworduser" alignment="TOP_CENTER" layoutX="50.0" layoutY="324.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Password" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Button fx:id="editimgbutton" layoutX="565.0" layoutY="39.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Choose image">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Button fx:id="editbutton" layoutX="595.0" layoutY="335.0" mnemonicParsing="false" onAction="#editUserButton" prefHeight="56.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Edit User">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="editimguser" fitHeight="150.0" fitWidth="200.0" layoutX="570.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/logo%20version%201%20(2).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeChat1" layoutX="734.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeChat" styleClass="Details-button" stylesheets="@../../style/button.css">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="deleteuser" layoutX="358.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteCourseBtnClicked" prefHeight="50.0" prefWidth="207.0" styleClass="delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete account">
+               <graphic>
+                  <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="blurPane" layoutX="536.0" layoutY="150.0" prefHeight="426.0" prefWidth="485.0" styleClass="glass-effect" stylesheets="@../../style/button.css">
@@ -325,7 +460,7 @@
                   </VBox>
                </content>
             </ScrollPane>
-            <Label fx:id="welcomeMsg2" layoutX="14.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Student Chat">
+            <Label fx:id="welcomeMsg2" layoutX="14.0" prefHeight="47.0" prefWidth="289.0" styleClass="welcome-msg" stylesheets="@../../style/style.css" text="Students Chat">
                <font>
                   <Font name="Jost Regular" size="32.0" />
                </font>
@@ -342,7 +477,7 @@
             </Button>
          </children>
       </Pane>
-      <Button layoutX="1280.0" layoutY="26.0" mnemonicParsing="false" onAction="#userContainer" prefHeight="40.0" prefWidth="56.0" styleClass="forget-password" stylesheets="@../../style/button.css">
+      <Button fx:id="arrow" layoutX="1280.0" layoutY="26.0" mnemonicParsing="false" onAction="#userContainer" prefHeight="40.0" prefWidth="56.0" styleClass="forget-password" stylesheets="@../../style/button.css">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>

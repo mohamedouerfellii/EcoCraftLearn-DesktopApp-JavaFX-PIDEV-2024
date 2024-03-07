@@ -4,26 +4,22 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.mortbay.jetty.security.Password;
 import tn.SIRIUS.controller.SignUpController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,70 +27,133 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
+import tn.SIRIUS.controller.tutors.DashboardAdminHomePageController;
 import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.utils.ChatServer;
+import tn.SIRIUS.services.GRUDService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.*;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static javafx.application.Application.launch;
 
 public class HomePageController implements Initializable {
 
     @FXML
-    private Circle profilImgContainer;
+    private Text emailLabelDetail;
+
     @FXML
-    private AnchorPane homeAnchorPane;
+    private Button eventsBtn;
+
     @FXML
-    private Pane paneitem;
+    private ImageView eventsBtnImg;
+
     @FXML
-    private VBox vboxitem;
+    private Text firstNameLabelDetail;
+
+    @FXML
+    private Button forumBtn;
+
+    @FXML
+    private ImageView forumBtnImg;
+
+    @FXML
+    private Text genderLabelDetail;
+
     @FXML
     private HBox hboxitem;
+
+    @FXML
+    private AnchorPane homeAnchorPane;
+
+    @FXML
+    private Button homeBtn;
+
+    @FXML
+    private ImageView homeBtnImg;
+
+    @FXML
+    private Text lastNameLabelDetail;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private ImageView logoutBtnImg;
+
+    @FXML
+    private Button message;
+
+    @FXML
+    private Label messageCunt;
+
+    @FXML
+    private Button mostPopularCoursesBtn;
+
+    @FXML
+    private Button mostProgressedCourseBtn;
+
+    @FXML
+    private Circle mostProgressedCourseImgContainer;
+
+    @FXML
+    private Arc mostProgressedCoursePrc;
+
+    @FXML
+    private Label mostProgressedCoursePrcVal;
+
+    @FXML
+    private Label mostProgressedCourseTitle;
+
+    @FXML
+    private Label mostProgressedCourseTutorName;
+
+    @FXML
+    private HBox msgCount;
+
+    @FXML
+    private Text nbrPtCollectLabelDetail;
+
+    @FXML
+    private Button newestCoursesBtn;
+
     @FXML
     private HBox notifCount;
 
     @FXML
-    private HBox msgCount;
+    private Text numberLabelDetail;
+
+    @FXML
+    private Pane paneitem;
+
+    @FXML
+    private Button productsBtn;
+
+    @FXML
+    private ImageView productsBtnImg;
+
+    @FXML
+    private Circle profilImgContainer;
+
+    @FXML
+    private VBox vboxitem;
+
     @FXML
     private Label welcomeMsg;
-    @FXML
-    private Circle mostProgressedCourseImgContainer;
-    @FXML
-    private Arc mostProgressedCoursePrc;
-    @FXML
-    private Label mostProgressedCoursePrcVal;
-    @FXML
-    private Button homeBtn;
-    @FXML
-    private ImageView homeBtnImg;
+
     @FXML
     private Button coursesBtn;
     @FXML
     private ImageView coursesBtnImg;
-    @FXML
-    private Button eventsBtn;
-    @FXML
-    private ImageView eventsBtnImg;
-    @FXML
-    private Button forumBtn;
-    @FXML
-    private ImageView forumBtnImg;
-    @FXML
-    private Button productsBtn;
-    @FXML
-    private ImageView productsBtnImg;
+
+
     @FXML
     private Button collectsBtn;
     @FXML
     private ImageView collectsBtnImg;
-    @FXML
-    private Button logoutBtn;
-    @FXML
-    private ImageView logoutBtnImg;
+
     @FXML
     private VBox messagContainer;
     @FXML
@@ -106,7 +165,8 @@ public class HomePageController implements Initializable {
     @FXML
     private Rectangle messageRectangle;
 
-
+@FXML
+private Button  arrow;
     @FXML
     private Button sendBtn;
     private BoxBlur blurEffect = new BoxBlur();
@@ -136,20 +196,42 @@ public class HomePageController implements Initializable {
     private TextField textFieldMessage;
     @FXML
     private AnchorPane userCont;
+    @FXML
+    private ImageView userImage;
 @FXML
 private ScrollPane scrollPaneMessage;
-@FXML
-private Label messageCunt;
+
     private static final int SERVER_PORT = 12345;
 User loggingUser=Session.getUser();
 @FXML
 private void userContainer(ActionEvent event) {
-    userCont.setVisible(true);
-
+    userCont.setVisible(!userCont.isVisible());
 }
+@FXML
+private Pane detailsPane;
+    @FXML
+    public void closeDetailsPane(ActionEvent event){
+        detailsPane.setVisible(false);
+        blurEffect.setWidth(0);
+        blurEffect.setHeight(0);
+        // Create a timeline to animate the blur effect
+        Timeline timeline = new Timeline(
+                new KeyFrame(javafx.util.Duration.seconds(0.5),
+                        new KeyValue(blurEffect.widthProperty(), 0),
+                        new KeyValue(blurEffect.heightProperty(), 0)
+                )
+        );
+        paneitem.setEffect(blurEffect);
+        vboxitem.setEffect(blurEffect);
+        hboxitem.setEffect(blurEffect);
+
+        // Play the timeline
+        timeline.play();
+    }
 @FXML
 private void closeChat(ActionEvent event) {
     blurPane.setVisible(false);
+    editPane.setVisible(false);
     blurEffect.setWidth(0);
     blurEffect.setHeight(0);
     // Create a timeline to animate the blur effect
@@ -168,14 +250,24 @@ private void closeChat(ActionEvent event) {
     count = 0;
     messageCunt.setText(String.valueOf(count));
 }
+@FXML
+private Circle imgCircle;
     @Override
     public void initialize(URL url, ResourceBundle rb){
         User loggedInUser = Session.getUser();
+        editPane.setVisible(false);
+        detailsPane.setVisible(false);
         count = 0;
         profilImgContainer.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
         welcomeMsg.setText("Welcome "+loggedInUser.getFirstName()+"!");
        vboxMessage.setStyle("-fx-background-color: #D5FFDC;");
-
+        lastNameLabelDetail.setText(loggedInUser.getLastName());
+        firstNameLabelDetail.setText(loggedInUser.getFirstName());
+        emailLabelDetail.setText(loggedInUser.getEmail());
+        numberLabelDetail.setText(String.valueOf(loggedInUser.getNumber()));
+        genderLabelDetail.setText(loggedInUser.getGender());
+        nbrPtCollectLabelDetail.setText(String.valueOf(loggedInUser.getNbrPtsCollects()));
+        imgCircle.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
         byte[] uuid = ("init;" + loggedInUser.getFirstName()+";").getBytes();
         DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
         try {
@@ -191,8 +283,8 @@ sendBtn.setOnAction(event1 -> {
     hbox.setPadding(new Insets(5, 5, 5, 5));
 
     Label label = new Label(temp);
-    label.setStyle("-fx-background-color: #7BE41B; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
-    label.setWrapText(true); // Allow text to wrap to multiple lines if needed
+    label.setStyle("-fx-background-color: #D5FFDC;-fx-border-radius: 15 15 15 15; -fx-background-radius: 15 15 15 15;-fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+    label.setWrapText(true);
     label.setPadding(new Insets(5, 10, 5, 10));
     vboxMessage.setSpacing(7);
     hbox.setPadding(new Insets(5, 10, 5, 10));
@@ -220,7 +312,7 @@ sendBtn.setOnAction(event1 -> {
                 hbox.setPadding(new Insets(5, 5, 5, 5));
 
                 Label label = new Label(temp);
-                label.setStyle("-fx-background-color: #7BE41B; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                label.setStyle("-fx-background-color: #D5FFDC;-fx-border-radius: 15 15 15 15; -fx-background-radius: 15 15 15 15;-fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
                 label.setWrapText(true); // Allow text to wrap to multiple lines if needed
                 label.setPadding(new Insets(5, 10, 5, 10));
                 vboxMessage.setSpacing(7);
@@ -271,7 +363,7 @@ sendBtn.setOnAction(event1 -> {
                 hbox.setAlignment(Pos.CENTER_LEFT);
                 hbox.setPadding(new Insets(5, 5, 5, 10));
                 Label label = new Label(senderName + ": " + actualMessage);
-                label.setStyle("-fx-background-color: grey ; -fx-background-radius: 20px; -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
+                label.setStyle("-fx-background-color: #39932C;-fx-border-radius: 15 15 15 15; -fx-background-radius: 15 15 15 15;-fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); -fx-text-fill: black; -fx-font-family: 'Jost Medium'; -fx-font-size: 16px;");
                 label.setPadding(new Insets(5, 10, 5, 10));
                 label.setWrapText(true);
                 hbox.getChildren().add(label);
@@ -288,7 +380,120 @@ sendBtn.setOnAction(event1 -> {
         }
     }
 
+@FXML
+public void showDetails(ActionEvent event){
+    detailsPane.setVisible(true);
+    applyBlurEffect();
+    userCont.setVisible(false);
 
+}
+@FXML
+private TextField editfirstnameUser;
+    @FXML
+    private TextField editlastnameuser;
+    @FXML
+    private TextField editemailuser;
+    @FXML
+    private TextField editgenderuser;
+    @FXML
+    private TextField editnumberuser;
+    @FXML
+    private TextField editpassworduser;
+   private  String img=loggingUser.getImage();
+
+    private  Image detailImg=new Image(img);
+
+    @FXML
+    private ImageView editimguser;
+    @FXML
+    private Pane editPane;
+    @FXML
+    public void editUserBtnClicked(ActionEvent event) throws IOException {
+        detailsPane.setVisible(false);
+        editPane.setVisible(true);
+        editfirstnameUser.setText(firstNameLabelDetail.getText());
+        editlastnameuser.setText(lastNameLabelDetail.getText());
+        editemailuser.setText(emailLabelDetail.getText());
+        editgenderuser.setText(genderLabelDetail.getText());
+        editnumberuser.setText(String.valueOf(numberLabelDetail.getText()));
+        editpassworduser.setText("");
+        editimguser.setImage(detailImg);
+
+
+    }
+    @FXML
+    public void deleteCourseBtnClicked(ActionEvent event) throws IOException {
+        GRUDService userService=new GRUDService();
+        userService.delete(loggingUser.getId());
+        Session.logout();
+        FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminHomePageController.class.getResource("/gui/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void editUserButton(ActionEvent event){
+        String Password;
+        int id=loggingUser.getId();
+        String firstName=editfirstnameUser.getText();
+        String lastName=editlastnameuser.getText();
+        String Email=editemailuser.getText();
+        int number=Integer.parseInt(editnumberuser.getText());
+        String gender=editgenderuser.getText();
+        if(editpassworduser.getText().isEmpty()){
+            Password=String.valueOf(loggingUser.getPassword());
+        }else
+         Password = String.valueOf(editpassworduser.getText().hashCode());
+
+        GRUDService serv=new GRUDService();
+
+        User user=new User(id, firstName, lastName, number, Email, gender, Password,img);
+
+
+        if (serv.update(user))
+        {
+            profilImgContainer.setFill(new ImagePattern(new Image(user.getImage())));
+            imgCircle.setFill(new ImagePattern(new Image(user.getImage())));
+            welcomeMsg.setText("Welcome "+user.getFirstName()+"!");
+            editPane.setVisible(false);
+            detailsPane.setVisible(false);
+            blurEffect.setWidth(0);
+            blurEffect.setHeight(0);
+            // Create a timeline to animate the blur effect
+            Timeline timeline = new Timeline(
+                    new KeyFrame(javafx.util.Duration.seconds(0.5),
+                            new KeyValue(blurEffect.widthProperty(), 0),
+                            new KeyValue(blurEffect.heightProperty(), 0)
+                    )
+            );
+            paneitem.setEffect(blurEffect);
+            vboxitem.setEffect(blurEffect);
+            hboxitem.setEffect(blurEffect);
+
+            // Play the timeline
+            timeline.play();
+        }
+
+
+    }
+    @FXML
+    private void chooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image File");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            // Load the selected image into the ImageView
+            img = selectedFile.toURI().toString();
+            Image image = new Image(selectedFile.toURI().toString());
+            editimguser.setImage(image);
+        }
+    }
     @FXML
     public void logOut(ActionEvent event)  throws IOException {
         Session.logout();

@@ -1,5 +1,8 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,21 +12,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import tn.SIRIUS.controller.LoginController;
 import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.services.GURDService;
-import tn.SIRIUS.services.UserService;
+import tn.SIRIUS.services.GRUDService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -31,49 +38,147 @@ import java.util.ResourceBundle;
 
 public class DashboardAdminHomePageController implements Initializable {
     @FXML
-    private Circle profileImg;
+    private Button closeChat1;
+
     @FXML
-    private HBox notifCount;
+    private ImageView closeWarningPassword;
+
     @FXML
-    private HBox msgCount;
-    @FXML
-    private Button dashboardBtn;
-    @FXML
-    private ImageView dashboardBtnImg;
+    private Button collectsBtn;
+
     @FXML
     private Button coursesBtn;
+
     @FXML
     private ImageView coursesBtnImg;
+
+    @FXML
+    private Button dashboardBtn;
+
+    @FXML
+    private ImageView dashboardBtnImg;
+
+    @FXML
+    private ImageView deleteCourseBtnImg;
+
+    @FXML
+    private Button deleteuser;
+
+    @FXML
+    private Pane detailsPane;
+
+    @FXML
+    private ImageView editCourseBtnImg;
+
+    @FXML
+    private Pane editPane;
+
+    @FXML
+    private Button editUser;
+
+    @FXML
+    private Button editbutton;
+
+    @FXML
+    private TextField editemailuser;
+
+    @FXML
+    private TextField editfirstnameUser;
+
+    @FXML
+    private TextField editgenderuser;
+
+    @FXML
+    private Button editimgbutton;
+
+    @FXML
+    private ImageView editimguser;
+
+
+    @FXML
+    private TextField editlastnameuser;
+
+    @FXML
+    private TextField editnumberuser;
+
+    @FXML
+    private TextField editpassworduser;
+
+    @FXML
+    private Text emailLabelDetail;
+
     @FXML
     private Button eventsBtn;
+
+    @FXML
+    private Text firstNameLabelDetail;
+
+    @FXML
+    private Button forumBtn;
+
+    @FXML
+    private Text genderLabelDetail;
+
+    @FXML
+    private Text lastNameLabelDetail;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
+    private Pane mainContentContainer;
+
+    @FXML
+    private ImageView msgBtn;
+
+    @FXML
+    private HBox msgCount;
+
+    @FXML
+    private HBox notifCount;
+
+    @FXML
+    private Text numberLabelDetail;
+
+    @FXML
+    private AnchorPane pagesContainer;
+
+    @FXML
+    private Button productsBtn;
+
+    @FXML
+    private Circle profilImgContainer,profileImage;
+
     @FXML
     private Label nbrStudents;
     @FXML
     private ImageView eventsBtnImg;
-    @FXML
-    private Button forumBtn;
+
     @FXML
     private ImageView forumBtnImg;
-    @FXML
-    private Button productsBtn;
+
     @FXML
     private ImageView productsBtnImg;
-    @FXML
-    private Button collectsBtn;
+
     @FXML
     private ImageView collectsBtnImg;
-    @FXML
-    private Button logoutBtn;
+
     @FXML
     private ImageView logoutBtnImg;
-    @FXML
-    private Pane mainContentContainer;
 
 
+    User loggedInUser = Session.getUser();
 
     public void initialize(URL url, ResourceBundle rb){
+
         User loggedInUser = Session.getUser();
-        profileImg.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
+        profileImage.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
+        profilImgContainer.setFill(new ImagePattern(new Image(loggedInUser.getImage())));
+        lastNameLabelDetail.setText(loggedInUser.getLastName());
+        firstNameLabelDetail.setText(loggedInUser.getFirstName());
+        emailLabelDetail.setText(loggedInUser.getEmail());
+        numberLabelDetail.setText(String.valueOf(loggedInUser.getNumber()));
+        genderLabelDetail.setText(loggedInUser.getGender());
         Label nbrNotif = new Label();
         Label nbrMsg = new Label();
         nbrNotif.setText("5");
@@ -90,7 +195,7 @@ public class DashboardAdminHomePageController implements Initializable {
             Parent page = fxmlLoader.load();
             mainContentContainer.getChildren().setAll(page);
         }catch (IOException ex){
-            throw new RuntimeException();
+            System.out.println(ex.getMessage());
         }
         //Menu
         String styleMenuBtnClicked =
@@ -182,5 +287,146 @@ public class DashboardAdminHomePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    public void openUserDetails(ActionEvent event){
+        detailsPane.setVisible(true);
+        applyBlurEffect();
+
+
+    }
+    private String img=loggedInUser.getImage();
+    @FXML
+    public void editUserBtnClicked(ActionEvent event) throws IOException {
+        detailsPane.setVisible(false);
+        editPane.setVisible(true);
+        editfirstnameUser.setText(firstNameLabelDetail.getText());
+        editlastnameuser.setText(lastNameLabelDetail.getText());
+        editemailuser.setText(emailLabelDetail.getText());
+        editgenderuser.setText(genderLabelDetail.getText());
+        editnumberuser.setText(String.valueOf(numberLabelDetail.getText()));
+        editpassworduser.setText("");
+
+
+
+    }
+    @FXML
+    public void editUserButton(ActionEvent event){
+        int id=loggedInUser.getId();
+        String firstName=editfirstnameUser.getText();
+        String lastName=editlastnameuser.getText();
+        String Email=editemailuser.getText();
+        int number=Integer.parseInt(editnumberuser.getText());
+        String gender=editgenderuser.getText();
+        String Password = String.valueOf(editpassworduser.getText().hashCode());
+
+        GRUDService serv=new GRUDService();
+
+        User user=new User(id, firstName, lastName, number, Email, gender, Password,img);
+
+
+        if (serv.update(user))
+        {
+            profilImgContainer.setFill(new ImagePattern(new Image(user.getImage())));
+            editPane.setVisible(false);
+            detailsPane.setVisible(false);
+            blurEffect.setWidth(0);
+            blurEffect.setHeight(0);
+            // Create a timeline to animate the blur effect
+            Timeline timeline = new Timeline(
+                    new KeyFrame(javafx.util.Duration.seconds(0.5),
+                            new KeyValue(blurEffect.widthProperty(), 0),
+                            new KeyValue(blurEffect.heightProperty(), 0)
+                    )
+            );
+            mainContentContainer.setEffect(blurEffect);
+            vboxitem.setEffect(blurEffect);
+            hboxitem.setEffect(blurEffect);
+
+            // Play the timeline
+            timeline.play();
+        }
+
+
+    }
+    @FXML
+    public void deleteCourseBtnClicked(ActionEvent event) throws IOException {
+        GRUDService userService=new GRUDService();
+        userService.delete(loggedInUser.getId());
+        Session.logout();
+        FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminHomePageController.class.getResource("/gui/login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  // Get the current stage
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void chooseImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image File");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            // Load the selected image into the ImageView
+            img = selectedFile.toURI().toString();
+            Image image = new Image(selectedFile.toURI().toString());
+            editimguser.setImage(image);
+        }
+    }
+    @FXML
+    public void closeDetails(ActionEvent event){
+        detailsPane.setVisible(false);
+        editPane.setVisible(false);
+        blurEffect.setWidth(0);
+        blurEffect.setHeight(0);
+        // Create a timeline to animate the blur effect
+        Timeline timeline = new Timeline(
+                new KeyFrame(javafx.util.Duration.seconds(0.5),
+                        new KeyValue(blurEffect.widthProperty(), 0),
+                        new KeyValue(blurEffect.heightProperty(), 0)
+                )
+        );
+        mainContentContainer.setEffect(blurEffect);
+        vboxitem.setEffect(blurEffect);
+        hboxitem.setEffect(blurEffect);
+
+        // Play the timeline
+        timeline.play();
+    }
+    private BoxBlur blurEffect = new BoxBlur();
+    @FXML
+    private VBox vboxitem;
+    @FXML
+    private HBox hboxitem;
+    @FXML
+    private Pane paneitem;
+    @FXML
+    private ImageView arrow;
+    private void applyBlurEffect() {
+
+        blurEffect.setWidth(0);
+        blurEffect.setHeight(0);
+        // Create a timeline to animate the blur effect
+        Timeline timeline = new Timeline(
+                new KeyFrame(javafx.util.Duration.seconds(0.5),
+                        new KeyValue(blurEffect.widthProperty(), 10),
+                        new KeyValue(blurEffect.heightProperty(), 10)
+                )
+        );
+        mainContentContainer.setEffect(blurEffect);
+        vboxitem.setEffect(blurEffect);
+        hboxitem.setEffect(blurEffect);
+
+
+        // Play the timeline
+        timeline.play();
+    }
+
+
+
+
 
 }

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pagesContainer" prefHeight="720.0" prefWidth="1350.0" styleClass="pages-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.DashboardTutorHomePageController">
+   <children>
+      <Pane fx:id="mainContentContainer" layoutX="150.0" layoutY="70.0" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" />
+      <VBox fx:id="vboxitem" alignment="TOP_CENTER" prefHeight="721.0" prefWidth="150.0" styleClass="left-menu-container" stylesheets="@../../style/dashboardAdminStyle.css">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="logoContainer">
+                     <image>
+                        <Image url="@../../images/logoLight.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Button fx:id="dashboardBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Dashboard">
+               <graphic>
+                  <ImageView fx:id="dashboardBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/dashboard-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="100.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="coursesBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Courses    ">
+               <graphic>
+                  <ImageView fx:id="coursesBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/graduation-cap-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="eventsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Events      ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/calendar-event-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="forumBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Forum      ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/group-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="productsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Products  ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/shopping-bag-3-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="collectsBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Collects   ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/recycle-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="140.0" styleClass="menu-btn" stylesheets="@../../style/dashboardAdminStyle.css" text=" Logout   ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/light/logout-box-fill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" top="120.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox fx:id="hboxitem" alignment="CENTER_RIGHT" layoutX="289.0" layoutY="6.0" prefHeight="60.0" prefWidth="779.0" styleClass="headerContainer" stylesheets="@../../style/style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
+               <padding>
+                  <Insets left="-40.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="message" mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-message-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <HBox fx:id="msgCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0">
+                     <children>
+                        <Label fx:id="messageCunt" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="56.0" prefWidth="71.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="37.0" styleClass="notif-btn" stylesheets="@../../style/style.css" translateY="8.0">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/light/icons8-notification-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox fx:id="notifCount" alignment="CENTER" maxHeight="-Infinity" prefHeight="20.0" prefWidth="20.0" styleClass="notif-count" stylesheets="@../../style/style.css" translateX="-26.0" translateY="9.0" />
+               </children>
+            </HBox>
+            <Circle fx:id="profilImgContainer" fill="DODGERBLUE" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="profil-img-container">
+               <HBox.margin>
+                  <Insets right="-260.0" />
+               </HBox.margin>
+            </Circle>
+         </children>
+      </HBox>
+      <Button layoutX="1269.0" layoutY="13.0" mnemonicParsing="false" onAction="#openUserDetails" prefHeight="40.0" prefWidth="56.0" styleClass="forget-password" stylesheets="@../../style/button.css" />
+      <Pane fx:id="detailsPane" layoutX="444.0" layoutY="151.0" prefHeight="411.0" prefWidth="530.0" style="-fx-background-color: white;" styleClass="pane-details" stylesheets="@../../style/button.css" visible="false">
+         <children>
+            <Text fx:id="firstNameLabelDetail" layoutX="192.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="foulen">
+               <font>
+                  <Font name="Jost Medium" size="20.0" />
+               </font></Text>
+            <Text fx:id="lastNameLabelDetail" layoutX="283.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="falten">
+               <font>
+                  <Font name="Jost Medium" size="20.0" />
+               </font></Text>
+            <Label layoutX="96.0" layoutY="138.0" styleClass="user-details" stylesheets="@../../style/button.css" text="Email :" />
+            <Text fx:id="emailLabelDetail" layoutX="178.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="exemple@email.com">
+               <font>
+                  <Font name="Jost Medium" size="20.0" />
+               </font></Text>
+            <Label layoutX="95.0" layoutY="221.0" styleClass="user-details" stylesheets="@../../style/button.css" text="Gender :" />
+            <Text fx:id="genderLabelDetail" layoutX="196.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe">
+               <font>
+                  <Font name="Jost Medium" size="20.0" />
+               </font></Text>
+            <Label layoutX="96.0" layoutY="179.0" styleClass="user-details" stylesheets="@../../style/button.css" text="Phone Number :" />
+            <Text fx:id="numberLabelDetail" layoutX="268.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+216-**-***-***">
+               <font>
+                  <Font name="Jost Medium" size="20.0" />
+               </font></Text>
+            <Line endX="227.79998779296875" layoutX="200.0" layoutY="118.0" startX="-104.0" />
+            <Button layoutX="471.0" layoutY="5.0" mnemonicParsing="false" onAction="#closeDetails" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fx:id="closeWarningPassword" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Circle fx:id="profileImage" fill="DODGERBLUE" layoutX="262.0" layoutY="6.0" radius="57.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button fx:id="editUser" layoutX="191.0" layoutY="301.0" mnemonicParsing="false" onAction="#editUserBtnClicked" prefHeight="35.0" prefWidth="142.0" styleClass="show-details-btn" stylesheets="@../../style/coursesMainPage.css" text="Edit">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fx:id="editCourseBtnImg" fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/edit-box-line.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="editPane" layoutX="288.0" layoutY="151.0" prefHeight="411.0" prefWidth="794.0" styleClass="pane-details" stylesheets="@../../style/button.css" visible="false">
+         <children>
+            <Label layoutX="331.0" layoutY="207.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Gender:" />
+            <Label layoutX="419.0" layoutY="207.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editgenderuser" layoutX="331.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Female/Male" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label layoutX="333.0" layoutY="121.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Phone Number:" />
+            <Label layoutX="501.0" layoutY="121.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editnumberuser" layoutX="333.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Phone Number" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="51.0" layoutY="29.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="FirstName:" />
+            <Label alignment="TOP_CENTER" layoutX="118.0" layoutY="206.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editfirstnameUser" alignment="TOP_CENTER" layoutX="53.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new FirstName" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="53.0" layoutY="119.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="LastName:" />
+            <Label alignment="TOP_CENTER" layoutX="168.0" layoutY="29.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editlastnameuser" alignment="TOP_CENTER" layoutX="53.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new LastName" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="53.0" layoutY="206.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Email:" />
+            <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="119.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editemailuser" alignment="TOP_CENTER" layoutX="53.0" layoutY="241.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Email" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Label alignment="TOP_CENTER" layoutX="50.0" layoutY="285.0" styleClass="label-form" stylesheets="@../../style/addNewCourse.css" text="Password:" />
+            <Label layoutX="158.0" layoutY="285.0" text="*" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="editpassworduser" alignment="TOP_CENTER" layoutX="50.0" layoutY="324.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="221.0" promptText="Add new Password" styleClass="add-course-input" stylesheets="@../../style/addNewCourse.css" />
+            <Button fx:id="editimgbutton" layoutX="565.0" layoutY="53.0" mnemonicParsing="false" onAction="#chooseImage" prefHeight="42.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Choose image">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="editbutton" layoutX="572.0" layoutY="284.0" mnemonicParsing="false" onAction="#editUserButton" prefHeight="42.0" prefWidth="160.0" styleClass="choose-img_btn" stylesheets="@../../style/addNewCourse.css" text="Edit User">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fx:id="editimguser" fitHeight="150.0" fitWidth="200.0" layoutX="570.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/logo%20version%201%20(2).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeChat1" layoutX="734.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeDetails" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="deleteuser" layoutX="548.0" layoutY="338.0" mnemonicParsing="false" onAction="#deleteCourseBtnClicked" prefHeight="40.0" prefWidth="209.0" style="-fx-background-color: white;" styleClass="delete-course-btn" stylesheets="@../../style/coursesMainPage.css" text="Delete account">
+               <graphic>
+                  <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
+                     <image>
+                        <Image url="@../../icons/dark/close-circle-filll.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

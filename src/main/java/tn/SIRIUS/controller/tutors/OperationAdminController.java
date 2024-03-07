@@ -5,7 +5,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
@@ -13,26 +12,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.mindrot.jbcrypt.BCrypt;
-import org.w3c.dom.events.MouseEvent;
-import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.GRUDService;
 import tn.SIRIUS.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OperationAdminController implements Initializable {
@@ -84,7 +77,7 @@ public class OperationAdminController implements Initializable {
     private Button editimgbutton;
 
     @FXML
-    private ImageView editimguser;
+    private Rectangle editimguser;
 
     @FXML
     private TextField editlastnameuser;
@@ -135,7 +128,7 @@ public class OperationAdminController implements Initializable {
     private Text passwordLabelDetail;
 
     @FXML
-    private ImageView userImgContainer;
+    private Rectangle userImgContainer;
 
     @FXML
     private AnchorPane warningDeleteCourseContainer;
@@ -156,8 +149,9 @@ public class OperationAdminController implements Initializable {
         addCourseImgPath = user.getImage();
         System.out.println(addCourseImgPath);
         detailImg = new Image(addCourseImgPath);
+        ImagePattern imgPattern=new ImagePattern(detailImg);
         coursesDetailsContainer.setVisible(true);
-        userImgContainer.setImage(detailImg);
+        userImgContainer.setFill(imgPattern);
         firstNameLabelDetail.setText(user.getFirstName());
         idLabelDetail.setText(String.valueOf("#"+user.getId()));
         lastNameLabelDetail.setText(user.getLastName());
@@ -191,7 +185,7 @@ public class OperationAdminController implements Initializable {
         UserService userService = new UserService();
         if(userService.isPasswordConfirmed(Session.getUser().getId(), password)){
 
-            GURDService courseService = new GURDService();
+            GRUDService courseService = new GRUDService();
             if (courseService.delete(Integer.parseInt(idLabelDetail.getText().replace("#","")))){
                 passwordConfirmDelete.clear();
                 doneEditCourse.setVisible(true);
@@ -218,7 +212,8 @@ public class OperationAdminController implements Initializable {
         editgenderuser.setText(genderLabelDetail.getText());
         editnumberuser.setText(String.valueOf(numberLabelDetail.getText()));
         editpassworduser.setText(passwordLabelDetail.getText());
-        editimguser.setImage(detailImg);
+        ImagePattern imgPattern=new ImagePattern(detailImg);
+        editimguser.setFill(imgPattern);
         editstatususer.setText(String.valueOf(isActiveLabelDetail.getText()));
 
     }
@@ -232,7 +227,7 @@ int number=Integer.parseInt(editnumberuser.getText());
 String gender=editgenderuser.getText();
         String Password = String.valueOf(editpassworduser.getText().hashCode());
 
-        GURDService serv=new GURDService();
+        GRUDService serv=new GRUDService();
 
         User user=new User(id, firstName, lastName, number, Email, gender, Password,addCourseImgPath);
 
@@ -259,7 +254,8 @@ String gender=editgenderuser.getText();
             // Load the selected image into the ImageView
             addCourseImgPath = selectedFile.toURI().toString();
             Image image = new Image(selectedFile.toURI().toString());
-            editimguser.setImage(image);
+            ImagePattern imgpatter=new ImagePattern(image);
+            editimguser.setFill(imgpatter);
         }
     }
     @FXML

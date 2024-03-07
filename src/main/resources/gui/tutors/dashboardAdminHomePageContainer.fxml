@@ -5,72 +5,56 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="mainDashContentContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.dashboardAdminHomePageContainerController">
    <children>
-      <VBox layoutX="19.0" layoutY="13.0" prefHeight="626.0" prefWidth="1072.0" spacing="10.0" style="-fx-background-color: white;" styleClass="feedback-container" stylesheets="@../../style/dashboardAdminStyle.css">
+      <ScrollPane fx:id="feedbackScrollPane" hbarPolicy="NEVER" layoutX="50.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="446.0" prefWidth="1041.0" style="-fx-background-color: white;" styleClass="feedback-scroll-pane" stylesheets="@../../style/dashboardAdminStyle.css" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="feedbackContentContainer" alignment="TOP_CENTER" fillWidth="false" prefHeight="454.0" prefWidth="1040.0" spacing="15.0" style="-fx-background-color: white;" styleClass="feedback-content-container" stylesheets="@../../style/dashboardAdminStyle.css" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="139.0" layoutY="23.0" style="-fx-font-weight: BOLD;" styleClass="feedback-label" stylesheets="@../../style/dashboardAdminStyle.css" text="Users">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="380.0" layoutY="19.0" prefHeight="43.0" prefWidth="445.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
          <children>
-            <HBox prefHeight="43.0" prefWidth="838.0">
-               <children>
-                  <Label styleClass="feedback-label" stylesheets="@../../style/dashboardAdminStyle.css" text="Users" />
-                  <HBox alignment="CENTER" layoutX="461.0" layoutY="13.0" prefHeight="43.0" prefWidth="445.0" styleClass="search-bar-container" stylesheets="@../../style/style.css">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
-                           <image>
-                              <Image url="@../../icons/dark/search-2-line.png" />
-                           </image>
-                        </ImageView>
-                        <TextField fx:id="searchInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleSearch" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
-                           <HBox.margin>
-                              <Insets left="-390.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="100.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </HBox>
-                  <Button fx:id="filter" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showFilterUser" styleClass="Details-button" stylesheets="@../../style/button.css" text="Filter">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icons/filter.png" />
-                           </image></ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </HBox>
-            <Line endX="878.5595092773438" endY="-5.409478908404708E-4" startX="-171.3333740234375" startY="3.0517578125E-5">
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </Line>
-            <ScrollPane fx:id="feedbackScrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="545.0" prefWidth="1052.0" style="-fx-background-color: white;" styleClass="feedback-scroll-pane" stylesheets="@../../style/dashboardAdminStyle.css">
-               <VBox.margin>
-                  <Insets left="20.0" top="10.0" />
-               </VBox.margin>
-               <content>
-                  <VBox fx:id="feedbackContentContainer" alignment="TOP_CENTER" prefHeight="546.0" prefWidth="1032.0" spacing="10.0" style="-fx-background-color: white;" styleClass="feedback-content-container" stylesheets="@../../style/dashboardAdminStyle.css" />
-               </content>
-            </ScrollPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
+               <image>
+                  <Image url="@../../icons/dark/search-2-line.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="searchInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleSearch" prefHeight="30.0" prefWidth="350.0" promptText="Search for any thnigs ..." styleClass="search-input" stylesheets="@../../style/style.css">
+               <HBox.margin>
+                  <Insets left="-390.0" />
+               </HBox.margin>
+            </TextField>
          </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <Button fx:id="filter" contentDisplay="RIGHT" layoutX="904.0" layoutY="18.0" mnemonicParsing="false" onAction="#showFilterUser" style="-fx-font-weight: BOLD; -fx-background-color: transparent; -fx-font-family: jost; -fx-font-size: 20;" stylesheets="@../../style/button.css" text="Filter">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/filter.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <effect>
+            <DropShadow height="0.0" radius="0.0" width="0.0" />
+         </effect>
+      </Button>
    </children>
 </Pane>

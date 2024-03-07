@@ -1,21 +1,20 @@
 package tn.SIRIUS.controller.tutors;
 
-import com.google.protobuf.StringValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import tn.SIRIUS.controller.SignUpController;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.GRUDService;
 import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
@@ -27,49 +26,26 @@ import java.util.ResourceBundle;
 public class dashboardAdminHomePageContainerController implements Initializable {
     @FXML
     private VBox feedbackContentContainer;
+
     @FXML
-    private PieChart genderRatio;
+    private ScrollPane feedbackScrollPane;
+
     @FXML
-    private Label nbrStudents;
+    private Button filter;
+
     @FXML
-    private Label genderRatioFDesc;
-    @FXML
-    private Label genderRatioMDesc;
-    @FXML
-    private Circle top1CourseImgContainer;
-    @FXML
-    private Label top1CourseTitle;
-    @FXML
-    private Label top1NbrRegistred;
-    @FXML
-    private Circle top2CourseImgContainer;
-    @FXML
-    private Label top2CourseTitle;
-    @FXML
-    private Label top2NbrRegistred;
-    @FXML
-    private Circle top3CourseImgContainer;
-    @FXML
-    private Label top3CourseTitle;
-    @FXML
-    private Label top3NbrRegistred;
+    private Pane mainDashContentContainer;
+
     @FXML
     private TextField searchInput;
 
-    @FXML
-    private Label nbrTotStudents1;
-@FXML
-        private Button filter;
     List<User> users = new ArrayList<>();
-User user;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        UserService srv=new UserService();
-        //showUsers
+        feedbackContentContainer.setAlignment(Pos.CENTER);
             showAllUsers();
-        //handleSearch();
-
     }
 
     @FXML
@@ -85,24 +61,27 @@ User user;
             filter.setText("By name");
             users = userService.getAllFilterByName();
         }
-
         displayUsers();
     }
+
     @FXML
     private void handleSearch() {
         String searchTerm = searchInput.getText().trim();
         feedbackContentContainer.getChildren().clear();
         showAllUsers(searchTerm);
+
     }
+
 
     public void showAllUsers(String searchTerm) {
         UserService userService = new UserService();
         users = userService.searchUsers(searchTerm);
+
         displayUsers();
     }
 
     public void showAllUsers() {
-        GURDService use = new GURDService();
+        GRUDService use = new GRUDService();
         users = use.getAll();
         displayUsers();
     }
@@ -117,6 +96,7 @@ User user;
                 Parent root = fxmlLoader.load();
                 userDashboardItemController itemController = fxmlLoader.getController();
                 itemController.setUserData(u);
+                feedbackContentContainer.setAlignment(Pos.CENTER);
                 feedbackContentContainer.getChildren().add(root);
             }
             }

@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GURDService implements ICRUD<User> {
+public class GRUDService implements ICRUD<User> {
     private Connection con;
-    public GURDService(){
+    public GRUDService(){
         con = MyDB.getInstance().getCon();
     }
     @Override

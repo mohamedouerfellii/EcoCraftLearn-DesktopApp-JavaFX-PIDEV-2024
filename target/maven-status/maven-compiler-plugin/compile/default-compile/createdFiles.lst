@@ -1,3 +1,4 @@
+tn\SIRIUS\utils\GoogleSignInManager.class
 tn\SIRIUS\controller\tutors\DashboardAdminHomePageController.class
 tn\SIRIUS\api\SMS.class
 tn\SIRIUS\iservices\ICRUD.class
@@ -5,11 +6,13 @@ tn\SIRIUS\controller\tutors\OperationAdminController.class
 tn\SIRIUS\controller\students\UserHomePageItemsController.class
 tn\SIRIUS\controller\tutors\profileItemController.class
 tn\SIRIUS\controller\LoginController.class
-tn\SIRIUS\services\GURDService.class
 tn\SIRIUS\controller\tutors\dashboardAdminHomePageContainerController.class
 tn\SIRIUS\controller\students\HomePageController$ClientThread.class
 tn\SIRIUS\controller\SignUpController.class
+tn\SIRIUS\controller\admins\DashboardTutorHomePageContentController.class
 tn\SIRIUS\controller\students\HomePageController.class
+tn\SIRIUS\services\GRUDService.class
+tn\SIRIUS\controller\admins\DashboardTutorHomePageController.class
 tn\SIRIUS\entities\Session.class
 tn\SIRIUS\services\UserService.class
 tn\SIRIUS\EcoCraftLearning\EcoCraftLearning.class

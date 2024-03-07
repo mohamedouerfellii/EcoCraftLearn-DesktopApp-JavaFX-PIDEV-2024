@@ -1,6 +1,10 @@
 package tn.SIRIUS.controller;
 
-import com.twilio.twiml.voice.Sms;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.oauth2.Oauth2;
+import com.google.api.services.oauth2.model.Userinfoplus;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,6 +17,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,22 +27,21 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.mindrot.jbcrypt.BCrypt;
-import org.w3c.dom.events.MouseEvent;
 import tn.SIRIUS.api.SMS;
-import tn.SIRIUS.controller.tutors.DashboardAdminHomePageController;
 import tn.SIRIUS.controller.tutors.OperationAdminController;
 import tn.SIRIUS.entities.Session;
 import tn.SIRIUS.entities.User;
-import tn.SIRIUS.services.GURDService;
+import tn.SIRIUS.services.GRUDService;
 import tn.SIRIUS.services.UserService;
+import tn.SIRIUS.utils.GoogleSignInManager;
 import tn.SIRIUS.utils.MyDB;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -139,13 +145,12 @@ private TextField answerQuestion;
                         } else if ("admin".equals(role)) {
                             fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
                             Parent root = fxmlLoader.load();
-
                             Scene scene = new Scene(root, 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
                             stage.show();
                         } else if ("teacher".equals(role)) {
-                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/students/homePage.fxml"));
+                            fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/admins/dashboardTutorHomePage.fxml"));
                             Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             stage.setScene(scene);
@@ -164,6 +169,66 @@ private TextField answerQuestion;
 
     }
     private BoxBlur blurEffect = new BoxBlur();
+    @FXML
+    public void googleLogin(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader;
+        Path directoryPath = Paths.get(System.getProperty("user.home"), ".store/oauth2_sample");
+        try {
+            GoogleSignInManager.deleteFilesInsideDirectory(directoryPath);
+            System.out.println("Files inside directory deleted successfully.");
+        } catch (IOException e) {
+            System.err.println("Error deleting files inside directory: " + e.getMessage());
+        }
+        UserService userService = new UserService();
+        GoogleSignInManager.setHttpTransport(GoogleNetHttpTransport.newTrustedTransport());
+        GoogleSignInManager.setDataStoreFactory(new FileDataStoreFactory(GoogleSignInManager.getDataStoreDir()));
+        Credential credential = GoogleSignInManager.authorize();
+        Oauth2 oauth2;
+        oauth2 = new Oauth2.Builder(GoogleSignInManager.getHttpTransport(), GoogleSignInManager.getJsonFactory(), credential).setApplicationName(
+                "Ecocraft/blabla/1.0").build();
+        Userinfoplus userinfo = oauth2.userinfo().get().execute();
+        String useremail = userinfo.getEmail().trim().toLowerCase();
+        String[] s = userinfo.getEmail().split("@");
+        User currentuser = userService.getUserByEmail(useremail);
+        GRUDService g = new GRUDService();
+        if (!userService.emailExist(userinfo.getEmail())) {
+            User user = new User(userinfo.getGivenName(), userinfo.getFamilyName(), 454152851, userinfo.getEmail(), "male", String.valueOf("oussema".hashCode()), "student", userinfo.getPicture(), "20mars", "who is your best teacher?");
+            g.add(user);
+
+
+        } else
+            if ( userService.isPasswordMatch2(currentuser) != 0 ) {
+            int userId = userService.isPasswordMatch2(currentuser);
+            User loggedInUser = userService.getUserById(userId);
+            Session.setUser(loggedInUser);
+            if (loggedInUser.getRoles().equals("student")) {
+                fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/students/homePage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } else if (loggedInUser.getRoles().equals("admin")) {
+                try{
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/dashboardAdminHomePage.fxml"));
+                    Parent root = fxmlLoader.load();
+                    Scene scene = new Scene(root, 1350, 720);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+
+            } else if (loggedInUser.getRoles().equals("teacher")) {
+                fxmlLoader = new FXMLLoader(OperationAdminController.class.getResource("/gui/admins/dashboardTutorHomePage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 1350, 720);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+        }
+
     private void applyBlurEffect() {
 
         blurEffect.setWidth(100);
@@ -222,7 +287,7 @@ public void closeForgetPassword(ActionEvent event) {
     public void UpdatePassword(ActionEvent event) {
         if(newPassword.getText().equals(confirmNewPassword.getText())){
             UserService u = new UserService();
-           GURDService g = new GURDService();
+           GRUDService g = new GRUDService();
             String password = String.valueOf(newPassword.getText().hashCode());
             User user1 = u.getUserByFirstName(userNameLabel.getText());
 
