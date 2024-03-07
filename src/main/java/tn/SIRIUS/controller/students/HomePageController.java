@@ -39,6 +39,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,6 +138,7 @@ public class HomePageController implements Initializable {
     private boolean isThreadRunning;
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        //Course.generateCertificate();
         isThreadRunning = true;
         sectionService = new SectionService();
         quizAnswerService = new QuizAnswerService();
@@ -354,7 +356,6 @@ public class HomePageController implements Initializable {
             Parent root = fxmlLoader.load();
             WhiteBoardController controller = fxmlLoader.getController();
             controller.setCourseId(courseWB.getId(),this);
-            System.out.println("iddd"+courseWB.getId());
             mainPageContainer.getChildren().clear();
             mainPageContainer.getChildren().add(root);
         }catch (IOException e){
@@ -529,14 +530,15 @@ public class HomePageController implements Initializable {
                 nbrCorrect++;
         }
         float result = ((float) nbrCorrect/totQuestionNbr)*100;
-        System.out.println("result :"+result);
+        DecimalFormat df = new DecimalFormat("#.##");
+        float resultF = Float.parseFloat(df.format(result));
         if(result < 50){
             quizCountReadyContainer.setStyle("-fx-background-color: #ff001e");
             countForReady.setStyle("""
                     -fx-font-family: "Jost SemiBold";
                         -fx-font-size: 50;
                         -fx-fill: #ffffff;""");
-            countForReady.setText("Hard Luck you got "+result+"% !");
+            countForReady.setText("Hard Luck you got "+resultF+"% !");
             quizCountReadyContainer.setVisible(true);
             FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), quizCountReadyContainer);
             fadeInTransition.setFromValue(0);
@@ -573,11 +575,9 @@ public class HomePageController implements Initializable {
                         -fx-fill: #ffffff;""");
         }else {
             User student = new User(userTest,"","","","");
-            //quizAnswerService.addAnswer(
-            //                    new QuizAnswer(0,student,quizToPlay,result,"")
-            //            )
-            boolean test = true;
-            if(test){
+            if(quizAnswerService.addAnswer(
+                    new QuizAnswer(0,student,quizToPlay,resultF,"")
+            )){
                 String musicFile = "C:/Users/ouerfelli mohamed/Desktop/EcoCraftLearning/src/main/resources/Audience Clapping Sound Effects (no copyright).mp3";
                 Media sound = new Media(new File(musicFile).toURI().toString());
                 clappingSound = new MediaPlayer(sound);
@@ -587,7 +587,7 @@ public class HomePageController implements Initializable {
                         -fx-font-family: "Jost SemiBold";
                             -fx-font-size: 50;
                             -fx-fill: #ffffff;""");
-                countForReady.setText("Congratulations you got "+result+"% !");
+                countForReady.setText("Congratulations you got "+resultF+"% !");
                 quizCountReadyContainer.setVisible(true);
                 FadeTransition fadeInTransition = new FadeTransition(Duration.seconds(2), quizCountReadyContainer);
                 fadeInTransition.setFromValue(0);

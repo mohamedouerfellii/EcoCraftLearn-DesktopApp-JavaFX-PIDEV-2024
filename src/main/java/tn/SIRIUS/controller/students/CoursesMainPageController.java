@@ -175,6 +175,7 @@ public class CoursesMainPageController implements Initializable {
     private VBox listReviewsLeftContainer;
     @FXML
     private AnchorPane mainPageContainer;
+    @FXML Button whiteBoardBtn;
     private int incorrectPasswordCounter;
     private CourseService courseService;
     private List<Course> registeredCourses;

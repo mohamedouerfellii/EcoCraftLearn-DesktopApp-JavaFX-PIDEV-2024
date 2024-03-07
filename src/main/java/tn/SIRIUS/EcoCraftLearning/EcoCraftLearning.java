@@ -6,29 +6,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import tn.SIRIUS.controller.students.HomePageController;
-import tn.SIRIUS.utils.WhiteBoardServer;
+
 
 import java.io.IOException;
-import java.net.InetAddress;
+
 
 public class EcoCraftLearning extends Application {
-    HomePageController homePageController;
+    //HomePageController homePageController;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(EcoCraftLearning.class.getResource("/gui/students/homePage.fxml"));
         //FXMLLoader fxmlLoader = new FXMLLoader(EcoCraftLearning.class.getResource("/gui/tutors/dashboardTutorHomePage.fxml"));
         Parent root = fxmlLoader.load();
-        homePageController = fxmlLoader.getController();
+        //homePageController = fxmlLoader.getController();
         Scene scene = new Scene(root,1350,720);
         stage.setScene(scene);
         stage.setTitle("EcoCraft Learning");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logoDark.png")));
         stage.setResizable(false);
-        stage.setOnCloseRequest(e -> {
+        /*stage.setOnCloseRequest(e -> {
             if(homePageController != null) homePageController.closeClientThread();
             WhiteBoardServer.closeWhiteBoardServer();
-        });
+        });*/
         stage.show();
     }
 

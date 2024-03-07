@@ -4,10 +4,7 @@ import tn.SIRIUS.services.CourseParticipationService;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class WhiteBoardServer {
     private static byte[] incoming = new byte[256];
@@ -25,6 +22,8 @@ public class WhiteBoardServer {
     private static Map<Integer,ArrayList<String>> roomStudentConnected = new TreeMap<>();
     private static Map<Integer,String> roomTutorsConnected = new TreeMap<>();
     private static Map<Integer,Integer> studentsJoined = new TreeMap<>();
+    private static Map<String,Integer> tutorsConnected = new HashMap<>();
+    private static Map<Integer,ArrayList<Integer>> tutorsInvitedRoom = new HashMap<>();
     private static InetAddress address;
     private static boolean running;
     private static CourseParticipationService courseParticipationService = new CourseParticipationService();
@@ -51,10 +50,6 @@ public class WhiteBoardServer {
             System.out.println(e.getMessage());
         }
     }
-    public static void closeWhiteBoardServer(){
-        running = false;
-        socket.close();
-    }
     public static void main(String[] args){
         running = true;
         while (running){
@@ -66,14 +61,55 @@ public class WhiteBoardServer {
             }
             int userPort = packet.getPort();
             String msg = new String(packet.getData(),0, packet.getLength());
+            // Tutor joined the server
+            if(msg.contains("tutorJoinServer;")){
+                String[] allData = msg.split(";");
+                tutorsConnected.remove(allData[2]);
+                tutorsConnected.put(allData[2],userPort); // add tutor to the list of tutor connected
+            }
+            // tutor invite to be joined
+            else if(msg.contains("inviteTutor;")){
+                String[] allData = msg.split(";");
+                String tutorId = allData[2];
+                String email = allData[3];
+                int courseID = Integer.parseInt(allData[1]);
+                if(tutorsConnected.containsKey(email)){ // tutor invited is connected
+                    int tutorInvitedPort = tutorsConnected.get(email);
+                    sendData("courseInvite;",courseID+";"+tutorId+";",tutorInvitedPort);
+                }
+            }
+            // Tutor accept invite
+            else if(msg.contains("tutorJoinInvite;")){
+                String[] allData = msg.split(";");
+                int courseID = Integer.parseInt(allData[1]);
+                String email = allData[2];
+                int roomKey = searchForRoom(courseID);
+                if(roomKey != 0){
+                    int tutorPort = roomKey - courseID;
+                    tutorsInvitedRoom.get(roomKey).add(userPort); // add tutor
+                    sendData("tutorInvitedJoinedAccept;",email+" joined",tutorPort);
+                }
+            }
+            // Tutor invited disconnect
+            else if(msg.contains("tutorInvitedDisconnect;")){
+                String[] allData = msg.split(";");
+                int courseID = Integer.parseInt(allData[1]);
+                String email = allData[2];
+                int roomKey = searchForRoom(courseID);
+                if(roomKey != 0){
+                    int tutorPort = roomKey - courseID;
+                    tutorsInvitedRoom.get(roomKey).remove((Integer) userPort);// remove tutor from invited list room
+                    sendData("tutorInvitedJoinedLeft;",email+" left",tutorPort);
+                }
+            }
             // Create room
-            if(msg.contains("initRoom;")){
-                System.out.println("done");
+            else if(msg.contains("initRoom;")){
                 String[] allData = msg.split(";");
                 int courseId = Integer.parseInt(allData[1]);
                 int roomKey = courseId + userPort;
                 rooms.put(roomKey,new ArrayList<>());
                 roomStudentConnected.put(roomKey,new ArrayList<>());
+                tutorsInvitedRoom.put(roomKey,new ArrayList<>());
                 roomTutorsConnected.put(roomKey,msg.replace("initRoom;",""));
                 tutorsIDs.add(userPort);
                 // sending alert to student
@@ -114,10 +150,14 @@ public class WhiteBoardServer {
                     for(int forward_port : rooms.get(roomKey)){
                         sendData("roomEnd;","Finished",forward_port);
                     }
+                    for(int forward_port : tutorsInvitedRoom.get(roomKey)){
+                        sendData("roomEnd;","Finished",forward_port);
+                    }
                 }
                 rooms.remove((Integer) roomKey);
                 roomTutorsConnected.remove((Integer) roomKey);
                 roomStudentConnected.remove((Integer) roomKey);
+                tutorsInvitedRoom.remove((Integer) roomKey);
             }
             // Join student
             else if(msg.contains("studentConnect;")){
@@ -155,6 +195,33 @@ public class WhiteBoardServer {
                     byte[] byteMessage = msg.getBytes();
                     for(int forward_port : rooms.get(roomID)){
                         DatagramPacket forward = new DatagramPacket(byteMessage,byteMessage.length,address,forward_port);
+                        try{
+                            socket.send(forward);
+                        }catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    for (int forward_port : tutorsInvitedRoom.get(roomID)){
+                        DatagramPacket forward = new DatagramPacket(byteMessage,byteMessage.length,address,forward_port);
+                        try{
+                            socket.send(forward);
+                        }catch (IOException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else {
+                    int roomKey = searchForRoom(courseID);
+                    if(rooms.containsKey(roomKey)){
+                        byte[] byteMessage = msg.getBytes();
+                        for(int forward_port : rooms.get(roomKey)){
+                            DatagramPacket forward = new DatagramPacket(byteMessage,byteMessage.length,address,forward_port);
+                            try{
+                                socket.send(forward);
+                            }catch (IOException e){
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        DatagramPacket forward = new DatagramPacket(byteMessage,byteMessage.length,address,roomKey - courseID);
                         try{
                             socket.send(forward);
                         }catch (IOException e){

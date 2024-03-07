@@ -1178,7 +1178,7 @@ public class CoursesMainPageController implements Initializable {
             fxmlLoader.setLocation(getClass().getResource("/gui/tutors/whiteboard.fxml"));
             Parent root = fxmlLoader.load();
             WhiteBoardController controller = fxmlLoader.getController();
-            controller.setCourseId(courseID,dashboardTutorHomePageController);
+            controller.setCourseId(courseID,dashboardTutorHomePageController,false,0);
             pageContainer.getChildren().clear();
             pageContainer.getChildren().add(root);
         }catch (IOException e){

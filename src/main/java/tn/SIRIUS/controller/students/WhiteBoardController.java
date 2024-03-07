@@ -1,18 +1,24 @@
 package tn.SIRIUS.controller.students;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import tn.SIRIUS.entities.User;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -27,6 +33,8 @@ public class WhiteBoardController implements Initializable {
     private Circle tutorImg;
     @FXML
     private Text tutorName;
+    @FXML private AnchorPane joinedStudentContainer;
+    @FXML private Label joinedTxt;
     private GraphicsContext gc;
     private String[] colors;
     private static DatagramSocket socket;
@@ -73,6 +81,13 @@ public class WhiteBoardController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    public void notifyPresented(String identifier){
+        joinedTxt.setText(identifier);
+        joinedStudentContainer.setVisible(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> joinedStudentContainer.setVisible(false)));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
     private class ClientThread implements Runnable {
         @Override
         public void run() {
@@ -103,6 +118,7 @@ public class WhiteBoardController implements Initializable {
                             double w = Double.parseDouble(parts[3]);
                             int currentColorIndex = Integer.parseInt(parts[4]);
                             Platform.runLater(() -> {
+                                notifyPresented(parts[6]+" Writing ...");
                                 gc.setFill(Color.web(colors[currentColorIndex]));
                                 gc.fillOval(x,y,h,w);
                             });

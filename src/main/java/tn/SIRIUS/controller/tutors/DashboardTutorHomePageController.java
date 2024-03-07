@@ -1,5 +1,8 @@
 package tn.SIRIUS.controller.tutors;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,15 +13,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tn.SIRIUS.controller.students.HomePageController;
+import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CourseService;
+import tn.SIRIUS.services.UserService;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -60,9 +75,24 @@ public class DashboardTutorHomePageController implements Initializable {
     private ImageView logoutBtnImg;
     @FXML
     private Pane mainContentContainer;
+    @FXML private AnchorPane demandeJoinWBContainer;
+    @FXML private Circle tutorImgWB;
+    @FXML private Label tutorInvWBName;
     private CoursesMainPageController coursesMainPageController;
+    // for whiteboard server
+    private static DatagramSocket socket;
+    private static InetAddress address;
+    private static final int SERVER_PORT = 12345;
+    private Thread clientThread;
+    private boolean isThreadRunning;
+    private final User USER_TEST = new User(6,"Moetaz Hechmi","Groun","mohamedouerfelli2@gmail.com","");
+    UserService userService = new UserService();
+    private MediaPlayer whiteboardPlayer;
+    private int courseWBInvite;
+    private int tutorIdWBInvite;
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        isThreadRunning = true;
         //Profile Image
         Image profileImg = new Image(getClass().getResourceAsStream("/images/profilePictures/12.jpg"));
         profileImgContainer.setFill(new ImagePattern(profileImg));
@@ -169,6 +199,18 @@ public class DashboardTutorHomePageController implements Initializable {
                 throw new RuntimeException();
             }
         });
+        // Sending msg connect to ther server
+        try {
+            socket = new DatagramSocket();
+            address = InetAddress.getByName("localhost");
+            byte[] uuid = ("tutorJoinServer;" + USER_TEST.getId()+ ";"+USER_TEST.getEmail()+";").getBytes();
+            DatagramPacket initialize = new DatagramPacket(uuid, uuid.length, address, SERVER_PORT);
+            socket.send(initialize);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        clientThread = new Thread(new DashboardTutorHomePageController.ClientThread());
+        clientThread.start();
     }
     public void backToCoursesPage(){
         String styleMenuBtnClicked =
@@ -216,5 +258,67 @@ public class DashboardTutorHomePageController implements Initializable {
         }catch (IOException ex){
             throw new RuntimeException();
         }
+    }
+    // Thread for listening invite
+    private class ClientThread implements Runnable{
+        @Override
+        public void run(){
+            System.out.println("thread start");
+            byte[] incoming = new byte[256];
+            while (isThreadRunning) {
+                DatagramPacket packet = new DatagramPacket(incoming, incoming.length);
+                try {
+                    socket.receive(packet);
+                    String msg = new String(packet.getData(), 0, packet.getLength());
+                    if (msg.contains("courseInvite;")) {
+                        String[] allData = msg.split(";");
+                        courseWBInvite = Integer.parseInt(allData[1]);
+                        tutorIdWBInvite = Integer.parseInt(allData[2]);
+                        User organizer = userService.getCourseTutor(tutorIdWBInvite);
+                        Platform.runLater(() -> {
+                            tutorImgWB.setFill(new ImagePattern(new Image(
+                                    "file:/"+organizer.getImage()
+                            )));
+                            tutorInvWBName.setText(organizer.getLastName()+" "+organizer.getFirstName());
+                            demandeJoinWBContainer.setVisible(true);
+                            String musicFile = "C:/Users/ouerfelli mohamed/Desktop/EcoCraftLearning/src/main/resources/Microsoft Teams Call Sound.mp3";
+                            Media sound = new Media(new File(musicFile).toURI().toString());
+                            whiteboardPlayer = new MediaPlayer(sound);
+                            whiteboardPlayer.play();
+                            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(41000), e -> {
+                                whiteboardPlayer.dispose();
+                                demandeJoinWBContainer.setVisible(false);
+                            }));
+                            timeline.setCycleCount(1);
+                            timeline.play();
+                        });
+                    }
+                }catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+    }
+    @FXML
+    public void joWBMeeting(MouseEvent event){
+        whiteboardPlayer.dispose();
+        demandeJoinWBContainer.setVisible(false);
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/gui/tutors/whiteboard.fxml"));
+            Parent root = fxmlLoader.load();
+            WhiteBoardController controller = fxmlLoader.getController();
+            controller.setCourseId(courseWBInvite,this,true,tutorIdWBInvite);
+            mainContentContainer.getChildren().clear();
+            mainContentContainer.getChildren().add(root);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    @FXML
+    public void declineWBMeeting(MouseEvent event){
+        whiteboardPlayer.dispose();
+        demandeJoinWBContainer.setVisible(false);
     }
 }

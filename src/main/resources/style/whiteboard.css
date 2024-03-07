@@ -74,3 +74,9 @@
 .scroll-pane-sections-container .scroll-bar:vertical .decrement-button {
     -fx-background-color: #D5FFDC;
 }
+.inviteInput{
+    -fx-background-color: transparent;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+}
