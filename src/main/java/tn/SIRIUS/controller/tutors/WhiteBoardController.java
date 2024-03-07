@@ -57,6 +57,7 @@ public class WhiteBoardController implements Initializable {
     @FXML private AnchorPane listStdContainer;
     @FXML private AnchorPane inviteContainer;
     private String[] colors;
+    private String[] colorsOther;
     private Button[] chalks;
     private int currentColorIndex;
     private GraphicsContext gc;
@@ -74,15 +75,15 @@ public class WhiteBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rs){
         usersConnected = new ArrayList<>();
-        currentColorIndex = 0;
         colors = new String[]{"FFFFFF","ffff00","ff0000","047904","086c3a"};
+        colorsOther = new String[]{"FFFFFF","ffff00","ff0000","047904","086c3a"};
         chalks = new Button[]{chalkWhite,chalkYellow,chalkRed,chalkGreen};
         gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.web("#086c3a"));
+        gc.setFill(Color.web("#ffffff"));
         gc.fillRect(0,0,canvas.getWidth(), canvas.getHeight());
-
     }
     public void setCourseId(int id,DashboardTutorHomePageController controller,boolean isInvited,int idInvited){
+        currentColorIndex = 0;
         courseId = id;
         if(!isInvited){
             dashboardTutorHomePageController = controller;
@@ -271,11 +272,12 @@ public class WhiteBoardController implements Initializable {
                             double y = Double.parseDouble(parts[1]);
                             double h = Double.parseDouble(parts[2]);
                             double w = Double.parseDouble(parts[3]);
-                            int currentColorIndex = Integer.parseInt(parts[4]);
+                            int currentColorIndexOther = Integer.parseInt(parts[4]);
                             Platform.runLater(() -> {
-                                gc.setFill(Color.web(colors[currentColorIndex]));
+                                gc.setFill(Color.web(colors[currentColorIndexOther]));
                                 gc.fillOval(x,y,h,w);
                             });
+                            Platform.runLater(() -> gc.setFill(Color.web(colors[currentColorIndex])));
                         }
                     }
                 } catch (IOException e) {

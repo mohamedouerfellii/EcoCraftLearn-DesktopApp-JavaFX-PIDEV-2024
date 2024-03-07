@@ -57,7 +57,7 @@ public class SMS {
         Request request = new Request.Builder()
                 .url("https://3g33gw.api.infobip.com/sms/2/text/advanced")
                 .method("POST", body)
-                .addHeader("Authorization", "App 3510eb017e90ff6c1d13a721d055cb9d-b637c57d-4c14-4910-be4d-c84b02514a86")
+                .addHeader("Authorization", "App adac923e648a46110102aa7a42ce72ae-d0ace92f-0d09-4529-a0fc-05a0a2dbbea1")
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
                 .build();
