@@ -1,11 +1,9 @@
-package tn.SIRIUS.controller.tutors;
+package tn.SIRIUS.controller.admins;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,11 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import tn.SIRIUS.services.CourseService;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -189,7 +184,7 @@ public class DashboardTutorHomePageController implements Initializable {
                 collectsBtnImg.setImage(new Image(getClass().getResourceAsStream("/icons/light/recycle-fill.png")));
             }
             try{
-                Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/tutors/ForumPage.fxml")));
+                Parent page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gui/admins/ForumPage.fxml")));
                 mainContentContainer.getChildren().clear();
                 mainContentContainer.getChildren().setAll(page);
             }catch (IOException ex){

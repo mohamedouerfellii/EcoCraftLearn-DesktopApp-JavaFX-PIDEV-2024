@@ -14,7 +14,9 @@ public class EcoCraftLearning extends Application {
     public void start(Stage stage) throws IOException {
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/students/homePage.fxml"));
+      //  FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/tutors/dashboardTutorHomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/admins/dashboardAdminHomePage.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/students/homePage.fxml"));
         Scene scene = new Scene(loader.load(), 1350,720);
         stage.setScene(scene);
         stage.setTitle("Eco Craft");

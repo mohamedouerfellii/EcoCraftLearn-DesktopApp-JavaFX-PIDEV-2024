@@ -1,0 +1,147 @@
+.PostContent{
+    -fx-control-inner-background: #D5FFDC;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 12;
+    -fx-text-fill: #000000;
+    -fx-border-color: grey ;
+    -fx-border-radius: 10 ;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 4, 4);
+
+
+}
+
+.Borderepane{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #D5FFDC;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0,0, 0);
+}
+
+
+.custom-text-area {
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: black;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+
+.forum{
+    -fx-background-color: Transparent ;
+}
+.forum .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 2px;
+}
+.forum .scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+}
+
+
+
+.button {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: transparent;
+    -fx-text-fill: #939393;
+    -fx-background-radius: 8px;
+}
+
+
+.button:hover {
+
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-background-color: #939393;
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 8px;
+}
+
+
+
+.top-bar.button,
+.top-bar.button:pressed,
+.top-bar-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+
+}
+
+.top-bar.button:hover {
+    -fx-background-color: #b2b2b2;
+    -fx-background-radius: 10;
+}
+
+.top-bar.button:selected,
+.top-bar-button-selected {
+    -fx-background-color: #b2b2b2;
+    -fx-border-color: #b2b2b2;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-radius: 0;
+}
+
+
+.choice-box {
+    -fx-background-color: transparent;
+
+}
+
+.choice-box .arrow {
+    -fx-background-color: transparent;
+}
+
+.choice-box .box {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 0 0, 1 1 1 1;
+}
+
+
+.transparent-vbox {
+    -fx-background-color: #D5FFDC;
+}
+
+.PopularUser{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #D5FFDC;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+.PopularUser:hover{
+    -fx-background-color: grey;
+    -fx-border-color: grey;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+
+
+
+.transparent-pane {
+    -fx-background-color: rgba(61, 61, 61, 0.7);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 0, 0, 0, 0);
+}
+
+.scroll-pane {
+    -fx-background: rgba(255, 255, 255, 0);
+    -fx-background-color: transparent;
+}
+
+.about-post-borderpane{
+
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: none;
+    -fx-border-radius: 0 0 20  20;
+    -fx-background-radius: 20 20 0 0;
+}
+
+
+.main-content-container{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 18 0 0 18;
+}
+
+.separator {
+    -fx-background-color: transparent; /* Replace 'red' with your desired color */
+}

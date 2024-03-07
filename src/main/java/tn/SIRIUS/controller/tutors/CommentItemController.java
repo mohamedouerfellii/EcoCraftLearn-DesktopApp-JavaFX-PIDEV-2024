@@ -1,33 +1,29 @@
-package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.tutors;
 
 import javafx.animation.ScaleTransition;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.SIRIUS.entities.Comment;
 import tn.SIRIUS.entities.Post;
-import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CommentService;
-import  javafx.scene.control.MenuItem;
 import tn.SIRIUS.services.PostService;
 
-import java.awt.*;
 import java.io.File;
 
 public class CommentItemController {
@@ -222,10 +218,10 @@ if (attachment != null && !attachment.isEmpty()) {
     });
 
     updateCommentContentBtn.setOnAction(e->{
-     //   newContent.setText(forumController.convertToCensoredText(newContent.getText()));
-        String updatedCommentText = newContent.getText();
-        updatedCommentText = forumController.containsBadWords(updatedCommentText) ? forumController.convertToCensoredText(updatedCommentText) : updatedCommentText;
-        Comment updateComment = new Comment(comment.getIdComment(), comment.getPost(),comment.getOwner(),updatedCommentText, attachment);
+        newContent.setText(forumController.convertToCensoredText(newContent.getText()));
+//        String updatedCommentText = newContent.getText();
+//        updatedCommentText = forumController.containsBadWords(updatedCommentText) ? forumController.convertToCensoredText(updatedCommentText) : updatedCommentText;
+        Comment updateComment = new Comment(comment.getIdComment(), comment.getPost(),comment.getOwner(),newContent.getText(), attachment);
         CommentService commentService = new CommentService();
         if (commentService.update(updateComment) == 1) {
             System.out.println("updated");

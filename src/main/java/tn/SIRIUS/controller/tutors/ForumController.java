@@ -1,38 +1,39 @@
-package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.tutors;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.geometry.Insets;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.*;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.json.JSONObject;
-import tn.SIRIUS.entities.Comment;
-import tn.SIRIUS.entities.Post;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.json.JSONObject;
+import tn.SIRIUS.entities.Comment;
+import tn.SIRIUS.entities.Post;
 import tn.SIRIUS.entities.Report;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.CommentService;
 import tn.SIRIUS.services.PostService;
 import tn.SIRIUS.services.ReportService;
 import tn.SIRIUS.services.UserService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -141,7 +142,7 @@ public class ForumController implements Initializable {
     private TextArea newCommentInput;
 
     @FXML
-    private Circle newCommentUserImage;
+    private Circle newCommentUserImg;
 
     @FXML
     private Rectangle newImage;
@@ -227,7 +228,7 @@ public class ForumController implements Initializable {
     }
 
     private List<Comment> comments = new ArrayList<>();
-    List<Post> acuill = new ArrayList<>();
+   List<Post> acuill = new ArrayList<>();
     String attachmentPath;
     String newattachmentPath;
     int idposttodelete;
@@ -308,11 +309,11 @@ public class ForumController implements Initializable {
         savedPosts.getStyleClass().remove("top-bar-button-selected");
         allPosts.getStyleClass().add("top-bar-button-selected");
 
-        closeReportPostContainer.setOnAction(e->{
-            reportPostConatainer.setVisible(false);
-            reportTypeLabel.setText("");
-            aboutReportLabel.setText("");
-        });
+closeReportPostContainer.setOnAction(e->{
+    reportPostConatainer.setVisible(false);
+    reportTypeLabel.setText("");
+    aboutReportLabel.setText("");
+});
 
         abuseBtn.setOnAction(e->{
             setReportData("Abuse","Sharing or soliciting content involving abuse, neglect, or sexualization of minors or any predatory or inappropriate behavior towards minors.");
@@ -392,7 +393,7 @@ public class ForumController implements Initializable {
             for (Post post : acuill) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/gui/tutors/Post.fxml"));
                 Parent p = fxmlLoader.load();
                 PostItem postItem = fxmlLoader.getController();
                 postItem.setForumController(this);
@@ -507,6 +508,7 @@ public class ForumController implements Initializable {
        updatePostContainer.setVisible(true);
        updatePostBtn.setOnAction(e->{UpdatePost(post);});
 
+
     }
 
 
@@ -516,7 +518,7 @@ public class ForumController implements Initializable {
         }
 
         LocalDateTime currentDateTime = LocalDateTime.now();
-       // updatePostText.setText(convertToCensoredText(updatePostText.getText()));
+        updatePostText.setText(convertToCensoredText(updatePostText.getText()));
         String updatedcentent = updatePostText.getText();
         updatedcentent = containsBadWords(updatedcentent) ? convertToCensoredText(updatedcentent) : updatedcentent;
         Post updatedpost = new Post(post.getIdPost(), updatedcentent, newattachmentPath, user.getIdUser(), post.getPostedDate());
@@ -546,7 +548,7 @@ public class ForumController implements Initializable {
             int nblike = entry.getValue();
             System.out.println(1);
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/students/popularPeopleItem.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/tutors/popularPeopleItem.fxml"));
                 HBox hBox = fxmlLoader.load();
                 PopularPeopleItemController popularPeopleItemController = fxmlLoader.getController();
                 popularPeopleItemController.SetPopularData(nblike, usr);
@@ -571,7 +573,7 @@ public void showPostComments(Post post) {
         commentPostUserName.setText(post.getUser().getFirstName() + post.getUser().getLastName());
         commentPostPostedDate.setText(post.getPostedDate().toString());
         commentPostContentText.setText(post.getContent());
-        newCommentUserImage.setFill(new ImagePattern(new Image(user.getImage())));
+        newCommentUserImg.setFill(new ImagePattern(new Image(user.getImage())));
         String imageUrl = post.getAttachment();
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Image image = new Image(imageUrl);
@@ -600,7 +602,7 @@ public void showPostComments(Post post) {
             if (comment.getPost().getIdPost() == post.getIdPost()) {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/gui/students/commentItem.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/gui/tutors/commentItem.fxml"));
                     Parent root = fxmlLoader.load();
                     CommentItemController item = fxmlLoader.getController();
                     item.setForumController(this);
@@ -623,7 +625,7 @@ public void showPostComments(Post post) {
         int lastIndex = allCommentsContainer.getChildren().size() - 1;
         if (lastIndex >= 1) {
             Parent lastRoot = (Parent) allCommentsContainer.getChildren().get(lastIndex);
-            lastRoot.setStyle("-fx-background-color: #D5FFDC;" +
+            lastRoot.setStyle("-fx-background-color: white;" +
                     "        -fx-border-color: none;" +
                     "        -fx-border-radius: 20 20 0  0;" +
                     "        -fx-background-radius: 0 0 20 20;");
@@ -646,7 +648,7 @@ public void showPostComments(Post post) {
 public  void addNewComment(Post p){
 
         if (newCommentInput.getText() != null && !newCommentInput.getText().isEmpty()) {
-           //newCommentInput.setText(convertToCensoredText(newCommentInput.getText()));
+            newCommentInput.setText(convertToCensoredText(newCommentInput.getText()));
             String newCommentText = newCommentInput.getText();
             newCommentText = containsBadWords(newCommentText) ? convertToCensoredText(newCommentText) : newCommentText;
             Comment comment = new Comment(0, p , user, newCommentText, newCommentAttachmentPath);
@@ -714,7 +716,7 @@ public void  deleteComment(Comment comment) {
                 for (Post post : acuillF) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("/gui/tutors/Post.fxml"));
                     Parent p = fxmlLoader.load();
                     PostItem postItem = fxmlLoader.getController();
                     postItem.setForumController(this);
@@ -751,7 +753,7 @@ public void showSavedPosts(){
         for (Post post : savedPosts) {
 
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/gui/students/Post.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/gui/tutors/Post.fxml"));
             Parent p = fxmlLoader.load();
             PostItem postItem = fxmlLoader.getController();
             postItem.setForumController(this);
@@ -787,12 +789,12 @@ public void showSavedPosts(){
             if (jsonResponse.has("is-bad")) {
                 return jsonResponse.getBoolean("is-bad");
             } else {
-
+                // Assume no bad words if "is-bad" field is not present
                 return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return false; // Assume no bad words in case of an error
         }
     }
 
@@ -810,6 +812,8 @@ public void showSavedPosts(){
         return "*".repeat(text.length());
     }
 
+
+
     public void setReportData(String type,String Content){
         reportTypeLabel.setText(type);
         aboutReportLabel.setText(Content);
@@ -817,7 +821,7 @@ public void showSavedPosts(){
     public void reportPost(Post post){
         ReportService service = new ReportService();
         Report report = new Report( 1,post,reportTypeLabel.getText(),aboutReportLabel.getText(),1);
-        int id = service.ReportExist(report);
+       int id = service.ReportExist(report);
         if(reportTypeLabel.getText()!="" && aboutReportLabel.getText()!=""){
             if (id!=0){
                 service.updateNbrReports(report.getPost().getIdPost());

@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="postItem" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/studentstyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.students.PostItem">
+<BorderPane fx:id="postItem" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0" styleClass="Borderepane" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.tutors.PostItem">
    <bottom>
       <VBox maxWidth="-Infinity" prefHeight="50.0" prefWidth="594.0" BorderPane.alignment="CENTER">
          <children>
-            <Line endX="494.49285888671875" endY="-0.42847663164138794" startX="-100.0" stroke="LIGHTGRAY" />
+            <Separator fx:id="separator" prefHeight="27.0" prefWidth="623.0">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Separator>
             <HBox maxWidth="-Infinity" prefHeight="42.0" prefWidth="594.0" translateX="3.0">
                <children>
                   <HBox prefHeight="37.0" prefWidth="106.0">
                      <children>
-                        <Button fx:id="likePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/studentstyle.css">
+                        <Button fx:id="likePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/style.css">
                            <graphic>
                               <ImageView fx:id="LikeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -42,7 +45,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <Button fx:id="disLikePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/studentstyle.css">
+                        <Button fx:id="disLikePostBtn" mnemonicParsing="false" styleClass="button-like" stylesheets="@../../css/style.css">
                            <graphic>
                               <ImageView fx:id="disLikePostIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -53,47 +56,35 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Line endX="-100.70711517333984" endY="35.692893981933594" startX="-100.50000762939453" startY="71.5928955078125" stroke="LIGHTGRAY" />
-                  <Button fx:id="commentPostBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="121.0" styleClass="commentBtn" stylesheets="@../../css/studentstyle.css" text="comment">
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="commentPostBtn" mnemonicParsing="false" prefHeight="37.0" prefWidth="121.0" styleClass="commentBtn" stylesheets="@../../css/style.css" text="comment">
                      <graphic>
                         <ImageView fx:id="CommentIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../img/dark/icons8-paroles-24.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Line endX="-102.62135314941406" endY="109.2857894897461" layoutX="537.0" layoutY="-99.0" startX="-102.62134552001953" startY="145.37867736816406" stroke="LIGHTGRAY" />
-                  <Button fx:id="sharePostBtn" layoutX="127.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="99.0" styleClass="BtnShare" stylesheets="@../../css/studentstyle.css" text="share">
+                     </graphic></Button>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="sharePostBtn" layoutX="127.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="99.0" styleClass="BtnShare" stylesheets="@../../css/style.css" text="share">
                      <graphic>
                         <ImageView fx:id="shareIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../img/dark/icons8-transférer-50%20(1).png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Line endX="-102.62135314941406" endY="109.2857894897461" layoutX="533.0" layoutY="-99.0" startX="-102.62134552001953" startY="145.37867736816406" stroke="LIGHTGRAY" />
-                  <Button fx:id="savePostBtn" mnemonicParsing="false" stylesheets="@../../css/studentstyle.css" text="save">
+                     </graphic></Button>
+                  <Separator layoutX="484.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="savePostBtn" mnemonicParsing="false" text="save">
                      <graphic>
                         <ImageView fx:id="savePostIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../img/dark/icons8-bookmark-48.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Line endX="-102.62135314941406" endY="109.2857894897461" layoutX="624.0" layoutY="-61.0" startX="-102.62134552001953" startY="145.37867736816406" stroke="LIGHTGRAY" />
-                  <Button fx:id="reportPostBtn" layoutX="568.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="90.0" stylesheets="@../../css/studentstyle.css" text="rapot">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                     </graphic></Button>
+                  <Separator layoutX="244.0" layoutY="10.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Button fx:id="reportPostBtn" layoutX="568.0" layoutY="10.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="97.0" text="Report">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -107,9 +98,6 @@
                </opaqueInsets>
             </HBox>
          </children>
-         <padding>
-            <Insets top="10.0" />
-         </padding>
       </VBox>
    </bottom>
    <center>

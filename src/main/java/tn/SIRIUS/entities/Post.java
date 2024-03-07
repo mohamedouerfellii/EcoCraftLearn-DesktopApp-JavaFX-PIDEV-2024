@@ -83,6 +83,8 @@ public class Post {
     }
 
 
+    public Post() {
+    }
 
     public Post(int idPost , String content, String attachment, int owner, LocalDateTime postedDate) {
         this.idPost=idPost;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="postsMainContent" prefHeight="650.0" prefWidth="1200.0" styleClass="main-content-container" stylesheets="@../../style/dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.SIRIUS.controller.admins.ForumController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" layoutX="230.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="782.0" styleClass="courses-scroll-pane" stylesheets="@../../style/style.css" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="forum" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="607.0" prefWidth="786.0" spacing="10.0" styleClass="transparent-vbox">
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+               <stylesheets>
+                  <URL value="@../../css/style.css" />
+                  <URL value="@../../style/dashboardAdminStyle.css" />
+               </stylesheets>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <AnchorPane fx:id="deletePostContainer" prefHeight="650.0" prefWidth="1200.0" styleClass="transparent-pane" stylesheets="@../../css/style.css" visible="false">
+         <children>
+            <Pane layoutX="381.0" layoutY="149.0" prefHeight="298.0" prefWidth="536.0" styleClass="Borderepane" stylesheets="@../../css/style.css">
+               <children>
+                  <Label layoutX="132.0" layoutY="64.0" prefHeight="42.0" prefWidth="348.0" text="Are you Sure to Delete this Post  ?">
+                     <font>
+                        <Font name="Jost Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutX="28.0" layoutY="221.0" prefHeight="19.0" prefWidth="481.0">
+                     <children>
+                        <Button fx:id="confirmDeletePostBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="224.0" text="Yes" />
+                        <Button fx:id="cancelDeletePostBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="262.0" text="Cancel" />
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

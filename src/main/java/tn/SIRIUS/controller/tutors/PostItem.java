@@ -1,38 +1,28 @@
-package tn.SIRIUS.controller.students;
+package tn.SIRIUS.controller.tutors;
 
-import com.sun.javafx.tk.TKScene;
-import com.sun.javafx.tk.TKStage;
-import javafx.concurrent.Worker;
-import javafx.event.Event;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import tn.SIRIUS.EcoCraftLearning.EcoCraftLearning;
-import tn.SIRIUS.entities.Post;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
-import javafx.event.ActionEvent;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import tn.SIRIUS.entities.Post;
 import tn.SIRIUS.entities.User;
 import tn.SIRIUS.services.PostService;
-import tn.SIRIUS.services.UserService;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.*;
 
 public class PostItem  {
 
@@ -79,7 +69,6 @@ public class PostItem  {
     @FXML
     private Label nbLikesPost;
 
-
     @FXML
     private Button reportPostBtn;
 
@@ -98,7 +87,7 @@ public class PostItem  {
     @FXML
     private MenuItem updatePostBtn;
  
-    private  ForumController forumController = new ForumController();
+    private ForumController forumController = new ForumController();
 
     public MenuButton getAboutPostBtn() {return AboutPostBtn;}
 
@@ -265,10 +254,10 @@ public class PostItem  {
         });
 
 
-        reportPostBtn.setOnAction(e->{
-            forumController.getReportPostConatainer().setVisible(true);
-            forumController.getSubmitReportBtn().setOnAction(event-> forumController.reportPost(p));
-        });
+   reportPostBtn.setOnAction(e->{
+       forumController.getReportPostConatainer().setVisible(true);
+       forumController.getSubmitReportBtn().setOnAction(event-> forumController.reportPost(p));
+   });
 
 
               setSavedPosts(p,forumController.getUser());
