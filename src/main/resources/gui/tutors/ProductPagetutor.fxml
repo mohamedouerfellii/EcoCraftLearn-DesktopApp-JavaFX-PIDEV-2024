@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -303,11 +304,11 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="771.0" layoutY="597.0" stroke="#19bb1c" visible="false" />
-                  <Line fx:id="lineMiniDetailsBtn1" endX="92.0" layoutX="888.0" layoutY="597.0" stroke="#19bb1c" visible="false" />
+                  <Line fx:id="lineMiniDetailsBtn" endX="92.0" layoutX="771.0" layoutY="591.0" stroke="#19bb1c" visible="false" />
+                  <Line fx:id="lineMiniDetailsBtn1" endX="92.0" layoutX="888.0" layoutY="591.0" stroke="#19bb1c" visible="false" />
                   <Button fx:id="DetailGoBackBtn" layoutX="87.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleOnDetailGoBackBtnClicked" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
-                  <Button fx:id="AddReview" layoutX="484.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleopenrating" prefHeight="35.0" prefWidth="164.0" styleClass="AddReviewBtn" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" text="Add Review" />
-                  <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="365.0" layoutX="78.0" layoutY="109.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="569.0" />
+                  <Button fx:id="AddReview" layoutX="529.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleopenrating" prefHeight="35.0" prefWidth="115.0" styleClass="AddReviewBtn" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" text="Add Review" />
+                  <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="370.0" layoutX="78.0" layoutY="77.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="570.0" />
                   <AnchorPane fx:id="AnchorPanedetailProduct" layoutX="668.0" layoutY="70.0" prefHeight="470.0" prefWidth="430.0" styleClass="courses-details-left" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css">
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="45.0" layoutY="73.0" prefHeight="281.0" prefWidth="346.0" spacing="15.0">
@@ -411,6 +412,13 @@
                         <Button fx:id="miniDescriptionBtn" mnemonicParsing="false" onAction="#handleDetailsBtnleft" prefHeight="39.0" prefWidth="92.0" styleClass="details-desc-enroll-btn" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" text="Description" />
                      </children>
                   </HBox>
+                  <Circle fx:id="OwnerProductImgDetail" fill="DODGERBLUE" layoutX="109.0" layoutY="537.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Label fx:id="OwnerProductDetailsClient" layoutX="152.0" layoutY="513.0" prefHeight="47.0" prefWidth="252.0" styleClass="tutor-course-details-name" stylesheets="@../../styles/DetailsAnchorPaneProductClient.css" text="Zied Gachita " />
+                  <Text fx:id="courseDetailsTitle" layoutX="83.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-course-details" text="Designed by :" wrappingWidth="176.0">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="AnchorPaneMyorders" maxHeight="656.0" maxWidth="1206.0" prefHeight="656.0" prefWidth="1206.0" styleClass="AnchorPaneMyorderstutor" stylesheets="@../../styles/StyleCommande.css" visible="false">

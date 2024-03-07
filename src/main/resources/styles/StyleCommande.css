@@ -1,5 +1,4 @@
-.btnOrders
-{
+.btnOrders {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
     -fx-opacity: 0.6;
@@ -7,6 +6,30 @@
     -fx-text-fill: #000000;
     -fx-cursor: hand;
 }
+
+.btnOrders:hover {
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
+
+
+
+.btnOrderstutorStudent {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 16;
+    -fx-opacity: 0.6;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+}
+
+.btnOrderstutorStudent:hover:pressed {
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
+.btnOrderstutorStudent:pressed {
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
+
+
 .AnchorPaneCommande
 {
     -fx-border-color: #fff ;
@@ -102,10 +125,9 @@
 
 
 .HboxItemCommande
-{
+{  -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-background-color: Transparent;
-
-
 }
 
 .anchorPaneContainerItem
@@ -116,7 +138,19 @@
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-color: #fff;
     -fx-border-width: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
+
+}
+
+.anchorPaneContainerItemstudent
+{
+
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
+    -fx-border-color: #D5FFDC;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
 
 }
 .VboxTableProduct

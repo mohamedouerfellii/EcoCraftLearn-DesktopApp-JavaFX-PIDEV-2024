@@ -126,6 +126,7 @@
     -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .AddProductBtntutor
 {
@@ -134,6 +135,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 
 
@@ -224,8 +226,8 @@
 }
 
 .ItemProductPane {
-    -fx-background-color: #fff; /* Couleur de fond */
-    -fx-border-color: #fff; /* Couleur de la bordure */
+    -fx-background-color: #D5FFDC; /* Couleur de fond */
+    -fx-border-color: #D5FFDC; /* Couleur de la bordure */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-width: 1px; /* Largeur du contour */
@@ -238,8 +240,8 @@
 }
 
 .ItemProductPanetutor {
-    -fx-background-color: #D5FFDC; /* Couleur de fond */
-    -fx-border-color: #D5FFDC; /* Couleur de la bordure */
+    -fx-background-color: #fff; /* Couleur de fond */
+    -fx-border-color: #fff; /* Couleur de la bordure */
     -fx-background-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-width: 1px; /* Largeur du contour */
@@ -271,22 +273,33 @@
 }
 /* Style de base pour le bouton */
 .BtnAcheter {
-    -fx-font-family: "Jost";
-    -fx-font-size: 20;
-    -fx-background-color: transparent;
-    -fx-text-fill: #000000;
-    -fx-background-radius: 25px; /* Corner radius */
-    -fx-border-color:#000000 ;
-    -fx-border-radius: 25px;
-    -fx-border-width: 1px;
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 15;
+    -fx-background-color: #000000;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
 }
-
 
 
 .BtnAcheter:hover {
     -fx-opacity: 0.6;
 }
 
+
+.BtnAchetertutor {
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 15;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+
+.BtnAchetertutor:hover {
+    -fx-opacity: 0.6;
+}
 
 .GridContainerProduct {
     -fx-background-color: #D5FFDC;

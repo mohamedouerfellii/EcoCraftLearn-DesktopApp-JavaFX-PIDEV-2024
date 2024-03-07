@@ -12,8 +12,8 @@
             <Label fx:id="AddresseCommande" layoutX="20.0" layoutY="11.0" prefHeight="35.0" prefWidth="384.0" styleClass="NameProductAdmin" stylesheets="@../../styles/StyleItemTable.css" text="Adresse Destination de commande " />
             <Label fx:id="DateCommande" layoutX="20.0" layoutY="59.0" prefHeight="23.0" prefWidth="330.0" styleClass="DateProduct" stylesheets="@../../styles/StyleItemTable.css" text="20-20-2024" />
             <Label fx:id="TotalCommande" layoutX="488.0" layoutY="37.0" prefHeight="35.0" prefWidth="119.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
-            <Label fx:id="StatusCommande" layoutX="650.0" layoutY="43.0" prefHeight="23.0" prefWidth="90.0" styleClass="DateProduct" stylesheets="@../../styles/StyleItemTable.css" text="En Cours" />
-            <Button fx:id="BtnDelivred" layoutX="840.0" layoutY="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="show-details-btn" stylesheets="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/coursesMainPage.css" text="Delivred" />
+            <Label fx:id="StatusCommande" layoutX="657.0" layoutY="42.0" prefHeight="23.0" prefWidth="90.0" styleClass="DateProduct" stylesheets="@../../styles/StyleItemTable.css" text="in progress" />
+            <Button fx:id="BtnDelivred" layoutX="836.0" layoutY="34.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="108.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Delivred" />
          </children>
       </AnchorPane>
    </children>

@@ -413,7 +413,7 @@ public void showQrCode(Product product) {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         Map<EncodeHintType, Object> hints = new HashMap<>();
         hints.put(EncodeHintType.MARGIN, 0);
-        BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200, hints);
+        BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 250, 250, hints);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
         byte[] qrCodeBytes = outputStream.toByteArray();
@@ -525,37 +525,42 @@ public  void updateStat(Commandes commandes)
 
 
 
-    void AfficherStat() {
-
+    void AfficherStat(){
 
         AnchorPaneStatestique.setVisible(true);
         ProductService productService = new ProductService();
         List<Float> prices = productService.getAllPrices();
 
-
-        int countPriceLessThan10 = 0;
-        int countPriceBetween10And50 = 0;
-        int countPriceGreaterThan50 = 0;
+        int countPriceLessThan100 = 0;
+        int countPriceBetween100And500 = 0;
+        int countPriceBetween500And1000 = 0;
+        int countPriceGreaterThan1000 = 0;
 
         for (Float price : prices) {
-            if (price < 10) {
-                countPriceLessThan10++;
-            } else if (price >= 10 && price <= 50) {
-                countPriceBetween10And50++;
+            if (price < 100) {
+                countPriceLessThan100++;
+            } else if (price <= 500) {
+                countPriceBetween100And500++;
+            } else if (price <= 1000) {
+                countPriceBetween500And1000++;
             } else {
-                countPriceGreaterThan50++;
+                countPriceGreaterThan1000++;
             }
         }
+
         barChart.getData().clear();
         xAxis.setLabel("Price Range");
-        xAxis.setCategories(FXCollections.observableArrayList("Price < 10", "10 <= Price <= 50", "Price > 50"));
+        xAxis.setCategories(FXCollections.observableArrayList("price < 100", "100 - 500", "500 - 1000", "price > 1000"));
         yAxis.setLabel("Number of Products");
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("Price < 10", countPriceLessThan10));
-        series.getData().add(new XYChart.Data<>("10 <= Price <= 50", countPriceBetween10And50));
-        series.getData().add(new XYChart.Data<>("Price > 50", countPriceGreaterThan50));
+        series.getData().add(new XYChart.Data<>("price < 100", countPriceLessThan100));
+        series.getData().add(new XYChart.Data<>("100 - 500", countPriceBetween100And500));
+        series.getData().add(new XYChart.Data<>("500 - 1000", countPriceBetween500And1000));
+        series.getData().add(new XYChart.Data<>("price > 1000", countPriceGreaterThan1000));
         barChart.getData().add(series);
     }
+
+
 
 
 

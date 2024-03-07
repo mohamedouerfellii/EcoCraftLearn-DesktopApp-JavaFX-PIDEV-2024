@@ -5,7 +5,7 @@
     -fx-border-radius: 15 15 15 15; /* Rayon de bordure */
     -fx-border-color: #fff;
     -fx-border-width: 5px;
-    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
 
 }
 
@@ -63,6 +63,10 @@
     -fx-background-radius: 15;
     -fx-font-family: "Jost";
     -fx-font-size: 15;
+    -fx-cursor: hand;
+}
+.UpdateBtn :hover{
+    -fx-opacity: 0.8;
 }
 .DeleteBtn
 {
@@ -71,8 +75,12 @@
     -fx-background-radius: 15;
     -fx-font-family: "Jost";
     -fx-font-size: 15;
+    -fx-cursor: hand;
 }
-
+.DeleteBtn:hover{
+    -fx-background-color: #1D6611;
+    -fx-opacity: 0.8;
+}
 .boxTableProduct
 {
     -fx-background-color: Transparent;

@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -300,6 +301,17 @@ public class ProductPagetutor implements Initializable{
     private AnchorPane insufficientquantity;
     @FXML
     private AnchorPane FailedRate;
+
+
+
+
+
+    @FXML
+    private Circle OwnerProductImgDetail;
+    @FXML
+    private Label OwnerProductDetailsClient;
+
+
 
 
     @FXML
@@ -701,6 +713,22 @@ public class ProductPagetutor implements Initializable{
             }
 
        });
+
+
+       ProductService productService = new ProductService();
+       List<String> userData = productService.GetImageNameLastNameUser(product.getOwner());
+       String image = userData.get(0);
+       String firstName = userData.get(1);
+       String lastName = userData.get(2);
+
+       Image imageUser = new Image("file:///" +image.replace("\\","/"));
+
+       OwnerProductImgDetail.setFill(new ImagePattern(imageUser));
+       OwnerProductDetailsClient.setText(firstName + " " + lastName);
+
+
+
+
 
     }
 

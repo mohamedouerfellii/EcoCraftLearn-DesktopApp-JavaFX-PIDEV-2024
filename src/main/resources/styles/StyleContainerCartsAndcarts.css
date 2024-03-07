@@ -7,9 +7,18 @@
 
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 }
+.ContainerTotalPricestudent
+{
+    -fx-background-color: #D5FFDC;
+    -fx-border-color: #D5FFDC;
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+}
 .Panecart
 {
-    -fx-background-color: #fff;
+    -fx-background-color: #D5FFDC;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
@@ -18,7 +27,7 @@
 
 .Panecarttutor
 {
-    -fx-background-color: #D5FFDC;
+    -fx-background-color: #fff;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
@@ -29,6 +38,16 @@
     -fx-background-color: #fff;
     -fx-background-radius: 15 15 15 15;
     -fx-border-color: #fff;
+    -fx-border-radius: 15 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
+
+}
+
+.sousCartItemstudent
+{
+    -fx-background-color: #D5FFDC;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: #D5FFDC;
     -fx-border-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 
@@ -81,14 +100,18 @@
 {
     -fx-font-family: "Jost Medium";
     -fx-font-size: 16;
+    -fx-opacity: 0.6;
     -fx-background-color: transparent;
     -fx-text-fill: #000000;
-    -fx-opacity: 0.6;
-    -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .hideCartBtn:hover
 {
-    -fx-opacity: 0.6;
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
+.hideCartBtn:pressed
+{
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
 }
 .passerCommandeBtn
 {
@@ -97,6 +120,7 @@
     -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .passerCommandeBtn:hover
 {
@@ -109,6 +133,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .passerCommandeBtntutor:hover
 {
@@ -174,9 +199,20 @@
     -fx-text-fill: #000000;
     -fx-background-radius: 8px;
 }
+
+.totalPriceCartLabelstudent
+{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 25;
+    -fx-background-color: #D5FFDC;
+    -fx-border-radius: 15 15 15 15;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 8px;
+}
 .openCart
 {
     -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
 .CloseCart
@@ -185,6 +221,7 @@
     -fx-font-size: 16;
     -fx-background-color: Transparent;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .CloseCart:hover
 {
@@ -198,6 +235,7 @@
     -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .decrementValue:hover
 {
@@ -212,6 +250,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .decrementValuetutor:hover
 {
@@ -226,6 +265,7 @@
     -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .incrementValue:hover
 {
@@ -239,6 +279,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .incrementValuetutor:hover
 {
@@ -254,6 +295,7 @@
     -fx-background-color: #000000;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .ConfirmeCartBtn:hover
 {
@@ -269,6 +311,7 @@
     -fx-background-color: #1D6611;
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 .ConfirmeCartBtntutor:hover
 {
@@ -318,6 +361,7 @@
 .closemap
 {
     -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
 .TitelMycart

@@ -51,7 +51,7 @@ public class ProductService implements ICRUD<Product> {
                         rs.getString("description"),
                         rs.getString("image"),
                         rs.getFloat("price"),
-                        0,
+                        rs.getInt("owner"),
                         rs.getString("addDate"),
                         rs.getInt("quantite")
                 );
@@ -298,6 +298,30 @@ public class ProductService implements ICRUD<Product> {
         return products;
 
     }
+
+    public List<String> GetImageNameLastNameUser(int owner) {
+        List<String> userData = new ArrayList<>();
+        String query = "SELECT image, firstName, lastName FROM users WHERE idUser = ?";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, owner);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String image = resultSet.getString("image");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+                userData.add(image);
+                userData.add(firstName);
+                userData.add(lastName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userData;
+    }
+
+
+
 
 
 

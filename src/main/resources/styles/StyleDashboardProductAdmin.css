@@ -76,6 +76,7 @@
 .pane-data-details{
     -fx-background-color: #D5FFDC;
     -fx-background-radius: 50px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 10, 0, 0, 2); /* Augmenter l'ombre */
 }
 
 .VboxTableProduct
@@ -93,6 +94,7 @@
 {
     -fx-arc-height: 20;
     -fx-arc-width: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 2, 0, 0, 2); /* Augmenter l'ombre */
 }
 
 .label-details{
@@ -129,6 +131,19 @@
     -fx-cursor: hand;
 }
 
+.delete-course-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #fff;
+    -fx-text-fill: red;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
+
 .edit-course-btn{
     -fx-font-family: "Jost Medium";
     -fx-font-size: 20;
@@ -141,19 +156,34 @@
     -fx-cursor: hand;
 }
 
+.edit-course-btn:hover{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #fff;
+    -fx-text-fill: #BDA91A;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #BDA91A;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+}
+
 .PaneQrcode
 {
     -fx-background-color: #fff;
     -fx-background-radius: 15 15 15 15;
     -fx-border-radius: 15 15 15 15;
-     -fx-border-color: #000000;
+     -fx-border-color: #fff;
     -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 }
 .AnchorPaneStatestique
 {
     -fx-background-color: #fff;
     -fx-background-radius: 15 15 15 15;
     -fx-border-radius: 15 15 15 15;
-    -fx-border-color: #000000;
+    -fx-border-color: #fff;
     -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0.4,0,0,0.4), 30, 0, 0, 2); /* Augmenter l'ombre */
 }

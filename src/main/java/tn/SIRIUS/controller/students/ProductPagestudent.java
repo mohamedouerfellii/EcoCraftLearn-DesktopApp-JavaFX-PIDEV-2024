@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -299,6 +300,13 @@ public class ProductPagestudent implements Initializable{
     private AnchorPane insufficientquantity;
     @FXML
     private AnchorPane FailedRate;
+
+
+
+    @FXML
+    private Circle OwnerProductImgDetail;
+    @FXML
+    private Label OwnerProductDetailsClient;
 
 
     @FXML
@@ -671,6 +679,7 @@ public class ProductPagestudent implements Initializable{
         PaneGroupProduct.setVisible(false);
 
       //IdProductdetailsClient.setText(String.valueOf(product.getIdProduct()));
+
        RectangleDetailProduct.setFill(new ImagePattern(new Image("file:///" +product.getImage().replace("\\","/"))));
        NameProductdetailsClient.setText(product.getName());
        DescProductdetailsClient.setText(product.getDescription());
@@ -700,6 +709,19 @@ public class ProductPagestudent implements Initializable{
             }
 
        });
+
+
+
+       ProductService productService = new ProductService();
+       List<String> userData = productService.GetImageNameLastNameUser(product.getOwner());
+       String image = userData.get(0);
+       String firstName = userData.get(1);
+       String lastName = userData.get(2);
+
+       Image imageUser = new Image("file:///" +image.replace("\\","/"));
+
+       OwnerProductImgDetail.setFill(new ImagePattern(imageUser));
+       OwnerProductDetailsClient.setText(firstName + " " + lastName);
 
     }
 
@@ -945,9 +967,8 @@ public class ProductPagestudent implements Initializable{
         System.out.println(latitude);
         System.out.println(longitude);
         System.out.println(cityName);
+
     }
-
-
 
 
     public boolean PasserCommande() {

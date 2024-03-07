@@ -52,11 +52,11 @@
                       <NumberAxis fx:id="yAxis" side="LEFT" />
                     </yAxis>
                   </BarChart>
-                  <Line endX="-7.0" layoutX="373.0" layoutY="66.0" startX="-239.0" />
+                  <Line endX="52.0" layoutX="356.0" layoutY="62.0" startX="-239.0" />
                   <Label alignment="CENTER" layoutX="121.0" layoutY="14.0" prefHeight="45.0" prefWidth="251.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Statistique" />
                </children>
             </AnchorPane>
-            <HBox alignment="CENTER" layoutX="280.0" layoutY="17.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/style.css">
+            <HBox alignment="CENTER" layoutX="287.0" layoutY="17.0" prefHeight="50.0" prefWidth="420.0" styleClass="search-bar-container" stylesheets="@../../../../../../../Users/zgach/Downloads/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/EcoCraftLearn-DesktopApp-PIDEV-2024-Gestion_des_Cours/src/main/resources/style/style.css">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="search-bar" width="400.0" />
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="search-bar-icon" translateX="-395.0">
@@ -74,11 +74,10 @@
                   <Insets left="-40.0" />
                </padding>
             </HBox>
-            <Label layoutX="33.0" layoutY="16.0" prefHeight="47.0" prefWidth="215.0" styleClass="TextShop" stylesheets="@../../styles/Style1.css" text="List of Product" />
             <Pane fx:id="paneqrCode" layoutX="419.0" layoutY="158.0" prefHeight="343.0" prefWidth="358.0" styleClass="PaneQrcode" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
                <children>
-                  <ImageView fx:id="ImageQrcode" fitHeight="241.0" fitWidth="302.0" layoutX="31.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-                  <Line endX="-7.0" layoutX="305.0" layoutY="59.0" startX="-239.0" />
+                  <ImageView fx:id="ImageQrcode" fitHeight="250.0" fitWidth="250.0" layoutX="60.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+                  <Line endX="-7.0" layoutX="305.0" layoutY="56.0" startX="-239.0" />
                   <Label layoutX="117.0" layoutY="7.0" prefHeight="45.0" prefWidth="147.0" styleClass="Title" stylesheets="@../../styles/StyleCart.css" text="Qr Code !" />
                   <Button fx:id="CloseQrcode" layoutX="306.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCloseQrcode" prefHeight="34.0" prefWidth="43.0" styleClass="CloseCart" stylesheets="@../../styles/StyleContainerCartsAndcarts.css">
                      <graphic>
@@ -91,16 +90,20 @@
                   </Button>
                </children>
             </Pane>
-            <Button fx:id="btnOrders" layoutX="1052.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleOpenOrder" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
-            <Button fx:id="Statestiqueproduct" layoutX="701.0" layoutY="26.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Statistique" />
-            <Button fx:id="TrieBtnProduct" layoutX="819.0" layoutY="26.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Trie" />
+            <HBox layoutX="710.0" layoutY="26.0">
+               <children>
+                  <Button fx:id="Statestiqueproduct" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Statistic" />
+                  <Button fx:id="TrieBtnProduct" mnemonicParsing="false" prefHeight="33.0" prefWidth="105.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Sort" />
+                  <Button fx:id="btnOrders" mnemonicParsing="false" onAction="#handleOpenOrder" prefHeight="33.0" prefWidth="123.0" styleClass="btnOrders" stylesheets="@../../styles/StyleCommande.css" text="Orders" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="AnchorPanedetailsProduct" layoutX="-1.0" prefHeight="650.0" prefWidth="1200.0" styleClass="AnchorPanedetailsProduct" stylesheets="@../../styles/StyleDashboardProductAdmin.css" visible="false">
          <children>
-            <Button fx:id="GoBackBtn" layoutX="83.0" layoutY="27.0" mnemonicParsing="false" onAction="#GoBackBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
+            <Button fx:id="GoBackBtn" layoutX="83.0" layoutY="27.0" mnemonicParsing="false" onAction="#GoBackBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
             <Rectangle fx:id="RectangleDetailProduct" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="360.0" layoutX="706.0" layoutY="72.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="course-details-img" width="481.0" />
-            <Button fx:id="DeleteBtnProduct" layoutX="745.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Delete">
+            <Button fx:id="DeleteBtnProduct" layoutX="745.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleDeleteBtnProduct" prefHeight="50.0" prefWidth="188.0" styleClass="delete-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Delete">
                <graphic>
                   <ImageView fx:id="deleteCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="delete-course-btn-img">
                      <image>
@@ -109,7 +112,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="BtnOpenUpdate" layoutX="947.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Edit">
+            <Button fx:id="BtnOpenUpdate" layoutX="947.0" layoutY="446.0" mnemonicParsing="false" onAction="#handleOnBtnOpenUpdate" prefHeight="50.0" prefWidth="188.0" styleClass="edit-course-btn" stylesheets="@../../styles/StyleDashboardProductAdmin.css" text="Edit">
                <graphic>
                   <ImageView fx:id="editCourseBtnImg" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -151,9 +154,9 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Text fx:id="NameProductdetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="Product" wrappingWidth="257.36328125">
+                                    <Text fx:id="NameProductdetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="Product" wrappingWidth="297.36328125">
                                        <HBox.margin>
-                                          <Insets left="40.0" />
+                                          <Insets left="50.0" />
                                        </HBox.margin>
                                     </Text>
                                  </children>
@@ -170,7 +173,7 @@
                                     </Label>
                                     <Text fx:id="QuantityProductdetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="12">
                                        <HBox.margin>
-                                          <Insets left="30.0" />
+                                          <Insets left="50.0" />
                                        </HBox.margin>
                                     </Text>
                                  </children>
@@ -187,7 +190,7 @@
                                     </Label>
                                     <Text fx:id="PriceProductDetails" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-data" text="125 TND" wrappingWidth="129.7421875">
                                        <HBox.margin>
-                                          <Insets left="66.0" />
+                                          <Insets left="80.0" />
                                        </HBox.margin>
                                     </Text>
                                  </children>
@@ -232,7 +235,7 @@
             <AnchorPane fx:id="FormUpdateAdmin" prefHeight="650.0" prefWidth="1200.0" styleClass="FormUpdateAdmin" stylesheets="@../../styles/StyleFormUpdateAdmin.css" visible="false">
                <children>
                   <Button fx:id="UpdateBtn" layoutX="785.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleOnUpdateBtn" prefHeight="53.0" prefWidth="188.0" styleClass="AddBtn" stylesheets="@../../styles/StyleForm.css" text="Update" />
-                  <Button fx:id="cancelBtn" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleOnCancelBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
+                  <Button fx:id="cancelBtn" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleOnCancelBtn" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="Go Back" />
                   <Label layoutX="434.0" layoutY="23.0" prefHeight="51.0" prefWidth="251.0" styleClass="title-form" stylesheets="@../../styles/StyleForm.css" text="Update Product " />
                   <Button fx:id="PictureBtn" layoutX="802.0" layoutY="149.0" mnemonicParsing="false" onAction="#handleOnBtnChooserImage" prefHeight="56.0" prefWidth="160.0" styleClass="PictureBtn" stylesheets="@../../styles/StyleForm.css" text="Choose image">
                      <font>
@@ -308,7 +311,7 @@
                   </VBox>
                </content>
             </ScrollPane>
-            <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoBackBtnCommande" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtn" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
+            <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoBackBtnCommande" prefHeight="30.0" prefWidth="120.0" styleClass="GoBackBtntutor" stylesheets="@../../styles/StyleForm.css" text="GoBack" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="SuccesAddProduct" layoutX="588.0" layoutY="24.0" prefHeight="35.0" prefWidth="146.0" styleClass="success-operation-container" stylesheets="@../../styles/StyleNotification.css" visible="false">

@@ -58,6 +58,9 @@ public class ItemProducttutor {
         QuantityProduct.setText("Quantity available : "+q);
         float price = product.getPrice();
         Priceproduct.setText(price + "  DT");
+
+
+
         RectangleImageProduct.setOnMouseClicked( e -> productPage.showProductDetailsClient(product));
         AddToCartBtn.setOnMouseClicked(e -> {
             productPage.remplireCartProduct(product);

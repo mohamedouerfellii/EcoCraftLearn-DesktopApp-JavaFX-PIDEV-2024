@@ -114,7 +114,7 @@
 }
 .GoBackBtn:hover
 {
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.6;
 }
 
 
@@ -153,10 +153,18 @@
     -fx-text-fill: #D5FFDC;
     -fx-background-radius: 8px;
 }
-
 .PictureBtn:hover
 {
     -fx-opacity: 0.6;
+}
+
+
+.PictureBtn{
+    -fx-font-family: "Jost Medium";
+    -fx-font-size: 20;
+    -fx-background-color: #1D6611;
+    -fx-text-fill: #D5FFDC;
+    -fx-background-radius: 8px;
 }
 .PictureBtn:hover
 {

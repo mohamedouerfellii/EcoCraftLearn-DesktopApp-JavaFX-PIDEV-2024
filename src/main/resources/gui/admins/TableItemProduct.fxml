@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1000.0" styleClass="AnchorPaneItem" stylesheets="@../../styles/StyleItemTable.css">
          <children>
-            <Label fx:id="PriceProduct" layoutX="567.0" layoutY="37.0" prefHeight="35.0" prefWidth="161.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
+            <Label fx:id="PriceProduct" layoutX="567.0" layoutY="36.0" prefHeight="35.0" prefWidth="161.0" styleClass="PriceProduct" stylesheets="@../../styles/StyleItemTable.css" text="300" />
             <Button fx:id="DetailsBtnProduct" layoutX="825.0" layoutY="33.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" styleClass="DeleteBtn" stylesheets="@../../styles/StyleItemTable.css" text="Show details">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
